@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+compileJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.2.0'
+    testCompile 'com.squareup.okhttp:mockwebserver:2.5.0'
+}
+
+task 'create-dirs' << {
+    sourceSets.all { set ->
+        set.allSource.srcDirs.each { it.mkdirs() }
+    }
+}
+
+mainClassName = 'de.larseckart.spielplatz.Main';
