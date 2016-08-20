@@ -36,25 +36,16 @@ public class EverythingOptional {
 
         Optional<String> optional = Optional.of("Lars on tubli poiss");
 
-        Optional<String> optionally = Optional.ofNullable(getName());
+        String result = optional.orElse(getName());
+        //String result = optional.orElseGet(() -> getName());
 
-        Optional<String> empty = Optional.empty();
-
-        //Optional<Authentication> authentication = this.findAuthentication(9L);
-
-        Authentication authentication = findAuthentication(9L);
-
-        System.out.println(optional.get());
-        System.out.println(empty.get());
-        System.out.println(optionally.get());
+        System.out.println(result);
 
     }
 
     private static String getName() {
-        if (System.currentTimeMillis() > 1) {
-            return null;
-        }
-        return "";
+        System.out.println("computing");
+        return "text";
     }
 
     private static Authentication findAuthentication(long id) {

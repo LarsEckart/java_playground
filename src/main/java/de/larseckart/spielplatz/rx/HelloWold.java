@@ -34,13 +34,8 @@ import rx.functions.Action1;
 public class HelloWold {
 
     public static void main(String... names) {
-        Observable.from(names).subscribe(new Action1<String>() {
-
-            @Override
-            public void call(String s) {
-                System.out.println("Hello " + s + "!");
-            }
-
+        Observable.from(names).subscribe(s -> {
+            System.out.println("Hello " + s + "!");
         });
     }
 }
