@@ -5,8 +5,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
-apply plugin: 'pmd'
+//apply plugin: 'findbugs'
+//apply plugin: 'pmd'
 
 checkstyle {
     toolVersion = "7.1"
@@ -17,6 +17,7 @@ checkstyle {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
+compileJava.options.compilerArgs << "-Xlint:all"
 javadoc.options.encoding = 'UTF-8'
 
 repositories {

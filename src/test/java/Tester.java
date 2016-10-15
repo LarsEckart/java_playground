@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Tester {
 
-    private List list = new ArrayList();
+    private List<String> list = new ArrayList<>();
 
     @Test
     public void testFirst() {
