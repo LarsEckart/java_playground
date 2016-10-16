@@ -1,3 +1,4 @@
+// allows 'gradle dependencyUpdates' to discover outdated dependencies
 plugins {
     id 'com.github.ben-manes.versions' version '0.13.0'
 }
@@ -31,7 +32,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile "org.mockito:mockito-core:2.0.106-beta"
+    testCompile "org.mockito:mockito-core:2.2.2"
 }
 
 task 'create-dirs' << {
