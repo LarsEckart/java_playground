@@ -41,4 +41,8 @@ task 'create-dirs' << {
     }
 }
 
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+}
+
 mainClassName = 'de.larseckart.spielplatz.Main';
