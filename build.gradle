@@ -8,6 +8,19 @@ apply plugin: 'idea'
 apply plugin: 'checkstyle'
 //apply plugin: 'findbugs'
 //apply plugin: 'pmd'
+configurations { javancss }
+
+dependencies { javancss "javancss:javancss:29.50" }
+
+task javancss(group: 'verification', description: 'Runs javaNCSS tests and generates a report afterwards') << {
+    def reportDir = file("$reporting.baseDir/javancss")
+    reportDir.mkdirs()
+
+    ant {
+        taskdef(name:'javancss', classname:'javancss.JavancssAntTask', classpath: configurations.javancss.asPath)
+        javancss(srcdir: 'src/main/java', generateReport:'true', format: 'xml', outputfile: "$reportDir/main.xml")
+    }
+}
 
 checkstyle {
     toolVersion = "7.1"
@@ -26,13 +39,14 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'io.reactivex:rxjava:1.1.9'
+    compile 'com.google.code.gson:gson:2.8'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'io.reactivex:rxjava:1.2.2'
+    compile 'com.google.guava:guava:20.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile "org.mockito:mockito-core:2.2.2"
+    testCompile "org.mockito:mockito-core:2.2.16"
 }
 
 task 'create-dirs' << {

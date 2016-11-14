@@ -36,59 +36,58 @@ import java.util.stream.Collectors;
 
 public class AdvancedStreamOperations {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        List<Person> persons =
-            Arrays.asList(
-                new Person("Max", 18),
-                new Person("Peter", 23),
-                new Person("Pamela", 23),
-                new Person("David", 12));
+    List<Person> persons = Arrays.asList(
+        new Person("Max", 18),
+        new Person("Peter", 23),
+        new Person("Pamela", 23),
+        new Person("David", 12));
 
-        List<Person> filtered =
-            persons
-                .stream()
-                .filter(p -> p.name.startsWith("P"))
-                .collect(Collectors.toList());
-
-        Map<Integer, List<Person>> personsByAge = persons
+    List<Person> filtered =
+        persons
             .stream()
-            .collect(Collectors.groupingBy(p -> p.age));
+            .filter(p -> p.name.startsWith("P"))
+            .collect(Collectors.toList());
 
-        personsByAge
-            .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
+    Map<Integer, List<Person>> personsByAge = persons
+        .stream()
+        .collect(Collectors.groupingBy(p -> p.age));
 
-        ForkJoinPool commonPool = ForkJoinPool.commonPool();
-        System.out.println(commonPool.getParallelism());
+    personsByAge
+        .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
 
-        Arrays.asList("a1", "a2", "b1", "c2", "c1")
-            .parallelStream()
-            .filter(s -> {
-                System.out.format("filter: %s [%s]\n",
-                    s, Thread.currentThread().getName());
-                return true;
-            })
-            .map(s -> {
-                System.out.format("map: %s [%s]\n",
-                    s, Thread.currentThread().getName());
-                return s.toUpperCase();
-            })
-            .forEach(s -> System.out.format("forEach: %s [%s]\n",
-                s, Thread.currentThread().getName()));
+    ForkJoinPool commonPool = ForkJoinPool.commonPool();
+    System.out.println(commonPool.getParallelism());
+
+    Arrays.asList("a1", "a2", "b1", "c2", "c1")
+        .parallelStream()
+        .filter(s -> {
+          System.out.format("filter: %s [%s]\n",
+              s, Thread.currentThread().getName());
+          return true;
+        })
+        .map(s -> {
+          System.out.format("map: %s [%s]\n",
+              s, Thread.currentThread().getName());
+          return s.toUpperCase();
+        })
+        .forEach(s -> System.out.format("forEach: %s [%s]\n",
+            s, Thread.currentThread().getName()));
+  }
+
+  static class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+      this.name = name;
+      this.age = age;
     }
 
-    static class Person {
-        String name;
-        int age;
-
-        Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
+    @Override
+    public String toString() {
+      return name;
     }
+  }
 }
