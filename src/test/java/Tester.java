@@ -39,9 +39,6 @@ public class Tester {
 
         }
 
-        StringBuilder strb = new StringBuilder();
-        strb.append()
-
         arr[0] = 1;
         System.out.println(arr[0]);
 
