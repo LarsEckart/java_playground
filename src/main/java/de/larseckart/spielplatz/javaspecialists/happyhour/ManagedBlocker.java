@@ -1,6 +1,8 @@
 package de.larseckart.spielplatz.javaspecialists.happyhour;
 
 import java.math.BigInteger;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
@@ -24,30 +26,36 @@ public class ManagedBlocker {
     }
 
     public BigInteger f(int n) {
-        if (n == 0) {
-            return BigInteger.ZERO;
-        }
-        if (n == 1) {
-            return BigInteger.ONE;
-        }
+        Map<Integer, BigInteger> cache = new ConcurrentHashMap<>();
+        cache.put(0, BigInteger.ZERO);
+        cache.put(1, BigInteger.ONE);
+        return f(n, cache);
+    }
 
-        int half = (n + 1) / 2;
+    public BigInteger f(int n, Map<Integer, BigInteger> cache) {
+        BigInteger result = cache.get(n);
+        if (result == null) {
 
-        ForkJoinTask<BigInteger> f0_task = new RecursiveTask<BigInteger>() {
-            @Override
-            protected BigInteger compute() {
-                return f(half - 1);
+            int half = (n + 1) / 2;
+
+            ForkJoinTask<BigInteger> f0_task = new RecursiveTask<BigInteger>() {
+                @Override
+                protected BigInteger compute() {
+                    return f(half - 1, cache);
+                }
+            }.fork();
+
+            BigInteger f1 = f(half, cache);
+            BigInteger f0 = f0_task.join();
+            //BigInteger f0 = f(half - 1);
+
+            if (n % 2 == 1) {
+                result = f0.multiply(f0).add(f1.multiply(f1));
+            } else {
+                result = f0.shiftLeft(1).add(f1).multiply(f1);
             }
-        }.fork();
-
-        BigInteger f1 = f(half);
-        BigInteger f0 = f0_task.join();
-        //BigInteger f0 = f(half - 1);
-
-        if (n % 2 == 1) {
-            return f0.multiply(f0).add(f1.multiply(f1));
-        } else {
-            return f0.shiftLeft(1).add(f1).multiply(f1);
+            cache.put(n, result);
         }
+        return result;
     }
 }
