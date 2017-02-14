@@ -1,6 +1,7 @@
 package de.larseckart.spielplatz.javaspecialists.happyhour;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
@@ -15,6 +16,10 @@ public class Fibonacci {
     // if result is null, we are first and start
     // if result is placeholder, we wait
     // "reserved caching scheme"
+
+    public BigInteger f(int n) {
+        return this.f(n, new HashMap<>());
+    }
 
     public BigInteger f(int n, Map<Integer, BigInteger> cache) {
         BigInteger result = cache.putIfAbsent(n, RESERVED);
