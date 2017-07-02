@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+dependencies {
+    def jsonDependencies = rootProject.ext.jsonDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile jsonDependencies.gson
+
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
+}
