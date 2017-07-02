@@ -8,6 +8,7 @@ ext {
 
     //Libraries
     gsonVersion = '2.8.1'
+    moshiVersion = '1.5.0'
 
     daggerVersion = '2.9'
     rxJavaVersion = '2.0.2'
@@ -21,6 +22,7 @@ ext {
 
     jsonDependencies = [
             gson: "com.google.code.gson:gson:${gsonVersion}",
+            moshi: "com.squareup.moshi:moshi:${moshiVersion}",
     ]
 
     testDependencies = [

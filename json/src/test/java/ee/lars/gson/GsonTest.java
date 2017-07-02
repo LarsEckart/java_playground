@@ -1,6 +1,7 @@
 package ee.lars.gson;
 
 import com.google.gson.Gson;
+import ee.lars.json.BagOfPrimitives;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,7 +59,7 @@ public class GsonTest {
         String json = gson.toJson(obj);
 
         // then
-        assertThat(json).isEqualTo("{\"value1\":1,\"value2\":\"abc\"}");
+        assertThat(json).isEqualTo("{\"value1\":1,\"value2\":\"abc\",\"value3\":0}");
     }
 
     @Test
@@ -109,13 +110,30 @@ public class GsonTest {
         assertThat(json).isEqualTo("{\"value1\":\"hello\"}");
     }
 
-    class BagOfPrimitives {
+    @Test
+    public void parses_empty_string_to_null() throws Exception {
+        // given
+        String json = "";
 
-        private int value1 = 1;
-        private String value2 = "abc";
+        // when
+        BagOfPrimitives obj = gson.fromJson(json, BagOfPrimitives.class);
 
-        BagOfPrimitives() {
-        }
+        // then
+        assertThat(obj).isNull();
+    }
+
+    @Test
+    public void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives() throws Exception {
+        // given
+        String json = "{}";
+
+        // when
+        BagOfPrimitives obj = gson.fromJson(json, BagOfPrimitives.class);
+
+        // then
+        assertThat(obj).isNotNull();
+        assertThat(obj.getValue3()).isEqualTo(0);
+        assertThat(obj.getValue4()).isNull();
     }
 
     class BagWithNull {
@@ -146,6 +164,14 @@ public class GsonTest {
         private transient String value2 = "world";
 
         public BagWithTransientField() {
+        }
+
+        public String getValue1() {
+            return this.value1;
+        }
+
+        public String getValue2() {
+            return this.value2;
         }
     }
 }
