@@ -1,0 +1,19 @@
+plugins {
+    id "net.ltgt.apt" version "0.10"
+}
+apply plugin: 'java'
+apply plugin: 'idea'
+
+dependencies {
+    def daggerDependencies = rootProject.ext.daggerDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile daggerDependencies.dagger
+    apt daggerDependencies.daggerCompiler
+
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
+}
+
+/** enable annotation processors in intellij */

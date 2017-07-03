@@ -21,8 +21,13 @@ ext {
     mockitoVersion = '2.8.47'
 
     jsonDependencies = [
-            gson: "com.google.code.gson:gson:${gsonVersion}",
+            gson : "com.google.code.gson:gson:${gsonVersion}",
             moshi: "com.squareup.moshi:moshi:${moshiVersion}",
+    ]
+
+    daggerDependencies = [
+            dagger        : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
     ]
 
     testDependencies = [
