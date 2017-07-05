@@ -10,7 +10,7 @@ ext {
     gsonVersion = '2.8.1'
     moshiVersion = '1.5.0'
 
-    daggerVersion = '2.9'
+    daggerVersion = '2.11'
     rxJavaVersion = '2.0.2'
     javaxInjectVersion = '1'
     okHttpVersion = '2.5.0'

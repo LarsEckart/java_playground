@@ -1,23 +1,25 @@
 package ee.lars.moshi;
 
+import com.google.gson.reflect.TypeToken;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 import ee.lars.json.BagOfPrimitives;
 import ee.lars.json.BagWithNull;
 import ee.lars.json.BagWithTransientField;
-import ee.lars.json.BlackjackHand;
 import ee.lars.json.Card;
 import ee.lars.json.ImmutableBag;
+import ee.lars.json.Suit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.EOFException;
-import java.util.Arrays;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
-import static ee.lars.json.Suit.CLUBS;
 import static ee.lars.json.Suit.HEARTS;
-import static ee.lars.json.Suit.SPADES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoshiTest {
@@ -154,5 +156,38 @@ public class MoshiTest {
 
         // then
         assertThat(json).isEqualTo("\"6H\"");
+    }
+
+    @Test
+    public void converts_generic_list_to_json_array() throws Exception {
+        // given
+        List<Card> list = new ArrayList<>();
+        list.add(new Card('6', Suit.HEARTS));
+        list.add(new Card('A', Suit.SPADES));
+
+        Type type = Types.newParameterizedType(List.class, Card.class);
+        JsonAdapter<List<Card>> jsonAdapter = this.moshi.adapter(type);
+
+        // when
+        final String json = jsonAdapter.toJson(list);
+
+        // then
+        assertThat(json).isEqualTo("[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]");
+    }
+
+    @Test
+    public void converts_json_array_to_generic_list() throws Exception {
+        // given
+        String json = "[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]";
+        Type type = Types.newParameterizedType(List.class, Card.class);
+        JsonAdapter<List<Card>> jsonAdapter = this.moshi.adapter(type);
+
+        // when
+        final List<Card> list = jsonAdapter.fromJson(json);
+
+        // then
+        assertThat(list).hasSize(2);
+        assertThat(list).contains(new Card('6', Suit.HEARTS));
+        assertThat(list).contains(new Card('A', Suit.SPADES));
     }
 }
