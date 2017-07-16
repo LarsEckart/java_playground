@@ -18,16 +18,73 @@ import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * TODO: take care of padding
+ */
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        new JwtExample().createSignedJwt();
+        System.out.println(new JwtExample().createJwt());
     }
 
     static class JwtExample {
 
-        public void createSignedJwt() throws Exception {
+        public String createJwt() throws Exception {
+
+            String headerPart = createHeader();
+            String payloadPart = createPayload();
+            String signature = createSignature(headerPart, payloadPart);
+
+            return String.join(".", headerPart, payloadPart, signature);
+        }
+
+        private String createHeader() {
+            Map<String, Object> headerMap = new LinkedHashMap<>();
+            headerMap.put("typ", "JWT");
+            headerMap.put("alg", "RS256");
+            final Moshi moshi = new Moshi.Builder().build();
+            Type type = Types.newParameterizedType(Map.class, String.class, Object.class);
+            final JsonAdapter<Map<String, Object>> jsonAdapter = moshi.adapter(type);
+            final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
+            final String headerJson = jsonAdapter.toJson(headerMap);
+            final byte[] headerEncoded = urlEncoder.encode(headerJson.getBytes(StandardCharsets.UTF_8));
+            final String headerPart = new String(headerEncoded);
+            return headerPart;
+        }
+
+        private String createPayload() {
+            Map<String, Object> payload = new LinkedHashMap<>();
+            payload.put("hello", "world");
+            final Moshi moshi = new Moshi.Builder().build();
+            Type type = Types.newParameterizedType(Map.class, String.class, Object.class);
+            final JsonAdapter<Map<String, Object>> jsonAdapter = moshi.adapter(type);
+            final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
+            final String payloadJson = jsonAdapter.toJson(payload);
+            final byte[] payloadEncoded = urlEncoder.encode(payloadJson.getBytes(StandardCharsets.UTF_8));
+            final String payloadPart = new String(payloadEncoded);
+            return payloadPart;
+        }
+
+        private String createSignature(String headerPart, String payloadPart) throws Exception {
+
+            final ClassLoader classLoader = getClass().getClassLoader();
+            final String privateKeyFile = classLoader.getResource("private_key.der").getFile();
+
+            RSAPrivateKey privateKey = (RSAPrivateKey) PrivateKeyReader.get(privateKeyFile);
+
+            final String headerAndData = String.join(".", headerPart, payloadPart);
+            final Signature signer = Signature.getInstance("SHA256withRSA");
+            signer.initSign(privateKey);
+            signer.update(headerAndData.getBytes());
+            final byte[] signature = signer.sign();
+            final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
+            final byte[] encodedSig = urlEncoder.encode(signature);
+            final String signaturePart = new String(encodedSig, StandardCharsets.UTF_8);
+            return signaturePart;
+        }
+
+        public void javaJwtExample() throws Exception {
             final ClassLoader classLoader = getClass().getClassLoader();
             final String publicKeyFile = classLoader.getResource("public_key.der").getFile();
             final String privateKeyFile = classLoader.getResource("private_key.der").getFile();
@@ -35,43 +92,7 @@ public class Main {
             RSAPublicKey publicKey = (RSAPublicKey) PublicKeyReader.get(publicKeyFile);
             RSAPrivateKey privateKey = (RSAPrivateKey) PrivateKeyReader.get(privateKeyFile);
 
-            final Moshi moshi = new Moshi.Builder().build();
-            Type type = Types.newParameterizedType(Map.class, String.class, Object.class);
-            final JsonAdapter<Map<String, Object>> jsonAdapter = moshi.adapter(type);
-            final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
-            final Signature signer = Signature.getInstance("SHA256withRSA");
-
-            Map<String, Object> headerMap = new LinkedHashMap<>();
-            headerMap.put("typ", "JWT");
-            headerMap.put("alg", "RS256");
-
-            final String headerJson = jsonAdapter.toJson(headerMap);
-            final byte[] headerEncoded = urlEncoder.encode(headerJson.getBytes(StandardCharsets.UTF_8));
-            final String headerPart = new String(headerEncoded);
-
-            Map<String, Object> payloadMap = new LinkedHashMap<>();
-            payloadMap.put("hello", "world");
-
-            final String payloadJson = jsonAdapter.toJson(payloadMap);
-            final byte[] payloadEncoded = urlEncoder.encode(payloadJson.getBytes(StandardCharsets.UTF_8));
-            final String payloadPart = new String(payloadEncoded).replaceAll("=+$", "");
-
-            final String headerAndData = String.join(".", headerPart, payloadPart);
-
-            signer.initSign(privateKey);
-
-            signer.update(headerAndData.getBytes());
-
-            final byte[] signature = signer.sign();
-            final byte[] encodedSig = urlEncoder.encode(signature);
-
-            final String signaturePart = new String(encodedSig, StandardCharsets.UTF_8);
-
-            final String myJWT = String.join(".", headerPart, payloadPart, signaturePart);
-            System.out.println(myJWT);
-
             try {
-                System.out.println("//////////////////////");
                 Algorithm signAlgo = Algorithm.RSA256(null, privateKey);
                 String token = JWT.create()
                                   .withClaim("hello", "world")

@@ -1,9 +1,12 @@
 package ee.lars.jwt;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 
 public class PrivateKeyReader {
@@ -15,7 +18,9 @@ public class PrivateKeyReader {
      * and then convert it via
      * openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.der -nocrypt
      */
-    public static PrivateKey get(String filename) throws Exception {
+    public static PrivateKey get(String filename)
+            throws IOException, NoSuchAlgorithmException, InvalidKeySpecException
+    {
         byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
 
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
