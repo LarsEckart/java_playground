@@ -10,6 +10,8 @@ ext {
     gsonVersion = '2.8.1'
     moshiVersion = '1.5.0'
 
+    javaJwtVersion = '3.2.0'
+
     daggerVersion = '2.11'
     rxJavaVersion = '2.0.2'
     javaxInjectVersion = '1'
@@ -28,6 +30,11 @@ ext {
     daggerDependencies = [
             dagger        : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+    ]
+
+    jwtDependencies = [
+            javaJwt: "com.auth0:java-jwt:${javaJwtVersion}",
+            moshi: "com.squareup.moshi:moshi:${moshiVersion}",
     ]
 
     testDependencies = [

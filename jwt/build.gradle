@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+dependencies {
+    def jwtDependencies = rootProject.ext.jwtDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile jwtDependencies.javaJwt
+    compile jwtDependencies.moshi
+
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
+}
