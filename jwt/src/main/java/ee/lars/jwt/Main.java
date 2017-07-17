@@ -43,24 +43,25 @@ public class Main {
             Map<String, Object> headerMap = new LinkedHashMap<>();
             headerMap.put("typ", "JWT");
             headerMap.put("alg", "RS256");
-            final Moshi moshi = new Moshi.Builder().build();
-            Type type = Types.newParameterizedType(Map.class, String.class, Object.class);
-            final JsonAdapter<Map<String, Object>> jsonAdapter = moshi.adapter(type);
+            final String headerJson = mapToJson(headerMap);
             final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
-            final String headerJson = jsonAdapter.toJson(headerMap);
             final byte[] headerEncoded = urlEncoder.encode(headerJson.getBytes(StandardCharsets.UTF_8));
             final String headerPart = new String(headerEncoded);
             return headerPart;
         }
 
-        private String createPayload() {
-            Map<String, Object> payload = new LinkedHashMap<>();
-            payload.put("hello", "world");
+        private String mapToJson(Map<String, Object> headerMap) {
             final Moshi moshi = new Moshi.Builder().build();
             Type type = Types.newParameterizedType(Map.class, String.class, Object.class);
             final JsonAdapter<Map<String, Object>> jsonAdapter = moshi.adapter(type);
+            return jsonAdapter.toJson(headerMap);
+        }
+
+        private String createPayload() {
+            Map<String, Object> payload = new LinkedHashMap<>();
+            payload.put("hello", "world");
+            final String payloadJson = mapToJson(payload);
             final Base64.Encoder urlEncoder = Base64.getUrlEncoder();
-            final String payloadJson = jsonAdapter.toJson(payload);
             final byte[] payloadEncoded = urlEncoder.encode(payloadJson.getBytes(StandardCharsets.UTF_8));
             final String payloadPart = new String(payloadEncoded);
             return payloadPart;
