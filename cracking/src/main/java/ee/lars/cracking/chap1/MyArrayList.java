@@ -70,6 +70,7 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
         return (E) this.elements[index];
@@ -77,7 +78,7 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void clear() {
-        for (int i = 0; i < this.elements.length - 1; i++) {
+        for (int i = 0; i < this.elements.length; i++) {
             this.elements[i] = null;
         }
         this.elementsCount = 0;
