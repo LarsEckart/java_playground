@@ -86,4 +86,32 @@ public class MyArrayListTest {
         assertThat(itemZero).isEqualTo("hello");
         assertThat(itemOne).isEqualTo("world");
     }
+    
+    @Test
+    public void clear_should_empty_the_list() throws Exception {
+        // given
+        this.list.add("hello");
+        this.list.add("world");
+
+        // when
+        this.list.clear();
+        
+        // then
+        assertThat(this.list).isEmpty();
+    }
+    
+    @Test
+    public void should_resize_itself_instead_of_throwing_ArrayIndexOutOfBoundsException() throws Exception {
+        // given
+        this.list.add("hello");
+        this.list.add("world");
+        this.list.add("halli");
+        this.list.add("galli");
+        this.list.add("john");
+        this.list.add("snow");
+
+
+        // then
+        assertThat(this.list.size()).isEqualTo(6);
+    }
 }

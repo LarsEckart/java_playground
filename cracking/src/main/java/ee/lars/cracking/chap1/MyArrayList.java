@@ -12,7 +12,11 @@ public class MyArrayList<E> implements List<E> {
     private int currentIndex;
 
     public MyArrayList() {
-        this.elements = new Object[5];
+        this(5);
+    }
+
+    public MyArrayList(int size) {
+        this.elements = new Object[size];
         this.elementsCount = 0;
     }
 
@@ -38,6 +42,11 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean add(Object o) {
+        if (this.currentIndex == this.elements.length - 1) {
+            Object[] largerArray = new Object[this.elements.length * 2];
+            System.arraycopy(this.elements, 0, largerArray, 0, this.elements.length);
+            this.elements = largerArray;
+        }
         this.elementsCount++;
         this.elements[this.currentIndex++] = o;
         return false;
@@ -67,13 +76,11 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
+    public void clear() {
+        for (int i = 0; i < this.elements.length - 1; i++) {
+            this.elements[i] = null;
+        }
+        this.elementsCount = 0;
     }
 
     @Override
@@ -82,18 +89,13 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public void clear() {
+    public void add(int index, Object element) {
 
     }
 
     @Override
     public Object set(int index, Object element) {
         return null;
-    }
-
-    @Override
-    public void add(int index, Object element) {
-
     }
 
     @Override
@@ -112,6 +114,31 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
+    public List subList(int fromIndex, int toIndex) {
+        return null;
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
     public ListIterator listIterator() {
         return null;
     }
@@ -122,22 +149,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public List subList(int fromIndex, int toIndex) {
-        return null;
-    }
-
-    @Override
     public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
         return false;
     }
 
