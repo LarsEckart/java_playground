@@ -1,14 +1,11 @@
 package ee.lars.cracking.chap1;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-public class MyArrayList<E> implements List<E> {
+public class MyArrayList<E> extends AbstractList<E> {
 
-    public static final int DEFAULT_INITIAL_CAPACITY = 5;
-    private Object[] elements;
+public static final int DEFAULT_INITIAL_CAPACITY = 5;
+private Object[] elements;
     private int size;
     private int currentIndex;
 
@@ -146,32 +143,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-    @Override
     public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public ListIterator listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public Object[] toArray(Object[] a) {
         return new Object[0];
     }
 }
