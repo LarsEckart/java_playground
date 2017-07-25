@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+dependencies {
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
+}
