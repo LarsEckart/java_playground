@@ -1,6 +1,7 @@
 package ee.lars.cracking.chap1;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -110,8 +111,36 @@ public class MyArrayListTest {
         this.list.add("john");
         this.list.add("snow");
 
-
         // then
         assertThat(this.list.size()).isEqualTo(6);
+    }
+
+    @Test
+    public void test_add_with_index() throws Exception {
+        this.list.add(5, "hello");
+        this.list.add("world");
+
+        // then
+        assertThat(this.list.get(0)).isEqualToIgnoringCase("world");
+        assertThat(this.list.get(5)).isEqualToIgnoringCase("hello");
+    }
+
+    @Ignore("implement later")
+    @Test
+    public void should_add_all_with_index() throws Exception {
+        Collection<String> col = new ArrayList<>();
+        col.add("hello");
+        col.add("world");
+        this.list.add("halli");
+        this.list.add("galli");
+
+        // when
+        this.list.addAll(1, col);
+
+        // then
+        assertThat(this.list.get(0)).isEqualTo("halli");
+        assertThat(this.list.get(1)).isEqualTo("hello");
+        assertThat(this.list.get(2)).isEqualTo("world");
+        assertThat(this.list.get(3)).isEqualTo("galli");
     }
 }

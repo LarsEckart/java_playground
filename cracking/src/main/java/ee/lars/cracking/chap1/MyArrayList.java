@@ -7,27 +7,28 @@ import java.util.ListIterator;
 
 public class MyArrayList<E> implements List<E> {
 
+    public static final int DEFAULT_INITIAL_CAPACITY = 5;
     private Object[] elements;
-    private int elementsCount;
+    private int size;
     private int currentIndex;
 
     public MyArrayList() {
-        this(5);
+        this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    public MyArrayList(int size) {
-        this.elements = new Object[size];
-        this.elementsCount = 0;
+    public MyArrayList(int initialCapacity) {
+        this.elements = new Object[initialCapacity];
+        this.size = 0;
     }
 
     @Override
     public int size() {
-        return this.elementsCount;
+        return this.size;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.elementsCount == 0;
+        return this.size == 0;
     }
 
     @Override
@@ -43,20 +44,24 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public boolean add(Object o) {
         if (this.currentIndex == this.elements.length - 1) {
-            Object[] largerArray = new Object[this.elements.length * 2];
-            System.arraycopy(this.elements, 0, largerArray, 0, this.elements.length);
-            this.elements = largerArray;
+            expand();
         }
-        this.elementsCount++;
+        this.size++;
         this.elements[this.currentIndex++] = o;
         return false;
+    }
+
+    private void expand() {
+        Object[] largerArray = new Object[this.elements.length * 2];
+        System.arraycopy(this.elements, 0, largerArray, 0, this.elements.length);
+        this.elements = largerArray;
     }
 
     @Override
     public boolean remove(Object o) {
         for (Object element : this.elements) {
             if (element != null && element.equals(o)) {
-                this.elementsCount--;
+                this.size--;
             }
         }
         return false;
@@ -81,17 +86,28 @@ public class MyArrayList<E> implements List<E> {
         for (int i = 0; i < this.elements.length; i++) {
             this.elements[i] = null;
         }
-        this.elementsCount = 0;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection c) {
-        return false;
+        this.size = 0;
     }
 
     @Override
     public void add(int index, Object element) {
+        if (this.elements[this.elements.length - 1] != null || index > this.elements.length - 1) {
+            expand();
+            // TODO: expanding once might not be enough
+        }
+        for (int i = this.elements.length - 1; i > index; i--) {
+            this.elements[i] = this.elements[i - 1];
+            this.elements[i - 1] = null;
+        }
+        this.elements[index] = element;
+    }
 
+    @Override
+    public boolean addAll(int index, Collection c) {
+        for (Object o : c) {
+
+        }
+        return false;
     }
 
     @Override
