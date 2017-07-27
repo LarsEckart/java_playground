@@ -1,8 +1,6 @@
 plugins {
     id "net.ltgt.apt" version "0.10"
 }
-apply plugin: 'java'
-apply plugin: 'idea'
 
 dependencies {
     def daggerDependencies = rootProject.ext.daggerDependencies

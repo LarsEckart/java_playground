@@ -1,4 +1,3 @@
-apply plugin: 'java'
 
 dependencies {
     def jsonDependencies = rootProject.ext.jsonDependencies

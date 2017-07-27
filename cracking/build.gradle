@@ -1,6 +1,7 @@
-apply plugin: 'java'
 
 dependencies {
+    def testDependencies = rootProject.ext.testDependencies
+
     testCompile testDependencies.junit
     testCompile testDependencies.assertj
     testCompile testDependencies.mockito

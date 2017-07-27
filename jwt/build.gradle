@@ -1,4 +1,3 @@
-apply plugin: 'java'
 
 dependencies {
     def jwtDependencies = rootProject.ext.jwtDependencies
