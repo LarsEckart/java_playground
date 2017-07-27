@@ -17,6 +17,8 @@ ext {
     javaxInjectVersion = '1'
     okHttpVersion = '2.5.0'
 
+    springVersion = '4.3.10.RELEASE'
+
     //Testing
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
@@ -37,9 +39,14 @@ ext {
             moshi: "com.squareup.moshi:moshi:${moshiVersion}",
     ]
 
+    springDependencies = [
+            spring : "org.springframework:spring-context:${springVersion}"
+    ]
+
     testDependencies = [
             junit  : "junit:junit:${jUnitVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}",
             mockito: "org.mockito:mockito-core:${mockitoVersion}",
+            springTest : "org.springframework:spring-test:${springVersion}"
     ]
 }
