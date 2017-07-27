@@ -1,11 +1,14 @@
 package ee.lars.cracking.chap1;
 
-import java.util.*;
+import java.util.AbstractList;
+import java.util.Collection;
+import java.util.List;
 
 public class MyArrayList<E> extends AbstractList<E> {
 
-public static final int DEFAULT_INITIAL_CAPACITY = 5;
-private Object[] elements;
+    public static final int DEFAULT_INITIAL_CAPACITY = 5;
+
+    private Object[] elements;
     private int size;
     private int currentIndex;
 

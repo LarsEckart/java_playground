@@ -30,7 +30,7 @@ public class MyArrayListTest {
         // then
         assertThat(this.list.size()).isEqualTo(2);
     }
-    
+
     @Test
     public void new_list_is_empty() throws Exception {
         // then
@@ -46,7 +46,7 @@ public class MyArrayListTest {
         // then
         assertThat(this.list.isEmpty()).isTrue();
     }
-    
+
     @Test
     public void after_adding_list_contains_entry() throws Exception {
         // given
@@ -54,7 +54,7 @@ public class MyArrayListTest {
         this.list.add("world");
 
         // then
-        assertThat(this.list.contains("hello")).isTrue();
+        assertThat(this.list).contains("hello");
     }
 
     @Test
@@ -68,9 +68,8 @@ public class MyArrayListTest {
         this.list.addAll(col);
 
         // then
-        assertThat(this.list.contains("hello")).isTrue();
-        assertThat(this.list.contains("world")).isTrue();
-        assertThat(this.list.contains("hello")).isTrue();
+        assertThat(this.list).contains("hello");
+        assertThat(this.list).contains("world");
     }
 
     @Test
@@ -87,7 +86,7 @@ public class MyArrayListTest {
         assertThat(itemZero).isEqualTo("hello");
         assertThat(itemOne).isEqualTo("world");
     }
-    
+
     @Test
     public void clear_should_empty_the_list() throws Exception {
         // given
@@ -96,11 +95,11 @@ public class MyArrayListTest {
 
         // when
         this.list.clear();
-        
+
         // then
         assertThat(this.list).isEmpty();
     }
-    
+
     @Test
     public void should_resize_itself_instead_of_throwing_ArrayIndexOutOfBoundsException() throws Exception {
         // given
