@@ -12,15 +12,16 @@ public class CDPlayerConfig {
         return new SgtPeppers();
     }
 
+    /*
     @Bean
     public MediaPlayer cdPlayer() {
         return new SpringCDPlayer(sgtPeppers());
     }
+    */
 
-    /*
     @Bean
     public MediaPlayer anotherCdPlayer(CompactDisc cd) {
         return new SpringCDPlayer(cd);
     }
-    */
+
 }
