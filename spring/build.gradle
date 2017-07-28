@@ -5,11 +5,13 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     compile springDependencies.spring
+    compile springDependencies.jsr330
 
     testCompile testDependencies.junit
     testCompile testDependencies.assertj
     testCompile testDependencies.mockito
     testCompile testDependencies.springTest
+    testCompile testDependencies.systemRules
 }
 
 mainClassName = 'ee.lars.spring.knight.KnightMain';

@@ -18,11 +18,13 @@ ext {
     okHttpVersion = '2.5.0'
 
     springVersion = '4.3.10.RELEASE'
+    jsr330Version = '1'
 
     //Testing
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
     mockitoVersion = '2.8.47'
+    systemRulesVersion = '1.16.1'
 
     jsonDependencies = [
             gson : "com.google.code.gson:gson:${gsonVersion}",
@@ -40,13 +42,15 @@ ext {
     ]
 
     springDependencies = [
-            spring : "org.springframework:spring-context:${springVersion}"
+            spring : "org.springframework:spring-context:${springVersion}",
+            jsr330 : "javax.inject:javax.inject:${jsr330Version}"
     ]
 
     testDependencies = [
             junit  : "junit:junit:${jUnitVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}",
             mockito: "org.mockito:mockito-core:${mockitoVersion}",
-            springTest : "org.springframework:spring-test:${springVersion}"
+            springTest : "org.springframework:spring-test:${springVersion}",
+            systemRules: "com.github.stefanbirkner:system-rules:${systemRulesVersion}"
     ]
 }
