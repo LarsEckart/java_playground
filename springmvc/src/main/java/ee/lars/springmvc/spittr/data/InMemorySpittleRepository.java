@@ -15,4 +15,9 @@ public class InMemorySpittleRepository implements SpittleRepository {
     public List<Spittle> findSpittles(long max, int count) {
         return this.spittles;
     }
+
+    @Override
+    public Spittle findOne(long id) {
+        return this.spittles.get((int) id);
+    }
 }

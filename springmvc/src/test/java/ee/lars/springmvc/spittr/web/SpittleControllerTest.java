@@ -13,10 +13,13 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -43,30 +46,32 @@ public class SpittleControllerTest {
     }
 
     @Test
-    public void houldShowRecentSpittles() throws Exception {
+    public void shouldShowRecentSpittles() throws Exception {
         // given
         List<Spittle> expectedSpittles = this.createSpittleList(20);
         given(this.mockRepository.findSpittles(Long.MAX_VALUE, 20))
                 .willReturn(expectedSpittles);
 
         // when then
-        mockMvc.perform(get("/spittles"))
-               .andExpect(view().name("spittles"))
-               .andExpect(model().attributeExists("spittleList"))
-               .andExpect(model().attribute("spittleList",
+        this.mockMvc.perform(get("/spittles"))
+                    .andExpect(view().name("spittles"))
+                    .andExpect(model().attributeExists("spittleList"))
+                    .andExpect(model().attribute("spittleList",
                        hasItems(expectedSpittles.toArray())));
     }
 
     @Test
     public void shouldShowPagedSpittles() throws Exception {
+        // given
         List<Spittle> expectedSpittles = createSpittleList(50);
-        given(mockRepository.findSpittles(MAX_ID, FITHTY))
+        given(this.mockRepository.findSpittles(MAX_ID, FITHTY))
                 .willReturn(expectedSpittles);
 
-        mockMvc.perform(get("/spittles?max=" + MAX_ID + "&count=" + FITHTY))
-               .andExpect(view().name("spittles"))
-               .andExpect(model().attributeExists("spittleList"))
-               .andExpect(model().attribute("spittleList",
+        // when then
+        this.mockMvc.perform(get("/spittles?max=" + MAX_ID + "&count=" + FITHTY))
+                    .andExpect(view().name("spittles"))
+                    .andExpect(model().attributeExists("spittleList"))
+                    .andExpect(model().attribute("spittleList",
                        hasItems(expectedSpittles.toArray())));
     }
 
@@ -76,5 +81,18 @@ public class SpittleControllerTest {
             spittles.add(new Spittle("Spittle " + i, LocalDate.now()));
         }
         return spittles;
+    }
+
+    @Test
+    public void testSpittle() throws Exception {
+        // given
+        Spittle expectedSpittle = new Spittle("Hello", LocalDate.now());
+        given(this.mockRepository.findOne(12345)).willReturn(expectedSpittle);
+
+        // when then
+        this.mockMvc.perform(get("/spittles/12345"))
+                    .andExpect(view().name("spittle"))
+                    .andExpect(model().attributeExists("spittle"))
+                    .andExpect(model().attribute("spittle", expectedSpittle));
     }
 }
