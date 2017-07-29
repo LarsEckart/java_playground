@@ -20,6 +20,9 @@ ext {
     springVersion = '4.3.10.RELEASE'
     jsr330Version = '1'
 
+    servletApiVersion = '3.1.0'
+    jstlVersion = '1.2'
+
     //Testing
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
@@ -44,6 +47,12 @@ ext {
     springDependencies = [
             spring : "org.springframework:spring-context:${springVersion}",
             jsr330 : "javax.inject:javax.inject:${jsr330Version}"
+    ]
+
+    springMvcDependencies = [
+            springMvc: "org.springframework:spring-webmvc:${springVersion}",
+            servletApi: "javax.servlet:javax.servlet-api:${servletApiVersion}",
+            jstl: "javax.servlet:jstl:${jstlVersion}"
     ]
 
     testDependencies = [
