@@ -3,6 +3,7 @@ package ee.lars.spring.soundsystem;
 import org.springframework.stereotype.Component;
 
 @Component
+@Beatles
 public class SgtPeppers implements CompactDisc {
 
     private String title = "Sgt. Pepper's Lonely Hearts Club Band";

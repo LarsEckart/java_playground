@@ -9,6 +9,7 @@ public class SpringCDPlayer implements MediaPlayer {
     private CompactDisc cd;
 
     @Autowired
+    @Beatles
     public SpringCDPlayer(CompactDisc cd) {
         this.cd = cd;
     }
