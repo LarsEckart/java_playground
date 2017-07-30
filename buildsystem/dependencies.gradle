@@ -18,7 +18,9 @@ ext {
     okHttpVersion = '2.5.0'
 
     springVersion = '4.3.10.RELEASE'
+    //springVersion = '4.0.7.RELEASE'
     jsr330Version = '1'
+    hibernateValidatorVersion = '5.4.1.Final'
 
     servletApiVersion = '3.1.0'
     jstlVersion = '1.2'
@@ -52,7 +54,8 @@ ext {
     springMvcDependencies = [
             springMvc: "org.springframework:spring-webmvc:${springVersion}",
             servletApi: "javax.servlet:javax.servlet-api:${servletApiVersion}",
-            jstl: "javax.servlet:jstl:${jstlVersion}"
+            jstl: "javax.servlet:jstl:${jstlVersion}",
+            hibernateValidator: "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
     ]
 
     testDependencies = [
