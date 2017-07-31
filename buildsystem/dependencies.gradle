@@ -21,6 +21,8 @@ ext {
     //springVersion = '4.0.7.RELEASE'
     jsr330Version = '1'
     hibernateValidatorVersion = '5.4.1.Final'
+    springSecurityVersion = '4.2.3.RELEASE'
+    h2Version = '1.4.196'
 
     servletApiVersion = '3.1.0'
     jstlVersion = '1.2'
@@ -55,7 +57,11 @@ ext {
             springMvc: "org.springframework:spring-webmvc:${springVersion}",
             servletApi: "javax.servlet:javax.servlet-api:${servletApiVersion}",
             jstl: "javax.servlet:jstl:${jstlVersion}",
-            hibernateValidator: "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
+            hibernateValidator: "org.hibernate:hibernate-validator:${hibernateValidatorVersion}",
+            springSecurity: "org.springframework.security:spring-security-config:$springSecurityVersion",
+            springSecurityWeb: "org.springframework.security:spring-security-web:$springSecurityVersion",
+            springJdbc: "org.springframework:spring-jdbc:${springVersion}",
+            h2: "com.h2database:h2:${h2Version}",
     ]
 
     testDependencies = [
