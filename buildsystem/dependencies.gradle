@@ -62,6 +62,8 @@ ext {
             springSecurityWeb: "org.springframework.security:spring-security-web:$springSecurityVersion",
             springJdbc: "org.springframework:spring-jdbc:${springVersion}",
             h2: "com.h2database:h2:${h2Version}",
+            spring : "org.springframework:spring-context:${springVersion}",
+            jsr330 : "javax.inject:javax.inject:${jsr330Version}",
     ]
 
     testDependencies = [

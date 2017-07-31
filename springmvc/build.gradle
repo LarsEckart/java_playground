@@ -12,6 +12,8 @@ dependencies {
     compile springDependencies.springSecurityWeb
     compile springDependencies.springJdbc
     compile springDependencies.h2
+    compile springDependencies.spring
+    compile springDependencies.jsr330
 
     providedCompile springDependencies.servletApi
 

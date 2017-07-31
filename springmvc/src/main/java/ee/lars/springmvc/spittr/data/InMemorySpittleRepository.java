@@ -1,6 +1,7 @@
 package ee.lars.springmvc.spittr.data;
 
 import ee.lars.springmvc.spittr.Spittle;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Primary
 public class InMemorySpittleRepository implements SpittleRepository {
 
     private List<Spittle> spittles = new ArrayList<>();
