@@ -1,6 +1,7 @@
 package ee.lars.springmvc.spittr.data;
 
 import ee.lars.springmvc.spittr.Spitter;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +31,7 @@ public class JdbcSpitterRepository implements SpitterRepository {
     }
 
     @Override
+    @Cacheable("userCache")
     public Spitter findByUsername(String username) {
         return this.jdbcOperations.queryForObject(
                 "select id, username, null, first_name, last_name, email from Spitter where username=?",
