@@ -6,13 +6,13 @@ import ee.lars.springmvc.spittr.data.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -53,9 +53,9 @@ public class SpittleApiController {
     }
 
     @ExceptionHandler(SpittleNotFoundException.class)
-    public ResponseEntity<Error> spittleNotFound(SpittleNotFoundException exception) {
-        long spittleId = exception.getSpittleId();
-        Error error = new Error(4, "Spittle [" + spittleId + "] not found");
-        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Error spittleNotFound(SpittleNotFoundException e) {
+        long spittleId = e.getSpittleId();
+        return new Error(4, "Spittle [" + spittleId + "] not found");
     }
 }
