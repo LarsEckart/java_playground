@@ -1,11 +1,13 @@
 package ee.lars.springmvc.spittr.api;
 
 import ee.lars.springmvc.spittr.Spittle;
+import ee.lars.springmvc.spittr.SpittleNotFoundException;
 import ee.lars.springmvc.spittr.data.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,16 +40,22 @@ public class SpittleApiController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public Spittle saveSpittle(@RequestBody Spittle spittle) {
-        return spittleRepository.save(spittle);
+        return this.spittleRepository.save(spittle);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> spittleById(@PathVariable long id) {
+    public Spittle spittleById(@PathVariable long id) {
         Spittle spittle = this.spittleRepository.findOne(id);
         if (spittle == null) {
-            Error error = new Error(4, "Spittle [" + id + "] not found");
-            return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
+            throw new SpittleNotFoundException(id);
         }
-        return new ResponseEntity<Spittle>(spittle, HttpStatus.OK);
+        return spittle;
+    }
+
+    @ExceptionHandler(SpittleNotFoundException.class)
+    public ResponseEntity<Error> spittleNotFound(SpittleNotFoundException exception) {
+        long spittleId = exception.getSpittleId();
+        Error error = new Error(4, "Spittle [" + spittleId + "] not found");
+        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
     }
 }
