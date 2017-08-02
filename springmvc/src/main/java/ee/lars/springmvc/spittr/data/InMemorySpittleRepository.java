@@ -26,4 +26,9 @@ public class InMemorySpittleRepository implements SpittleRepository {
     public Spittle findOne(long id) {
         return this.spittles.get((int) id);
     }
+
+    @Override
+    public Spittle save(Spittle spittle) {
+        return null;
+    }
 }
