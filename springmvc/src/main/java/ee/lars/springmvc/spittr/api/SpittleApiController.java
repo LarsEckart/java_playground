@@ -4,8 +4,10 @@ import ee.lars.springmvc.spittr.Spittle;
 import ee.lars.springmvc.spittr.SpittleNotFoundException;
 import ee.lars.springmvc.spittr.data.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -39,8 +42,14 @@ public class SpittleApiController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public Spittle saveSpittle(@RequestBody Spittle spittle) {
-        return this.spittleRepository.save(spittle);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Spittle> saveSpittle(@RequestBody Spittle spittle) {
+        final Spittle savedSpittle = this.spittleRepository.save(spittle);
+        HttpHeaders headers = new HttpHeaders();
+        URI location = URI.create("http://localhost:8080/spittr/spittles/" + spittle.getId());
+        headers.setLocation(location);
+        ResponseEntity<Spittle> responseEntity = new ResponseEntity<>(savedSpittle, headers, HttpStatus.CREATED);
+        return responseEntity;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
