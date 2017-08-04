@@ -68,6 +68,10 @@ ext {
             rabbitmq: "org.springframework.amqp:spring-rabbit:${springMqVersion}"
     ]
 
+    springBootDependencies = [
+
+    ]
+
     testDependencies = [
             junit  : "junit:junit:${jUnitVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}",
