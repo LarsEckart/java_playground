@@ -24,6 +24,8 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.thymeleaf:thymeleaf-spring4')
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("com.h2database:h2")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

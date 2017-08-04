@@ -8,6 +8,10 @@ public class Contact {
     private String phoneNumber;
     private String emailAddress;
 
+    public Contact(){
+
+    }
+
     public Contact(String firstName, String lastName, String phoneNumber, String emailAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,5 +45,25 @@ public class Contact {
 
     public String getEmailAddress() {
         return this.emailAddress;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }
