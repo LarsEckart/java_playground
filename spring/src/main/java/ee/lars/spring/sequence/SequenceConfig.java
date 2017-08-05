@@ -15,4 +15,9 @@ public class SequenceConfig {
     public PrefixGenerator prefixGenerator() {
         return new DatePrefixGenerator("yyyyMMdd");
     }
+
+    @Bean
+    public MyPostProcessor prefixGeneratorPostProcessor() {
+        return new MyPostProcessor();
+    }
 }
