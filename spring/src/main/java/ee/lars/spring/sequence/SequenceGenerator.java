@@ -23,6 +23,7 @@ public class SequenceGenerator {
 
     @Autowired
     public SequenceGenerator(PrefixGenerator prefix, String suffix, int initial) {
+        System.out.println("sg constructor");
         this.prefixGenerator = prefix;
         this.suffix = suffix;
         this.initial = initial;
