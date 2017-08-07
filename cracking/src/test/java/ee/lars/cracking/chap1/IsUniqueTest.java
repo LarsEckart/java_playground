@@ -27,4 +27,12 @@ public class IsUniqueTest {
         assertThat(this.check.isUnique("BB")).isFalse();
         assertThat(this.check.isUnique("AB")).isTrue();
     }
+
+    @Test
+    public void many_character_string() throws Exception {
+        assertThat(this.check.isUnique("AAA")).isFalse();
+        assertThat(this.check.isUnique("AAB")).isFalse();
+        assertThat(this.check.isUnique("ABB")).isFalse();
+        assertThat(this.check.isUnique("ABC")).isTrue();
+    }
 }
