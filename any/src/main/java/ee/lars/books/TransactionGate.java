@@ -2,7 +2,6 @@ package ee.lars.books;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,21 +15,26 @@ public class TransactionGate {
     private TransactionBundle transactionBundle;
 
     public void postEntries(List<Entry> entries) {
+        List<Entry> entriesToAdd = uniqueEntries(entries);
 
-        List<Entry> entriesToAdd = new LinkedList<>();
-
-        for (Iterator<Entry> it = entries.iterator(); it.hasNext(); ) {
+        for (Iterator<Entry> it = entriesToAdd.iterator(); it.hasNext(); ) {
             Entry entry = it.next();
-            if (!this.transactionBundle.getListManager().contains(entry)) {
-                entry.postData();
-                entriesToAdd.add(entry);
-            }
+            entry.postData();
         }
 
         this.transactionBundle.getListManager().addAll(entriesToAdd);
     }
 
-
+    List<Entry> uniqueEntries(List entries) {
+        List<Entry> result = new ArrayList<>();
+        for (Iterator it = entries.iterator(); it.hasNext(); ) {
+            Entry entry = (Entry) it.next();
+            if (!this.transactionBundle.getListManager().contains(entry)) {
+                result.add(entry);
+            }
+        }
+        return result;
+    }
 
     private class Entry {
 
