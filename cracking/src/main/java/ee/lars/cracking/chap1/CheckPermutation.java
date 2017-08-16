@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class CheckPermutation {
 
-    public boolean isPermutation(String first, String second) {
+    public static boolean isPermutation(String first, String second) {
         if (first.length() != second.length()) {
             return false;
         } else {
