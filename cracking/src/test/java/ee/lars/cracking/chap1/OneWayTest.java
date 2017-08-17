@@ -20,23 +20,10 @@ public class OneWayTest {
         String second = "abc";
 
         // when
-        final boolean oneEditAway = OneWay.oneEditAway(first, second);
+        final boolean oneEditAway = OneAway.oneEditAway(first, second);
 
         // then
         assertThat(oneEditAway).isFalse();
-    }
-
-    @Test
-    public void should_return_true_if_palindrome() throws Exception {
-        // given
-        String first = "hello";
-        String second = "leolh";
-
-        // when
-        final boolean oneEditAway = OneWay.oneEditAway(first, second);
-
-        // then
-        assertThat(oneEditAway).isTrue();
     }
 
     @Test
@@ -46,7 +33,7 @@ public class OneWayTest {
         String second = "helab";
 
         // when
-        final boolean oneEditAway = OneWay.oneEditAway(first, second);
+        final boolean oneEditAway = OneAway.oneEditAway(first, second);
 
         // then
         assertThat(oneEditAway).isFalse();
@@ -55,10 +42,14 @@ public class OneWayTest {
     @Test
     public void should_return_correct_values_for_book_examples() throws Exception {
         SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(OneWay.oneEditAway("pale", "ple")).isTrue();
-            softly.assertThat(OneWay.oneEditAway("pales", "pale")).isTrue();
-            softly.assertThat(OneWay.oneEditAway("pale", "bale")).isTrue();
-            softly.assertThat(OneWay.oneEditAway("pale", "bake")).isFalse();
+            softly.assertThat(OneAway.oneEditAway("pale", "ple")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("ple", "pale")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("pales", "pale")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("pale", "pales")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("pale", "bale")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("bale", "pale")).isTrue();
+            softly.assertThat(OneAway.oneEditAway("pale", "bake")).isFalse();
+            softly.assertThat(OneAway.oneEditAway("bake", "pale")).isFalse();
         });
     }
 }
