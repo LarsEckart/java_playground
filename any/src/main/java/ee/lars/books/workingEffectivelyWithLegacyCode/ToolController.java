@@ -1,4 +1,4 @@
-package ee.lars.books;
+package ee.lars.books.workingEffectivelyWithLegacyCode;
 
 public class ToolController {
 

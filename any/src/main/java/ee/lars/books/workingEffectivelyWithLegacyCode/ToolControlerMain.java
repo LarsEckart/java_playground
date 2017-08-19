@@ -1,4 +1,4 @@
-package ee.lars.books;
+package ee.lars.books.workingEffectivelyWithLegacyCode;
 
 import java.util.ArrayList;
 
