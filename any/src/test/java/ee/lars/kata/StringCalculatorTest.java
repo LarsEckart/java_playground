@@ -18,45 +18,52 @@ public class StringCalculatorTest {
 
     @Test
     public void returns_zero_for_empty_string() throws Exception {
-        final int sum = this.stringCalculator.add("");
+        final String input = "";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(0);
     }
 
     @Test
     public void returns_the_number_if_only_one_number() throws Exception {
-        final int sum = this.stringCalculator.add("1");
+        final String input = "1";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(1);
     }
 
     @Test
     public void returns_sum_of_two_numbers_separated_by_comma() throws Exception {
-        final int sum = this.stringCalculator.add("1,1");
+        final String input = "1,1";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(2);
     }
 
     @Test
     public void returns_sum_of_any_amount_of_numbers_separated_by_comma() throws Exception {
-        final int sum = this.stringCalculator.add("1,2,3");
+        final String input = "1,2,3";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(6);
     }
 
     @Test
     public void returns_sum_if_numbers_String_contains_newline_instead_of_comma() throws Exception {
-        final int sum = this.stringCalculator.add("1\n2,3");
+        final String input = "1\n2,3";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(6);
     }
 
     @Test
     public void returns_sum_if_numbers_string_has_delimiter_provided_in_first_line() throws Exception {
-        final int sum = this.stringCalculator.add("//;\n1;2");
+        final String input = "//;\n1;2";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(3);
     }
 
     @Test
     public void does_not_allow_negative_numbers() throws Exception {
+        final String input = "-1,-2";
         try {
             //when
-            this.stringCalculator.add("-1,-2");
+            this.stringCalculator.add(input);
 
             //then
             Assert.fail("did not throw despite negative numbers");
@@ -67,13 +74,15 @@ public class StringCalculatorTest {
 
     @Test
     public void ignores_numbers_larger_than_thousand() throws Exception {
-        final int sum = this.stringCalculator.add("2,1001");
+        final String input = "2,1001";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(2);
     }
 
     @Test
     public void delimiter_can_be_any_length() throws Exception {
-        final int sum = this.stringCalculator.add("//[aaa]\n1aaa2aaa3");
+        final String input = "//[aaa]\n1aaa2aaa3";
+        final int sum = this.stringCalculator.add(input);
         assertThat(sum).isEqualTo(6);
     }
 
