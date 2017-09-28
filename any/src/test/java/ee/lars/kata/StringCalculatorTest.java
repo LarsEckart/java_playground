@@ -59,6 +59,13 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void returns_sum_if_numbers_string_has_delimiter_provided_in_first_line_and_additional_new_lines() throws Exception {
+        final String input = "//;\n1;2\n3";
+        final int sum = this.stringCalculator.add(input);
+        assertThat(sum).isEqualTo(6);
+    }
+
+    @Test
     public void does_not_allow_negative_numbers() throws Exception {
         final String input = "-1,-2";
         try {

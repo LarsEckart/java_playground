@@ -49,7 +49,7 @@ public class StringCalculator {
         }
 
         if (numbersToParse.contains("\n")) {
-            numbersToParse = numbers.replace("\n", delimiter.get());
+            numbersToParse = numbersToParse.replace("\n", delimiter.get());
         }
         return Arrays.asList(numbersToParse.split(delimiter.get()))
                      .stream()
