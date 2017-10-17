@@ -13,5 +13,4 @@ public interface OptionalPattern<T> {
     public default T getValue(long id) {
         return findValue(id).orElseThrow(() -> new RuntimeException("boom"));
     }
-
 }
