@@ -1,47 +1,41 @@
 package ee.lars.kata;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class RomanConverter {
 
-    private static final Map<Integer, String> results;
+    private static final Map<Integer, String> mappings;
 
     static {
-        results = new LinkedHashMap<>();
-        results.put(1, "I");
-        results.put(4, "IV");
-        results.put(5, "V");
-        results.put(9, "IX");
-        results.put(10, "X");
-        results.put(40, "XL");
+        mappings = new LinkedHashMap<>();
+        mappings.put(1000, "M");
+        mappings.put(900, "CM");
+        mappings.put(500, "D");
+        mappings.put(400, "CD");
+        mappings.put(100, "C");
+        mappings.put(90, "XC");
+        mappings.put(50, "L");
+        mappings.put(40, "XL");
+        mappings.put(10, "X");
+        mappings.put(9, "IX");
+        mappings.put(5, "V");
+        mappings.put(4, "IV");
+        mappings.put(1, "I");
     }
 
     public String convert(int number) {
-        if (results.containsKey(number)) {
-            return results.get(number);
-        }
         String result = "";
-        while(number > 40) {
-            result += "XL";
-            number -= 40;
+        Iterator<Integer> iterator = mappings.keySet().iterator();
+        while (iterator.hasNext()) {
+            int mapping = iterator.next();
+            while (number >= mapping) {
+                result += mappings.get(mapping);
+                number -= mapping;
+            }
         }
-        while(number > 10) {
-            result += "X";
-            number -= 10;
-        }
-        while(number > 5) {
-            result += "V";
-            number -= 5;
-        }
-        while(number >= 4) {
-            result += "IV";
-            number -= 4;
-        }
-        while(number >= 1) {
-            result += "I";
-            number -= 1;
-        }
+
         return result;
     }
 }
