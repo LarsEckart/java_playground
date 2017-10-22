@@ -12,15 +12,36 @@ public class RomanConverter {
         results.put(1, "I");
         results.put(4, "IV");
         results.put(5, "V");
+        results.put(9, "IX");
+        results.put(10, "X");
+        results.put(40, "XL");
     }
 
     public String convert(int number) {
         if (results.containsKey(number)) {
             return results.get(number);
         }
-        if (number > 5) {
-            return results.get(5) + convert(number - 5);
+        String result = "";
+        while(number > 40) {
+            result += "XL";
+            number -= 40;
         }
-        return results.get(1) + convert(number - 1);
+        while(number > 10) {
+            result += "X";
+            number -= 10;
+        }
+        while(number > 5) {
+            result += "V";
+            number -= 5;
+        }
+        while(number >= 4) {
+            result += "IV";
+            number -= 4;
+        }
+        while(number >= 1) {
+            result += "I";
+            number -= 1;
+        }
+        return result;
     }
 }
