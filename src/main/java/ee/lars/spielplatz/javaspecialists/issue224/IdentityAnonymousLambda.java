@@ -1,5 +1,7 @@
 package ee.lars.spielplatz.javaspecialists.issue224;
 
+import java.util.Arrays;
+
 public class IdentityAnonymousLambda {
 
     public static void main(String... args) {
@@ -8,7 +10,7 @@ public class IdentityAnonymousLambda {
                     System.out.println("Lambda - no fields"));
 
             showIdentity(() ->
-                    System.out.println("Lambda - parameters - " + args));
+                    System.out.println("Lambda - parameters - " + Arrays.toString(args)));
 
             showIdentity(new Runnable() {
                 public void run() {
@@ -18,7 +20,7 @@ public class IdentityAnonymousLambda {
 
             showIdentity(new Runnable() {
                 public void run() {
-                    System.out.println("anon - parameters - " + args);
+                    System.out.println("anon - parameters - " + Arrays.toString(args));
                 }
             });
             System.out.println();

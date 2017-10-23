@@ -20,7 +20,7 @@ public final class Lazy<T> {
         return value;
     }
 
-    class Point {
+    static class Point {
 
         private final int x, y;
         private final Lazy<String> lazyToString;

@@ -1,9 +1,10 @@
 package ee.lars.spielplatz.rx;
 
 import io.reactivex.Flowable;
+import io.reactivex.disposables.Disposable;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        Flowable.just("Hello world").subscribe(System.out::println);
+        Disposable helloWorld = Flowable.just("Hello world").subscribe(System.out::println);
     }
 }

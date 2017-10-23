@@ -3,7 +3,7 @@ package ee.lars.spielplatz.javaspecialists.issue224;
 public class Interruptions {
 
     public static void saveForLater(InterruptibleAction action) {
-        saveForLater(() -> action.run());
+        //saveForLater(() -> action.run());
     }
 
     public static <E> E saveForLater(InterruptibleTask<E> task) {
