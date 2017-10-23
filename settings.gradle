@@ -1,8 +1,1 @@
-include ':any'
-include ':json'
-include ':dagger2'
-include ':jwt'
-include ':cracking'
-include ':spring'
-include ':springmvc'
-include ':springboot'
+

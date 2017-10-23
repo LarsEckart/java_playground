@@ -1,9 +1,0 @@
-
-dependencies {
-    def testDependencies = rootProject.ext.testDependencies
-
-    testCompile testDependencies.junit
-    testCompile testDependencies.hamcrest
-    testCompile testDependencies.assertj
-    testCompile testDependencies.mockito
-}
