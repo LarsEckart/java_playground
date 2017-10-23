@@ -3,16 +3,13 @@ package ee.lars.gson.gson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
-import com.squareup.moshi.Types;
 import ee.lars.json.BagOfPrimitives;
 import ee.lars.json.BagWithNull;
 import ee.lars.json.BagWithTransientField;
 import ee.lars.json.Card;
 import ee.lars.json.ImmutableBag;
 import ee.lars.json.Suit;
-import ee.lars.moshi.*;
+import ee.lars.json.gson.CardAdapter;
 import org.junit.Before;
 import org.junit.Test;
 

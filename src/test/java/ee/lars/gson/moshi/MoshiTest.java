@@ -1,6 +1,5 @@
 package ee.lars.gson.moshi;
 
-import com.google.gson.reflect.TypeToken;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
@@ -10,14 +9,14 @@ import ee.lars.json.BagWithTransientField;
 import ee.lars.json.Card;
 import ee.lars.json.ImmutableBag;
 import ee.lars.json.Suit;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import ee.lars.json.moshi.CardAdapter;
 import java.io.EOFException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import static ee.lars.json.Suit.HEARTS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -128,7 +127,8 @@ public class MoshiTest {
     }
 
     @Test
-    public void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives() throws Exception {
+    public void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives()
+            throws Exception {
         // given
         String json = "{}";
         JsonAdapter<BagOfPrimitives> jsonAdapter = moshi.adapter(BagOfPrimitives.class);
@@ -172,7 +172,8 @@ public class MoshiTest {
         final String json = jsonAdapter.toJson(list);
 
         // then
-        assertThat(json).isEqualTo("[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]");
+        assertThat(json).isEqualTo(
+                "[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]");
     }
 
     @Test
