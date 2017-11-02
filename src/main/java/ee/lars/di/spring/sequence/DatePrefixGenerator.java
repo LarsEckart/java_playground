@@ -16,6 +16,7 @@ public class DatePrefixGenerator implements PrefixGenerator {
         this.formatter = DateTimeFormatter.ofPattern(pattern);
     }
 
+    @Override
     public String getPrefix() {
         return this.formatter.format(LocalDate.now());
     }

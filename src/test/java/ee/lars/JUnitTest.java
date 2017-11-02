@@ -74,7 +74,7 @@ public class JUnitTest {
         // AssertionError: expected same:<ee.lars.testing.JUnitTest$Person@3581c5f3> was not:<ee.lars.testing.JUnitTest$Person@6aa8ceb6>
     }
 
-    class Person {
+    static class Person {
 
         public String name;
         public int age;

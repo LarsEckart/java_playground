@@ -30,9 +30,12 @@ public class SequenceGenerator {
     }
 
     public synchronized String getSequence() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(prefixGenerator.getPrefix());
-        buffer.append(" " + initial + counter++ + " ");
+        buffer.append(" ");
+        buffer.append(initial);
+        buffer.append(counter++);
+        buffer.append(" ");
         buffer.append(suffix);
         return buffer.toString();
     }

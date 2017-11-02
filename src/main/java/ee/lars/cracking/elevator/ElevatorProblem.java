@@ -61,7 +61,7 @@ public class ElevatorProblem {
         return totalStops;
     }
 
-    private class Elevator extends LinkedList<Person> {
+    private static class Elevator extends LinkedList<Person> {
 
         int getCurrentWeightSum() {
             return this.stream().mapToInt(p -> p.getWeight()).sum();
@@ -72,7 +72,7 @@ public class ElevatorProblem {
         }
     }
 
-    private class Person {
+    private static class Person {
 
         private final int weight;
         private final int targetFloor;
