@@ -50,7 +50,7 @@ public class EfficientCounter {
         }
     }
 
-    class MutableInteger {
+    static class MutableInteger {
 
         private int val;
 

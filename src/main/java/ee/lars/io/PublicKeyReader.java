@@ -37,7 +37,7 @@ public class PublicKeyReader {
      */
     public static PublicKey fromPem(String filename) throws Exception {
         byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
-        String publicKeyString = new String(keyBytes);
+        String publicKeyString = new String(keyBytes, StandardCharsets.UTF_8);
 
         final RSAPublicKeySpec spec = getRsaPublicKeySpec(publicKeyString);
         final KeyFactory keyFactory = KeyFactory.getInstance("RSA");

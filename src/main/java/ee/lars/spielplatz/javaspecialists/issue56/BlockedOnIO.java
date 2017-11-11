@@ -16,6 +16,7 @@ public class BlockedOnIO extends Thread {
         this.in = in;
     }
 
+    @Override
     public void interrupt() {
         super.interrupt();
         try {

@@ -2,6 +2,7 @@ package ee.lars.spielplatz.javaspecialists.issue29;
 
 public class ThreeByteFactory implements ObjectFactory {
 
+    @Override
     public Object makeObject() {
         return new ThreeBytes();
     }

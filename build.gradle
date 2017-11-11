@@ -41,6 +41,7 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     //options.compilerArgs += [ '-Xep:DeadException:WARN', '-Xep:GuardedByValidator:OFF' ]
+    options.compilerArgs += '-Xlint:unchecked'
 }
 
 sourceCompatibility = '1.8'

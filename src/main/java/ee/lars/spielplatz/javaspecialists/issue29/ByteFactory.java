@@ -2,7 +2,8 @@ package ee.lars.spielplatz.javaspecialists.issue29;
 
 public class ByteFactory implements ObjectFactory {
 
+    @Override
     public Object makeObject() {
-        return new Byte((byte) 33);
+        return (byte) 33;
     }
 }

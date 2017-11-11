@@ -12,17 +12,9 @@ public class IdentityAnonymousLambda {
             showIdentity(() ->
                     System.out.println("Lambda - parameters - " + Arrays.toString(args)));
 
-            showIdentity(new Runnable() {
-                public void run() {
-                    System.out.println("anon - no fields");
-                }
-            });
+            showIdentity(() -> System.out.println("anon - no fields"));
 
-            showIdentity(new Runnable() {
-                public void run() {
-                    System.out.println("anon - parameters - " + Arrays.toString(args));
-                }
-            });
+            showIdentity(() -> System.out.println("anon - parameters - " + Arrays.toString(args)));
             System.out.println();
         }
     }

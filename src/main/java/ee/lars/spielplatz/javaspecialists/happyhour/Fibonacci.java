@@ -3,6 +3,7 @@ package ee.lars.spielplatz.javaspecialists.happyhour;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
@@ -49,10 +50,10 @@ public class Fibonacci {
                 RESERVED.notifyAll();
             }
             cache.put(n, result);
-        } else if (result == RESERVED) {
+        } else if (RESERVED.equals(result)) {
             try {
                 synchronized (RESERVED) {
-                    while ((result = cache.get(n)) == RESERVED) {
+                    while (Objects.equals(result = cache.get(n), RESERVED)) {
                         RESERVED.wait();
                     }
                 }

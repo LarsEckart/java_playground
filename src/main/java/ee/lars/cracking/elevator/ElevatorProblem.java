@@ -1,5 +1,6 @@
 package ee.lars.cracking.elevator;
 
+import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -34,7 +35,7 @@ public class ElevatorProblem {
     }
 
     private Queue<Person> setupQueue(int[] weight, int[] targetFloor) {
-        Queue<Person> queue = new LinkedList<>();
+        Queue<Person> queue = new ArrayDeque<>();
         for (int i = 0; i < weight.length; i++) {
             queue.add(new Person(weight[i], targetFloor[i]));
         }
@@ -61,7 +62,7 @@ public class ElevatorProblem {
         return totalStops;
     }
 
-    private static class Elevator extends LinkedList<Person> {
+    private static class Elevator extends ArrayDeque<Person> {
 
         int getCurrentWeightSum() {
             return this.stream().mapToInt(p -> p.getWeight()).sum();

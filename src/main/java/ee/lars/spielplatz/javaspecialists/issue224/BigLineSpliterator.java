@@ -66,6 +66,7 @@ public class BigLineSpliterator implements Spliterator<DispLine> {
         return bbs;
     }
 
+    @Override
     public boolean tryAdvance(Consumer<? super DispLine> action) {
         long index = lo;
         StringBuilder sb = new StringBuilder();

@@ -10,6 +10,7 @@ public class Hello {
         System.out.println(toString());
     };
 
+    @Override
     public String toString() {
         return "Hello, world!";
     }
