@@ -10,6 +10,7 @@ buildscript {
 plugins {
     id "net.ltgt.apt" version "0.13"
     id "net.ltgt.errorprone" version "0.0.13"
+    id 'io.franzbecker.gradle-lombok' version '1.11'
 }
 
 apply plugin: 'com.github.ben-manes.versions'
@@ -24,6 +25,8 @@ repositories {
 dependencies {
     compile 'com.google.dagger:dagger:2.12'
     apt 'com.google.dagger:dagger-compiler:2.12'
+    compileOnly "com.google.auto.value:auto-value:1.5"
+    apt "com.google.auto.value:auto-value:1.5"
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.moshi:moshi:1.5.0'
     compile 'org.springframework:spring-context:5.0.1.RELEASE'
@@ -41,7 +44,6 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     //options.compilerArgs += [ '-Xep:DeadException:WARN', '-Xep:GuardedByValidator:OFF' ]
-    options.compilerArgs += '-Xlint:unchecked'
 }
 
 sourceCompatibility = '1.8'

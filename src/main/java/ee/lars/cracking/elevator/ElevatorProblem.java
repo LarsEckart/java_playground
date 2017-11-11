@@ -8,15 +8,15 @@ import java.util.Set;
 
 public class ElevatorProblem {
 
-    public int solve(int[] A, int[] B, int M, int X, int Y) {
+    public long solve(int[] A, int[] B, int M, int X, int Y) {
         return this.countElevatorStops(A, B, M, X, Y);
     }
 
-    private int countElevatorStops(int[] weight, int[] targetFloor, int maxFloor, int capacity, int weightLimit) {
+    private long countElevatorStops(int[] weight, int[] targetFloor, int maxFloor, int capacity, int weightLimit) {
         Queue<Person> queue = setupQueue(weight, targetFloor);
 
         Elevator elevatorPassengers = new Elevator();
-        int totalStops = 0;
+        long totalStops = 0L;
         while (!queue.isEmpty()) {
             final Person peek = queue.peek();
 
@@ -55,7 +55,7 @@ public class ElevatorProblem {
         elevatorPassengers.add(poll);
     }
 
-    private int updateTotalStops(int totalStops, Elevator elevatorPassengers) {
+    private long updateTotalStops(long totalStops, Elevator elevatorPassengers) {
         totalStops += elevatorPassengers.stream().mapToInt(p -> p.getTargetFloor()).distinct().count();
         totalStops++;
         elevatorPassengers.clear();

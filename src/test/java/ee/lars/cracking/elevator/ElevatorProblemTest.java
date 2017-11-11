@@ -22,7 +22,7 @@ public class ElevatorProblemTest {
         int Y = 200;
 
         // when
-        final int totalStops = new ElevatorProblem().solve(A, B, M, X, Y);
+        final long totalStops = new ElevatorProblem().solve(A, B, M, X, Y);
 
         // then
         assertThat(totalStops).isEqualTo(6);
