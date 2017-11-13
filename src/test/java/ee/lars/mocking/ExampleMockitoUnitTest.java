@@ -1,6 +1,7 @@
 package ee.lars.mocking;
 
 import mockit.Expectations;
+import mockit.FullVerifications;
 import mockit.Mocked;
 import mockit.Verifications;
 import org.junit.Rule;
@@ -10,7 +11,18 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class ExampleMockitoUnitTest {
@@ -31,5 +43,24 @@ public class ExampleMockitoUnitTest {
         performer.perform(model);
 
         verify(this.collaborator).receive(true);
+    }
+
+    @Mock
+    ExpectationsCollaborator mock;
+
+    @Test
+    public void verify_primitives() throws Exception {
+        given(mock.methodForAny1(anyString(), anyInt(), anyBoolean())).willReturn("any");
+
+        assertEquals("any", mock.methodForAny1("barfooxyz", 0, Boolean.FALSE));
+
+
+    }
+
+    @Test
+    public void verify_list() throws Exception {
+        mock.methodForAny2(2L, new ArrayList<>());
+
+        verify(mock).methodForAny2(anyLong(), anyList());
     }
 }
