@@ -8,9 +8,11 @@ public class MazeJumper {
 
   private final List<Integer> maze;
   private int position;
+  private int jumps;
 
   public MazeJumper(String maze) {
     position = 0;
+    jumps = 0;
     this.maze = Arrays.stream(maze.split("\n"))
         .mapToInt(Integer::parseInt)
         .boxed()
@@ -18,6 +20,10 @@ public class MazeJumper {
   }
 
   public void jump() {
+    if (hasEscaped()) {
+      throw new UnsupportedOperationException("Cannot jump anymore, already escaped");
+    }
+    jumps++;
     Integer currentValue = maze.get(position);
     Integer newValue;
     if (currentValue >= 3) {
@@ -35,5 +41,13 @@ public class MazeJumper {
 
   public int getMazeSize() {
     return maze.size();
+  }
+
+  public boolean hasEscaped() {
+    return position < 0 || position >= maze.size();
+  }
+
+  public int getJumps() {
+    return jumps;
   }
 }

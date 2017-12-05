@@ -20,19 +20,17 @@ public class MazeJumper_Should {
   }
 
   @Test
-  public void jump_until_out_of_maze() throws Exception {
+  public void jump_until_has_escaped() throws Exception {
     // given
     String maze = "0\n3\n0\n1\n-3";
     MazeJumper mazeJumper = new MazeJumper(maze);
-    int jumps = 0;
 
     // when
-    while (mazeJumper.getPosition() >= 0 && mazeJumper.getPosition() < mazeJumper.getMazeSize()) {
+    while (!mazeJumper.hasEscaped()) {
       mazeJumper.jump();
-      jumps++;
     }
 
     // then
-    assertThat(jumps).isEqualTo(10);
+    assertThat(mazeJumper.getJumps()).isEqualTo(10);
   }
 }
