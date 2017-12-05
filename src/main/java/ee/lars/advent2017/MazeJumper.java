@@ -19,7 +19,12 @@ public class MazeJumper {
 
   public void jump() {
     Integer currentValue = maze.get(position);
-    Integer newValue = currentValue + 1;
+    Integer newValue;
+    if (currentValue >= 3) {
+      newValue = currentValue - 1;
+    } else {
+      newValue = currentValue + 1;
+    }
     maze.set(position, newValue);
     position += currentValue;
   }

@@ -1,11 +1,8 @@
 package ee.lars.advent2017;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class MazeJumper_Should {
 
@@ -36,6 +33,6 @@ public class MazeJumper_Should {
     }
 
     // then
-    assertThat(jumps).isEqualTo(5);
+    assertThat(jumps).isEqualTo(10);
   }
 }
