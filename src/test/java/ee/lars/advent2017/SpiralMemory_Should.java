@@ -14,19 +14,5 @@ import static org.mockito.Mockito.verify;
 @RunWith(JUnitParamsRunner.class)
 public class SpiralMemory_Should {
 
-  @Parameters({"1, 1",
-               "4, 2",
-               "16, 4",
-               "25, 5",
-              })
-  @Test
-  public void calculate_row_length(int number, int rowLength) throws Exception {
-    // given
 
-    // when
-    int result = new SpiralMemory().calculateRowLength(number);
-
-    // then
-    assertThat(result).isEqualTo(rowLength);
-  }
 }
