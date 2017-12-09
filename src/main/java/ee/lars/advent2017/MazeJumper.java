@@ -2,6 +2,7 @@ package ee.lars.advent2017;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MazeJumper {
@@ -13,7 +14,8 @@ public class MazeJumper {
   public MazeJumper(String maze) {
     position = 0;
     jumps = 0;
-    this.maze = Arrays.stream(maze.split("\n"))
+    Pattern pattern = Pattern.compile("\\R");
+    this.maze = pattern.splitAsStream(maze)
         .mapToInt(Integer::parseInt)
         .boxed()
         .collect(Collectors.toList());
