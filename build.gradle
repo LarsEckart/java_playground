@@ -32,6 +32,7 @@ dependencies {
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.9.1'
     compile 'org.apache.logging.log4j:log4j-api:2.9.1'
     compile 'org.apache.logging.log4j:log4j-core:2.9.1'
+    compileOnly 'org.projectlombok:lombok:1.16.20'
 
     testCompile 'junit:junit:4.12'
 

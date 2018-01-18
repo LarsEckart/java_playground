@@ -15,16 +15,8 @@ public class MoneyTest {
     assertThat(product.amount).isEqualTo(15);
   }
 
-  class Dollar {
-
-    int amount;
-
-    public Dollar(int amount) {
-      this.amount = amount;
-    }
-
-    Dollar times(int multiplier) {
-      return new Dollar(amount * multiplier);
-    }
+  @Test
+  public void equality() throws Exception {
+    assertThat(new Dollar(5)).isEqualTo(new Dollar(5));
   }
 }
