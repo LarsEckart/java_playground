@@ -9,7 +9,7 @@ buildscript {
 
 plugins {
     id "net.ltgt.apt" version "0.13"
-    id "net.ltgt.errorprone" version "0.0.13"
+    //id "net.ltgt.errorprone" version "0.0.13"
 }
 
 apply plugin: 'com.github.ben-manes.versions'
