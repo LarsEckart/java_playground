@@ -9,8 +9,10 @@ public class MoneyTest {
   @Test
   public void multiplication() throws Exception {
     Dollar five = new Dollar(5);
-    five.times(2);
-    assertThat(five.amount).isEqualTo(10);
+    Dollar product = five.times(2);
+    assertThat(product.amount).isEqualTo(10);
+    product = five.times(3);
+    assertThat(product.amount).isEqualTo(15);
   }
 
   class Dollar {
@@ -21,8 +23,8 @@ public class MoneyTest {
       this.amount = amount;
     }
 
-    void times(int multiplier) {
-      amount *= multiplier;
+    Dollar times(int multiplier) {
+      return new Dollar(amount * multiplier);
     }
   }
 }
