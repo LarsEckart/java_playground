@@ -8,25 +8,21 @@ public class MoneyTest {
 
   @Test
   public void multiplication() throws Exception {
-    Dollar five = new Dollar(5);
-    assertThat(five.times(2)).isEqualTo(new Dollar(10));
-    assertThat(five.times(3)).isEqualTo(new Dollar(15));
+    Money five = Money.dollar(5);
+    assertThat(five.times(2)).isEqualTo(Money.dollar(10));
+    assertThat(five.times(3)).isEqualTo(Money.dollar(15));
+
+    Money fiveFranc = Money.franc(5);
+    assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
+    assertThat(fiveFranc.times(3)).isEqualTo(Money.franc(15));
   }
 
   @Test
   public void equality() throws Exception {
-    assertThat(new Dollar(5)).isEqualTo(new Dollar(5));
-  }
+    assertThat(Money.dollar(5)).isEqualTo(Money.dollar(5));
 
-  @Test
-  public void multiplication_franc() throws Exception {
-    Franc five = new Franc(5);
-    assertThat(five.times(2)).isEqualTo(new Franc(10));
-    assertThat(five.times(3)).isEqualTo(new Franc(15));
-  }
+    assertThat(Money.franc(5)).isEqualTo(Money.franc(5));
 
-  @Test
-  public void equality_franc() throws Exception {
-    assertThat(new Franc(5)).isEqualTo(new Franc(5));
+    assertThat(Money.franc(5)).isNotEqualTo(Money.dollar(5));
   }
 }
