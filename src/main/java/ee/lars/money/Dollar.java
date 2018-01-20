@@ -1,19 +1,12 @@
 package ee.lars.money;
 
-class Dollar {
-
-  private int amount;
+class Dollar extends Money {
 
   public Dollar(int amount) {
-    this.amount = amount;
+    super(amount);
   }
 
   Dollar times(int multiplier) {
     return new Dollar(amount * multiplier);
-  }
-
-  public boolean equals(Object o) {
-    Dollar other = (Dollar) o;
-    return amount == other.amount;
   }
 }
