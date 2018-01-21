@@ -1,5 +1,6 @@
 package ee.lars.money;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,5 +25,11 @@ public class MoneyTest {
     assertThat(Money.franc(5)).isEqualTo(Money.franc(5));
 
     assertThat(Money.franc(5)).isNotEqualTo(Money.dollar(5));
+  }
+
+  @Test
+  public void currencies() throws Exception {
+    assertThat(Money.dollar(1).currency()).isEqualTo("USD");
+    assertThat(Money.franc(1).currency()).isEqualTo("CHF");
   }
 }
