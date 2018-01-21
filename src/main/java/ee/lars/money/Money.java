@@ -1,6 +1,6 @@
 package ee.lars.money;
 
-abstract class Money {
+class Money {
 
   protected int amount;
   protected String currency;
@@ -18,15 +18,24 @@ abstract class Money {
     return new Franc(amount, "CHF");
   }
 
-  abstract Money times(int amount);
+  String currency() {
+    return currency;
+  }
+
+  Money times(int multiplier) {
+    return new Money(amount * multiplier, currency);
+  }
+
+  @Override public String toString() {
+    return "Money{" +
+        "amount=" + amount +
+        ", currency='" + currency + '\'' +
+        '}';
+  }
 
   @Override
   public boolean equals(Object object) {
     Money other = (Money) object;
-    return amount == other.amount && getClass().equals(other.getClass());
-  }
-
-  String currency() {
-    return currency;
+    return amount == other.amount && currency.equals(other.currency);
   }
 }
