@@ -31,4 +31,13 @@ public class MoneyTest {
     assertThat(Money.dollar(1).currency()).isEqualTo("USD");
     assertThat(Money.franc(1).currency()).isEqualTo("CHF");
   }
+
+  @Test
+  public void simple_addition() throws Exception {
+    Money five = Money.dollar(5);
+    Expression sum = five.plus(Money.dollar(5));
+    Bank bank = new Bank();
+    Money reduced = bank.reduce(sum, "USD");
+    assertThat(reduced).isEqualTo(Money.dollar(10));
+  }
 }
