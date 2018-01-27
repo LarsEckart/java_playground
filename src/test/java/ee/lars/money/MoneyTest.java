@@ -1,5 +1,6 @@
 package ee.lars.money;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,5 +40,29 @@ public class MoneyTest {
     Bank bank = new Bank();
     Money reduced = bank.reduce(sum, "USD");
     assertThat(reduced).isEqualTo(Money.dollar(10));
+  }
+
+  @Test
+  public void plus_returns_sum() throws Exception {
+    Money five = Money.dollar(5);
+    Expression result = five.plus(five);
+    Sum sum = (Sum) result;
+    assertThat(sum.augend).isEqualTo(five);
+    assertThat(sum.addend).isEqualTo(five);
+  }
+
+  @Test
+  public void reduce_sum() throws Exception {
+    Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+    Bank bank = new Bank();
+    Money result = bank.reduce(sum, "USD");
+    assertThat(result).isEqualTo(Money.dollar(7));
+  }
+
+  @Test
+  public void reduce_money() throws Exception {
+    Bank bank = new Bank();
+    Money result = bank.reduce(Money.dollar(1), "USD");
+    assertThat(result).isEqualTo(Money.dollar(1));
   }
 }
