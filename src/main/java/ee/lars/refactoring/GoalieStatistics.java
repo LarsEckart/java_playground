@@ -1,7 +1,5 @@
 package ee.lars.refactoring;
 
-import java.util.List;
-
 public class GoalieStatistics {
 
   private final Season season;
@@ -14,9 +12,8 @@ public class GoalieStatistics {
     if (season.getGames().isEmpty()) {
       return 0.0;
     } else {
-      List<Game> games = season.getGames();
-      int tga = season.calculateTotalGoalsAgainst(games);
-      double mins = season.calculateTotalMinutesPlayed(games);
+      int tga = season.calculateTotalGoalsAgainst();
+      double mins = season.calculateTotalMinutesPlayed();
       return (tga / mins) * 60;
     }
   }
@@ -25,9 +22,8 @@ public class GoalieStatistics {
     if (season.getGames().isEmpty()) {
       return 0.0;
     } else {
-      List<Game> games = season.getGames();
-      int g = season.calculateTotalGoalsAgainst(games);
-      int tsoga = season.calculateTotalShotsOnGoalAgainst(games);
+      int g = season.calculateTotalGoalsAgainst();
+      int tsoga = season.calculateTotalShotsOnGoalAgainst();
       return ((double) tsoga - g) / tsoga;
     }
   }

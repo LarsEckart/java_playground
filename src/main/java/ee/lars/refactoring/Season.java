@@ -31,15 +31,15 @@ public class Season {
     return new GoalieStatistics(this);
   }
 
-  int calculateTotalGoalsAgainst(List<Game> games) {
+  int calculateTotalGoalsAgainst() {
     return games.stream().mapToInt(Game::getGoalsAgainst).sum();
   }
 
-  double calculateTotalMinutesPlayed(List<Game> games) {
+  double calculateTotalMinutesPlayed() {
     return games.stream().mapToDouble(Game::getMinutesPlayed).sum();
   }
 
-  int calculateTotalShotsOnGoalAgainst(List<Game> games) {
+  int calculateTotalShotsOnGoalAgainst() {
     return games.stream().mapToInt(Game::getShotsOnGoalAgainst).sum();
   }
 }
