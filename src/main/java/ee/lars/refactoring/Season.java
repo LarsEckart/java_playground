@@ -42,4 +42,8 @@ public class Season {
   int calculateTotalShotsOnGoalAgainst() {
     return games.stream().mapToInt(Game::getShotsOnGoalAgainst).sum();
   }
+
+  boolean hasStarted() {
+    return !getGames().isEmpty();
+  }
 }
