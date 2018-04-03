@@ -15,16 +15,8 @@ public class GoalieStatistics {
       return 0.0;
     } else {
       List<Game> games = season.getGames();
-      int tga = 0;
-      double mins = 0;
-      for (Game game : games) {
-        tga += game.getGoalsAgainst();
-        mins += game.getMinutesPlayed();
-      }
-      for (Game game : games) {
-        tga += game.getGoalsAgainst();
-        mins += game.getMinutesPlayed();
-      }
+      int tga = season.calculateTotalGoalsAgainst(games);
+      double mins = season.calculateTotalMinutesPlayed(games);
       return (tga / mins) * 60;
     }
   }
@@ -34,12 +26,8 @@ public class GoalieStatistics {
       return 0.0;
     } else {
       List<Game> games = season.getGames();
-      int g = 0;
-      int tsoga = 0;
-      for (Game game : games) {
-        g += game.getGoalsAgainst();
-        tsoga += game.getShotsOnGoalAgainst();
-      }
+      int g = season.calculateTotalGoalsAgainst(games);
+      int tsoga = season.calculateTotalShotsOnGoalAgainst(games);
       return ((double) tsoga - g) / tsoga;
     }
   }
