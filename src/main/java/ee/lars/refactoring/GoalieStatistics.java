@@ -12,9 +12,9 @@ public class GoalieStatistics {
     if (season.getGames().isEmpty()) {
       return 0.0;
     } else {
-      int tga = season.calculateTotalGoalsAgainst();
-      double mins = season.calculateTotalMinutesPlayed();
-      return (tga / mins) * 60;
+      int totalGoalsAgainst = season.calculateTotalGoalsAgainst();
+      double totalMinutesPlayed = season.calculateTotalMinutesPlayed();
+      return (totalGoalsAgainst / totalMinutesPlayed) * 60;
     }
   }
 
@@ -22,9 +22,9 @@ public class GoalieStatistics {
     if (season.getGames().isEmpty()) {
       return 0.0;
     } else {
-      int g = season.calculateTotalGoalsAgainst();
-      int tsoga = season.calculateTotalShotsOnGoalAgainst();
-      return ((double) tsoga - g) / tsoga;
+      int totalGoalsAgainst = season.calculateTotalGoalsAgainst();
+      int totalShotsOnGoalAgainst = season.calculateTotalShotsOnGoalAgainst();
+      return ((double) totalShotsOnGoalAgainst - totalGoalsAgainst) / totalShotsOnGoalAgainst;
     }
   }
 }
