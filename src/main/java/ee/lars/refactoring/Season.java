@@ -23,10 +23,6 @@ public class Season {
     games.remove(game);
   }
 
-  public List<Game> getGames() {
-    return games;
-  }
-
   public GoalieStatistics getGoalieStatistics() {
     return new GoalieStatistics(this);
   }
@@ -44,6 +40,6 @@ public class Season {
   }
 
   boolean hasStarted() {
-    return !getGames().isEmpty();
+    return !games.isEmpty();
   }
 }
