@@ -95,15 +95,29 @@ public class Board_should {
   }
 
   @Test
-  public void have_player_x_win_if_he_has_horizontal_line() throws Exception {
+  public void have_player_X_win_if_he_has_horizontal_line() throws Exception {
     board.placePiece(1,1);
+    board.placePiece(2,2);
     board.placePiece(1,2);
-    board.placePiece(2,1);
+    board.placePiece(3,3);
     board.placePiece(1,3);
-    board.placePiece(3,1);
 
     String winner = board.getWinner();
 
-    assertThat(winner).isEqualToIgnoringCase("X");
+    assertThat(winner).isEqualToIgnoringCase("X wins");
+  }
+
+  @Test
+  public void have_player_O_win_if_she_has_horizontal_line() throws Exception {
+    board.placePiece(1,1);
+    board.placePiece(2,1);
+    board.placePiece(3,1);
+    board.placePiece(2,2);
+    board.placePiece(3,3);
+    board.placePiece(2,3);
+
+    String winner = board.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("O wins");
   }
 }

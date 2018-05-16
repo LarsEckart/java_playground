@@ -2,8 +2,18 @@ package ee.lars.tictactoe;
 
 public class Board {
 
+  private static final char EMPTY_FIELD_INDICATOR = 'e';
+
   private char[][] placedPieces = new char[3][3];
   private boolean isPlayerX = true;
+
+  public Board() {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        placedPieces[i][j] = EMPTY_FIELD_INDICATOR;
+      }
+    }
+  }
 
   public void placePiece(int xAxis, int yAxis) {
     verifyXAxis(xAxis);
@@ -24,7 +34,7 @@ public class Board {
   }
 
   private void placePieceOnField(int xAxis, int yAxis) {
-    if (placedPieces[xAxis - 1][yAxis - 1] == 'O' || placedPieces[xAxis - 1][yAxis - 1] == 'X') {
+    if (placedPieces[xAxis - 1][yAxis - 1] != EMPTY_FIELD_INDICATOR) {
       throw new RuntimeException("space already occupied");
     }
     placedPieces[xAxis - 1][yAxis - 1] = isPlayerX ? 'X' : 'O';
@@ -37,12 +47,32 @@ public class Board {
 
   public String getWinner() {
 
+    if (hasHorizontalRow('X')) {
+      return "X wins";
+    }
+    if (hasHorizontalRow('O')) {
+      return "O wins";
+    }
+
+    return "no winner";
+  }
+
+  private boolean hasHorizontalRow(char playerSign) {
     for (int i = 0; i < 3; i++) {
-      if (placedPieces[i][0] == 'X' && placedPieces[i][0] == 'X' && placedPieces[i][0] == 'X') {
-        return "X";
+      if (placedPieces[i][0] == playerSign && placedPieces[i][1] == playerSign && placedPieces[i][2] == playerSign) {
+        return true;
       }
     }
-    
-    return "no winner";
+    return false;
+  }
+
+  /* for debug purpose because multidimensional arrays are tough */
+  private void printGrid() {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        System.out.printf("%s ", placedPieces[i][j]);
+      }
+      System.out.println();
+    }
   }
 }
