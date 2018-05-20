@@ -1,14 +1,15 @@
 package ee.lars.tictactoe;
 
-public class TicTacToe {
+class TicTacToe {
 
   private static final char EMPTY_FIELD_INDICATOR = 'e';
+  private static final int DEFAULT_GRID_SIZE = 3;
 
   private Grid grid;
   private boolean isPlayerX = true;
 
   public TicTacToe() {
-    this.grid = new Grid(3, EMPTY_FIELD_INDICATOR);
+    this.grid = new Grid(DEFAULT_GRID_SIZE, EMPTY_FIELD_INDICATOR);
   }
 
   public void placePiece(int row, int column) {
@@ -36,7 +37,6 @@ public class TicTacToe {
   }
 
   public String getWinner() {
-
     if (hasHorizontalRow('X')) {
       return "X wins";
     }
@@ -48,13 +48,6 @@ public class TicTacToe {
   }
 
   private boolean hasHorizontalRow(char playerSign) {
-    for (int row = 1; row < 4; row++) {
-      if (grid.getFieldMarking(row, 1) == playerSign
-          && grid.getFieldMarking(row, 2) == playerSign
-          && grid.getFieldMarking(row, 3) == playerSign) {
-        return true;
-      }
-    }
-    return false;
+    return grid.anyRowCompleteFor(playerSign);
   }
 }

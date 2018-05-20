@@ -8,8 +8,8 @@ class Grid {
   public Grid(int size, char emptyFieldIndicator) {
     this.fields = new char[size][size];
     this.emptyFieldIndicator = emptyFieldIndicator;
-    for (int i = 1; i < size + 1; i++) {
-      for (int j = 1; j < size + 1; j++) {
+    for (int i = 1; i <= size; i++) {
+      for (int j = 1; j <= size; j++) {
         this.markField(i, j, emptyFieldIndicator);
       }
     }
@@ -29,6 +29,17 @@ class Grid {
 
   public void markField(int row, int column, char sign) {
     this.fields[row - 1][column - 1] = sign;
+  }
+
+  public boolean anyRowCompleteFor(char playerSign) {
+    for (int row = 1; row <= size(); row++) {
+      if (this.getFieldMarking(row, 1) == playerSign
+          && this.getFieldMarking(row, 2) == playerSign
+          && this.getFieldMarking(row, 3) == playerSign) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public int size() {
