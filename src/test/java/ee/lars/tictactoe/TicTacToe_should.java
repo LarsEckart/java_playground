@@ -74,7 +74,6 @@ TicTacToe_should {
     assertThat(playerSign).isEqualTo('O');
   }
 
-  @Ignore("false positive, was passing without changing implementation")
   @Test
   public void make_next_turn_after_player_y_with_player_x() throws Exception {
     ticTacToe.placePiece(1, 1);
@@ -142,6 +141,60 @@ TicTacToe_should {
     ticTacToe.placePiece(2,1);
     ticTacToe.placePiece(3,2);
     ticTacToe.placePiece(3,1);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("O wins");
+  }
+
+  @Test
+  public void have_player_X_win_if_he_has_diagonal_line() throws Exception {
+    ticTacToe.placePiece(1,1);
+    ticTacToe.placePiece(1,2);
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(3,2);
+    ticTacToe.placePiece(3,3);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("X wins");
+  }
+
+  @Test
+  public void have_player_X_win_if_he_has_the_pther_diagonal_line() throws Exception {
+    ticTacToe.placePiece(3,1);
+    ticTacToe.placePiece(1,2);
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(3,2);
+    ticTacToe.placePiece(1,3);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("X wins");
+  }
+
+  @Test
+  public void have_player_O_win_if_he_has_diagonal_line() throws Exception {
+    ticTacToe.placePiece(1,2);
+    ticTacToe.placePiece(1,1);
+    ticTacToe.placePiece(3,2);
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(1,3);
+    ticTacToe.placePiece(3,3);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("O wins");
+  }
+
+  @Test
+  public void have_player_O_win_if_he_has_the_pther_diagonal_line() throws Exception {
+    ticTacToe.placePiece(1,2);
+    ticTacToe.placePiece(3,1);
+    ticTacToe.placePiece(3,2);
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(3,3);
+    ticTacToe.placePiece(1,3);
 
     String winner = ticTacToe.getWinner();
 

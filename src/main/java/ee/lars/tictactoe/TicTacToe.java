@@ -37,10 +37,14 @@ class TicTacToe {
   }
 
   public String getWinner() {
-    if (hasHorizontalWinningCondition('X') || hasVerticalWinningCondition('X')) {
+    if (hasHorizontalWinningCondition('X')
+        || hasVerticalWinningCondition('X')
+        || hasDiagonalWinningCondition('X')) {
       return "X wins";
     }
-    if (hasHorizontalWinningCondition('O') || hasVerticalWinningCondition('O')) {
+    if (hasHorizontalWinningCondition('O')
+        || hasVerticalWinningCondition('O')
+        || hasDiagonalWinningCondition('O')) {
       return "O wins";
     }
 
@@ -53,5 +57,9 @@ class TicTacToe {
 
   private boolean hasVerticalWinningCondition(char playerSign) {
     return grid.anyColumnCompleteFor(playerSign);
+  }
+
+  private boolean hasDiagonalWinningCondition(char playerSign) {
+    return grid.anyDiagonalCompleteFor(playerSign);
   }
 }

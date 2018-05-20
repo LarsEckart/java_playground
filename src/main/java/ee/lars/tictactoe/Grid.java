@@ -56,4 +56,13 @@ class Grid {
     }
     return false;
   }
+
+  public boolean anyDiagonalCompleteFor(char playerSign) {
+    return (this.getFieldMarking(1, 1) == playerSign
+        && this.getFieldMarking(2, 2) == playerSign
+        && this.getFieldMarking(3, 3) == playerSign)
+        || (this.getFieldMarking(3, 1) == playerSign
+        && this.getFieldMarking(2, 2) == playerSign
+        && this.getFieldMarking(1, 3) == playerSign);
+  }
 }
