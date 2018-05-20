@@ -4,45 +4,35 @@ public class TicTacToe {
 
   private static final char EMPTY_FIELD_INDICATOR = 'e';
 
-  private char[][] placedPieces = new char[3][3];
+  private Grid grid;
   private boolean isPlayerX = true;
 
   public TicTacToe() {
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        placedPieces[i][j] = EMPTY_FIELD_INDICATOR;
-      }
+    this.grid = new Grid(3, EMPTY_FIELD_INDICATOR);
+  }
+
+  public void placePiece(int row, int column) {
+    verifyPiecePlacement(row, "row");
+    verifyPiecePlacement(column, "column");
+    placePieceOnField(row, column);
+  }
+
+  private void verifyPiecePlacement(int place, String type) {
+    if (grid.validPlacement(place)) {
+      throw new IllegalArgumentException("not a valid " + type);
     }
   }
 
-  public void placePiece(int column, int row) {
-    verifyPiecePlacedWithinAllowedColumns(column);
-    verifyPiecePlacedWithinAllowedRows(row);
-    placePieceOnField(column, row);
-  }
-
-  private void verifyPiecePlacedWithinAllowedColumns(int column) {
-    if (column > 3 || column < 1) {
-      throw new RuntimeException("x axis value too large");
+  private void placePieceOnField(int row, int column) {
+    if (!this.grid.fieldEmpty(row, column)) {
+      throw new IllegalArgumentException("space already occupied");
     }
-  }
-
-  private void verifyPiecePlacedWithinAllowedRows(int row) {
-    if (row > 3 || row < 1) {
-      throw new RuntimeException("y axis value too large");
-    }
-  }
-
-  private void placePieceOnField(int column, int row) {
-    if (placedPieces[column - 1][row - 1] != EMPTY_FIELD_INDICATOR) {
-      throw new RuntimeException("space already occupied");
-    }
-    placedPieces[column - 1][row - 1] = isPlayerX ? 'X' : 'O';
+    this.grid.markField(row, column, isPlayerX ? 'X' : 'O');
     isPlayerX = !isPlayerX;
   }
 
-  public char getPlayerToken(int column, int row) {
-    return placedPieces[column - 1][row - 1];
+  public char getPlayerToken(int row, int column) {
+    return this.grid.getFieldMarking(row, column);
   }
 
   public String getWinner() {
@@ -58,21 +48,13 @@ public class TicTacToe {
   }
 
   private boolean hasHorizontalRow(char playerSign) {
-    for (int i = 0; i < 3; i++) {
-      if (placedPieces[i][0] == playerSign && placedPieces[i][1] == playerSign && placedPieces[i][2] == playerSign) {
+    for (int row = 1; row < 4; row++) {
+      if (grid.getFieldMarking(row, 1) == playerSign
+          && grid.getFieldMarking(row, 2) == playerSign
+          && grid.getFieldMarking(row, 3) == playerSign) {
         return true;
       }
     }
     return false;
-  }
-
-  /* for debug purpose because multidimensional arrays are tough */
-  private void printGrid() {
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        System.out.printf("%s ", placedPieces[i][j]);
-      }
-      System.out.println();
-    }
   }
 }

@@ -11,7 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @RunWith(JUnitParamsRunner.class)
-public class TicTacToe_should {
+public class
+TicTacToe_should {
 
   private TicTacToe ticTacToe;
 
@@ -22,23 +23,23 @@ public class TicTacToe_should {
 
   @Test
   @Parameters({"4", "5", "0"})
-  public void not_allow_to_place_piece_outside_x_axis(int xAxis) throws Exception {
+  public void not_allow_to_place_piece_outside_possible_rows(int row) throws Exception {
     try {
-      ticTacToe.placePiece(xAxis, 0);
-      fail("Placing a piece outside of x axis should have thrown exception");
-    } catch (RuntimeException expected) {
-      assertThat(expected.getMessage()).isEqualToIgnoringCase("x axis value too large");
+      ticTacToe.placePiece(row, 1);
+      fail("Placing a piece outside of allowed rows should have thrown exception");
+    } catch (IllegalArgumentException expected) {
+      assertThat(expected.getMessage()).isEqualToIgnoringCase("not a valid row");
     }
   }
 
   @Test
   @Parameters({"4", "5", "0"})
-  public void not_allow_to_place_piece_outside_y_axis(int yAxis) throws Exception {
+  public void not_allow_to_place_piece_outside_possible_columns(int column) throws Exception {
     try {
-      ticTacToe.placePiece(1, yAxis);
-      fail("Placing a piece outside of y axis should have thrown exception");
-    } catch (RuntimeException expected) {
-      assertThat(expected.getMessage()).isEqualToIgnoringCase("y axis value too large");
+      ticTacToe.placePiece(1, column);
+      fail("Placing a piece outside of allowed columns should have thrown exception");
+    } catch (IllegalArgumentException expected) {
+      assertThat(expected.getMessage()).isEqualToIgnoringCase("not a valid column");
     }
   }
 
@@ -49,7 +50,7 @@ public class TicTacToe_should {
     try {
       ticTacToe.placePiece(1, 1);
       fail("Placing a piece where already a piece was placed should have thrown exception");
-    } catch (RuntimeException expected) {
+    } catch (IllegalArgumentException expected) {
       assertThat(expected.getMessage()).isEqualToIgnoringCase("space already occupied");
     }
   }
