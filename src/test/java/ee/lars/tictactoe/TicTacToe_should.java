@@ -120,4 +120,31 @@ TicTacToe_should {
 
     assertThat(winner).isEqualToIgnoringCase("O wins");
   }
+
+  @Test
+  public void have_player_X_win_if_he_has_vertical_line() throws Exception {
+    ticTacToe.placePiece(1,1);
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(2,1);
+    ticTacToe.placePiece(3,3);
+    ticTacToe.placePiece(3,1);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("X wins");
+  }
+
+  @Test
+  public void have_player_O_win_if_he_has_vertical_line() throws Exception {
+    ticTacToe.placePiece(2,2);
+    ticTacToe.placePiece(1,1);
+    ticTacToe.placePiece(3,3);
+    ticTacToe.placePiece(2,1);
+    ticTacToe.placePiece(3,2);
+    ticTacToe.placePiece(3,1);
+
+    String winner = ticTacToe.getWinner();
+
+    assertThat(winner).isEqualToIgnoringCase("O wins");
+  }
 }

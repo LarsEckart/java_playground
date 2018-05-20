@@ -45,4 +45,15 @@ class Grid {
   public int size() {
     return fields.length;
   }
+
+  public boolean anyColumnCompleteFor(char playerSign) {
+    for (int column = 1; column <= size(); column++) {
+      if (this.getFieldMarking(1, column) == playerSign
+          && this.getFieldMarking(2, column) == playerSign
+          && this.getFieldMarking(3, column) == playerSign) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
