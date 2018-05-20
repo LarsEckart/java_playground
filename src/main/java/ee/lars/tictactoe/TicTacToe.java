@@ -1,13 +1,13 @@
 package ee.lars.tictactoe;
 
-public class Board {
+public class TicTacToe {
 
   private static final char EMPTY_FIELD_INDICATOR = 'e';
 
   private char[][] placedPieces = new char[3][3];
   private boolean isPlayerX = true;
 
-  public Board() {
+  public TicTacToe() {
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         placedPieces[i][j] = EMPTY_FIELD_INDICATOR;
@@ -15,34 +15,34 @@ public class Board {
     }
   }
 
-  public void placePiece(int xAxis, int yAxis) {
-    verifyXAxis(xAxis);
-    verifyYAxis(yAxis);
-    placePieceOnField(xAxis, yAxis);
+  public void placePiece(int column, int row) {
+    verifyPiecePlacedWithinAllowedColumns(column);
+    verifyPiecePlacedWithinAllowedRows(row);
+    placePieceOnField(column, row);
   }
 
-  private void verifyXAxis(int xAxis) {
-    if (xAxis > 3 || xAxis < 1) {
+  private void verifyPiecePlacedWithinAllowedColumns(int column) {
+    if (column > 3 || column < 1) {
       throw new RuntimeException("x axis value too large");
     }
   }
 
-  private void verifyYAxis(int yAxis) {
-    if (yAxis > 3 || yAxis < 1) {
+  private void verifyPiecePlacedWithinAllowedRows(int row) {
+    if (row > 3 || row < 1) {
       throw new RuntimeException("y axis value too large");
     }
   }
 
-  private void placePieceOnField(int xAxis, int yAxis) {
-    if (placedPieces[xAxis - 1][yAxis - 1] != EMPTY_FIELD_INDICATOR) {
+  private void placePieceOnField(int column, int row) {
+    if (placedPieces[column - 1][row - 1] != EMPTY_FIELD_INDICATOR) {
       throw new RuntimeException("space already occupied");
     }
-    placedPieces[xAxis - 1][yAxis - 1] = isPlayerX ? 'X' : 'O';
+    placedPieces[column - 1][row - 1] = isPlayerX ? 'X' : 'O';
     isPlayerX = !isPlayerX;
   }
 
-  public char getPlayerToken(int xAxis, int yAxis) {
-    return placedPieces[xAxis - 1][yAxis - 1];
+  public char getPlayerToken(int column, int row) {
+    return placedPieces[column - 1][row - 1];
   }
 
   public String getWinner() {
