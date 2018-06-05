@@ -50,5 +50,5 @@ tasks.withType(JavaCompile) {
     //options.compilerArgs += [ '-Xep:DeadException:WARN', '-Xep:GuardedByValidator:OFF' ]
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '1.9'
+targetCompatibility = '1.9'

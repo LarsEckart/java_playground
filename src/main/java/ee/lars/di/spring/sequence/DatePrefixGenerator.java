@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 
 @Component
 public class DatePrefixGenerator implements PrefixGenerator {
@@ -21,7 +21,7 @@ public class DatePrefixGenerator implements PrefixGenerator {
         return this.formatter.format(LocalDate.now());
     }
 
-    @PostConstruct
+    //@PostConstruct
     public void post() {
         System.out.println("dpg post");
     }
