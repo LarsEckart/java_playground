@@ -1,5 +1,6 @@
 package lars.vavr;
 
+import io.vavr.collection.Stream;
 import io.vavr.control.Try;
 import org.junit.Test;
 
