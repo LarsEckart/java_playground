@@ -11,13 +11,12 @@ public class OptionalProperties {
         return Optional.ofNullable(properties.get(propertyName));
     }
 
-    public <T> Optional<T> getProperty(
-            String propertyName, ThrowingFunction<String, ? extends T, ? extends Exception> supplier) {
+    public <T> Optional<T> getProperty(String propertyName, ThrowingFunction<String, ? extends T, ? extends Exception> supplier) {
         return this.getProperty(propertyName).map(val -> {
             try {
                 return supplier.apply(val);
             } catch (Exception e) {
-                System.err.println("Invalid property transform, will default " + e.getMessage());
+                System.err.println("Invalid property transform, will default." + e.getMessage());
                 return null;
             }
         });
@@ -29,6 +28,7 @@ public class OptionalProperties {
         boolean enabled = config.getProperty("cache.enabled", Boolean::getBoolean).orElse(true);
     }
 
+    @FunctionalInterface
     interface ThrowingFunction<T, R, E extends Throwable> {
 
         R apply(T arg) throws E;
