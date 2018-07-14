@@ -1,7 +1,7 @@
 language: java
 
 jdk:
-  - oraclejdk9
+  - oraclejdk10
 
 os:
   - linux
@@ -17,6 +17,6 @@ cache:
 before_script:
 
 script:
-  - ./gradlew clean build
+  - ./gradlew clean check
 
 after_script:
