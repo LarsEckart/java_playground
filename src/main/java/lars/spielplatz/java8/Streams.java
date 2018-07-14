@@ -9,7 +9,7 @@ public class Streams {
 
     public static void main(String[] args) {
 
-        List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
+        List<String> myList = List.of("a1", "a2", "b1", "c2", "c1");
 
         myList
                 .stream()
@@ -18,7 +18,7 @@ public class Streams {
                 .sorted()
                 .forEach(System.out::println);
 
-        Arrays.asList("a1", "a2", "a3")
+        List.of("a1", "a2", "a3")
                 .stream()
                 .findFirst()
                 .ifPresent(System.out::println);

@@ -57,7 +57,7 @@ public class PassphraseChecker {
         }
 
         public List<String> getWords() {
-            return Arrays.asList(passphrase.split(" "));
+            return List.of(passphrase.split(" "));
         }
     }
 }

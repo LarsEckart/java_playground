@@ -6,7 +6,7 @@ import java.util.List;
 public class ChecksumCalculator {
 
     public int checksum(String matrix) {
-        List<String> rows = Arrays.asList(matrix.split("\n"));
+        List<String> rows = List.of(matrix.split("\n"));
 
         int sum = 0;
         for (String row : rows) {
@@ -19,7 +19,7 @@ public class ChecksumCalculator {
     }
 
     public int divisableChecksum(String matrix) {
-        List<String> rows = Arrays.asList(matrix.split("\n"));
+        List<String> rows = List.of(matrix.split("\n"));
 
         int sum = 0;
         for (String row : rows) {

@@ -10,7 +10,7 @@ public class AdvancedStreamOperations {
 
     public static void main(String[] args) {
 
-        List<Person> persons = Arrays.asList(
+        List<Person> persons = List.of(
                 new Person("Max", 18),
                 new Person("Peter", 23),
                 new Person("Pamela", 23),
@@ -32,7 +32,7 @@ public class AdvancedStreamOperations {
         ForkJoinPool commonPool = ForkJoinPool.commonPool();
         System.out.println(commonPool.getParallelism());
 
-        Arrays.asList("a1", "a2", "b1", "c2", "c1")
+        List.of("a1", "a2", "b1", "c2", "c1")
                 .parallelStream()
                 .filter(s -> {
                     System.out.format("filter: %s [%s]\n",
