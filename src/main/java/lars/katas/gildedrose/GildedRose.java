@@ -18,40 +18,65 @@ class GildedRose {
             if (SULFURAS.equals(item.name)) {
                 continue;
             }
-            item.sellIn = item.sellIn - 1;
+            decreaseSellIn(item);
 
-            if (isItemThatDecreasesInQuality(item)) {
-                if (item.quality > 0) {
-                    item.quality = item.quality - 1;
-                }
-            } else {
-                if (item.quality < MAX_QUALITY) {
-                    item.quality = item.quality + 1;
-
-                    if (isBackstagePass(item)) {
-                        additionalQualityIncreaseForBackstagePass(item);
-                    }
-                }
-            }
-
-            if (item.sellIn < 0) {
-                updateQualityOncePastExpiry(item);
-            }
+            adjustQuality(item);
         }
     }
 
+    private void decreaseSellIn(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    private void adjustQuality(Item item) {
+        if (isItemThatDecreasesInQuality(item)) {
+            if (item.quality > 0) {
+                decreaseQualityByOne(item);
+
+            }
+        } else {
+            if (item.quality < MAX_QUALITY) {
+                increaseQualityByOne(item);
+
+                if (isBackstagePass(item)) {
+                    additionalQualityIncreaseForBackstagePass(item);
+                }
+            }
+        }
+
+        if (item.sellIn < 0) {
+            updateQualityOncePastExpiry(item);
+        }
+    }
+
+    private boolean isItemThatDecreasesInQuality(Item item) {
+        return !item.name.equals(AGED_BRIE) && !isBackstagePass(item);
+    }
+
+    private void decreaseQualityByOne(Item item) {
+        item.quality = item.quality - 1;
+    }
+
+    private void increaseQualityByOne(Item item) {
+        item.quality = item.quality + 1;
+    }
+
+    private boolean isBackstagePass(Item item) {
+        return item.name.equals(BACKSTAGE_PASSES);
+    }
+
     private void updateQualityOncePastExpiry(Item item) {
-        if (!item.name.equals(AGED_BRIE)) {
+        if (item.name.equals(AGED_BRIE)) {
+            if (item.quality < MAX_QUALITY) {
+                increaseQualityByOne(item);
+            }
+        } else {
             if (isBackstagePass(item)) {
                 item.quality = 0;
             } else {
                 if (item.quality > 0) {
-                    item.quality = item.quality - 1;
+                    decreaseQualityByOne(item);
                 }
-            }
-        } else {
-            if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
             }
         }
     }
@@ -59,22 +84,14 @@ class GildedRose {
     private void additionalQualityIncreaseForBackstagePass(Item item) {
         if (item.sellIn < 11) {
             if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
+                increaseQualityByOne(item);
             }
         }
 
         if (item.sellIn < 6) {
             if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
+                increaseQualityByOne(item);
             }
         }
-    }
-
-    private boolean isBackstagePass(Item item) {
-        return item.name.equals(BACKSTAGE_PASSES);
-    }
-
-    private boolean isItemThatDecreasesInQuality(Item item) {
-        return !item.name.equals(AGED_BRIE) && !isBackstagePass(item);
     }
 }
