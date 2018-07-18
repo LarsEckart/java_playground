@@ -72,6 +72,15 @@ public class GildedRoseTest {
     }
 
     @Test
+    public void backstage_passes_increase_by_2_when_less_10_sellin_days2() throws Exception {
+        givenItemWithSellinAndQuality("Backstage passes to a TAFKAL80ETC concert", 10, 49);
+
+        whenWeUpdateTheQuality();
+
+        thenItemBecomes("Backstage passes to a TAFKAL80ETC concert", 9, 50);
+    }
+
+    @Test
     public void backstage_passes_increase_by_3_when_less_5_sellin_days() throws Exception {
         givenItemWithSellinAndQuality("Backstage passes to a TAFKAL80ETC concert", 5, 20);
 
@@ -81,7 +90,16 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void backstage_passes_quality_drops_to_0_after_event_by_3_when_less_5_sellin_days() throws Exception {
+    public void backstage_passes_increase_by_3_when_less_5_sellin_days3() throws Exception {
+        givenItemWithSellinAndQuality("Backstage passes to a TAFKAL80ETC concert", 5, 49);
+
+        whenWeUpdateTheQuality();
+
+        thenItemBecomes("Backstage passes to a TAFKAL80ETC concert", 4, 50);
+    }
+
+    @Test
+    public void backstage_passes_quality_drops_to_0_after_event() throws Exception {
         givenItemWithSellinAndQuality("Backstage passes to a TAFKAL80ETC concert", 0, 20);
 
         whenWeUpdateTheQuality();
