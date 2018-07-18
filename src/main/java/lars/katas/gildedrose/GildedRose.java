@@ -42,52 +42,34 @@ class GildedRose {
             return;
         }
 
-        if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
-        } else {
+        if (AGED_BRIE.equals(item.name)) {
             if (item.quality < MAX_QUALITY) {
                 item.quality = item.quality + 1;
-
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.sellIn < 11) {
-                        if (item.quality < MAX_QUALITY) {
-                            increaseQualityByOne(item);
-                        }
-                    }
-
-                    if (item.sellIn < 6) {
-                        if (item.quality < MAX_QUALITY) {
-                            increaseQualityByOne(item);
-                        }
-                    }
-                }
             }
+            return;
         }
 
-        if (item.sellIn < 0) {
-            if (item.name.equals(AGED_BRIE)) {
-                if (item.quality < MAX_QUALITY) {
-                    item.quality = item.quality + 1;
-                }
-            } else {
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    item.quality = 0;
+        if (item.name.equals(BACKSTAGE_PASSES)) {
+            if (item.sellIn < 5) {
+                if (item.quality < 48) {
+                    item.quality = item.quality + 3;
                 } else {
-                    if (item.quality > 0) {
-                        item.quality = item.quality - 1;
-                    }
+                    item.quality = MAX_QUALITY;
+                }
+            } else if (item.sellIn < 10) {
+                if (item.quality < 49) {
+                    item.quality = item.quality + 2;
+                } else {
+                    item.quality = MAX_QUALITY;
                 }
             }
+            if (item.sellIn < 0) {
+                item.quality = 0;
+            }
+            return;
         }
-    }
-
-    private void decreaseQualityByOne(Item item) {
-        item.quality = item.quality - 1;
-    }
-
-    private void increaseQualityByOne(Item item) {
-        item.quality = item.quality + 1;
+        if (SULFURAS.equals(item.name)) {
+            return;
+        }
     }
 }
