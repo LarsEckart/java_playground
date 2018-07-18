@@ -14,23 +14,21 @@ class GildedRose {
     }
 
     void updateQuality() {
+        ConsumableFactory consumableFactory = new ConsumableFactory();
         for (Item item : items) {
-            if (SULFURAS.equals(item.name)) {
-                continue;
+            Consumable consumable = consumableFactory.create(item.name);
+            if (consumable != null) {
+                consumable.updateQuality(item);
+            } else {
+                adjustQuality(item);
             }
-            decreaseSellIn(item);
-
-            adjustQuality(item);
         }
-    }
-
-    private void decreaseSellIn(Item item) {
-        item.sellIn = item.sellIn - 1;
     }
 
     private void adjustQuality(Item item) {
 
         if ("foo".equals(item.name)) {
+            decreaseSellIn(item);
             if (item.quality != 0) {
                 if (item.sellIn > 0) {
                     item.quality = item.quality - 1;
@@ -42,14 +40,8 @@ class GildedRose {
             return;
         }
 
-        if (AGED_BRIE.equals(item.name)) {
-            if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
-            }
-            return;
-        }
-
-        if (item.name.equals(BACKSTAGE_PASSES)) {
+        if (BACKSTAGE_PASSES.equals(item.name)) {
+            decreaseSellIn(item);
             if (item.sellIn < 5) {
                 if (item.quality < 48) {
                     item.quality = item.quality + 3;
@@ -70,6 +62,35 @@ class GildedRose {
         }
         if (SULFURAS.equals(item.name)) {
             return;
+        }
+    }
+
+    private void decreaseSellIn(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    interface Consumable {
+
+        void updateQuality(Item item);
+    }
+
+    class Brie implements Consumable {
+
+        @Override public void updateQuality(Item item) {
+            item.sellIn = item.sellIn - 1;
+            if (item.quality < MAX_QUALITY) {
+                item.quality = item.quality + 1;
+            }
+        }
+    }
+
+    class ConsumableFactory {
+
+        public Consumable create(String itemName) {
+            if (AGED_BRIE.equals(itemName)) {
+                return new Brie();
+            }
+            return null;
         }
     }
 }
