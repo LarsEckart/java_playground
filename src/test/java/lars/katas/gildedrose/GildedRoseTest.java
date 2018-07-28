@@ -13,25 +13,25 @@ public class GildedRoseTest {
 
     final String expected = "--- day 0 ---\n"
             + "name   sellin   quality\n"
-            + "Item{name='+5 Dexterity Vest', sellIn=10, quality=20}\n"
-            + "Item{name='Aged Brie', sellIn=2, quality=0}\n"
-            + "Item{name='Elixir of Mongoose', sellIn=5, quality=7}\n"
-            + "Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=80}\n"
-            + "Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=80}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=15, quality=20}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=49}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=5, quality=49}\n"
+            + "+5 Dexterity Vest   10   20\n"
+            + "Aged Brie   2   0\n"
+            + "Elixir of Mongoose   5   7\n"
+            + "Sulfuras, Hand of Ragnaros   0   80\n"
+            + "Sulfuras, Hand of Ragnaros   -1   80\n"
+            + "Backstage passes to a TAFKAL80ETC concert   15   20\n"
+            + "Backstage passes to a TAFKAL80ETC concert   10   49\n"
+            + "Backstage passes to a TAFKAL80ETC concert   5   49\n"
             + "\n"
             + "--- day 1 ---\n"
             + "name   sellin   quality\n"
-            + "Item{name='+5 Dexterity Vest', sellIn=9, quality=19}\n"
-            + "Item{name='Aged Brie', sellIn=1, quality=1}\n"
-            + "Item{name='Elixir of Mongoose', sellIn=4, quality=6}\n"
-            + "Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=80}\n"
-            + "Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=80}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=14, quality=21}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=50}\n"
-            + "Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=4, quality=50}\n"
+            + "+5 Dexterity Vest   9   19\n"
+            + "Aged Brie   1   1\n"
+            + "Elixir of Mongoose   4   6\n"
+            + "Sulfuras, Hand of Ragnaros   0   80\n"
+            + "Sulfuras, Hand of Ragnaros   -1   80\n"
+            + "Backstage passes to a TAFKAL80ETC concert   14   21\n"
+            + "Backstage passes to a TAFKAL80ETC concert   9   50\n"
+            + "Backstage passes to a TAFKAL80ETC concert   4   50\n"
             + "\n";
 
     @Test
@@ -58,12 +58,13 @@ public class GildedRoseTest {
             out.println("--- day " + i + " ---");
             out.println("name   sellin   quality");
             for (Item item : items) {
-                out.println(item);
+                out.println(item.name + "   " + item.sellIn + "   " + item.quality);
             }
             out.println();
             gildedRose.updateQuality();
         }
 
+        System.out.println(output.toString());
         assertThat(output.toString()).isEqualTo(expected);
     }
 }
