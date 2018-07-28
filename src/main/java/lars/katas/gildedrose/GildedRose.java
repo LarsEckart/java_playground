@@ -10,24 +10,99 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            updateOneItem(item);
+            ItemCategory category = categorize(item);
+            category.updateOneItem(item, this);
         }
     }
 
-    private void updateOneItem(Item item) {
-        updateQuality(item);
-
-        updateSellIn(item);
-
-        if (hasExpired(item)) {
-            updateExpired(item);
+    private ItemCategory categorize(Item item) {
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return new Legendary();
         }
-    }
-
-    private void updateQuality(Item item) {
         if (item.name.equals("Aged Brie")) {
+            return new Cheese();
+        }
+        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            return new BackstagePass();
+        }
+        return new ItemCategory();
+    }
+
+    private boolean hasExpired(Item item) {
+        return item.sellIn < 0;
+    }
+
+    private class ItemCategory {
+
+        protected void incrementQuality(Item item) {
+            if (item.quality < 50) {
+                item.quality = item.quality + 1;
+            }
+        }
+
+        private void decrementQuality(Item item) {
+            if (item.quality > 0) {
+                item.quality = item.quality - 1;
+            }
+        }
+
+        private void updateOneItem(Item item, GildedRose gildedRose) {
+            updateQuality(item);
+
+            updateSellIn(item);
+
+            if (gildedRose.hasExpired(item)) {
+                updateExpired(item);
+            }
+        }
+
+        protected void updateQuality(Item item) {
+            decrementQuality(item);
+        }
+
+        protected void updateSellIn(Item item) {
+            item.sellIn = item.sellIn - 1;
+        }
+
+        protected void updateExpired(Item item) {
+            decrementQuality(item);
+        }
+    }
+
+    private class Legendary extends ItemCategory {
+
+        @Override
+        protected void updateQuality(Item item) {
+
+        }
+
+        @Override
+        protected void updateSellIn(Item item) {
+
+        }
+
+        @Override
+        protected void updateExpired(Item item) {
+        }
+    }
+
+    private class Cheese extends ItemCategory {
+
+        @Override
+        protected void updateQuality(Item item) {
             incrementQuality(item);
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        }
+
+        @Override
+        protected void updateExpired(Item item) {
+            incrementQuality(item);
+        }
+    }
+
+    private class BackstagePass extends ItemCategory {
+
+        @Override
+        protected void updateQuality(Item item) {
             incrementQuality(item);
 
             if (item.sellIn < 11) {
@@ -37,40 +112,11 @@ class GildedRose {
             if (item.sellIn < 6) {
                 incrementQuality(item);
             }
-        } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-        } else decrementQuality(item);
-    }
-
-    private void updateSellIn(Item item) {
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            item.sellIn = item.sellIn - 1;
         }
-    }
 
-    private boolean hasExpired(Item item) {
-        return item.sellIn < 0;
-    }
-
-    private void updateExpired(Item item) {
-        if (item.name.equals("Aged Brie")) {
-            incrementQuality(item);
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        @Override
+        protected void updateExpired(Item item) {
             item.quality = 0;
-        } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-        } else {
-            decrementQuality(item);
-        }
-    }
-
-    private void incrementQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
-    }
-
-    private void decrementQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
         }
     }
 }
