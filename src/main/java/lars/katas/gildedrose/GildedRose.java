@@ -25,6 +25,10 @@ class GildedRose {
         if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             return new BackstagePass();
         }
+
+        if (item.name.startsWith("Conjured")) {
+            return new Conjured();
+        }
         return new ItemCategory();
     }
 
@@ -40,7 +44,7 @@ class GildedRose {
             }
         }
 
-        private void decrementQuality(Item item) {
+        protected void decrementQuality(Item item) {
             if (item.quality > 0) {
                 item.quality = item.quality - 1;
             }
@@ -117,6 +121,21 @@ class GildedRose {
         @Override
         protected void updateExpired(Item item) {
             item.quality = 0;
+        }
+    }
+
+    private class Conjured extends ItemCategory {
+
+        @Override
+        protected void updateQuality(Item item) {
+            decrementQuality(item);
+            decrementQuality(item);
+        }
+
+        @Override
+        protected void updateExpired(Item item) {
+            decrementQuality(item);
+            decrementQuality(item);
         }
     }
 }

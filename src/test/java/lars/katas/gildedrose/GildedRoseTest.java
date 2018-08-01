@@ -21,6 +21,7 @@ public class GildedRoseTest {
             + "Backstage passes to a TAFKAL80ETC concert   15   20\n"
             + "Backstage passes to a TAFKAL80ETC concert   10   49\n"
             + "Backstage passes to a TAFKAL80ETC concert   5   49\n"
+            + "Conjured Mana Cake   11   6\n"
             + "\n"
             + "--- day 1 ---\n"
             + "name   sellin   quality\n"
@@ -32,6 +33,7 @@ public class GildedRoseTest {
             + "Backstage passes to a TAFKAL80ETC concert   14   21\n"
             + "Backstage passes to a TAFKAL80ETC concert   9   50\n"
             + "Backstage passes to a TAFKAL80ETC concert   4   50\n"
+            + "Conjured Mana Cake   10   4\n"
             + "\n";
 
     @Test
@@ -48,6 +50,7 @@ public class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                new Item("Conjured Mana Cake", 11, 6),
         };
 
         GildedRose gildedRose = new GildedRose(items);
