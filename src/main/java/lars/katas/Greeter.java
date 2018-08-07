@@ -19,33 +19,20 @@ public class Greeter {
             return String.format(TEMPLATE_FOR_SINGLE_NAME, names[0]);
         }
 
-        if (isTwoNames(names)) {
-            return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, names[0], names[1]);
-        }
-
         List<String> allNames = List.of(names);
 
         List<String> shouters = allNames.stream().filter(this::isAllUpperCase).collect(Collectors.toList());
         if (shouters.isEmpty()) {
-            List<String> commaSeparatedNames = allNames.subList(0, List.of(names).size() - 1);
+            String toGreet = toString(allNames);
 
-            String collect = String.join(", ", commaSeparatedNames);
-
-            return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, collect, names[names.length - 1]);
+            return String.format("Hello, %s.", toGreet);
         }
-
-        String firstPart;
 
         List<String> normalOnes = allNames.stream().filter(n -> !n.toUpperCase().equals(n)).collect(Collectors.toList());
 
-        if (isTwoNames(normalOnes)) {
-            firstPart = String.format("%s and %s", normalOnes.get(0), normalOnes.get(1));
-        } else {
-            String collect = String.join(", ", normalOnes.subList(0, normalOnes.size() - 1));
-            firstPart = collect + " and " + normalOnes.get(normalOnes.size() - 1);
-        }
+        String normalNames = toString(normalOnes);
 
-        return String.format("Hello, %s. AND HELLO %s!", firstPart, shouters.get(0));
+        return String.format("Hello, %s. AND HELLO %s!", normalNames, shouters.get(0));
     }
 
     private boolean isTwoNames(List<String> names) {
@@ -63,5 +50,14 @@ public class Greeter {
 
     private boolean isAllUpperCase(String name) {
         return name.toUpperCase().equals(name);
+    }
+
+    private String toString(List<String> names) {
+        if (isTwoNames(names)) {
+            return String.format("%s and %s", names.get(0), names.get(1));
+        } else {
+            String collect = String.join(", ", names.subList(0, names.size() - 1));
+            return String.format("%s and %s", collect, names.get(names.size() - 1));
+        }
     }
 }
