@@ -57,7 +57,7 @@ public class Greeter {
             return String.format("%s and %s", names.get(0), names.get(1));
         } else {
             String collect = String.join(", ", names.subList(0, names.size() - 1));
-            return String.format("%s and %s", collect, names.get(names.size() - 1));
+            return String.format("%s, and %s", collect, names.get(names.size() - 1));
         }
     }
 }

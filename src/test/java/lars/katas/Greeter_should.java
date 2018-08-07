@@ -56,7 +56,7 @@ public class Greeter_should {
         String greeting = greeter.greet("Amy", "Brian", "Charlotte");
 
         // then
-        assertThat(greeting).isEqualTo("Hello, Amy, Brian and Charlotte.");
+        assertThat(greeting).isEqualTo("Hello, Amy, Brian, and Charlotte.");
     }
 
     @Test
@@ -74,7 +74,16 @@ public class Greeter_should {
         String greeting = greeter.greet("Amy", "BRIAN", "Lars", "Charlotte");
 
         // then
-        assertThat(greeting).isEqualTo("Hello, Amy, Lars and Charlotte. AND HELLO BRIAN!");
+        assertThat(greeting).isEqualTo("Hello, Amy, Lars, and Charlotte. AND HELLO BRIAN!");
+    }
+
+    @Test
+    public void greet_people_separated_by_comma() throws Exception {
+        // when
+        String greeting = greeter.greet("Bob", "Charlie, Dianne");
+
+        // then
+        assertThat(greeting).isEqualTo("Hello, Bob, Charlie, and Dianne");
     }
 
 
