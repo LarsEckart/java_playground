@@ -23,11 +23,30 @@ public class Greeter {
             return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, names[0], names[1]);
         }
 
-        List<String> commaSeparatedNames = List.of(names).subList(0, List.of(names).size() - 1);
+        List<String> allNames = List.of(names);
 
-        String collect = String.join(", ", commaSeparatedNames);
+        List<String> shouters = allNames.stream().filter(n -> n.toUpperCase().equals(n)).collect(Collectors.toList());
+        if (shouters.isEmpty()) {
+            List<String> commaSeparatedNames = List.of(names).subList(0, List.of(names).size() - 1);
 
-        return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, collect, names[names.length - 1]);
+            String collect = String.join(", ", commaSeparatedNames);
+
+            return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, collect, names[names.length - 1]);
+        }
+
+        String firstPart = "";
+
+        List<String> normalOnes = allNames.stream().filter(n -> !n.toUpperCase().equals(n)).collect(Collectors.toList());
+
+        if (isTwoNames(normalOnes)) {
+            firstPart = String.format("%s and %s", normalOnes.get(0), normalOnes.get(1));
+        }
+
+        return String.format("Hello, %s. AND HELLO %s!", firstPart, shouters.get(0));
+    }
+
+    private boolean isTwoNames(List<String> names) {
+        return names.size() == 2;
     }
 
 

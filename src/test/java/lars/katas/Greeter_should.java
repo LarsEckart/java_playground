@@ -1,6 +1,5 @@
 package lars.katas;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
