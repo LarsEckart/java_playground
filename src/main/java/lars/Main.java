@@ -1,12 +1,29 @@
 package lars;
 
-import java.util.stream.IntStream;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Main {
+    private static final BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(15);
 
     public static void main(String[] args) {
-        IntStream.range(1, 10)
-                .mapToDouble(i -> Math.pow(Double.valueOf(i), 3.0))
-                .forEach(d -> System.out.println(d));
+        Thread t = new Thread(() -> {
+            while (true) {
+                try {
+                    queue.take().run();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        t.start();
+
+        for (int i = 0; i < 10; i++) {
+            final int j =i;
+            queue.add(() -> {
+                System.out.println("Hello" + j);
+            });
+        }
     }
 }
