@@ -17,3 +17,5 @@ out/
 .gradle
 
 logs/
+/src/test/java/lars/exercism/
+/src/main/java/lars/exercism/

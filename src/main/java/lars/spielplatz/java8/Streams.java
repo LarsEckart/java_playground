@@ -11,8 +11,7 @@ public class Streams {
 
         List<String> myList = List.of("a1", "a2", "b1", "c2", "c1");
 
-        myList
-                .stream()
+        myList.stream()
                 .filter(s -> s.startsWith("c"))
                 .map(String::toUpperCase)
                 .sorted()
