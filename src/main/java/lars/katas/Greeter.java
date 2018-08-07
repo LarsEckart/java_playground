@@ -25,7 +25,7 @@ public class Greeter {
 
         List<String> allNames = List.of(names);
 
-        List<String> shouters = allNames.stream().filter(n -> n.toUpperCase().equals(n)).collect(Collectors.toList());
+        List<String> shouters = allNames.stream().filter(this::isAllUpperCase).collect(Collectors.toList());
         if (shouters.isEmpty()) {
             List<String> commaSeparatedNames = List.of(names).subList(0, List.of(names).size() - 1);
 
