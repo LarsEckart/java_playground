@@ -17,4 +17,16 @@ public class Greeter_should {
         // then
         assertThat(greeting).isEqualTo("Hello, Bob.");
     }
+
+    @Test
+    public void greet_with_default_greeting_when_given_null() throws Exception {
+        // given
+        Greeter greeter = new Greeter();
+
+        // when
+        String greeting = greeter.greet(null);
+
+        // then
+        assertThat(greeting).isEqualTo("Hello, my friend.");
+    }
 }
