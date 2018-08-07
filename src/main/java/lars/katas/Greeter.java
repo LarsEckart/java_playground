@@ -5,7 +5,10 @@ import java.util.stream.Collectors;
 
 public class Greeter {
 
-    public String greet(String... names) {
+    private static final String TEMPLATE_FOR_SINGLE_NAME = "Hello, %s.";
+    private static final String TEMPLATE_FOR_MULTIPLE_NAMES = "Hello, %s and %s.";
+
+    String greet(String... names) {
         if (names == null) {
             return "Hello, my friend.";
         }
@@ -13,20 +16,18 @@ public class Greeter {
             if (isAllUpperCase(names[0])) {
                 return String.format("HELLO %s!", names[0].toUpperCase());
             }
-            return String.format("Hello, %s.", names[0]);
+            return String.format(TEMPLATE_FOR_SINGLE_NAME, names[0]);
         }
 
         if (isTwoNames(names)) {
-            return String.format("Hello, %s and %s.", names[0], names[1]);
+            return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, names[0], names[1]);
         }
 
-        List<String> allNames = List.of(names);
-        List<String> commaSeparatedNames = allNames.subList(0, allNames.size() - 1);
+        List<String> commaSeparatedNames = List.of(names).subList(0, List.of(names).size() - 1);
 
         String collect = String.join(", ", commaSeparatedNames);
 
-
-        return String.format("Hello, %s and %s.", collect, names[names.length - 1]);
+        return String.format(TEMPLATE_FOR_MULTIPLE_NAMES, collect, names[names.length - 1]);
     }
 
 
