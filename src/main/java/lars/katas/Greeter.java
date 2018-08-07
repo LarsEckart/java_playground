@@ -10,7 +10,7 @@ public class Greeter {
             if (isAllUpperCase(name[0])) {
                 return String.format("HELLO %s!", name[0].toUpperCase());
             }
-            return String.format("Hello, %s.", name);
+            return String.format("Hello, %s.", name[0]);
         }
 
         return String.format("Hello, %s and %s.", name[0], name[1]);
