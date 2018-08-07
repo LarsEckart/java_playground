@@ -1,5 +1,6 @@
 package lars.katas;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,5 +31,14 @@ public class Greeter_should {
 
         // then
         assertThat(greeting).isEqualTo("Hello, my friend.");
+    }
+
+    @Test
+    public void shout_back_when_name_is_uppercase() throws Exception {
+        // when
+        String greeting = greeter.greet("JERRY");
+
+        // then
+        assertThat(greeting).isEqualTo("HELLO JERRY!");
     }
 }
