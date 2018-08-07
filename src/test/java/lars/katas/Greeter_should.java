@@ -41,4 +41,15 @@ public class Greeter_should {
         // then
         assertThat(greeting).isEqualTo("HELLO JERRY!");
     }
+
+    @Test
+    public void greet_two_people() throws Exception {
+        // when
+        String greeting = greeter.greet("Jill", "Jane");
+
+        // then
+        assertThat(greeting).isEqualTo("Hello, Jill and Jane.");
+    }
+
+
 }
