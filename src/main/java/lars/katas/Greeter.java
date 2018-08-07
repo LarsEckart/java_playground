@@ -1,5 +1,7 @@
 package lars.katas;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,12 @@ public class Greeter {
             return String.format(TEMPLATE_FOR_SINGLE_NAME, names[0]);
         }
 
-        List<String> allNames = List.of(names);
+        List<String> allNames = new ArrayList(Arrays.asList(names));
+        List<String> newNames = allNames.stream().filter(n -> n.contains(",")).map(n -> n.split(",")).flatMap(Arrays::stream).collect(Collectors.toList());
+
+        allNames.removeIf(n -> n.contains((",")));
+
+        allNames.addAll(newNames.stream().map(String::trim).collect(Collectors.toList()));
 
         List<String> shouters = allNames.stream().filter(this::isAllUpperCase).collect(Collectors.toList());
         if (shouters.isEmpty()) {

@@ -83,7 +83,7 @@ public class Greeter_should {
         String greeting = greeter.greet("Bob", "Charlie, Dianne");
 
         // then
-        assertThat(greeting).isEqualTo("Hello, Bob, Charlie, and Dianne");
+        assertThat(greeting).isEqualTo("Hello, Bob, Charlie, and Dianne.");
     }
 
 
