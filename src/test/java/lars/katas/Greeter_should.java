@@ -1,6 +1,5 @@
 package lars.katas;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,6 +15,6 @@ public class Greeter_should {
         String greeting = greeter.greet("Bob");
 
         // then
-        Assertions.assertThat(greeting).isEqualTo("Hello, Bob.");
+        assertThat(greeting).isEqualTo("Hello, Bob.");
     }
 }
