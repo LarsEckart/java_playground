@@ -1,32 +1,73 @@
 package lars.katas.gildedrose;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
 
-    private GildedRose app;
+    final String expected = "--- day 0 ---\n"
+            + "name   sellin   quality\n"
+            + "+5 Dexterity Vest   10   20\n"
+            + "Aged Brie   2   0\n"
+            + "Elixir of Mongoose   5   7\n"
+            + "Sulfuras, Hand of Ragnaros   0   80\n"
+            + "Sulfuras, Hand of Ragnaros   -1   80\n"
+            + "Backstage passes to a TAFKAL80ETC concert   15   20\n"
+            + "Backstage passes to a TAFKAL80ETC concert   10   49\n"
+            + "Backstage passes to a TAFKAL80ETC concert   5   49\n"
+            + "Conjured Mana Cake   11   6\n"
+            + "\n"
+            + "--- day 1 ---\n"
+            + "name   sellin   quality\n"
+            + "+5 Dexterity Vest   9   19\n"
+            + "Aged Brie   1   1\n"
+            + "Elixir of Mongoose   4   6\n"
+            + "Sulfuras, Hand of Ragnaros   0   80\n"
+            + "Sulfuras, Hand of Ragnaros   -1   80\n"
+            + "Backstage passes to a TAFKAL80ETC concert   14   21\n"
+            + "Backstage passes to a TAFKAL80ETC concert   9   50\n"
+            + "Backstage passes to a TAFKAL80ETC concert   4   50\n"
+            + "Conjured Mana Cake   10   4\n"
+            + "\n";
 
     @Test
-    public void at_the_end_of_each_day_our_system_lowers_both_values_for_every_item() {
-        givenItemWithSellinAndQuality("foo", 10, 10);
-        whenWeUpdateTheQuality();
-        thenItemBecomes("foo", 9, 9);
-    }
+    public void gilded() throws Exception {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
 
-    private void givenItemWithSellinAndQuality(String name, int sellIn, int quality) {
-        Item[] items = new Item[] {new Item(name, sellIn, quality)};
-        app = new GildedRose(items);
-    }
+        Item[] items = new Item[] {
+                new Item("+5 Dexterity Vest", 10, 20),
+                new Item("Aged Brie", 2, 0),
+                new Item("Elixir of Mongoose", 5, 7),
+                new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                new Item("Conjured Mana Cake", 11, 6),
+        };
 
-    private void whenWeUpdateTheQuality() {
-        app.updateQuality();
-    }
+        GildedRose gildedRose = new GildedRose(items);
 
-    private void thenItemBecomes(String name, int sellIn, int quality) {
-        assertThat(app.items[0].name).isEqualTo(name);
-        assertThat(app.items[0].sellIn).isEqualTo(sellIn);
-        assertThat(app.items[0].quality).isEqualTo(quality);
+        int days = 2;
+
+        for (int i = 0; i < days; i++) {
+            out.println("--- day " + i + " ---");
+            out.println("name   sellin   quality");
+            for (Item item : items) {
+                out.println(item.name + "   " + item.sellIn + "   " + item.quality);
+            }
+            out.println();
+            gildedRose.updateQuality();
+        }
+
+        System.out.println(output.toString());
+        assertThat(output.toString()).isEqualTo(expected);
     }
 }
