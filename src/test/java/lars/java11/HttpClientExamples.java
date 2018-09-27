@@ -97,4 +97,24 @@ public class HttpClientExamples {
         assertThat(recordedRequest.getHeader("hello")).isEqualTo("world");
         assertThat(recordedRequest.getHeader("x-lars")).isEqualTo("tubli");
     }
+
+    @Test
+    public void out_of_the_box_headers() throws Exception {
+        // given
+        mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+        var request = HttpRequest.newBuilder()
+                .uri(URI.create(mockWebServerUrl()))
+                .build();
+
+        // when
+        client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // then
+        var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+        assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
+        assertThat(recordedRequest.getHeader("Content-Length")).isEqualTo("0");
+        assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
+        assertThat(recordedRequest.getHeader("User-Agent")).isEqualTo("Java-http-client/11");
+        assertThat(recordedRequest.getHeader("Host")).contains("localhost:");
+    }
 }
