@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -96,5 +97,34 @@ public class HttpClientExamples {
         var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
         assertThat(recordedRequest.getHeader("hello")).isEqualTo("world");
         assertThat(recordedRequest.getHeader("x-lars")).isEqualTo("tubli");
+    }
+
+    @Test
+    public void response_headers() throws Exception {
+        // given
+        mockWebServer.enqueue(new MockResponse().setResponseCode(200).addHeader("x-lars", "tubli"));
+        var request = HttpRequest.newBuilder()
+                .uri(URI.create(mockWebServerUrl()))
+                .build();
+
+        // when
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // then
+        assertThat(response.headers().allValues("x-lars")).containsExactly("tubli");
+    }
+
+    @Test
+    public void async_requests() throws Exception {
+        // given
+        client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
+        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://www.google.com")).build();
+
+        // when
+        CompletableFuture<HttpResponse<String>> resFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+
+        // then
+        resFuture.thenAccept(response -> System.out.println(response.version()));
+        resFuture.join();
     }
 }
