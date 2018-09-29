@@ -115,10 +115,32 @@ public class HttpClientExamples {
     }
 
     @Test
+    public void out_of_the_box_headers() throws Exception {
+        mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+        var request = HttpRequest.newBuilder()
+            .uri(URI.create(mockWebServerUrl()))
+            .build();
+
+        // when
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // then
+        var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+        assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
+        assertThat(recordedRequest.getHeader("Content-Length")).isEqualTo("0");
+        assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
+        assertThat(recordedRequest.getHeader("User-Agent")).isEqualTo("Java-http-client/11");
+        assertThat(recordedRequest.getHeader("Host")).contains("localhost:");
+    }
+
+    @Test
     public void async_requests() throws Exception {
         // given
         client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://www.google.com")).build();
+        var request = HttpRequest.newBuilder()
+            .GET()
+            .uri(URI.create("https://www.google.com"))
+            .build();
 
         // when
         CompletableFuture<HttpResponse<String>> resFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
