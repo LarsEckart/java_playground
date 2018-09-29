@@ -16,6 +16,11 @@ out/
 # Gradle
 .gradle
 
+# Maven
+target
+
 logs/
+lib
+libs
 /src/test/java/lars/exercism/
 /src/main/java/lars/exercism/

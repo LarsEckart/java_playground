@@ -4,12 +4,14 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
+        classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.3.0'
     }
 }
 
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: "java"
-apply plugin: "idea"
+//apply plugin: 'org.kordamp.jdeps'
+apply plugin: 'java'
+apply plugin: 'idea'
 
 repositories {
     jcenter()
@@ -30,7 +32,11 @@ dependencies {
     testCompile 'pl.pragmatists:JUnitParams:1.1.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
     testCompile 'net.bytebuddy:byte-buddy:1.8.22'
+}
 
+task copyRuntimeLibs(type: Copy) {
+    into "libs"
+    from configurations.testRuntime - configurations.runtime
 }
 
 tasks.withType(JavaCompile) {
