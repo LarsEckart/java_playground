@@ -60,10 +60,18 @@ public class SalarySlip {
             BigDecimal taxableAmount = toMonthly(employee.getAnnualGrossSalary()).subtract(getTaxFreeAllowance());
             return taxableAmount;
         }
-        throw new UnsupportedOperationException("implement me!");
+        return BigDecimal.ONE;
     }
 
     private boolean isSubjectToTax() {
         return employee.getAnnualGrossSalary().compareTo(TAX_THRESHOLD) == 1;
+    }
+
+    public BigDecimal getPayableTax() {
+        if (isSubjectToTax()) {
+            BigDecimal taxableAmount = toMonthly(employee.getAnnualGrossSalary()).subtract(getTaxFreeAllowance());
+            return taxableAmount.multiply(BigDecimal.valueOf(0.20)).setScale(TWO_DECIMALS, RoundingMode.HALF_UP);
+        }
+        return BigDecimal.ONE;
     }
 }
