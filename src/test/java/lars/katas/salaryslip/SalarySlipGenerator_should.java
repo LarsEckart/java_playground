@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
-import java.util.EmptyStackException;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +40,8 @@ class SalarySlipGenerator_should {
     static Stream<Arguments> grossSalaryProvider() {
         return Stream.of(
             Arguments.of(5_000, EXPECTED_MONTHLY_GROSS_SALARY),
-            Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2))
+            Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2)),
+            Arguments.of(12_000, BigDecimal.valueOf(1_000.00).setScale(2))
         );
     }
 
@@ -79,8 +79,9 @@ class SalarySlipGenerator_should {
         assertThat(salarySlip.getNationalInsuranceContributions()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
-    @Test
-    void generate_slip_with_tax_information_when_salary_above_12_000() {
+    @ParameterizedTest
+    @MethodSource("taxNumbers")
+    void generate_slip_with_tax_information_when_salary_above_12_000(BigDecimal taxableIncome, BigDecimal payableTax) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(12_000);
 
@@ -90,8 +91,14 @@ class SalarySlipGenerator_should {
         // then
         assertAll(
             () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.valueOf(916.67)),
-            () -> assertThat(salarySlip.getTaxableIncome()).isEqualTo(BigDecimal.valueOf(83.33)),
-            () -> assertThat(salarySlip.getPayableTax()).isEqualTo(BigDecimal.valueOf(16.67))
+            () -> assertThat(salarySlip.getTaxableIncome()).isEqualTo(taxableIncome),
+            () -> assertThat(salarySlip.getPayableTax()).isEqualTo(payableTax)
+        );
+    }
+
+    static Stream<Arguments> taxNumbers() {
+        return Stream.of(
+            Arguments.of(BigDecimal.valueOf(83.33), BigDecimal.valueOf(16.67))
         );
     }
 
