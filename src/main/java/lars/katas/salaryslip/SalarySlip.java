@@ -31,6 +31,15 @@ public class SalarySlip {
     }
 
     private BigDecimal toMonthly(BigDecimal annual) {
-        return annual.divide(TWOLVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP);
+        return annual.divide(TWOLVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP).setScale(2);
+    }
+
+    public BigDecimal getNationalInsuranceContributions() {
+        BigDecimal limit = BigDecimal.valueOf(8_060.00);
+        if (employee.getAnnualGrossSalary().compareTo(limit) == 1) {
+            BigDecimal insurable = employee.getAnnualGrossSalary().subtract(limit);
+            return toMonthly(insurable.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12)));
+        }
+        return BigDecimal.ZERO;
     }
 }
