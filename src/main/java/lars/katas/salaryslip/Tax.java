@@ -13,7 +13,7 @@ class Tax {
     private BigDecimal payableTax = BigDecimal.ZERO;
     private BigDecimal taxableIncome = BigDecimal.ZERO;
 
-    public Tax(BigDecimal annualGrossSalary) {
+    Tax(BigDecimal annualGrossSalary) {
         this.annualGrossSalary = annualGrossSalary;
         if (isSubjectToTax()) {
             taxableIncome = taxableIncome();
@@ -34,25 +34,26 @@ class Tax {
     }
 
     private BigDecimal highPayableTax() {
-        BigDecimal highTaxAmount = annualGrossSalary.subtract(HIGH_TAX_THRESHOLD);
-        BigDecimal highTaxedAmount = highTaxAmount.multiply(FOURTY_PERCENT);
-        BigDecimal normalTaxedAmount = (annualGrossSalary.subtract(highTaxAmount).subtract(TAX_THRESHOLD)).multiply(TWENTY_PERCENT);
-        return highTaxedAmount.add(normalTaxedAmount);
+        BigDecimal amountWithHighTaxRate = annualGrossSalary.subtract(HIGH_TAX_THRESHOLD);
+        BigDecimal highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
+        BigDecimal amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(TAX_THRESHOLD);
+        BigDecimal normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
+        return normalTaxedAmount.add(highTaxedAmount);
     }
 
     private BigDecimal taxableIncome() {
         return annualGrossSalary.subtract(taxFreeAllowance());
     }
 
-    public BigDecimal taxFreeAllowance() {
+    BigDecimal taxFreeAllowance() {
         return TAX_THRESHOLD;
     }
 
-    public BigDecimal getPayableTax() {
+    BigDecimal getPayableTax() {
         return payableTax;
     }
 
-    public BigDecimal getTaxableIncome() {
+    BigDecimal getTaxableIncome() {
         return taxableIncome;
     }
 }
