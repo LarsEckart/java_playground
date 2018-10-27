@@ -88,7 +88,12 @@ class SalarySlipGenerator_should {
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
-        assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.valueOf(916.67));
+        assertAll(
+            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.valueOf(916.67)),
+            () -> assertThat(salarySlip.getTaxableIncome()).isEqualTo(BigDecimal.valueOf(83.33))
+        );
+
+
     }
 
     @Test

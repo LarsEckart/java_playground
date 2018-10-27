@@ -55,6 +55,14 @@ public class SalarySlip {
         return BigDecimal.ZERO;
     }
 
+    public BigDecimal getTaxableIncome() {
+        if (isSubjectToTax()) {
+            BigDecimal taxableAmount = toMonthly(employee.getAnnualGrossSalary()).subtract(getTaxFreeAllowance());
+            return taxableAmount;
+        }
+        throw new UnsupportedOperationException("implement me!");
+    }
+
     private boolean isSubjectToTax() {
         return employee.getAnnualGrossSalary().compareTo(TAX_THRESHOLD) == 1;
     }
