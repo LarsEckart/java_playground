@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 
 public class SalarySlip {
 
-    private static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
+    private static final BigDecimal TWELVE_MONTHS = BigDecimal.valueOf(12);
     private static final int TWO_DECIMALS = 2;
     private static final BigDecimal INSURANCE_CONTRIBUTION_THRESHOLD = BigDecimal.valueOf(8_060.00);
 
@@ -26,15 +26,11 @@ public class SalarySlip {
     }
 
     public BigDecimal getMonthlyGrossSalary() {
-        return monthlyGrossSalary();
-    }
-
-    private BigDecimal monthlyGrossSalary() {
         return toMonthly(employee.getAnnualGrossSalary());
     }
 
     private BigDecimal toMonthly(BigDecimal annual) {
-        return annual.divide(TWOLVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP).setScale(2);
+        return annual.divide(TWELVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP).setScale(2);
     }
 
     public BigDecimal getNationalInsuranceContributions() {
@@ -54,10 +50,10 @@ public class SalarySlip {
     }
 
     public BigDecimal getTaxableIncome() {
-        return toMonthly(tax.taxableIncome());
+        return toMonthly(tax.getTaxableIncome());
     }
 
     public BigDecimal getPayableTax() {
-        return toMonthly(tax.payableTax());
+        return toMonthly(tax.getPayableTax());
     }
 }
