@@ -1,6 +1,5 @@
 package lars.katas.salaryslip;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
+import java.util.EmptyStackException;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,11 +82,25 @@ class SalarySlipGenerator_should {
     @Test
     void generate_slip_with_tax_information_when_salary_above_12_000() {
         // given
+        Employee employee = employeeWithAnnualSalaryOf(12_000);
 
         // when
+        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
+        assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.valueOf(916.67));
+    }
 
+    @Test
+    void generate_slip_with_no_tax_information_when_salary_below_12_000() {
+        // given
+        Employee employee = employeeWithAnnualSalaryOf(11_000);
+
+        // when
+        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
+
+        // then
+        assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.ZERO);
     }
 
     private Employee employeeWithAnnualSalaryOf(Integer annualGrossSalary) {
