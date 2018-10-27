@@ -36,14 +36,14 @@ public class SalarySlip {
     }
 
     public BigDecimal getNationalInsuranceContributions() {
-        if (subjectToNationalInsuranceContribution()) {
+        if (isSubjectToNationalInsuranceContribution()) {
             BigDecimal amountAboveThreshold = employee.getAnnualGrossSalary().subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
             return toMonthly(amountAboveThreshold.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12)));
         }
         return BigDecimal.ZERO;
     }
 
-    private boolean subjectToNationalInsuranceContribution() {
+    private boolean isSubjectToNationalInsuranceContribution() {
         return employee.getAnnualGrossSalary().compareTo(INSURANCE_CONTRIBUTION_THRESHOLD) == 1;
     }
 }

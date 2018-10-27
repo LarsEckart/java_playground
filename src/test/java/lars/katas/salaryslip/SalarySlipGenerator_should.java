@@ -1,9 +1,11 @@
 package lars.katas.salaryslip;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
@@ -21,7 +23,7 @@ class SalarySlipGenerator_should {
 
     @ParameterizedTest
     @MethodSource("grossSalaryProvider")
-    void generate_slip_with_monthly_gross_salary(BigDecimal annualGrossSalary, BigDecimal monthlyGrossSalary) {
+    void generate_slip_with_monthly_gross_salary(Integer annualGrossSalary, BigDecimal monthlyGrossSalary) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualGrossSalary);
 
@@ -38,15 +40,15 @@ class SalarySlipGenerator_should {
 
     static Stream<Arguments> grossSalaryProvider() {
         return Stream.of(
-            Arguments.of(BigDecimal.valueOf(5_000.000), EXPECTED_MONTHLY_GROSS_SALARY),
-            Arguments.of(BigDecimal.valueOf(9_060.00), BigDecimal.valueOf(755.00).setScale(2))
+            Arguments.of(5_000, EXPECTED_MONTHLY_GROSS_SALARY),
+            Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2))
         );
     }
 
     @ParameterizedTest
     @MethodSource("grossSalaryAbove8060")
     void generate_slip_with_national_insurance_contributions_when_annual_salary_above_8060(
-        BigDecimal annualGrossSalary, BigDecimal insuranceContribution) {
+        Integer annualGrossSalary, BigDecimal insuranceContribution) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualGrossSalary);
 
@@ -59,15 +61,16 @@ class SalarySlipGenerator_should {
 
     static Stream<Arguments> grossSalaryAbove8060() {
         return Stream.of(
-            Arguments.of(BigDecimal.valueOf(9_060.00), BigDecimal.valueOf(10.00).setScale(2)),
-            Arguments.of(BigDecimal.valueOf(12_000.00), BigDecimal.valueOf(39.40).setScale(2))
+            Arguments.of(9_060, BigDecimal.valueOf(10.00).setScale(2)),
+            Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2))
         );
     }
 
-    @Test
-    void generate_slip_with_national_insurance_contributions_zero_when_annual_salary_below_8060() {
+    @ParameterizedTest
+    @ValueSource(ints = {8060, 5000})
+    void generate_slip_with_national_insurance_contributions_zero_when_annual_salary_below_8060(int annualSalary) {
         // given
-        Employee employee = employeeWithAnnualSalaryOf(BigDecimal.valueOf(5_000));
+        Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
         // when
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
@@ -76,8 +79,17 @@ class SalarySlipGenerator_should {
         assertThat(salarySlip.getNationalInsuranceContributions()).isEqualTo(BigDecimal.ZERO);
     }
 
-    // TODO: accept int
-    private Employee employeeWithAnnualSalaryOf(BigDecimal annualGrossSalary) {
-        return new Employee(ANY_ID, ANY_NAME, annualGrossSalary);
+    @Test
+    void generate_slip_with_tax_information_when_salary_above_12_000() {
+        // given
+
+        // when
+
+        // then
+
+    }
+
+    private Employee employeeWithAnnualSalaryOf(Integer annualGrossSalary) {
+        return new Employee(ANY_ID, ANY_NAME, BigDecimal.valueOf(annualGrossSalary));
     }
 }
