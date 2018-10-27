@@ -8,12 +8,13 @@ public class SalarySlip {
     private static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
     private static final int TWO_DECIMALS = 2;
     private static final BigDecimal INSURANCE_CONTRIBUTION_THRESHOLD = BigDecimal.valueOf(8_060.00);
-    private static final BigDecimal TAX_THRESHOLD = BigDecimal.valueOf(11_000);
 
     private final Employee employee;
+    private Tax tax;
 
     public SalarySlip(Employee employee) {
         this.employee = employee;
+        tax = new Tax(employee.getAnnualGrossSalary());
     }
 
     public String getEmployeeId() {
@@ -49,29 +50,14 @@ public class SalarySlip {
     }
 
     public BigDecimal getTaxFreeAllowance() {
-        if (isSubjectToTax()) {
-            return TAX_THRESHOLD.divide(TWOLVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP);
-        }
-        return BigDecimal.ZERO;
+        return toMonthly(tax.taxFreeAllowance());
     }
 
     public BigDecimal getTaxableIncome() {
-        if (isSubjectToTax()) {
-            BigDecimal taxableAmount = toMonthly(employee.getAnnualGrossSalary()).subtract(getTaxFreeAllowance());
-            return taxableAmount;
-        }
-        return BigDecimal.ONE;
-    }
-
-    private boolean isSubjectToTax() {
-        return employee.getAnnualGrossSalary().compareTo(TAX_THRESHOLD) == 1;
+        return toMonthly(tax.taxableIncome());
     }
 
     public BigDecimal getPayableTax() {
-        if (isSubjectToTax()) {
-            BigDecimal taxableAmount = toMonthly(employee.getAnnualGrossSalary()).subtract(getTaxFreeAllowance());
-            return taxableAmount.multiply(BigDecimal.valueOf(0.20)).setScale(TWO_DECIMALS, RoundingMode.HALF_UP);
-        }
-        return BigDecimal.ONE;
+        return toMonthly(tax.payableTax());
     }
 }

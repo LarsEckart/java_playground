@@ -104,7 +104,9 @@ class SalarySlipGenerator_should {
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
-        assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.ZERO);
+        assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
     private Employee employeeWithAnnualSalaryOf(Integer annualGrossSalary) {
