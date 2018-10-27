@@ -7,6 +7,7 @@ public class SalarySlip {
 
     private static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
     private static final int TWO_DECIMALS = 2;
+    private static final BigDecimal INSURANCE_CONTRIBUTION_THRESHOLD = BigDecimal.valueOf(8_060.00);
 
     private final Employee employee;
 
@@ -35,11 +36,14 @@ public class SalarySlip {
     }
 
     public BigDecimal getNationalInsuranceContributions() {
-        BigDecimal limit = BigDecimal.valueOf(8_060.00);
-        if (employee.getAnnualGrossSalary().compareTo(limit) == 1) {
-            BigDecimal insurable = employee.getAnnualGrossSalary().subtract(limit);
-            return toMonthly(insurable.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12)));
+        if (subjectToNationalInsuranceContribution()) {
+            BigDecimal amountAboveThreshold = employee.getAnnualGrossSalary().subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
+            return toMonthly(amountAboveThreshold.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12)));
         }
         return BigDecimal.ZERO;
+    }
+
+    private boolean subjectToNationalInsuranceContribution() {
+        return employee.getAnnualGrossSalary().compareTo(INSURANCE_CONTRIBUTION_THRESHOLD) == 1;
     }
 }
