@@ -33,7 +33,7 @@ class SalarySlipGenerator_should {
         assertAll(
             () -> assertThat(salarySlip.getEmployeeId()).isEqualTo(ANY_ID),
             () -> assertThat(salarySlip.getEmployeeName()).isEqualTo(ANY_NAME),
-            () -> assertThat(salarySlip.getMonthlyGrossSalary()).isEqualTo(monthlyGrossSalary)
+            () -> assertThat(salarySlip.getMonthlyGrossSalary()).isEqualByComparingTo(monthlyGrossSalary)
         );
     }
 
@@ -56,7 +56,7 @@ class SalarySlipGenerator_should {
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
-        assertThat(salarySlip.getNationalInsuranceContributions()).isEqualTo(insuranceContribution);
+        assertThat(salarySlip.getNationalInsuranceContributions()).isEqualByComparingTo(insuranceContribution);
     }
 
     static Stream<Arguments> grossSalaryAbove8060() {
@@ -90,9 +90,9 @@ class SalarySlipGenerator_should {
 
         // then
         assertAll(
-            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualTo(BigDecimal.valueOf(916.67)),
-            () -> assertThat(salarySlip.getTaxableIncome()).isEqualTo(taxableIncome),
-            () -> assertThat(salarySlip.getPayableTax()).isEqualTo(payableTax)
+            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(916.67)),
+            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
+            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
         );
     }
 
