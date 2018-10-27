@@ -76,7 +76,7 @@ class SalarySlipGenerator_should {
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
-        assertThat(salarySlip.getNationalInsuranceContributions()).isEqualTo(BigDecimal.ZERO);
+        assertThat(salarySlip.getNationalInsuranceContributions()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
     @Test

@@ -7,14 +7,15 @@ public class SalarySlip {
 
     private static final BigDecimal TWELVE_MONTHS = BigDecimal.valueOf(12);
     private static final int TWO_DECIMALS = 2;
-    private static final BigDecimal INSURANCE_CONTRIBUTION_THRESHOLD = BigDecimal.valueOf(8_060.00);
 
     private final Employee employee;
     private Tax tax;
+    private NationalInsurance nationalInsurance;
 
     public SalarySlip(Employee employee) {
         this.employee = employee;
-        tax = new Tax(employee.getAnnualGrossSalary());
+        this.tax = new Tax(employee.getAnnualGrossSalary());
+        this.nationalInsurance = new NationalInsurance(employee.getAnnualGrossSalary());
     }
 
     public String getEmployeeId() {
@@ -29,20 +30,8 @@ public class SalarySlip {
         return toMonthly(employee.getAnnualGrossSalary());
     }
 
-    private BigDecimal toMonthly(BigDecimal annual) {
-        return annual.divide(TWELVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP).setScale(2);
-    }
-
     public BigDecimal getNationalInsuranceContributions() {
-        if (isSubjectToNationalInsuranceContribution()) {
-            BigDecimal amountAboveThreshold = employee.getAnnualGrossSalary().subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
-            return toMonthly(amountAboveThreshold.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12)));
-        }
-        return BigDecimal.ZERO;
-    }
-
-    private boolean isSubjectToNationalInsuranceContribution() {
-        return employee.getAnnualGrossSalary().compareTo(INSURANCE_CONTRIBUTION_THRESHOLD) == 1;
+        return toMonthly(nationalInsurance.getContribution());
     }
 
     public BigDecimal getTaxFreeAllowance() {
@@ -55,5 +44,9 @@ public class SalarySlip {
 
     public BigDecimal getPayableTax() {
         return toMonthly(tax.getPayableTax());
+    }
+
+    private BigDecimal toMonthly(BigDecimal annual) {
+        return annual.divide(TWELVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP).setScale(2);
     }
 }
