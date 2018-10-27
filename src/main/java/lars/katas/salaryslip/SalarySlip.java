@@ -5,8 +5,9 @@ import java.math.RoundingMode;
 
 public class SalarySlip {
 
-    public static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
-    public static final int TWO_DECIMALS = 2;
+    private static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
+    private static final int TWO_DECIMALS = 2;
+
     private final Employee employee;
 
     public SalarySlip(Employee employee) {
