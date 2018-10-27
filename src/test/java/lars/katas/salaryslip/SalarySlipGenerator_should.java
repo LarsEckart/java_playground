@@ -62,7 +62,8 @@ class SalarySlipGenerator_should {
     static Stream<Arguments> grossSalaryAbove8060() {
         return Stream.of(
             Arguments.of(9_060, BigDecimal.valueOf(10.00).setScale(2)),
-            Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2))
+            Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2)),
+            Arguments.of(45_000, BigDecimal.valueOf(352.73).setScale(2))
         );
     }
 
