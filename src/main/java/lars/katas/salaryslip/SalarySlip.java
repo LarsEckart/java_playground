@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 public class SalarySlip {
 
+    public static final BigDecimal TWOLVE_MONTHS = BigDecimal.valueOf(12);
+    public static final int TWO_DECIMALS = 2;
     private final Employee employee;
 
     public SalarySlip(Employee employee) {
@@ -20,6 +22,14 @@ public class SalarySlip {
     }
 
     public BigDecimal getMonthlyGrossSalary() {
-        return employee.getAnnualGrossSalary().divide(BigDecimal.valueOf(12), 2, RoundingMode.HALF_UP);
+        return monthlyGrossSalary();
+    }
+
+    private BigDecimal monthlyGrossSalary() {
+        return toMonthly(employee.getAnnualGrossSalary());
+    }
+
+    private BigDecimal toMonthly(BigDecimal annual) {
+        return annual.divide(TWOLVE_MONTHS, TWO_DECIMALS, RoundingMode.HALF_UP);
     }
 }
