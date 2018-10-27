@@ -81,9 +81,9 @@ class SalarySlipGenerator_should {
 
     @ParameterizedTest
     @MethodSource("taxNumbers")
-    void generate_slip_with_tax_information_when_salary_above_12_000(BigDecimal taxableIncome, BigDecimal payableTax) {
+    void generate_slip_with_tax_information_when_salary_above_12_000(Integer annualSalary, BigDecimal taxableIncome, BigDecimal payableTax) {
         // given
-        Employee employee = employeeWithAnnualSalaryOf(12_000);
+        Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
         // when
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
@@ -98,7 +98,8 @@ class SalarySlipGenerator_should {
 
     static Stream<Arguments> taxNumbers() {
         return Stream.of(
-            Arguments.of(BigDecimal.valueOf(83.33), BigDecimal.valueOf(16.67))
+            Arguments.of(12_000, BigDecimal.valueOf(83.33), BigDecimal.valueOf(16.67)),
+            Arguments.of(45_000, BigDecimal.valueOf(2_833.33), BigDecimal.valueOf(600))
         );
     }
 
