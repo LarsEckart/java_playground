@@ -41,7 +41,8 @@ class SalarySlipGenerator_should {
         return Stream.of(
             Arguments.of(5_000, EXPECTED_MONTHLY_GROSS_SALARY),
             Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2)),
-            Arguments.of(12_000, BigDecimal.valueOf(1_000.00).setScale(2))
+            Arguments.of(12_000, BigDecimal.valueOf(1_000.00).setScale(2)),
+            Arguments.of(101_000, BigDecimal.valueOf(8_416.67).setScale(2))
         );
     }
 
@@ -63,7 +64,8 @@ class SalarySlipGenerator_should {
         return Stream.of(
             Arguments.of(9_060, BigDecimal.valueOf(10.00).setScale(2)),
             Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2)),
-            Arguments.of(45_000, BigDecimal.valueOf(352.73).setScale(2))
+            Arguments.of(45_000, BigDecimal.valueOf(352.73).setScale(2)),
+            Arguments.of(101_000, BigDecimal.valueOf(446.07).setScale(2))
         );
     }
 
@@ -82,7 +84,8 @@ class SalarySlipGenerator_should {
 
     @ParameterizedTest
     @MethodSource("taxNumbers")
-    void generate_slip_with_tax_information_when_salary_above_12_000(Integer annualSalary, BigDecimal taxableIncome, BigDecimal payableTax) {
+    void generate_slip_with_tax_information_when_salary_above_12_000(
+        Integer annualSalary, BigDecimal taxableIncome, BigDecimal payableTax) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
@@ -116,6 +119,22 @@ class SalarySlipGenerator_should {
         assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(916.67));
         assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(BigDecimal.ZERO);
         assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.ZERO);
+    }
+
+    @Test
+    void generate_slip_with_decreased_tax_free_allowance_and_then_higher_payable_tax_for_high_earners() {
+        // given
+        Employee employee = employeeWithAnnualSalaryOf(101_000);
+
+        // when
+        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
+
+        // then
+        assertAll(
+            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(875)),
+            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(BigDecimal.valueOf(7_541.67)),
+            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.valueOf(2_483.33))
+        );
     }
 
     private Employee employeeWithAnnualSalaryOf(Integer annualGrossSalary) {
