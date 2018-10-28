@@ -48,6 +48,7 @@ class Tax {
     }
 
     private BigDecimal calculatePayableTax() {
+        // TODO: refactor here
         if (isSubjectTo(EXTRA_HIGH_TAX)) {
             var above = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
             var extraHighTax = above.multiply(FOURTY_PERCENT);
@@ -64,8 +65,18 @@ class Tax {
             var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
             return normalTaxedAmount.add(highTaxedAmount);
         }
-        return annualGrossSalary.subtract(NORMAL_TAX).multiply(TWENTY_PERCENT);
+        return normalRateTax();
     }
+
+    private BigDecimal normalRateTax() {
+        BigDecimal normalTax = BigDecimal.ZERO;
+        if (isSubjectTo(NORMAL_TAX)) {
+            var normalTaxAmount = BigDecimal.valueOf(Math.min(annualGrossSalary.subtract(NORMAL_TAX).doubleValue(), 32_000d));
+            normalTax = normalTaxAmount.multiply(TWENTY_PERCENT);
+        }
+        return normalTax;
+    }
+
 
     private boolean isSubjectToReducedTaxFreeAllowance() {
         return annualGrossSalary.doubleValue() > EXTRA_HIGH_TAX.doubleValue();
