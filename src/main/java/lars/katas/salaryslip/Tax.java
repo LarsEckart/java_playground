@@ -37,10 +37,10 @@ class Tax {
     }
 
     private BigDecimal calculateReducedTaxFreeAllowance() {
-        BigDecimal amountAbove100k = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
-        BigDecimal amountReducingTaxFreeAllowance = amountAbove100k.divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP);
-        BigDecimal reducedTaxFreeAllowance = NORMAL_TAX.subtract(amountReducingTaxFreeAllowance);
-        return reducedTaxFreeAllowance.doubleValue() < 0 ? BigDecimal.ZERO : reducedTaxFreeAllowance;
+        var amountAbove100k = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
+        var amountReducingTaxFreeAllowance = amountAbove100k.divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP);
+        var reducedTaxFreeAllowance = NORMAL_TAX.subtract(amountReducingTaxFreeAllowance);
+        return reducedTaxFreeAllowance;
     }
 
     private BigDecimal taxableIncome() {
@@ -49,20 +49,19 @@ class Tax {
 
     private BigDecimal calculatePayableTax() {
         if (isSubjectTo(EXTRA_HIGH_TAX)) {
-            BigDecimal above = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
-            BigDecimal extraHighTax = above.multiply(FOURTY_PERCENT);
-            BigDecimal amountWithHighTaxRate = annualGrossSalary.subtract(above).subtract(HIGH_TAX);
-            BigDecimal highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
-            BigDecimal amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(NORMAL_TAX);
-            BigDecimal normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
+            var above = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
+            var extraHighTax = above.multiply(FOURTY_PERCENT);
+            var amountWithHighTaxRate = annualGrossSalary.subtract(above).subtract(HIGH_TAX);
+            var highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
+            var amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(NORMAL_TAX);
+            var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
             return normalTaxedAmount.add(highTaxedAmount).add(extraHighTax);
         }
         if (isSubjectTo(HIGH_TAX)) {
-
-            BigDecimal amountWithHighTaxRate = annualGrossSalary.subtract(HIGH_TAX);
-            BigDecimal highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
-            BigDecimal amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(NORMAL_TAX);
-            BigDecimal normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
+            var amountWithHighTaxRate = annualGrossSalary.subtract(HIGH_TAX);
+            var highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
+            var amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(NORMAL_TAX);
+            var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
             return normalTaxedAmount.add(highTaxedAmount);
         }
         return annualGrossSalary.subtract(NORMAL_TAX).multiply(TWENTY_PERCENT);
