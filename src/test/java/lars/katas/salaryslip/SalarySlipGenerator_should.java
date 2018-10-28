@@ -31,25 +31,25 @@ class SalarySlipGenerator_should {
 
         // then
         assertAll(
-            () -> assertThat(salarySlip.getEmployeeId()).isEqualTo(ANY_ID),
-            () -> assertThat(salarySlip.getEmployeeName()).isEqualTo(ANY_NAME),
-            () -> assertThat(salarySlip.getMonthlyGrossSalary()).isEqualByComparingTo(monthlyGrossSalary)
+                () -> assertThat(salarySlip.getEmployeeId()).isEqualTo(ANY_ID),
+                () -> assertThat(salarySlip.getEmployeeName()).isEqualTo(ANY_NAME),
+                () -> assertThat(salarySlip.getMonthlyGrossSalary()).isEqualByComparingTo(monthlyGrossSalary)
         );
     }
 
     static Stream<Arguments> grossSalaryProvider() {
         return Stream.of(
-            Arguments.of(5_000, EXPECTED_MONTHLY_GROSS_SALARY),
-            Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2)),
-            Arguments.of(12_000, BigDecimal.valueOf(1_000.00).setScale(2)),
-            Arguments.of(101_000, BigDecimal.valueOf(8_416.67).setScale(2))
+                Arguments.of(5_000, EXPECTED_MONTHLY_GROSS_SALARY),
+                Arguments.of(9_060, BigDecimal.valueOf(755.00).setScale(2)),
+                Arguments.of(12_000, BigDecimal.valueOf(1_000.00).setScale(2)),
+                Arguments.of(101_000, BigDecimal.valueOf(8_416.67).setScale(2))
         );
     }
 
     @ParameterizedTest
     @MethodSource("grossSalaryAbove8060")
     void generate_slip_with_national_insurance_contributions_when_annual_salary_above_8060(
-        Integer annualGrossSalary, BigDecimal insuranceContribution) {
+            Integer annualGrossSalary, BigDecimal insuranceContribution) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualGrossSalary);
 
@@ -62,10 +62,10 @@ class SalarySlipGenerator_should {
 
     static Stream<Arguments> grossSalaryAbove8060() {
         return Stream.of(
-            Arguments.of(9_060, BigDecimal.valueOf(10.00).setScale(2)),
-            Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2)),
-            Arguments.of(45_000, BigDecimal.valueOf(352.73).setScale(2)),
-            Arguments.of(101_000, BigDecimal.valueOf(446.07).setScale(2))
+                Arguments.of(9_060, BigDecimal.valueOf(10.00).setScale(2)),
+                Arguments.of(12_000, BigDecimal.valueOf(39.40).setScale(2)),
+                Arguments.of(45_000, BigDecimal.valueOf(352.73).setScale(2)),
+                Arguments.of(101_000, BigDecimal.valueOf(446.07).setScale(2))
         );
     }
 
@@ -85,7 +85,7 @@ class SalarySlipGenerator_should {
     @ParameterizedTest
     @MethodSource("taxNumbers")
     void generate_slip_with_tax_information_when_salary_above_12_000(
-        Integer annualSalary, BigDecimal taxableIncome, BigDecimal payableTax) {
+            Integer annualSalary, BigDecimal taxableIncome, BigDecimal payableTax) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
@@ -94,16 +94,16 @@ class SalarySlipGenerator_should {
 
         // then
         assertAll(
-            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(916.67)),
-            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
-            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
+                () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(916.67)),
+                () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
+                () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
         );
     }
 
     static Stream<Arguments> taxNumbers() {
         return Stream.of(
-            Arguments.of(12_000, BigDecimal.valueOf(83.33), BigDecimal.valueOf(16.67)),
-            Arguments.of(45_000, BigDecimal.valueOf(2_833.33), BigDecimal.valueOf(600))
+                Arguments.of(12_000, BigDecimal.valueOf(83.33), BigDecimal.valueOf(16.67)),
+                Arguments.of(45_000, BigDecimal.valueOf(2_833.33), BigDecimal.valueOf(600))
         );
     }
 
@@ -124,7 +124,7 @@ class SalarySlipGenerator_should {
     @ParameterizedTest
     @MethodSource("highEarners")
     void generate_slip_with_decreased_tax_free_allowance_and_then_higher_payable_tax_for_high_earners(
-        Integer annualSalary, BigDecimal taxFreeAllowance, BigDecimal taxableIncome, BigDecimal payableTax
+            Integer annualSalary, BigDecimal taxFreeAllowance, BigDecimal taxableIncome, BigDecimal payableTax
     ) {
         // given
         Employee employee = employeeWithAnnualSalaryOf(annualSalary);
@@ -134,21 +134,38 @@ class SalarySlipGenerator_should {
 
         // then
         assertAll(
-            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(taxFreeAllowance),
-            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
-            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
+                () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(taxFreeAllowance),
+                () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
+                () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
         );
     }
 
     static Stream<Arguments> highEarners() {
         return Stream.of(
-            Arguments.of(101_000, BigDecimal.valueOf(875), BigDecimal.valueOf(7_541.67), BigDecimal.valueOf(2_483.33)),
-            Arguments.of(111_000, BigDecimal.valueOf(458.33), BigDecimal.valueOf(8_791.67),
-                BigDecimal.valueOf(2_983.33)),
-            Arguments.of(122_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(10_166.67),
-                BigDecimal.valueOf(3_533.33))
-            // TODO: do the math by hand first, then it'll be possible to debug
-            //Arguments.of(150_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(12_500), BigDecimal.valueOf(4_466.67))
+                Arguments.of(101_000, BigDecimal.valueOf(875), BigDecimal.valueOf(7_541.67), BigDecimal.valueOf(2_483.33)),
+                Arguments.of(111_000, BigDecimal.valueOf(458.33), BigDecimal.valueOf(8_791.67),
+                        BigDecimal.valueOf(2_983.33)),
+                Arguments.of(122_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(10_166.67),
+                        BigDecimal.valueOf(3_533.33)),
+                Arguments.of(150_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(12_500), BigDecimal.valueOf(4_466.67))
+        );
+    }
+
+    @Test
+    void generate_slip_for_super_high_earners() {
+        // given
+        Employee employee = employeeWithAnnualSalaryOf(160_000);
+
+        // when
+        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
+
+        // then
+        assertAll(
+                () -> assertThat(salarySlip.getMonthlyGrossSalary()).isEqualByComparingTo(BigDecimal.valueOf(13_333.33)),
+                () -> assertThat(salarySlip.getNationalInsuranceContributions()).isEqualByComparingTo(BigDecimal.valueOf(544.40)),
+                () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.ZERO),
+                () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(BigDecimal.valueOf(13_333.33)),
+                () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.valueOf(4_841.67))
         );
     }
 
