@@ -1,6 +1,7 @@
 package lars.katas.salaryslip;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 class NationalInsurance {
 
@@ -26,17 +27,22 @@ class NationalInsurance {
             return highContribution();
         }
         if (isSubjectToNationalInsuranceContribution()) {
-            BigDecimal amountAboveThreshold = annualGrossSalary.subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
-            return amountAboveThreshold.divide(BigDecimal.valueOf(100)).multiply(BigDecimal.valueOf(12));
+            return normalContribution();
         }
         return BigDecimal.ZERO;
     }
 
+    private BigDecimal normalContribution() {
+        BigDecimal amountAboveThreshold = annualGrossSalary.subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
+        return amountAboveThreshold.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(12));
+    }
+
     BigDecimal highContribution() {
-        BigDecimal amountWithHighTaxRate = annualGrossSalary.subtract(HIGH_INSURANCE_CONTRIBUTION_THRESHOLD);
-        BigDecimal highTaxedAmount = amountWithHighTaxRate.multiply(BigDecimal.valueOf(0.02));
-        BigDecimal amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
-        BigDecimal normalTaxedAmount = amountWithNormalTaxRate.multiply(BigDecimal.valueOf(0.12));
-        return normalTaxedAmount.add(highTaxedAmount);
+        BigDecimal amountWithHighContribution = annualGrossSalary.subtract(HIGH_INSURANCE_CONTRIBUTION_THRESHOLD);
+        BigDecimal highContributionAmount = amountWithHighContribution.multiply(BigDecimal.valueOf(0.02));
+        BigDecimal amountWithNormalContribution =
+            annualGrossSalary.subtract(amountWithHighContribution).subtract(INSURANCE_CONTRIBUTION_THRESHOLD);
+        BigDecimal normalTaxedAmount = amountWithNormalContribution.multiply(BigDecimal.valueOf(0.12));
+        return normalTaxedAmount.add(highContributionAmount);
     }
 }
