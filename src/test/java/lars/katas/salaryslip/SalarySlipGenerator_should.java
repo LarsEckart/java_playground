@@ -121,19 +121,34 @@ class SalarySlipGenerator_should {
         assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
-    @Test
-    void generate_slip_with_decreased_tax_free_allowance_and_then_higher_payable_tax_for_high_earners() {
+    @ParameterizedTest
+    @MethodSource("highEarners")
+    void generate_slip_with_decreased_tax_free_allowance_and_then_higher_payable_tax_for_high_earners(
+        Integer annualSalary, BigDecimal taxFreeAllowance, BigDecimal taxableIncome, BigDecimal payableTax
+    ) {
         // given
-        Employee employee = employeeWithAnnualSalaryOf(101_000);
+        Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
         // when
         SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
         // then
         assertAll(
-            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(BigDecimal.valueOf(875)),
-            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(BigDecimal.valueOf(7_541.67)),
-            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.valueOf(2_483.33))
+            () -> assertThat(salarySlip.getTaxFreeAllowance()).isEqualByComparingTo(taxFreeAllowance),
+            () -> assertThat(salarySlip.getTaxableIncome()).isEqualByComparingTo(taxableIncome),
+            () -> assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(payableTax)
+        );
+    }
+
+    static Stream<Arguments> highEarners() {
+        return Stream.of(
+            Arguments.of(101_000, BigDecimal.valueOf(875), BigDecimal.valueOf(7_541.67), BigDecimal.valueOf(2_483.33)),
+            Arguments.of(111_000, BigDecimal.valueOf(458.33), BigDecimal.valueOf(8_791.67),
+                BigDecimal.valueOf(2_983.33)),
+            Arguments.of(122_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(10_166.67),
+                BigDecimal.valueOf(3_533.33))
+            // TODO: do the math by hand first, then it'll be possible to debug
+            //Arguments.of(150_000, BigDecimal.valueOf(0.00), BigDecimal.valueOf(12_500), BigDecimal.valueOf(4_466.67))
         );
     }
 
