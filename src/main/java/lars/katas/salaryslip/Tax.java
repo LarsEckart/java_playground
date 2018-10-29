@@ -52,16 +52,23 @@ class Tax {
     }
 
     private BigDecimal calculatePayableTax() {
-        // TODO: refactor here
         if (isSubjectTo(EXTRA_HIGH_TAX)) {
             var above = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
             var extraHighTax = above.multiply(FOURTY_PERCENT);
+
             var amountWithHighTaxRate = annualGrossSalary.subtract(above).subtract(HIGH_TAX);
             var highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
-            var amountWithNormalTaxRate = annualGrossSalary.subtract(amountWithHighTaxRate).subtract(TAX_FREE_LIMIT);
+
+            BigDecimal taxFree = calculateReducedTaxFreeAllowance();
+            BigDecimal extraAmountWithHighTax = TAX_FREE_LIMIT.subtract(taxFree);
+            var amountWithNormalTaxRate = BigDecimal.valueOf(43_000).subtract(extraAmountWithHighTax).subtract(TAX_FREE_LIMIT).add(extraAmountWithHighTax);
             var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
-            return normalTaxedAmount.add(highTaxedAmount).add(extraHighTax);
+
+            BigDecimal xxx = extraAmountWithHighTax.multiply(FOURTY_PERCENT);
+
+            return normalTaxedAmount.add(highTaxedAmount).add(extraHighTax).add(xxx);
         }
+
         if (isSubjectTo(HIGH_TAX)) {
             var amountWithHighTaxRate = annualGrossSalary.subtract(HIGH_TAX);
             var highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
@@ -69,6 +76,7 @@ class Tax {
             var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
             return normalTaxedAmount.add(highTaxedAmount);
         }
+
         return normalRateTax();
     }
 
@@ -80,7 +88,6 @@ class Tax {
         }
         return normalTax;
     }
-
 
     BigDecimal getPayableTax() {
         return payableTax;

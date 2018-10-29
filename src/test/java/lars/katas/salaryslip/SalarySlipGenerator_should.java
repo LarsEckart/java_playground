@@ -121,7 +121,7 @@ class SalarySlipGenerator_should {
         assertThat(salarySlip.getPayableTax()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index}: salary=''{0}'', taxFreeAllowance={1}, taxableIncome={2}, payableTax={3}")
     @MethodSource("highEarners")
     void generate_slip_with_decreased_tax_free_allowance_and_then_higher_payable_tax_for_high_earners(
             Integer annualSalary, BigDecimal taxFreeAllowance, BigDecimal taxableIncome, BigDecimal payableTax
