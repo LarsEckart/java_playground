@@ -8,9 +8,11 @@ class Tax {
     private static final BigDecimal TAX_FREE_LIMIT = BigDecimal.valueOf(11_000);
     private static final BigDecimal HIGH_TAX = BigDecimal.valueOf(43_000);
     private static final BigDecimal EXTRA_HIGH_TAX = BigDecimal.valueOf(100_000);
+    private static final BigDecimal SUPER_EXTRA_HIGH_TAX = BigDecimal.valueOf(150_000);
 
     private static final BigDecimal TWENTY_PERCENT = BigDecimal.valueOf(0.20);
     private static final BigDecimal FOURTY_PERCENT = BigDecimal.valueOf(0.40);
+    private static final BigDecimal FOURTYFIVE_PERCENT = BigDecimal.valueOf(0.45);
 
     private final BigDecimal annualGrossSalary;
 
@@ -26,7 +28,7 @@ class Tax {
     }
 
     private boolean isSubjectTo(BigDecimal taxThreshold) {
-        return annualGrossSalary.doubleValue() > taxThreshold.doubleValue();
+        return annualGrossSalary.doubleValue() >= taxThreshold.doubleValue();
     }
 
     BigDecimal taxFreeAllowance() {
@@ -52,6 +54,25 @@ class Tax {
     }
 
     private BigDecimal calculatePayableTax() {
+        if (isSubjectTo(SUPER_EXTRA_HIGH_TAX)) {
+            var superExtraHigh = annualGrossSalary.subtract(SUPER_EXTRA_HIGH_TAX);
+            BigDecimal xxx = superExtraHigh.multiply(FOURTYFIVE_PERCENT);
+
+            var above = annualGrossSalary.subtract(EXTRA_HIGH_TAX).subtract(superExtraHigh);
+            var extraHighTax = above.multiply(FOURTY_PERCENT);
+
+            var amountWithHighTaxRate = annualGrossSalary.subtract(above).subtract(HIGH_TAX).subtract(superExtraHigh);
+            var highTaxedAmount = amountWithHighTaxRate.multiply(FOURTY_PERCENT);
+
+            BigDecimal taxFree = calculateReducedTaxFreeAllowance();
+            BigDecimal extraAmountWithHighTax = TAX_FREE_LIMIT.subtract(taxFree);
+            var amountWithNormalTaxRate = BigDecimal.valueOf(43_000).subtract(extraAmountWithHighTax).subtract(TAX_FREE_LIMIT).add(extraAmountWithHighTax);
+            var normalTaxedAmount = amountWithNormalTaxRate.multiply(TWENTY_PERCENT);
+
+            BigDecimal xx = extraAmountWithHighTax.multiply(FOURTY_PERCENT);
+
+            return normalTaxedAmount.add(highTaxedAmount).add(extraHighTax).add(xx).add(xxx);
+        }
         if (isSubjectTo(EXTRA_HIGH_TAX)) {
             var above = annualGrossSalary.subtract(EXTRA_HIGH_TAX);
             var extraHighTax = above.multiply(FOURTY_PERCENT);
