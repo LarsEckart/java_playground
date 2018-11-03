@@ -16,9 +16,9 @@ class GildedRose {
     }
 
     private ItemCategory categorize(Item item) {
-if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-    return new Legendary();
-}
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return new Legendary();
+        }
         if (item.name.equals("Aged Brie")) {
             return new Cheese();
         }
