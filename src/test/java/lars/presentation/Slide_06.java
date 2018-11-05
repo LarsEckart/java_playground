@@ -18,7 +18,7 @@ public class Slide_06 {
     }
 
     private Optional<String> findMiddleName() {
-        return Optional.empty();
+        return Optional.of("any");
     }
 
     interface Search {
