@@ -1,6 +1,5 @@
 package lars.spielplatz.java8;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
@@ -46,6 +45,18 @@ public class AdvancedStreamOperations {
                 })
                 .forEach(s -> System.out.format("forEach: %s [%s]\n",
                         s, Thread.currentThread().getName()));
+
+        Map<Long, Person> personMap = Map.of(
+                1L, new Person("Lars", 33),
+                2L, new Person("Oskar", 2)
+        );
+
+        personMap.entrySet().stream()
+                .map(entry -> new Object() {
+                    long id = entry.getKey();
+                    String name = entry.getValue().name;
+                })
+                .forEach(tuple -> System.out.println(tuple.id + ": " + tuple.name));
     }
 
     static class Person {

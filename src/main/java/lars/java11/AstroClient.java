@@ -32,7 +32,7 @@ public class AstroClient {
     }
 
     private HttpRequest request() {
-        String astroUrl = "http://api.open-notify.org/astros.json";
+        var astroUrl = "http://api.open-notify.org/astros.json";
         return HttpRequest.newBuilder()
             .uri(URI.create(astroUrl))
             .GET()
