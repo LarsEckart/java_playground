@@ -37,9 +37,9 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 }
 
-task copyRuntimeLibs(type: Copy) {
+task copyDependenciesToLibs(type: Copy) {
     into "libs"
-    from configurations.testRuntime - configurations.runtime
+    from configurations.compile
 }
 
 tasks.withType(JavaCompile) {
