@@ -43,7 +43,7 @@ task copyRuntimeLibs(type: Copy) {
 }
 
 tasks.withType(JavaCompile) {
-    //options.compilerArgs += [ '-Xep:DeadException:WARN', '-Xep:GuardedByValidator:OFF' ]
+    options.compilerArgs << "-Xlint:all" //<< "-Werror"
 }
 
 sourceCompatibility = '11'

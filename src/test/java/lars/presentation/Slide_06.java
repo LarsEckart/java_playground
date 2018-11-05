@@ -1,8 +1,11 @@
 package lars.presentation;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Slide_06 {
 
@@ -12,6 +15,10 @@ public class Slide_06 {
 
         System.out.println("middle name: " + middleName.get());
 
+        if (middleName.isPresent()) {
+            System.out.println("middle name: " + middleName.get());
+        }
+
         System.out.println("middle name: " + middleName.orElseThrow());
 
         middleName.ifPresent(m -> System.out.println("middle name: " + m));
@@ -19,6 +26,29 @@ public class Slide_06 {
 
     private Optional<String> findMiddleName() {
         return Optional.of("any");
+    }
+
+    @Test
+    void be_careful() {
+        Optional<String> userFromDb = Optional.of("Lars");
+        String result = userFromDb
+                .map(this::runIfExists)
+                .orElse(runIfNotExists());
+
+        assertThat(result).isEqualTo("Lars");
+
+        // only meant to return default value, not to execute things!
+        // use orElseGet in that case
+    }
+
+    private String runIfExists(String str) {
+        System.out.println("run if exists");
+        return str;
+    }
+
+    private String runIfNotExists() {
+        System.out.println("insert into database");
+        return "new user created";
     }
 
     interface Search {
@@ -38,11 +68,11 @@ public class Slide_06 {
 
     @Test
     void if_present_or_else() {
-        Optional<String> name = Optional.empty();
+        Optional<String> name = Optional.of("Lars");
 
         name.ifPresentOrElse(
                 System.out::println,
-                () -> System.out.println("No middle name")
+                () -> System.out.println("No name")
         );
     }
 }
