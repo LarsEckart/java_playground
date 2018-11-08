@@ -16,6 +16,8 @@ public class Slide_04 {
 
     @Test
     void new_collection_factory_methods() {
+        List<String> strings = Arrays.asList("Lars", "oskar");
+
         List<String> list = List.of("Lars", "Oskar");
         Set<String> set = Set.of("Lars", "Oskar");
         Map<Long, String> map = Map.of(1L, "Lars", 2L, "Oskar");

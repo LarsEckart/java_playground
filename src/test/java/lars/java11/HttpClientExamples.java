@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HttpClientExamples {
 
     private MockWebServer mockWebServer = new MockWebServer();
+
     private HttpClient client;
 
     private String mockWebServerUrl() {
@@ -118,8 +119,8 @@ public class HttpClientExamples {
     public void out_of_the_box_headers() throws Exception {
         mockWebServer.enqueue(new MockResponse().setResponseCode(200));
         var request = HttpRequest.newBuilder()
-            .uri(URI.create(mockWebServerUrl()))
-            .build();
+                .uri(URI.create(mockWebServerUrl()))
+                .build();
 
         // when
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -138,9 +139,9 @@ public class HttpClientExamples {
         // given
         client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
         var request = HttpRequest.newBuilder()
-            .GET()
-            .uri(URI.create("https://www.google.com"))
-            .build();
+                .GET()
+                .uri(URI.create("https://www.google.com"))
+                .build();
 
         // when
         CompletableFuture<HttpResponse<String>> resFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());

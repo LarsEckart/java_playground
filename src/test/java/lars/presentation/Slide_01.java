@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Slide_01 {
 
@@ -35,6 +36,30 @@ public class Slide_01 {
     }
 
     @Test
+    void more_examples() {
+        var name = "Lars";
+        var solution = 42L;
+        var evenNumbers = List.of(2, 4, 6, 8);
+        var oddNumbers = new ArrayList<>();
+
+        evenNumbers = new ArrayList<>();
+        //oddNumbers = List.of(1, 3, 5, 7, 9);
+    }
+
+    @Test
+    void still_programming_to_the_interface() {
+        assertThat(getNames()).containsExactly("Lars");
+    }
+
+    private List<String> getNames() {
+        var list = new ArrayList<String>();
+        //...
+        list.add("Lars");
+        //...
+        return list;
+    }
+
+    @Test
     void in_loops() {
         var numbers = List.of(1, 2, 3, 4, 5);
 
@@ -45,13 +70,14 @@ public class Slide_01 {
 
     @Test
     void in_try_declarations() {
-        try (var file = new FileInputStream(new File("passwords.txt"))) {
+        try (var inputStream = new FileInputStream(new File("passwords.txt"));
+             var inputStreamReader = new InputStreamReader(inputStream, UTF_8);
+             var bufferedReader = new BufferedReader(inputStreamReader)) {
 
-            new BufferedReader(new InputStreamReader(file, UTF_8))
+            bufferedReader
                     .lines()
                     .forEach(System.out::println);
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
