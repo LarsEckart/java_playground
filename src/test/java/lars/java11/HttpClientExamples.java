@@ -34,6 +34,7 @@ public class HttpClientExamples {
     public void get_requests() throws Exception {
         // given
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("hello world"));
+
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
                 .build();
@@ -51,6 +52,7 @@ public class HttpClientExamples {
     public void post_requests() throws Exception {
         // given
         mockWebServer.enqueue(new MockResponse().setResponseCode(201));
+
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
                 .POST(HttpRequest.BodyPublishers.ofString("hello world"))
@@ -68,6 +70,7 @@ public class HttpClientExamples {
     public void header() throws Exception {
         // given
         mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
                 .header("x-lars", "tubli")
@@ -85,6 +88,7 @@ public class HttpClientExamples {
     public void headers() throws Exception {
         // given
         mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+
         String[] headers = {"hello", "world", "x-lars", "tubli"};
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
@@ -104,6 +108,7 @@ public class HttpClientExamples {
     public void response_headers() throws Exception {
         // given
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).addHeader("x-lars", "tubli"));
+
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
                 .build();
@@ -118,6 +123,7 @@ public class HttpClientExamples {
     @Test
     public void out_of_the_box_headers() throws Exception {
         mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(mockWebServerUrl()))
                 .build();
