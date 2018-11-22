@@ -1,5 +1,6 @@
 package lars.katas.gameoflife;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
 import static lars.katas.gameoflife.CellBuilder.aCell;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Game_should {
+class GameOfLife {
 
     @Test
     void new_world_has_8_rows() {
@@ -38,14 +39,14 @@ class Game_should {
 
     @ParameterizedTest
     @MethodSource("allCells")
-    void new_world_has_only_dead_cells(Cell cell) {
+    void new_world_has_no_living_cells(Cell cell) {
         // given
 
         // when
         World world = World.createNew();
 
         // then
-        assertThat(world.isDeadAt(cell)).isTrue();
+        assertThat(world.isAliveAt(cell)).isFalse();
     }
 
     private static Stream<Arguments> allCells() {
@@ -55,6 +56,35 @@ class Game_should {
                 cells.add(aCell().atColumn(i).atRow(j));
             }
         }
+
         return cells.stream().map(Arguments::of);
+    }
+
+    @Test
+    void living_cell_can_be_added_to_world() {
+        // given
+        World world = World.createNew();
+        Cell livingCell = aCell().atColumn(1).atRow(1);
+
+        // when
+        world.lifeAt(livingCell);
+
+        // then
+        assertThat(world.isAliveAt(livingCell)).isTrue();
+    }
+
+    @Disabled("on hold")
+    @Test
+    void evolution_step_single_alive_cell_will_die() {
+        // given
+        World world = World.createNew();
+        Cell livingCell = aCell().atColumn(1).atRow(1);
+        world.lifeAt(livingCell);
+
+        // when
+        world.evolve();
+
+        // then
+        assertThat(world.isAliveAt(livingCell)).isFalse();
     }
 }
