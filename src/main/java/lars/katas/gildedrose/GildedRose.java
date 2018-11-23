@@ -9,77 +9,125 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].name.equals("foo")) {
-                items[i].sellIn--;
-                if (items[i].quality > 0) {
-                    if (items[i].sellIn <= 0) {
-                        items[i].quality = items[i].quality - 2 < 0 ? 0 : items[i].quality - 2;
-                    } else {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-                return;
-            }
-            if (items[i].name.equals("Aged Brie")) {
-                items[i].sellIn--;
-                if (items[i].quality < 50) {
-                    if (items[i].sellIn <= 0) {
-                        items[i].quality = items[i].quality + 2 > 50 ? 50 : items[i].quality + 2;
-                    } else {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-                return;
-            }
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+        for (Item item : items) {
+            ItemCategory itemCategory = categorize(item);
+            itemCategory.updateQuality();
+            itemCategory.updateSellIn();
+        }
+    }
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+    private ItemCategory categorize(Item item) {
+        if (item.name.equals("foo")) {
+            return new NormalItem(item);
+        }
+        if (item.name.equals("Aged Brie")) {
+            return new Cheese(item);
+        }
+        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            return new Backstage(item);
+        }
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return new Legendary();
+        }
+        throw new RuntimeException("unknown item");
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+    private interface ItemCategory {
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
+        public void updateQuality();
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
+        void updateSellIn();
+    }
+
+    private class NormalItem implements ItemCategory {
+
+        private Item item;
+
+        public NormalItem(Item item) {
+            this.item = item;
+        }
+
+        @Override
+        public void updateQuality() {
+            if (item.quality > 0) {
+                if (item.sellIn <= 0) {
+                    item.quality = item.quality - 2 < 0 ? 0 : item.quality - 2;
                 } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
+                    item.quality = item.quality - 1;
                 }
             }
         }
+
+        @Override
+        public void updateSellIn() {
+            item.sellIn--;
+        }
     }
+
+    private class Cheese implements ItemCategory {
+
+        private Item item;
+
+        public Cheese(Item item) {
+            this.item = item;
+        }
+
+        @Override
+        public void updateQuality() {
+            if (item.quality < 50) {
+                if (item.sellIn <= 0) {
+                    item.quality = item.quality + 2 > 50 ? 50 : item.quality + 2;
+                } else {
+                    item.quality = item.quality + 1;
+                }
+            }
+        }
+
+        @Override
+        public void updateSellIn() {
+            item.sellIn--;
+        }
+    }
+
+    private class Backstage implements ItemCategory {
+
+        private Item item;
+
+        public Backstage(Item item) {
+            this.item = item;
+        }
+
+        @Override
+        public void updateQuality() {
+            if (item.sellIn <= 0) {
+                item.quality = 0;
+            } else if (item.quality < 50) {
+                if (item.sellIn <= 5) {
+                    item.quality = item.quality + 3 > 50 ? 50 : item.quality + 3;
+                } else if (item.sellIn <= 10) {
+                    item.quality = item.quality + 2 > 50 ? 50 : item.quality + 2;
+                } else {
+                    item.quality = item.quality + 1;
+                }
+            }
+        }
+
+        @Override
+        public void updateSellIn() {
+            item.sellIn--;
+        }
+    }
+
+    private class Legendary implements ItemCategory {
+
+        @Override
+        public void updateQuality() {
+
+        }
+
+        @Override
+        public void updateSellIn() {
+        }
+    }
+
 }

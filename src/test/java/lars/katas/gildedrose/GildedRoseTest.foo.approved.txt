@@ -1,80 +1,168 @@
 [foo, -1, 0] => Item{name='foo', sellIn=-2, quality=0} 
 [foo, -1, 1] => Item{name='foo', sellIn=-2, quality=0} 
+[foo, -1, 2] => Item{name='foo', sellIn=-2, quality=0} 
+[foo, -1, 48] => Item{name='foo', sellIn=-2, quality=46} 
 [foo, -1, 49] => Item{name='foo', sellIn=-2, quality=47} 
 [foo, -1, 50] => Item{name='foo', sellIn=-2, quality=48} 
 [foo, 0, 0] => Item{name='foo', sellIn=-1, quality=0} 
 [foo, 0, 1] => Item{name='foo', sellIn=-1, quality=0} 
+[foo, 0, 2] => Item{name='foo', sellIn=-1, quality=0} 
+[foo, 0, 48] => Item{name='foo', sellIn=-1, quality=46} 
 [foo, 0, 49] => Item{name='foo', sellIn=-1, quality=47} 
 [foo, 0, 50] => Item{name='foo', sellIn=-1, quality=48} 
 [foo, 2, 0] => Item{name='foo', sellIn=1, quality=0} 
 [foo, 2, 1] => Item{name='foo', sellIn=1, quality=0} 
+[foo, 2, 2] => Item{name='foo', sellIn=1, quality=1} 
+[foo, 2, 48] => Item{name='foo', sellIn=1, quality=47} 
 [foo, 2, 49] => Item{name='foo', sellIn=1, quality=48} 
 [foo, 2, 50] => Item{name='foo', sellIn=1, quality=49} 
 [foo, 8, 0] => Item{name='foo', sellIn=7, quality=0} 
 [foo, 8, 1] => Item{name='foo', sellIn=7, quality=0} 
+[foo, 8, 2] => Item{name='foo', sellIn=7, quality=1} 
+[foo, 8, 48] => Item{name='foo', sellIn=7, quality=47} 
 [foo, 8, 49] => Item{name='foo', sellIn=7, quality=48} 
 [foo, 8, 50] => Item{name='foo', sellIn=7, quality=49} 
+[foo, 9, 0] => Item{name='foo', sellIn=8, quality=0} 
+[foo, 9, 1] => Item{name='foo', sellIn=8, quality=0} 
+[foo, 9, 2] => Item{name='foo', sellIn=8, quality=1} 
+[foo, 9, 48] => Item{name='foo', sellIn=8, quality=47} 
+[foo, 9, 49] => Item{name='foo', sellIn=8, quality=48} 
+[foo, 9, 50] => Item{name='foo', sellIn=8, quality=49} 
+[foo, 10, 0] => Item{name='foo', sellIn=9, quality=0} 
+[foo, 10, 1] => Item{name='foo', sellIn=9, quality=0} 
+[foo, 10, 2] => Item{name='foo', sellIn=9, quality=1} 
+[foo, 10, 48] => Item{name='foo', sellIn=9, quality=47} 
+[foo, 10, 49] => Item{name='foo', sellIn=9, quality=48} 
+[foo, 10, 50] => Item{name='foo', sellIn=9, quality=49} 
 [foo, 11, 0] => Item{name='foo', sellIn=10, quality=0} 
 [foo, 11, 1] => Item{name='foo', sellIn=10, quality=0} 
+[foo, 11, 2] => Item{name='foo', sellIn=10, quality=1} 
+[foo, 11, 48] => Item{name='foo', sellIn=10, quality=47} 
 [foo, 11, 49] => Item{name='foo', sellIn=10, quality=48} 
 [foo, 11, 50] => Item{name='foo', sellIn=10, quality=49} 
 [Aged Brie, -1, 0] => Item{name='Aged Brie', sellIn=-2, quality=2} 
 [Aged Brie, -1, 1] => Item{name='Aged Brie', sellIn=-2, quality=3} 
+[Aged Brie, -1, 2] => Item{name='Aged Brie', sellIn=-2, quality=4} 
+[Aged Brie, -1, 48] => Item{name='Aged Brie', sellIn=-2, quality=50} 
 [Aged Brie, -1, 49] => Item{name='Aged Brie', sellIn=-2, quality=50} 
 [Aged Brie, -1, 50] => Item{name='Aged Brie', sellIn=-2, quality=50} 
 [Aged Brie, 0, 0] => Item{name='Aged Brie', sellIn=-1, quality=2} 
 [Aged Brie, 0, 1] => Item{name='Aged Brie', sellIn=-1, quality=3} 
+[Aged Brie, 0, 2] => Item{name='Aged Brie', sellIn=-1, quality=4} 
+[Aged Brie, 0, 48] => Item{name='Aged Brie', sellIn=-1, quality=50} 
 [Aged Brie, 0, 49] => Item{name='Aged Brie', sellIn=-1, quality=50} 
 [Aged Brie, 0, 50] => Item{name='Aged Brie', sellIn=-1, quality=50} 
 [Aged Brie, 2, 0] => Item{name='Aged Brie', sellIn=1, quality=1} 
 [Aged Brie, 2, 1] => Item{name='Aged Brie', sellIn=1, quality=2} 
+[Aged Brie, 2, 2] => Item{name='Aged Brie', sellIn=1, quality=3} 
+[Aged Brie, 2, 48] => Item{name='Aged Brie', sellIn=1, quality=49} 
 [Aged Brie, 2, 49] => Item{name='Aged Brie', sellIn=1, quality=50} 
 [Aged Brie, 2, 50] => Item{name='Aged Brie', sellIn=1, quality=50} 
 [Aged Brie, 8, 0] => Item{name='Aged Brie', sellIn=7, quality=1} 
 [Aged Brie, 8, 1] => Item{name='Aged Brie', sellIn=7, quality=2} 
+[Aged Brie, 8, 2] => Item{name='Aged Brie', sellIn=7, quality=3} 
+[Aged Brie, 8, 48] => Item{name='Aged Brie', sellIn=7, quality=49} 
 [Aged Brie, 8, 49] => Item{name='Aged Brie', sellIn=7, quality=50} 
 [Aged Brie, 8, 50] => Item{name='Aged Brie', sellIn=7, quality=50} 
+[Aged Brie, 9, 0] => Item{name='Aged Brie', sellIn=8, quality=1} 
+[Aged Brie, 9, 1] => Item{name='Aged Brie', sellIn=8, quality=2} 
+[Aged Brie, 9, 2] => Item{name='Aged Brie', sellIn=8, quality=3} 
+[Aged Brie, 9, 48] => Item{name='Aged Brie', sellIn=8, quality=49} 
+[Aged Brie, 9, 49] => Item{name='Aged Brie', sellIn=8, quality=50} 
+[Aged Brie, 9, 50] => Item{name='Aged Brie', sellIn=8, quality=50} 
+[Aged Brie, 10, 0] => Item{name='Aged Brie', sellIn=9, quality=1} 
+[Aged Brie, 10, 1] => Item{name='Aged Brie', sellIn=9, quality=2} 
+[Aged Brie, 10, 2] => Item{name='Aged Brie', sellIn=9, quality=3} 
+[Aged Brie, 10, 48] => Item{name='Aged Brie', sellIn=9, quality=49} 
+[Aged Brie, 10, 49] => Item{name='Aged Brie', sellIn=9, quality=50} 
+[Aged Brie, 10, 50] => Item{name='Aged Brie', sellIn=9, quality=50} 
 [Aged Brie, 11, 0] => Item{name='Aged Brie', sellIn=10, quality=1} 
 [Aged Brie, 11, 1] => Item{name='Aged Brie', sellIn=10, quality=2} 
+[Aged Brie, 11, 2] => Item{name='Aged Brie', sellIn=10, quality=3} 
+[Aged Brie, 11, 48] => Item{name='Aged Brie', sellIn=10, quality=49} 
 [Aged Brie, 11, 49] => Item{name='Aged Brie', sellIn=10, quality=50} 
 [Aged Brie, 11, 50] => Item{name='Aged Brie', sellIn=10, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, -1, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, -1, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
+[Backstage passes to a TAFKAL80ETC concert, -1, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
+[Backstage passes to a TAFKAL80ETC concert, -1, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, -1, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, -1, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-2, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, 0, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, 0, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
+[Backstage passes to a TAFKAL80ETC concert, 0, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
+[Backstage passes to a TAFKAL80ETC concert, 0, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, 0, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, 0, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=-1, quality=0} 
 [Backstage passes to a TAFKAL80ETC concert, 2, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=3} 
 [Backstage passes to a TAFKAL80ETC concert, 2, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=4} 
+[Backstage passes to a TAFKAL80ETC concert, 2, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=5} 
+[Backstage passes to a TAFKAL80ETC concert, 2, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 2, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 2, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=1, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 8, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=2} 
 [Backstage passes to a TAFKAL80ETC concert, 8, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=3} 
+[Backstage passes to a TAFKAL80ETC concert, 8, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=4} 
+[Backstage passes to a TAFKAL80ETC concert, 8, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 8, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 8, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=7, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=2} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=3} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=4} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 9, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=8, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=2} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=3} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=4} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=50} 
+[Backstage passes to a TAFKAL80ETC concert, 10, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=9, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 11, 0] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=1} 
 [Backstage passes to a TAFKAL80ETC concert, 11, 1] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=2} 
+[Backstage passes to a TAFKAL80ETC concert, 11, 2] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=3} 
+[Backstage passes to a TAFKAL80ETC concert, 11, 48] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=49} 
 [Backstage passes to a TAFKAL80ETC concert, 11, 49] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=50} 
 [Backstage passes to a TAFKAL80ETC concert, 11, 50] => Item{name='Backstage passes to a TAFKAL80ETC concert', sellIn=10, quality=50} 
 [Sulfuras, Hand of Ragnaros, -1, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=0} 
 [Sulfuras, Hand of Ragnaros, -1, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=1} 
+[Sulfuras, Hand of Ragnaros, -1, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=2} 
+[Sulfuras, Hand of Ragnaros, -1, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=48} 
 [Sulfuras, Hand of Ragnaros, -1, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=49} 
 [Sulfuras, Hand of Ragnaros, -1, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=-1, quality=50} 
 [Sulfuras, Hand of Ragnaros, 0, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=0} 
 [Sulfuras, Hand of Ragnaros, 0, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=1} 
+[Sulfuras, Hand of Ragnaros, 0, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=2} 
+[Sulfuras, Hand of Ragnaros, 0, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=48} 
 [Sulfuras, Hand of Ragnaros, 0, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=49} 
 [Sulfuras, Hand of Ragnaros, 0, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=0, quality=50} 
 [Sulfuras, Hand of Ragnaros, 2, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=0} 
 [Sulfuras, Hand of Ragnaros, 2, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=1} 
+[Sulfuras, Hand of Ragnaros, 2, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=2} 
+[Sulfuras, Hand of Ragnaros, 2, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=48} 
 [Sulfuras, Hand of Ragnaros, 2, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=49} 
 [Sulfuras, Hand of Ragnaros, 2, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=2, quality=50} 
 [Sulfuras, Hand of Ragnaros, 8, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=0} 
 [Sulfuras, Hand of Ragnaros, 8, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=1} 
+[Sulfuras, Hand of Ragnaros, 8, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=2} 
+[Sulfuras, Hand of Ragnaros, 8, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=48} 
 [Sulfuras, Hand of Ragnaros, 8, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=49} 
 [Sulfuras, Hand of Ragnaros, 8, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=8, quality=50} 
+[Sulfuras, Hand of Ragnaros, 9, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=0} 
+[Sulfuras, Hand of Ragnaros, 9, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=1} 
+[Sulfuras, Hand of Ragnaros, 9, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=2} 
+[Sulfuras, Hand of Ragnaros, 9, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=48} 
+[Sulfuras, Hand of Ragnaros, 9, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=49} 
+[Sulfuras, Hand of Ragnaros, 9, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=9, quality=50} 
+[Sulfuras, Hand of Ragnaros, 10, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=0} 
+[Sulfuras, Hand of Ragnaros, 10, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=1} 
+[Sulfuras, Hand of Ragnaros, 10, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=2} 
+[Sulfuras, Hand of Ragnaros, 10, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=48} 
+[Sulfuras, Hand of Ragnaros, 10, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=49} 
+[Sulfuras, Hand of Ragnaros, 10, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=10, quality=50} 
 [Sulfuras, Hand of Ragnaros, 11, 0] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=0} 
 [Sulfuras, Hand of Ragnaros, 11, 1] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=1} 
+[Sulfuras, Hand of Ragnaros, 11, 2] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=2} 
+[Sulfuras, Hand of Ragnaros, 11, 48] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=48} 
 [Sulfuras, Hand of Ragnaros, 11, 49] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=49} 
 [Sulfuras, Hand of Ragnaros, 11, 50] => Item{name='Sulfuras, Hand of Ragnaros', sellIn=11, quality=50} 
