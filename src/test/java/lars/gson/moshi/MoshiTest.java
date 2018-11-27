@@ -1,10 +1,5 @@
 package lars.gson.moshi;
 
-import java.io.EOFException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
@@ -15,24 +10,30 @@ import lars.json.Card;
 import lars.json.ImmutableBag;
 import lars.json.Suit;
 import lars.json.moshi.CardAdapter;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import static lars.json.Suit.HEARTS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MoshiTest {
 
     private Moshi moshi;
 
-    @Before
-    public void initialize() throws Exception {
+    @BeforeEach
+    void initialize() {
         this.moshi = new Moshi.Builder().build();
     }
 
     @Test
-    public void converts_simple_string() throws Exception {
+    void converts_simple_string() {
         // given
         JsonAdapter<String> jsonAdapter = moshi.adapter(String.class);
 
@@ -44,7 +45,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void converts_bag_of_primitives() throws Exception {
+    void converts_bag_of_primitives() {
         // given
         BagOfPrimitives obj = new BagOfPrimitives();
         JsonAdapter<BagOfPrimitives> jsonAdapter = moshi.adapter(BagOfPrimitives.class);
@@ -57,7 +58,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void converts_json_to_bag_with_final_field() throws Exception {
+    void converts_json_to_bag_with_final_field() throws IOException {
         // given
         String json = "{\"name\":\"Oskar\"}";
         JsonAdapter<ImmutableBag> jsonAdapter = moshi.adapter(ImmutableBag.class);
@@ -70,7 +71,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void ignores_transient_fields() throws Exception {
+    void ignores_transient_fields() {
         // given
         BagWithTransientField obj = new BagWithTransientField();
         JsonAdapter<BagWithTransientField> jsonAdapter = moshi.adapter(BagWithTransientField.class);
@@ -83,7 +84,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void ignores_null_fields() throws Exception {
+    void ignores_null_fields() {
         // given
         BagWithNull obj = new BagWithNull();
         JsonAdapter<BagWithNull> jsonAdapter = moshi.adapter(BagWithNull.class);
@@ -96,40 +97,25 @@ public class MoshiTest {
     }
 
     @Test
-    public void throws_np_exception_when_parsing_null() throws Exception {
+    void throws_np_exception_when_parsing_null() {
         // given
         String json = null;
         JsonAdapter<BagOfPrimitives> jsonAdapter = moshi.adapter(BagOfPrimitives.class);
 
-        try {
-            //when
-            BagOfPrimitives obj = jsonAdapter.fromJson(json);
-
-            //then
-            Assert.fail();
-        } catch (NullPointerException expected) {
-        }
+        assertThrows(NullPointerException.class, () -> jsonAdapter.fromJson(json));
     }
 
     @Test
-    public void throws_eof_exception_when_empty_string() throws Exception {
+    void throws_eof_exception_when_empty_string() {
         // given
         String json = "";
         JsonAdapter<BagOfPrimitives> jsonAdapter = moshi.adapter(BagOfPrimitives.class);
 
-        try {
-            //when
-            BagOfPrimitives obj = jsonAdapter.fromJson(json);
-
-            //then
-            Assert.fail();
-        } catch (EOFException expected) {
-        }
+        assertThrows(EOFException.class, () -> jsonAdapter.fromJson(json));
     }
 
     @Test
-    public void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives()
-            throws Exception {
+    void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives() throws IOException {
         // given
         String json = "{}";
         JsonAdapter<BagOfPrimitives> jsonAdapter = moshi.adapter(BagOfPrimitives.class);
@@ -144,7 +130,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void custom_type_adapter() throws Exception {
+    void custom_type_adapter() {
         // given
         moshi = new Moshi.Builder()
                 .add(new CardAdapter())
@@ -160,7 +146,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void converts_generic_list_to_json_array() throws Exception {
+    void converts_generic_list_to_json_array() {
         // given
         List<Card> list = new ArrayList<>();
         list.add(new Card('6', Suit.HEARTS));
@@ -178,7 +164,7 @@ public class MoshiTest {
     }
 
     @Test
-    public void converts_json_array_to_generic_list() throws Exception {
+    void converts_json_array_to_generic_list() throws IOException {
         // given
         String json = "[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]";
         Type type = Types.newParameterizedType(List.class, Card.class);

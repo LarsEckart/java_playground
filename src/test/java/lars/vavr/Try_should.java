@@ -1,8 +1,7 @@
 package lars.vavr;
 
-import io.vavr.collection.Stream;
 import io.vavr.control.Try;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.Fail.fail;
@@ -10,16 +9,14 @@ import static org.assertj.core.api.Fail.fail;
 public class Try_should {
 
     @Test
-    public void get_returns_result_when_all_good() throws Exception {
+    void get_returns_result_when_all_good() throws Exception {
         Try<Integer> parseInt = Try.of(() -> Integer.parseInt("42"));
 
-        Integer result = parseInt.get();
-
-        then(result).isEqualTo(42);
+        then(parseInt.get()).isEqualTo(42);
     }
 
     @Test
-    public void get_throws_when_exception_occured() throws Exception {
+    void get_throws_when_exception_occured() throws Exception {
         Try<Integer> parseInt = Try.of(() -> Integer.parseInt("lars"));
 
         try {
@@ -30,20 +27,16 @@ public class Try_should {
     }
 
     @Test
-    public void getOrElse_returns_else_if_exception_thrown() throws Exception {
+    void getOrElse_returns_else_if_exception_thrown() throws Exception {
         Try<Integer> parseInt = Try.of(() -> Integer.parseInt("lars"));
 
-        Integer result = parseInt.getOrElse(42);
-
-        then(result).isEqualTo(42);
+        then(parseInt.getOrElse(42)).isEqualTo(42);
     }
 
     @Test
-    public void getOrElse_returns_result_when_no_exception() throws Exception {
+    void getOrElse_returns_result_when_no_exception() throws Exception {
         Try<Integer> parseInt = Try.of(() -> Integer.parseInt("42"));
 
-        Integer result = parseInt.getOrElse(999);
-
-        then(result).isEqualTo(42);
+        then(parseInt.getOrElse(999)).isEqualTo(42);
     }
 }

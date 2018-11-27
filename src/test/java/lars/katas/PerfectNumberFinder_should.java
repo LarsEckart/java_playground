@@ -1,6 +1,6 @@
 package lars.katas;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,14 +15,14 @@ public class PerfectNumberFinder_should {
     private static Integer[] PERFECT_NUMBERS = {6, 28, 496, 8128, 33550336};
 
     @Test
-    public void find_perfect_numbers() throws Exception {
+    void find_perfect_numbers() {
         for (int i : PERFECT_NUMBERS) {
             assertThat(PerfectNumberFinder.isPerfect(i)).isTrue();
         }
     }
 
     @Test
-    public void reject_non_perfect_numbers() throws Exception {
+    void reject_non_perfect_numbers() {
         List<Integer> perfectNumbers = Arrays.asList(PERFECT_NUMBERS);
         for (int i = 2; i < 10000; i++) {
             if (perfectNumbers.contains(i)) {
@@ -34,52 +34,54 @@ public class PerfectNumberFinder_should {
     }
 
     @Test
-    public void is_factor() throws Exception {
+    void is_factor() {
         assertThat(Classifier1.isFactor(1, 10)).isTrue();
     }
 
     @Test
-    public void factor_for() throws Exception {
-        int[] expected = new int[]{1};
+    void factor_for() {
+        int[] expected = new int[] {1};
         assertThat(Classifier1.factorsFor(1)).isEqualTo(expected);
     }
 
     private static class Classifier1 {
+
         public static boolean isFactor(int factor, int number) {
             return number % factor == 0;
         }
 
         public static int[] factorsFor(int number) {
-            return new int[]{number};
+            return new int[] {number};
         }
     }
 
     @Test
-    public void is_1_a_factor_of_10() throws Exception {
+    void is_1_a_factor_of_10() {
         Classifier2 c = new Classifier2(10);
         assertThat(c.isFactor(1)).isTrue();
     }
 
     @Test
-    public void is_5_a_factor_of_25() throws Exception {
+    void is_5_a_factor_of_25() {
         Classifier2 c = new Classifier2(25);
         assertThat(c.isFactor(5)).isTrue();
     }
 
     @Test
-    public void is_3_not_a_factor_of_70() throws Exception {
+    void is_3_not_a_factor_of_70() {
         Classifier2 c = new Classifier2(70);
         assertThat(c.isFactor(3)).isFalse();
     }
 
     @Test
-    public void factors_for_6() throws Exception {
-        int[] expected = new int[]{1, 2, 3, 6};
+    void factors_for_6() {
+        int[] expected = new int[] {1, 2, 3, 6};
         Classifier2 c = new Classifier2(6);
         assertThat(c.getFactors()).isEqualTo(expected);
     }
 
     private class Classifier2 {
+
         private final int number;
 
         public Classifier2(int number) {
@@ -109,7 +111,7 @@ public class PerfectNumberFinder_should {
     }
 
     @Test
-    public void add_factors() throws Exception {
+    void add_factors() {
         Classifier3 c = new Classifier3(6);
         c.addFactor(2);
         c.addFactor(3);
@@ -118,6 +120,7 @@ public class PerfectNumberFinder_should {
     }
 
     private class Classifier3 {
+
         private final int number;
         private Set<Integer> factors;
 
@@ -138,7 +141,7 @@ public class PerfectNumberFinder_should {
     }
 
     @Test
-    public void calculate_factors_for_6() throws Exception {
+    void calculate_factors_for_6() {
         Set<Integer> expected = expectedSetWith(1, 2, 3, 6);
         Classifier4 c = new Classifier4(6);
         c.calculateFactors();
@@ -150,6 +153,7 @@ public class PerfectNumberFinder_should {
     }
 
     private class Classifier4 {
+
         private final int number;
         private Set<Integer> factors;
 
@@ -192,7 +196,7 @@ public class PerfectNumberFinder_should {
     }
 
     @Test
-    public void sum_of_factors() throws Exception {
+    void sum_of_factors() {
         Classifier4 c = new Classifier4(20);
         c.calculateFactors();
         int expected = 1 + 20 + 2 + 10 + 5 + 4;
@@ -200,7 +204,7 @@ public class PerfectNumberFinder_should {
     }
 
     @Test
-    public void perfection() throws Exception {
+    void perfection() {
         for (int i : PERFECT_NUMBERS) {
             Classifier4 c = new Classifier4(i);
             assertThat(c.isPerfect()).isTrue();

@@ -1,9 +1,5 @@
 package lars.gson.gson;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -14,23 +10,27 @@ import lars.json.Card;
 import lars.json.ImmutableBag;
 import lars.json.Suit;
 import lars.json.gson.CardAdapter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import static lars.json.Suit.HEARTS;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GsonTest {
+class GsonTest {
 
     private Gson gson;
 
-    @Before
-    public void initialize() throws Exception {
+    @BeforeEach
+    void initialize() {
         this.gson = new Gson();
     }
 
     @Test
-    public void converts_primitive_int() throws Exception {
+    void converts_primitive_int() {
         // given
 
         // when
@@ -41,7 +41,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_simple_string() throws Exception {
+    void converts_simple_string() {
         // given
 
         // when
@@ -52,7 +52,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_primitive_array() throws Exception {
+    void converts_primitive_array() {
         // given
         int[] values = {1, 2, 3};
 
@@ -64,7 +64,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_bag_of_primitives() throws Exception {
+    void converts_bag_of_primitives() {
         // given
         BagOfPrimitives obj = new BagOfPrimitives();
 
@@ -76,7 +76,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_bag_with_final_field() throws Exception {
+    void converts_bag_with_final_field() {
         // given
         ImmutableBag obj = new ImmutableBag("Oskar");
 
@@ -88,7 +88,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_json_to_bag_with_final_field() throws Exception {
+    void converts_json_to_bag_with_final_field() {
         // given
         String json = "{\"name\":\"Oskar\"}";
 
@@ -100,7 +100,7 @@ public class GsonTest {
     }
 
     @Test
-    public void ignores_transient_fields() throws Exception {
+    void ignores_transient_fields() {
         // given
         BagWithTransientField obj = new BagWithTransientField();
 
@@ -112,7 +112,7 @@ public class GsonTest {
     }
 
     @Test
-    public void ignores_null_fields() throws Exception {
+    void ignores_null_fields() {
         // given
         BagWithNull obj = new BagWithNull();
 
@@ -124,7 +124,7 @@ public class GsonTest {
     }
 
     @Test
-    public void parses_null_to_null() throws Exception {
+    void parses_null_to_null() {
         // given
         String json = null;
 
@@ -136,7 +136,7 @@ public class GsonTest {
     }
 
     @Test
-    public void parses_empty_string_to_null() throws Exception {
+    void parses_empty_string_to_null() {
         // given
         String json = "";
 
@@ -148,7 +148,7 @@ public class GsonTest {
     }
 
     @Test
-    public void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives() throws Exception {
+    void parses_empty_json_string_to_default_primitive_or_null_for_non_primitives() {
         // given
         String json = "{}";
 
@@ -162,7 +162,7 @@ public class GsonTest {
     }
 
     @Test
-    public void custom_type_adapter() throws Exception {
+    void custom_type_adapter() {
         // given
         gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
         Card sixOfHearts = new Card('6', HEARTS);
@@ -175,7 +175,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_generic_list_to_json_array() throws Exception {
+    void converts_generic_list_to_json_array() {
         // given
         List<Card> list = new ArrayList<>();
         list.add(new Card('6', Suit.HEARTS));
@@ -189,7 +189,7 @@ public class GsonTest {
     }
 
     @Test
-    public void converts_json_array_to_generic_list() throws Exception {
+    void converts_json_array_to_generic_list() {
         // given
         String json = "[{\"rank\":\"6\",\"suit\":\"HEARTS\"},{\"rank\":\"A\",\"suit\":\"SPADES\"}]";
         Type cardListType = new TypeToken<ArrayList<Card>>() {

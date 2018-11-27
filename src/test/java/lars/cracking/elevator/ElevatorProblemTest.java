@@ -1,19 +1,13 @@
 package lars.cracking.elevator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ElevatorProblemTest {
 
-    @Before
-    public void initialize() throws Exception {
-
-    }
-
     @Test
-    public void should_return_6_when_example_data() throws Exception {
+    void should_return_6_when_example_data() throws Exception {
         // given
         int[] A = {40, 40, 100, 80, 20};
         int[] B = {3, 3, 2, 2, 3};
