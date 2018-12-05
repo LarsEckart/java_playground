@@ -6,13 +6,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BottlesTest {
 
+    private final Bottles bottles = new ConciseBottles();
+
     @Test
     void test_the_first_verse() {
         var expected = "99 bottles of beer on the wall, " +
                 "99 bottles of beer.\n" +
                 "Take one down and pass it around, " +
                 "98 bottles of beer on the wall.\n";
-        assertThat(new Bottles().verse(99)).isEqualTo(expected);
+        assertThat(bottles.verse(99)).isEqualTo(expected);
     }
 
     @Test
@@ -21,7 +23,7 @@ class BottlesTest {
                 "3 bottles of beer.\n" +
                 "Take one down and pass it around, " +
                 "2 bottles of beer on the wall.\n";
-        assertThat(new Bottles().verse(3)).isEqualTo(expected);
+        assertThat(bottles.verse(3)).isEqualTo(expected);
     }
 
     @Test
@@ -30,7 +32,7 @@ class BottlesTest {
                 "2 bottles of beer.\n" +
                 "Take one down and pass it around, " +
                 "1 bottle of beer on the wall.\n";
-        assertThat(new Bottles().verse(2)).isEqualTo(expected);
+        assertThat(bottles.verse(2)).isEqualTo(expected);
     }
 
     @Test
@@ -39,7 +41,7 @@ class BottlesTest {
                 "1 bottle of beer.\n" +
                 "Take it down and pass it around, " +
                 "no more bottles of beer on the wall.\n";
-        assertThat(new Bottles().verse(1)).isEqualTo(expected);
+        assertThat(bottles.verse(1)).isEqualTo(expected);
     }
 
     @Test
@@ -48,7 +50,7 @@ class BottlesTest {
                 "no more bottles of beer.\n" +
                 "Go to the store and buy some more, " +
                 "99 bottles of beer on the wall.\n";
-        assertThat(new Bottles().verse(0)).isEqualTo(expected);
+        assertThat(bottles.verse(0)).isEqualTo(expected);
     }
 
     @Test
@@ -62,7 +64,7 @@ class BottlesTest {
                 "98 bottles of beer.\n" +
                 "Take one down and pass it around, " +
                 "97 bottles of beer on the wall.\n";
-        assertThat(new Bottles().verses(99, 98)).isEqualTo(expected);
+        assertThat(bottles.verses(99, 98)).isEqualTo(expected);
     }
 
     @Test
@@ -81,7 +83,7 @@ class BottlesTest {
                 "no more bottles of beer.\n" +
                 "Go to the store and buy some more, " +
                 "99 bottles of beer on the wall.\n";
-        assertThat(new Bottles().verses(2, 0)).isEqualTo(expected);
+        assertThat(bottles.verses(2, 0)).isEqualTo(expected);
     }
 
     @Test
@@ -386,6 +388,6 @@ class BottlesTest {
                 + "No more bottles of beer on the wall, no more bottles of beer.\n"
                 + "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
 
-        assertThat(new Bottles().song()).isEqualTo(expected);
+        assertThat(bottles.song()).isEqualTo(expected);
     }
 }
