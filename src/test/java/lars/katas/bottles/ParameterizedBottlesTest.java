@@ -1,15 +1,27 @@
 package lars.katas.bottles;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BottlesTest {
+class ParameterizedBottlesTest {
 
-    private final Bottles bottles = new Bottles();
+    private static Stream<Arguments> bottles() {
+        return Stream.of(
+                Arguments.of(new Bottles()),
+                Arguments.of(new ConciseBottles()),
+                Arguments.of(new SpeculativelyGeneralBottles()),
+                Arguments.of(new ConcretelyAbstractBottles()),
+                Arguments.of(new ShamelessGreenBottles()));
+    }
 
-    @Test
-    void test_the_first_verse() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_the_first_verse(Bottles bottles) {
         var expected = "99 bottles of beer on the wall, " +
                 "99 bottles of beer.\n" +
                 "Take one down and pass it around, " +
@@ -17,8 +29,9 @@ class BottlesTest {
         assertThat(bottles.verse(99)).isEqualTo(expected);
     }
 
-    @Test
-    void test_another_verse() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_another_verse(Bottles bottles) {
         var expected = "3 bottles of beer on the wall, " +
                 "3 bottles of beer.\n" +
                 "Take one down and pass it around, " +
@@ -26,8 +39,9 @@ class BottlesTest {
         assertThat(bottles.verse(3)).isEqualTo(expected);
     }
 
-    @Test
-    void test_verse_2() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_verse_2(Bottles bottles) {
         var expected = "2 bottles of beer on the wall, " +
                 "2 bottles of beer.\n" +
                 "Take one down and pass it around, " +
@@ -35,8 +49,9 @@ class BottlesTest {
         assertThat(bottles.verse(2)).isEqualTo(expected);
     }
 
-    @Test
-    void test_verse_1() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_verse_1(Bottles bottles) {
         var expected = "1 bottle of beer on the wall, " +
                 "1 bottle of beer.\n" +
                 "Take it down and pass it around, " +
@@ -44,8 +59,9 @@ class BottlesTest {
         assertThat(bottles.verse(1)).isEqualTo(expected);
     }
 
-    @Test
-    void test_verse_0() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_verse_0(Bottles bottles) {
         var expected = "No more bottles of beer on the wall, " +
                 "no more bottles of beer.\n" +
                 "Go to the store and buy some more, " +
@@ -53,8 +69,9 @@ class BottlesTest {
         assertThat(bottles.verse(0)).isEqualTo(expected);
     }
 
-    @Test
-    void test_a_couple_verses() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_a_couple_verses(Bottles bottles) {
         var expected = "99 bottles of beer on the wall, " +
                 "99 bottles of beer.\n" +
                 "Take one down and pass it around, " +
@@ -67,8 +84,9 @@ class BottlesTest {
         assertThat(bottles.verses(99, 98)).isEqualTo(expected);
     }
 
-    @Test
-    void test_a_few_verses() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_a_few_verses(Bottles bottles) {
         var expected = "2 bottles of beer on the wall, " +
                 "2 bottles of beer.\n" +
                 "Take one down and pass it around, " +
@@ -86,8 +104,9 @@ class BottlesTest {
         assertThat(bottles.verses(2, 0)).isEqualTo(expected);
     }
 
-    @Test
-    void test_the_whole_song() {
+    @ParameterizedTest
+    @MethodSource("bottles")
+    void test_the_whole_song(Bottles bottles) {
         var expected = "99 bottles of beer on the wall, 99 bottles of beer.\n"
                 + "Take one down and pass it around, 98 bottles of beer on the wall.\n"
                 + "\n"
