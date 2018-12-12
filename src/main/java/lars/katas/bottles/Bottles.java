@@ -1,5 +1,8 @@
 package lars.katas.bottles;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Bottles {
 
     public String verse(int n) {
@@ -27,15 +30,9 @@ public class Bottles {
     }
 
     public String verses(int start, int end) {
-
-        String result = "";
-        for (int i = start; i >= end; i--) {
-            result += verse(i);
-            if (i > end) {
-                result += "\n";
-            }
-        }
-        return result;
+        return Stream.iterate(start, i -> i >= end, i -> i - 1).
+                map(this::verse)
+                .collect(Collectors.joining("\n"));
     }
 
     public String song() {
