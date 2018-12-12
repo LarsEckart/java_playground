@@ -6,7 +6,7 @@ import java.util.Map;
 
 class Bill {
 
-    String statement(Invoice invoice, Map<String, Play> plays) {
+    static String statement(Invoice invoice, Map<String, Play> plays) {
         var totalAmount = 0;
         var volumeCredits = 0;
         var result = String.format("Statement for %s\n", invoice.getCustomer());

@@ -6,7 +6,7 @@ class Play {
     private String type;
 
     Play(String name, String type) {
-        type = type;
+        this.type = type;
         this.name = name;
     }
 
