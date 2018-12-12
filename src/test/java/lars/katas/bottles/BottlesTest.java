@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BottlesTest {
 
-    private final Bottles bottles = new ShamelessGreenBottles();
+    private final Bottles bottles = new OpenBottles();
 
     @Test
     void test_the_first_verse() {
