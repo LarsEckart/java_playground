@@ -1,0 +1,108 @@
+[hamlet, 5] => Statement for BigCo
+  Hamlet: $400.00 (5 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 10] => Statement for BigCo
+  Hamlet: $400.00 (10 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 15] => Statement for BigCo
+  Hamlet: $400.00 (15 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 20] => Statement for BigCo
+  Hamlet: $400.00 (20 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 25] => Statement for BigCo
+  Hamlet: $400.00 (25 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 30] => Statement for BigCo
+  Hamlet: $400.00 (30 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[hamlet, 35] => Statement for BigCo
+  Hamlet: $450.00 (35 seats)
+Amount owed is $450.00
+You earned 5 credits 
+[hamlet, 40] => Statement for BigCo
+  Hamlet: $500.00 (40 seats)
+Amount owed is $500.00
+You earned 10 credits 
+[hamlet, 45] => Statement for BigCo
+  Hamlet: $550.00 (45 seats)
+Amount owed is $550.00
+You earned 15 credits 
+[as-like, 5] => Statement for BigCo
+  As You Like It: $315.00 (5 seats)
+Amount owed is $315.00
+You earned 1 credits 
+[as-like, 10] => Statement for BigCo
+  As You Like It: $330.00 (10 seats)
+Amount owed is $330.00
+You earned 2 credits 
+[as-like, 15] => Statement for BigCo
+  As You Like It: $345.00 (15 seats)
+Amount owed is $345.00
+You earned 3 credits 
+[as-like, 20] => Statement for BigCo
+  As You Like It: $360.00 (20 seats)
+Amount owed is $360.00
+You earned 4 credits 
+[as-like, 25] => Statement for BigCo
+  As You Like It: $500.00 (25 seats)
+Amount owed is $500.00
+You earned 5 credits 
+[as-like, 30] => Statement for BigCo
+  As You Like It: $540.00 (30 seats)
+Amount owed is $540.00
+You earned 6 credits 
+[as-like, 35] => Statement for BigCo
+  As You Like It: $580.00 (35 seats)
+Amount owed is $580.00
+You earned 12 credits 
+[as-like, 40] => Statement for BigCo
+  As You Like It: $620.00 (40 seats)
+Amount owed is $620.00
+You earned 18 credits 
+[as-like, 45] => Statement for BigCo
+  As You Like It: $660.00 (45 seats)
+Amount owed is $660.00
+You earned 24 credits 
+[othello, 5] => Statement for BigCo
+  Othello: $400.00 (5 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 10] => Statement for BigCo
+  Othello: $400.00 (10 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 15] => Statement for BigCo
+  Othello: $400.00 (15 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 20] => Statement for BigCo
+  Othello: $400.00 (20 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 25] => Statement for BigCo
+  Othello: $400.00 (25 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 30] => Statement for BigCo
+  Othello: $400.00 (30 seats)
+Amount owed is $400.00
+You earned 0 credits 
+[othello, 35] => Statement for BigCo
+  Othello: $450.00 (35 seats)
+Amount owed is $450.00
+You earned 5 credits 
+[othello, 40] => Statement for BigCo
+  Othello: $500.00 (40 seats)
+Amount owed is $500.00
+You earned 10 credits 
+[othello, 45] => Statement for BigCo
+  Othello: $550.00 (45 seats)
+Amount owed is $550.00
+You earned 15 credits 
