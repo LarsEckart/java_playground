@@ -3,6 +3,7 @@ package lars.refactoring;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -18,39 +19,44 @@ public class SplitPhase {
         }
     }
 
-    static long run(String[] args) throws java.io.IOException {
-        return countOrders(parseCommandLine(args));
+    static long run(String[] args) throws IOException {
+        CommandLine commandLine = new CommandLine(args);
+        return countOrders(commandLine);
     }
 
-    private static CommandLine parseCommandLine(String[] args) {
-        if (args.length == 0) {
-            throw new RuntimeException("must supply a filename");
-        }
-        CommandLine result = new CommandLine();
-        result.onlyCountReady = Arrays.asList(args).contains("-r");
-        result.filename = args[args.length - 1];
-        return result;
-    }
-
-    private static long countOrders(CommandLine commandLine) throws java.io.IOException {
-        File input = Paths.get(commandLine.filename).toFile();
+    private static long countOrders(CommandLine commandLine) throws IOException {
+        File input = Paths.get(commandLine.filename()).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
-        if (commandLine.onlyCountReady) {
+        if (commandLine.onlyCountReady()) {
             return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
         } else {
             return orders.length;
         }
     }
 
-    private static class CommandLine {
-
-        boolean onlyCountReady;
-        String filename;
-    }
-
     private static class Order {
 
         public String status;
+    }
+
+    static class CommandLine {
+
+        String[] args;
+
+        CommandLine(String[] args) {
+            if (args.length == 0) {
+                throw new RuntimeException("must supply a filename");
+            }
+            this.args = args;
+        }
+
+        boolean onlyCountReady() {
+            return Arrays.asList(args).contains("-r");
+        }
+
+        String filename() {
+            return args[args.length - 1];
+        }
     }
 }
