@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class SplitPhase {
@@ -18,17 +19,21 @@ public class SplitPhase {
     }
 
     static long run(String[] args) throws java.io.IOException {
+        return countOrders(parseCommandLine(args));
+    }
+
+    private static CommandLine parseCommandLine(String[] args) {
         if (args.length == 0) {
             throw new RuntimeException("must supply a filename");
         }
-        CommandLine commandLine = new CommandLine();
-        commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-        String filename = args[args.length - 1];
-        return countOrders(commandLine, args, filename);
+        CommandLine result = new CommandLine();
+        result.onlyCountReady = Arrays.asList(args).contains("-r");
+        result.filename = args[args.length - 1];
+        return result;
     }
 
-    private static long countOrders(CommandLine commandLine, String[] args, String filename) throws java.io.IOException {
-        File input = Paths.get(filename).toFile();
+    private static long countOrders(CommandLine commandLine) throws java.io.IOException {
+        File input = Paths.get(commandLine.filename).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
         if (commandLine.onlyCountReady) {
@@ -41,6 +46,7 @@ public class SplitPhase {
     private static class CommandLine {
 
         boolean onlyCountReady;
+        String filename;
     }
 
     private static class Order {
