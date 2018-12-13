@@ -21,15 +21,26 @@ public class SplitPhase {
         if (args.length == 0) {
             throw new RuntimeException("must supply a filename");
         }
+        CommandLine commandLine = new CommandLine();
+        commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
         String filename = args[args.length - 1];
+        return countOrders(commandLine, args, filename);
+    }
+
+    private static long countOrders(CommandLine commandLine, String[] args, String filename) throws java.io.IOException {
         File input = Paths.get(filename).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
-        if (Stream.of(args).anyMatch(arg -> "-r".equals(arg))) {
+        if (commandLine.onlyCountReady) {
             return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
         } else {
             return orders.length;
         }
+    }
+
+    private static class CommandLine {
+
+        boolean onlyCountReady;
     }
 
     private static class Order {
