@@ -17,7 +17,7 @@ public class SplitPhase {
         }
     }
 
-    private static long run(String[] args) throws java.io.IOException {
+    static long run(String[] args) throws java.io.IOException {
         if (args.length == 0) {
             throw new RuntimeException("must supply a filename");
         }
