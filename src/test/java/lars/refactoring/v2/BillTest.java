@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BillTest {
 
+    private Bill bill = new Bill();
+
     @Test
     void book_example() {
         List<Performance> performances = List.of(
@@ -23,7 +25,7 @@ public class BillTest {
                 "othello", new Play("Othello", "tragedy"));
 
         // when
-        String statement = Bill.statement(new Invoice("BigCo", performances), plays);
+        String statement = bill.statement(new Invoice("BigCo", performances), plays);
 
         assertThat(statement).isEqualTo("Statement for BigCo\n"
                 + "  Hamlet: $650.00 (55 seats)\n"
@@ -43,7 +45,7 @@ public class BillTest {
     private String createStatement(String playId, int audience) {
         List<Performance> performances = List.of(
                 new Performance(playId, audience));
-        return Bill.statement(new Invoice("BigCo", performances), plays());
+        return bill.statement(new Invoice("BigCo", performances), plays());
     }
 
     private Map<String, Play> plays() {
