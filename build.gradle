@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.squareup.moshi:moshi:1.8.0'
     compile 'com.alibaba:fastjson:1.2.54'
