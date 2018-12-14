@@ -10,6 +10,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -148,12 +150,19 @@ public class HttpClientExamples {
                 .GET()
                 .uri(URI.create("https://www.google.com"))
                 .build();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         // when
         CompletableFuture<HttpResponse<String>> resFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         // then
-        resFuture.thenAccept(response -> System.out.println(response.version()));
-        resFuture.join();
+        resFuture.thenAcceptAsync(response -> {
+            String body = response.body();
+            System.out.println("body : " + body.length() + "[" + Thread.currentThread().getName() + "]");
+        }, executorService)
+                .thenRun(() -> System.out.println("Done"))
+                .join(); // just to wait that main thread doesnt die and kill daemon threads with it
+
+        executorService.shutdown();
     }
 }
