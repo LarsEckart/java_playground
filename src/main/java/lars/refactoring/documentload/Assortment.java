@@ -1,16 +1,13 @@
 package lars.refactoring.documentload;
 
+import java.util.Collections;
+import java.util.List;
+
 class Assortment {
 
-    private String json;
+    private List<Album> albums;
 
-    public static Assortment fromJson(String json) {
-        Assortment result = new Assortment();
-        result.json = json;
-        return result;
-    }
-
-    public String toJson() {
-        return json;
+    public List<Album> getAlbums() {
+        return Collections.unmodifiableList(albums);
     }
 }

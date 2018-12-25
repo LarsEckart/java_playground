@@ -12,11 +12,9 @@ class Album {
     public String getArtist() {
         return artist;
     }
-
     public String getTitle() {
         return title;
     }
-
     public List<Track> getTracks() {
         return Collections.unmodifiableList(tracks);
     }
