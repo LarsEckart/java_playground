@@ -7,7 +7,7 @@ class Service {
     public String tuesdayMusic(String query) {
         try {
             Assortment data = Assortment.fromJson(dataSource.getAlbumList(query));
-            return Json.mapper().writeValueAsString(data);
+            return data.toJson();
         } catch (Exception e) {
             System.out.println(e);
             throw new RuntimeException(e);
