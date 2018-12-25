@@ -8,7 +8,7 @@ class Service {
 
     public String tuesdayMusic(String query) {
         try {
-            Assortment data = loadAssortment(query);
+            Assortment data = loadAssortment(dataSource.getAlbumList(query));
             return Json.mapper().writeValueAsString(data);
         } catch (Exception e) {
             System.out.println(e);
@@ -16,9 +16,9 @@ class Service {
         }
     }
 
-    private Assortment loadAssortment(String query)  {
+    private Assortment loadAssortment(String json)  {
         try {
-            return Json.mapper().readValue(dataSource.getAlbumList(query), Assortment.class);
+            return Json.mapper().readValue(json, Assortment.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
