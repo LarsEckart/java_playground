@@ -16,7 +16,7 @@ class Service {
         }
     }
 
-    private Assortment loadAssortment(String json)  {
+    private static Assortment loadAssortment(String json)  {
         try {
             return Json.mapper().readValue(json, Assortment.class);
         } catch (IOException e) {
