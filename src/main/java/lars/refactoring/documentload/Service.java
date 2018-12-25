@@ -1,5 +1,7 @@
 package lars.refactoring.documentload;
 
+import java.io.IOException;
+
 class Service {
 
     private DataSource dataSource;
@@ -14,7 +16,11 @@ class Service {
         }
     }
 
-    private Assortment loadAssortment(String query) throws java.io.IOException {
-        return Json.mapper().readValue(dataSource.getAlbumList(query), Assortment.class);
+    private Assortment loadAssortment(String query)  {
+        try {
+            return Json.mapper().readValue(dataSource.getAlbumList(query), Assortment.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
