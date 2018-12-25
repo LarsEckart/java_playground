@@ -14,8 +14,6 @@ public class JavaExamples {
         sleep(10000);
     }
 
-    @Deprecated(since = "4.2", forRemoval = true)
-
     private static boolean sleep(int ms) {
         try {
             Thread.sleep(ms);

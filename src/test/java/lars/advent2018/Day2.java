@@ -60,6 +60,6 @@ public class Day2 {
         Map<String, Long> map = input.chars()
                 .mapToObj(i -> String.valueOf((char) (i)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        return map.values().contains((long)target) ? 1 : 0;
+        return map.values().contains((long) target) ? 1 : 0;
     }
 }
