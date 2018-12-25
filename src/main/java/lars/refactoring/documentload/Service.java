@@ -4,6 +4,10 @@ class Service {
 
     private DataSource dataSource;
 
+    Service(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public String tuesdayMusic(String query) {
         try {
             Assortment data = Assortment.fromJson(dataSource.getAlbumList(query));
