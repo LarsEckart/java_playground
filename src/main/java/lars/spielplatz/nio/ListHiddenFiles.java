@@ -15,10 +15,12 @@ public class ListHiddenFiles {
         }
 
         Path dir = Paths.get(args[0]);
-        DirectoryStream<Path> stream = Files.newDirectoryStream(dir);
-        for (Path file : stream)
-            if (Files.isHidden(file)) {
-                System.out.println(file);
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+            for (Path file : stream) {
+                if (Files.isHidden(file)) {
+                    System.out.println(file);
+                }
             }
+        }
     }
 }
