@@ -22,5 +22,6 @@ target
 logs/
 lib
 libs
+bin
 /src/test/java/lars/exercism/
 /src/main/java/lars/exercism/
