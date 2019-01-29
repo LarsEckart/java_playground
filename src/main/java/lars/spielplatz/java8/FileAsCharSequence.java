@@ -1,11 +1,10 @@
 package lars.spielplatz.java8;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
 
 public class FileAsCharSequence implements CharSequence {
 
@@ -13,12 +12,12 @@ public class FileAsCharSequence implements CharSequence {
     private final StringBuilder buffer = new StringBuilder();
     private final InputStream input;
 
-    public FileAsCharSequence(File file) throws FileNotFoundException {
+    public FileAsCharSequence(File file) throws IOException {
         if (file.length() > (long) Integer.MAX_VALUE) {
             throw new IllegalArgumentException("File is too long to handle as character sequence");
         }
         this.length = (int) file.length();
-        this.input = new FileInputStream(file);
+        this.input = Files.newInputStream((file.toPath()));
     }
 
     @Override

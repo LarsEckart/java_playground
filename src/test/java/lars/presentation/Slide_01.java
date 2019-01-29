@@ -1,20 +1,20 @@
 package lars.presentation;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -70,7 +70,7 @@ public class Slide_01 {
 
     @Test
     void in_try_declarations() {
-        try (var inputStream = new FileInputStream(new File("passwords.txt"));
+        try (var inputStream = Files.newInputStream(Paths.get("passwords.txt"));
              var inputStreamReader = new InputStreamReader(inputStream, UTF_8);
              var bufferedReader = new BufferedReader(inputStreamReader)) {
 
