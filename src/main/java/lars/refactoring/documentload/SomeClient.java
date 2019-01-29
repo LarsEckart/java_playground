@@ -13,6 +13,6 @@ class SomeClient {
     }
 
     private List<String> somethingCleverWith(List<String> titles) {
-        throw new UnsupportedOperationException("implement me!");
+        return titles.stream().map(String::toUpperCase).collect(Collectors.toList());
     }
 }
