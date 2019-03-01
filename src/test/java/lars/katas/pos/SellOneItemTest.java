@@ -3,7 +3,6 @@ package lars.katas.pos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,9 +15,9 @@ public class SellOneItemTest {
     @BeforeEach
     void setUp() {
         display = new Display();
-        sale = new Sale(display, Map.of(
+        sale = new Sale(display, new Catalogue(Map.of(
                 "12345", "7.95€",
-                "23456", "12.50€"));
+                "23456", "12.50€")));
     }
 
     @Test
@@ -44,7 +43,7 @@ public class SellOneItemTest {
 
     @Test
     void empty_barcode() {
-        Sale sale = new Sale(display, null);
+        Sale sale = new Sale(display, new Catalogue(null));
 
         sale.onBarcode("");
 
@@ -62,30 +61,56 @@ public class SellOneItemTest {
         public void setText(String text) {
             this.text = text;
         }
+
+        private void displayproductNotFound(String barcode) {
+            setText("Product not found for " + barcode);
+        }
+
+        private void displayPrice(String priceAsText) {
+            setText(priceAsText);
+        }
+
+        private void displayEmptyBarcodeMessage() {
+            setText("Scanning error: empty barcode");
+        }
     }
 
     private static class Sale {
 
-        private Display display;
-        private Map<String, String> pricesByBarcode;
+        private final Display display;
+        private final Catalogue catalogue;
 
-        private Sale(Display display, Map<String, String> pricesByBarcode) {
+        private Sale(Display display, Catalogue catalogue) {
             this.display = display;
-            this.pricesByBarcode = pricesByBarcode;
+            this.catalogue = catalogue;
         }
 
         public void onBarcode(String barcode) {
             // up the call stack?
             if ("".equals(barcode)) {
-                display.setText("Scanning error: empty barcode");
+                display.displayEmptyBarcodeMessage();
                 return;
             }
 
-            if (pricesByBarcode.containsKey(barcode)) {
-                display.setText(pricesByBarcode.get(barcode));
+            String priceAsText = catalogue.findPrice(barcode);
+            if (priceAsText == null) {
+                display.displayproductNotFound(barcode);
             } else {
-                display.setText("Product not found for " + barcode);
+                display.displayPrice(priceAsText);
             }
+        }
+    }
+
+    private static class Catalogue {
+
+        private final Map<String, String> pricesByBarcode;
+
+        public Catalogue(Map<String, String> pricesByBarcode) {
+            this.pricesByBarcode = pricesByBarcode;
+        }
+
+        private String findPrice(String barcode) {
+            return pricesByBarcode.get(barcode);
         }
     }
 }
