@@ -7,21 +7,19 @@ public class ConciseBottles extends Bottles {
 
     @Override
     public String verse(int n) {
-        StringBuilder strb = new StringBuilder();
 
-        strb.append(n == 0 ? "No more" : n);
-        strb.append(n != 1 ? " bottles " : " bottle ");
-        strb.append("of beer on the wall, ");
-        strb.append(n == 0 ? "no more" : n);
-        strb.append(n != 1 ? " bottles " : " bottle ");
-        strb.append("of beer.");
-        strb.append("\n");
-        strb.append(n > 0 ? "Take " + (n > 1 ? "one" : "it") + " down and pass it around, "
-                          : "Go to the store and buy some more, ");
-        strb.append(n - 1 < 0 ? "99" : (n - 1 == 0 ? "no more" : String.valueOf(n - 1)));
-        strb.append(n - 1 != 1 ? " bottles " : " bottle ");
-        strb.append("of beer on the wall.\n");
-        return strb.toString();
+        return (n == 0 ? "No more" : n)
+                + (n != 1 ? " bottles " : " bottle ")
+                + "of beer on the wall, "
+                + (n == 0 ? "no more" : n)
+                + (n != 1 ? " bottles " : " bottle ")
+                + "of beer."
+                + "\n"
+                + (n > 0 ? "Take " + (n > 1 ? "one" : "it") + " down and pass it around, "
+                         : "Go to the store and buy some more, ")
+                + (n - 1 < 0 ? "99" : (n - 1 == 0 ? "no more" : String.valueOf(n - 1)))
+                + (n - 1 != 1 ? " bottles " : " bottle ")
+                + "of beer on the wall.\n";
     }
 
     @Override

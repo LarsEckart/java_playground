@@ -27,6 +27,11 @@ public class SpeculativelyGeneralBottles extends Bottles {
             (verse.number - 1) + " bottles of beer on the wall.\n";
 
     @Override
+    public String verse(int number) {
+        return verseFor(number).text();
+    }
+
+    @Override
     public String verses(int start, int end) {
         return Stream.iterate(start, i -> i >= end, i -> i - 1)
                 .map(this::verseFor)
