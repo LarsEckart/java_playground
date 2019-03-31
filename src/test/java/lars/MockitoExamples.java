@@ -10,10 +10,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class MockitoExamples {
+class MockitoExamples {
 
     @Test
-    void any() {
+    void default_way_of_using_mockito() {
         LinkedList mockedList = mock(LinkedList.class);
         when(mockedList.get(0)).thenReturn("first");
 

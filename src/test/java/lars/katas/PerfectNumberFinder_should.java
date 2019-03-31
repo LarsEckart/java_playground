@@ -1,5 +1,7 @@
 package lars.katas;
 
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,7 +12,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PerfectNumberFinder_should {
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+class PerfectNumberFinder_should {
 
     private static Integer[] PERFECT_NUMBERS = {6, 28, 496, 8128, 33550336};
 
