@@ -3,15 +3,15 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
-        classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.5.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.21.0'
+        classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.6.0'
     }
 }
 
 plugins {
     id 'org.kordamp.gradle.jdeprscan' version '0.4.0'
-    id 'org.kordamp.gradle.jdeps' version '0.5.0'
-    id 'net.ltgt.errorprone' version '0.6.1'
+    id 'org.kordamp.gradle.jdeps' version '0.6.0'
+    id 'net.ltgt.errorprone' version '0.7.1'
 }
 
 apply plugin: 'com.github.ben-manes.versions'
@@ -29,13 +29,13 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.3.2")
+    errorprone("com.google.errorprone:error_prone_core:2.3.3")
 
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.squareup.moshi:moshi:1.8.0'
-    compile 'com.alibaba:fastjson:1.2.54'
-    compile 'io.reactivex.rxjava2:rxjava:2.2.4'
+    compile 'com.alibaba:fastjson:1.2.56'
+    compile 'io.reactivex.rxjava2:rxjava:2.2.8'
 
     def junit4Version = '4.12'
     def junitVintageVersion = '5.4.1'
@@ -54,12 +54,12 @@ dependencies {
         because 'allows tests to run from IDEs that bundle older version of launcher'
     }
 
-    testImplementation 'org.assertj:assertj-core:3.11.1'
-    testImplementation 'org.mockito:mockito-core:2.23.16'
+    testImplementation 'org.assertj:assertj-core:3.12.2'
+    testImplementation 'org.mockito:mockito-core:2.25.7'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.12.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
     testImplementation 'com.approvaltests:approvaltests:2.0.2'
-    testImplementation 'org.awaitility:awaitility-groovy:3.1.5'
+    testImplementation 'org.awaitility:awaitility-groovy:3.1.6'
 }
 
 task copyDependenciesToLibs(type: Copy) {
