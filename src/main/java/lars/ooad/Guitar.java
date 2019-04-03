@@ -2,13 +2,18 @@ package lars.ooad;
 
 class Guitar {
 
-    private String serialNumber, builder, model, type, backWood, topWood;
+    private String serialNumber;
     private double price;
+    private String model;
+    private Builder builder;
+    private Type type;
+    private Wood backWood;
+    private Wood topWood;
 
     public Guitar(
             String serialNumber, double price,
-            String builder, String model, String type,
-            String backWood, String topWood) {
+            Builder builder, String model, Type type,
+            Wood backWood, Wood topWood) {
         this.serialNumber = serialNumber;
         this.price = price;
         this.builder = builder;
@@ -26,11 +31,11 @@ class Guitar {
         return price;
     }
 
-    public void setPrice(double newPrice) {
+    public void setPrice(float newPrice) {
         this.price = newPrice;
     }
 
-    public String getBuilder() {
+    public Builder getBuilder() {
         return builder;
     }
 
@@ -38,15 +43,15 @@ class Guitar {
         return model;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public String getBackWood() {
+    public Wood getBackWood() {
         return backWood;
     }
 
-    public String getTopWood() {
+    public Wood getTopWood() {
         return topWood;
     }
 }
