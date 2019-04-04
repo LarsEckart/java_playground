@@ -20,34 +20,10 @@ class GuitarSpec {
 
     @Override
     public String toString() {
-        return getBuilder() + " " + getModel() + " " +
-                getType() + " guitar:\n     " +
-                getBackWood() + " back and sides,\n     " +
-                getTopWood() + " top.";
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public Builder getBuilder() {
-        return builder;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-    public Wood getTopWood() {
-        return topWood;
-    }
-
-    public int getNumStrings() {
-        return numStrings;
+        return builder + " " + model + " " +
+                type + " guitar:\n     " +
+                backWood + " back and sides,\n     " +
+                topWood + " top.";
     }
 
     public boolean matches(GuitarSpec otherSpec) {
