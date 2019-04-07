@@ -1,51 +1,30 @@
 package lars.ooad;
 
-class GuitarSpec {
+class GuitarSpec extends InstrumentSpec {
 
-    private String model;
-    private Builder builder;
-    private Type type;
     private int numStrings;
-    private Wood backWood;
-    private Wood topWood;
 
     public GuitarSpec(Builder builder, String model, Type type, int numStrings, Wood backWood, Wood topWood) {
-        this.model = model;
-        this.builder = builder;
-        this.type = type;
+        super(builder, model, type, backWood, topWood);
         this.numStrings = numStrings;
-        this.backWood = backWood;
-        this.topWood = topWood;
     }
 
-    @Override
-    public String toString() {
-        return builder + " " + model + " " +
-                type + " guitar:\n     " +
-                backWood + " back and sides,\n     " +
-                topWood + " top.";
+    public int getNumStrings() {
+        return numStrings;
     }
 
-    public boolean matches(GuitarSpec otherSpec) {
-        if (builder != otherSpec.builder) {
+    public boolean matches(InstrumentSpec otherSpec) {
+        if (!super.matches(otherSpec)) {
             return false;
         }
-        if ((model != null) && (!model.equals("")) &&
-                (!model.toLowerCase().equals(otherSpec.model.toLowerCase()))) {
+        if (!(otherSpec instanceof GuitarSpec)) {
             return false;
         }
-        if (type != otherSpec.type) {
-            return false;
-        }
-        if (numStrings != otherSpec.numStrings) {
-            return false;
-        }
-        if (backWood != otherSpec.backWood) {
-            return false;
-        }
-        if (topWood != otherSpec.topWood) {
+        GuitarSpec spec = (GuitarSpec) otherSpec;
+        if (numStrings != spec.numStrings) {
             return false;
         }
         return true;
     }
 }
+
