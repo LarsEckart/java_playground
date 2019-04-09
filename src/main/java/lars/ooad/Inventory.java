@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Inventory {
 
-    private List inventory;
+    private List<Instrument> inventory;
 
     public Inventory() {
-        inventory = new LinkedList();
+        inventory = new LinkedList<>();
     }
 
     public void addInstrument(String serialNumber, double price, InstrumentSpec spec) {
@@ -23,8 +23,7 @@ public class Inventory {
     }
 
     public Instrument get(String serialNumber) {
-        for (Iterator i = inventory.iterator(); i.hasNext(); ) {
-            Instrument instrument = (Instrument)i.next();
+        for (Instrument instrument : inventory) {
             if (instrument.getSerialNumber().equals(serialNumber)) {
                 return instrument;
             }
@@ -32,12 +31,13 @@ public class Inventory {
         return null;
     }
 
-    public List search(GuitarSpec searchSpec) {
-        List matchingGuitars = new LinkedList();
-        for (Iterator i = inventory.iterator(); i.hasNext(); ) {
-            Guitar guitar = (Guitar)i.next();
-            if (guitar.getSpec().matches(searchSpec))
+    public List<Guitar> search(GuitarSpec searchSpec) {
+        List<Guitar> matchingGuitars = new LinkedList<>();
+        for (Instrument instrument : inventory) {
+            Guitar guitar = (Guitar) instrument;
+            if (guitar.getSpec().matches(searchSpec)) {
                 matchingGuitars.add(guitar);
+            }
         }
         return matchingGuitars;
     }
