@@ -1,6 +1,5 @@
 package lars.ooad;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,12 +12,7 @@ public class Inventory {
     }
 
     public void addInstrument(String serialNumber, double price, InstrumentSpec spec) {
-        Instrument instrument = null;
-        if (spec instanceof GuitarSpec) {
-            instrument = new Guitar(serialNumber, price, (GuitarSpec)spec);
-        } else if (spec instanceof MandolinSpec) {
-            instrument = new Mandolin(serialNumber, price, (MandolinSpec)spec);
-        }
+        var instrument = new Instrument(serialNumber, price, spec);
         inventory.add(instrument);
     }
 
@@ -31,25 +25,14 @@ public class Inventory {
         return null;
     }
 
-    public List<Guitar> search(GuitarSpec searchSpec) {
-        List<Guitar> matchingGuitars = new LinkedList<>();
+    public List<Instrument> search(InstrumentSpec searchSpec) {
+        List<Instrument> matchingInstruments = new LinkedList<>();
         for (Instrument instrument : inventory) {
-            Guitar guitar = (Guitar) instrument;
-            if (guitar.getSpec().matches(searchSpec)) {
-                matchingGuitars.add(guitar);
+            if (instrument.getSpec().matches(searchSpec)) {
+                matchingInstruments.add(instrument);
             }
         }
-        return matchingGuitars;
-    }
-
-    public List search(MandolinSpec searchSpec) {
-        List matchingMandolins = new LinkedList();
-        for (Iterator i = inventory.iterator(); i.hasNext(); ) {
-            Mandolin mandolin = (Mandolin)i.next();
-            if (mandolin.getSpec().matches(searchSpec))
-                matchingMandolins.add(mandolin);
-        }
-        return matchingMandolins;
+        return matchingInstruments;
     }
 }
 

@@ -1,6 +1,6 @@
 package lars.ooad;
 
-abstract class Instrument {
+final class Instrument {
 
     private String serialNumber;
     private double price;

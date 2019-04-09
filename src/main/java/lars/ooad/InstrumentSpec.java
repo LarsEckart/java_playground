@@ -1,59 +1,38 @@
 package lars.ooad;
 
-abstract class InstrumentSpec {
+import java.util.HashMap;
+import java.util.Map;
 
-    private Builder builder;
-    private String model;
-    private Type type;
-    private Wood backWood;
-    private Wood topWood;
+class InstrumentSpec {
 
-    public InstrumentSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+    private Map<String, Object> properties;
+
+    public InstrumentSpec(Map<String, Object> properties) {
+        if (properties == null) {
+            this.properties = new HashMap<>();
+        } else {
+            this.properties = new HashMap<>(properties);
+        }
     }
 
-    public Builder getBuilder() {
-        return builder;
+    public Object getProperty(String propertyName) {
+        return properties.get(propertyName);
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-    public Wood getTopWood() {
-        return topWood;
+    public Map getProperties() {
+        return properties;
     }
 
     public boolean matches(InstrumentSpec otherSpec) {
-        if (builder != otherSpec.builder) {
-            return false;
-        }
-        if ((model != null) && (!model.equals("")) &&
-                (!model.equals(otherSpec.model))) {
-            return false;
-        }
-        if (type != otherSpec.type) {
-            return false;
-        }
-        if (backWood != otherSpec.backWood) {
-            return false;
-        }
-        if (topWood != otherSpec.topWood) {
-            return false;
+        for (Object o : otherSpec.getProperties().keySet()) {
+            String propertyName = (String) o;
+            if (!properties.get(propertyName).equals(
+                    otherSpec.getProperty(propertyName))) {
+                return false;
+            }
         }
         return true;
     }
 }
+
 
