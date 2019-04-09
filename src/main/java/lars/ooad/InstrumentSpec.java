@@ -19,13 +19,12 @@ class InstrumentSpec {
         return properties.get(propertyName);
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return properties;
     }
 
     public boolean matches(InstrumentSpec otherSpec) {
-        for (Object o : otherSpec.getProperties().keySet()) {
-            String propertyName = (String) o;
+        for (String propertyName : otherSpec.getProperties().keySet()) {
             if (!properties.get(propertyName).equals(
                     otherSpec.getProperty(propertyName))) {
                 return false;
