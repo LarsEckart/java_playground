@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static org.awaitility.Awaitility.await;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,7 +41,7 @@ class AstroClientTest {
     void getAsync() {
         AstroResponse response = assertTimeoutPreemptively(
             Duration.ofSeconds(2),
-            () -> client.getAsync());
+            () -> client.getAsync().get());
 
         int num = response.getNumber();
         List assignments = response.getPeople();

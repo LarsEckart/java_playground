@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class AstroClient {
@@ -24,11 +25,10 @@ public class AstroClient {
         return getResponse(response.body());
     }
 
-    public AstroResponse getAsync() throws ExecutionException, InterruptedException {
-        String json = client.sendAsync(request(), HttpResponse.BodyHandlers.ofString())
+    public CompletableFuture<AstroResponse> getAsync() {
+        return client.sendAsync(request(), HttpResponse.BodyHandlers.ofString())
             .thenApply(HttpResponse::body)
-            .get();
-        return getResponse(json);
+            .thenApply(this::getResponse);
     }
 
     private HttpRequest request() {
