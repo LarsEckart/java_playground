@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 class PrintStatementFeature {
 
+    /*
+    https://github.com/sandromancuso/bank-kata-outsidein-screencast
+
     @Test
     void should_print_statement_containing_all_transactions() {
         account.deposit(1000);
@@ -17,5 +20,5 @@ class PrintStatementFeature {
         verify(console).printLine("02/04/2014 | -100.00 | 900.00");
         verify(console).printLine("01/04/2014 | 1000.00 | 1000.00");
     }
-
+*/
 }

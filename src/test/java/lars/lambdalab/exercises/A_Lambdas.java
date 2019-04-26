@@ -1,6 +1,5 @@
 package lars.lambdalab.exercises;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -28,9 +27,9 @@ public class A_Lambdas {
      * Write a lambda expression that is a predicate
      * that tests whether a string is longer than four characters.
      */
-    @Test @Ignore
+    @Test
     public void a_predicate1() {
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = s -> s.length() > 4;
 
         assertTrue(pred.test("abcde"));
         assertFalse(pred.test("abcd"));
@@ -40,9 +39,9 @@ public class A_Lambdas {
      * Write a lambda expression that is a predicate
      * that tests whether a string is empty.
      */
-    @Test @Ignore
+    @Test
     public void a_predicate2() {
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = s -> s.isEmpty();
 
         assertTrue(pred.test(""));
         assertFalse(pred.test("a"));
@@ -54,11 +53,11 @@ public class A_Lambdas {
      * reference has a class name on the left-hand side of the ::
      * operator:
      *
-     *     classname::methodname
+     * classname::methodname
      */
-    @Test @Ignore
+    @Test
     public void a_predicate3() {
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = String::isEmpty;
 
         assertTrue(pred.test(""));
         assertFalse(pred.test("a"));
@@ -75,12 +74,12 @@ public class A_Lambdas {
      * Create a predicate that returns true if both predicates
      * startsWithJ and lengthIs7 hold.
      */
-    @Test @Ignore
+    @Test
     public void a_predicate4() {
         Predicate<String> startsWithJ = s -> s.startsWith("J");
         Predicate<String> lengthIs7 = s -> s.length() == 7;
 
-        Predicate<String> startsWithJAndLengthIs7 = null; // TODO
+        Predicate<String> startsWithJAndLengthIs7 = startsWithJ.and(lengthIs7);
 
         assertFalse(startsWithJAndLengthIs7.test("Hello"));
         assertFalse(startsWithJAndLengthIs7.test("HelloJ1"));
@@ -96,13 +95,13 @@ public class A_Lambdas {
      * Create a predicate that is true if the length of the provided string
      * is 9 or the provided string equals ERROR.
      */
-    @Test @Ignore
+    @Test
     public void a_predicate5() {
         Predicate<String> lengthIs9 = s -> s.length() == 9;
         Predicate<String> equalsError = "ERROR"::equals;
         // Note: this could also be: Predicate.isEqual("ERROR")
 
-        Predicate<String> lengthIs9orError = null; // TODO
+        Predicate<String> lengthIs9orError = lengthIs9.or(equalsError);
 
         assertFalse(lengthIs9orError.test("Hello"));
         assertTrue(lengthIs9orError.test("Hello J1!"));
@@ -118,9 +117,9 @@ public class A_Lambdas {
      * Write a lambda expression that wraps the given
      * string in parentheses.
      */
-    @Test @Ignore
+    @Test
     public void b_function1() {
-        Function<String, String> func = null; // TODO
+        Function<String, String> func = s -> "(" + s + ")";
 
         assertEquals("(abc)", func.apply("abc"));
     }
@@ -129,9 +128,9 @@ public class A_Lambdas {
      * Write a lambda expression that converts the
      * given string to upper case.
      */
-    @Test @Ignore
+    @Test
     public void b_function2() {
-        Function<String, String> func = null; // TODO
+        Function<String, String> func = s -> s.toUpperCase();
 
         assertEquals("ABC", func.apply("abc"));
     }
@@ -140,9 +139,9 @@ public class A_Lambdas {
      * Write an unbound method reference that converts the
      * given string to upper case.
      */
-    @Test @Ignore
+    @Test
     public void b_function3() {
-        Function<String, String> func = null; // TODO
+        Function<String, String> func = String::toUpperCase;
 
         assertEquals("ABC", func.apply("abc"));
     }
@@ -153,16 +152,16 @@ public class A_Lambdas {
      * create a single function converts nulls and then gets the
      * string's length.
      */
-    @Test @Ignore
+    @Test
     public void b_function4() {
         Function<String, String> unNullify = s -> s == null ? "" : s;
         Function<String, Integer> length = String::length;
 
-        Function<String, Integer> lengthBis = null; // TODO
+        Function<String, Integer> lengthBis = unNullify.andThen(length);
 
-        assertEquals((Integer)14, lengthBis.apply("Hello JavaOne!"));
-        assertEquals((Integer)0, lengthBis.apply(""));
-        assertEquals((Integer)0, lengthBis.apply(null));
+        assertEquals((Integer) 14, lengthBis.apply("Hello JavaOne!"));
+        assertEquals((Integer) 0, lengthBis.apply(""));
+        assertEquals((Integer) 0, lengthBis.apply(null));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -173,9 +172,9 @@ public class A_Lambdas {
      * Write a lambda expression that appends the
      * string "abc" to the given StringBuilder.
      */
-    @Test @Ignore
+    @Test
     public void c_consumer1() {
-        Consumer<StringBuilder> cons = null; // TODO
+        Consumer<StringBuilder> cons = sb -> sb.append("abc");
 
         StringBuilder sb = new StringBuilder("xyz");
         cons.accept(sb);
@@ -185,9 +184,9 @@ public class A_Lambdas {
     /**
      * Write a lambda expression that clears the given list.
      */
-    @Test @Ignore
+    @Test
     public void c_consumer2() {
-        Consumer<List<String>> cons = null; // TODO
+        Consumer<List<String>> cons = l -> l.clear();
 
         List<String> list = new ArrayList<>(List.of("a", "b", "c"));
         cons.accept(list);
@@ -197,9 +196,9 @@ public class A_Lambdas {
     /**
      * Write an unbound method reference that clears the given list.
      */
-    @Test @Ignore
+    @Test
     public void c_consumer3() {
-        Consumer<List<String>> cons = null; // TODO
+        Consumer<List<String>> cons = List::clear;
 
         List<String> list = new ArrayList<>(List.of("a", "b", "c"));
         cons.accept(list);
@@ -210,12 +209,12 @@ public class A_Lambdas {
      * Given two consumers, create a consumer that passes the String to the
      * first consumer, then to the second.
      */
-    @Test @Ignore
+    @Test
     public void c_consumer4() {
         Consumer<List<String>> c1 = list -> list.add("first");
         Consumer<List<String>> c2 = list -> list.add("second");
 
-        Consumer<List<String>> consumer = null; // TODO
+        Consumer<List<String>> consumer = c1.andThen(c2);
 
         List<String> list = new ArrayList<>(List.of("a", "b", "c"));
         consumer.accept(list);
@@ -230,9 +229,9 @@ public class A_Lambdas {
      * Write a lambda expression that returns a new StringBuilder
      * containing the string "abc".
      */
-    @Test @Ignore
+    @Test
     public void d_supplier1() {
-        Supplier<StringBuilder> sup = null; // TODO
+        Supplier<StringBuilder> sup = () -> new StringBuilder("abc");
 
         assertEquals("abc", sup.get().toString());
     }
@@ -240,9 +239,9 @@ public class A_Lambdas {
     /**
      * Write a lambda expression that returns a new, empty StringBuilder.
      */
-    @Test @Ignore
+    @Test
     public void d_supplier2() {
-        Supplier<StringBuilder> sup = null; // TODO
+        Supplier<StringBuilder> sup = () -> new StringBuilder();
 
         assertEquals("", sup.get().toString());
     }
@@ -250,9 +249,9 @@ public class A_Lambdas {
     /**
      * Write a constructor reference that returns a new, empty StringBuilder.
      */
-    @Test @Ignore
+    @Test
     public void d_supplier3() {
-        Supplier<StringBuilder> sup = null; // TODO
+        Supplier<StringBuilder> sup = StringBuilder::new;
 
         assertEquals("", sup.get().toString());
     }
@@ -262,9 +261,9 @@ public class A_Lambdas {
      * of concatenating the first with the second, followed by the
      * first again.
      */
-    @Test @Ignore
+    @Test
     public void e_bifunction1() {
-        BiFunction<String, String, String> bifunc = null; // TODO
+        BiFunction<String, String, String> bifunc = (x, y) -> x + y + x;
 
         assertEquals("FirstSecondFirst", bifunc.apply("First", "Second"));
     }
@@ -274,9 +273,9 @@ public class A_Lambdas {
      * the first occurrence of the second string within the first string,
      * or -1 if the second string doesn't occur within the first string.
      */
-    @Test @Ignore
+    @Test
     public void e_bifunction2() {
-        BiFunction<String, String, Integer> bifunc = null; // TODO
+        BiFunction<String, String, Integer> bifunc = (x, y) -> x.indexOf(y);
 
         assertEquals(3, bifunc.apply("abcdefghi", "def").intValue());
         assertEquals(-1, bifunc.apply("abcdefghi", "xyz").intValue());
@@ -295,9 +294,9 @@ public class A_Lambdas {
      * the first occurrence of the second string within the first string,
      * or -1 if the second string doesn't occur within the first string.
      */
-    @Test @Ignore
+    @Test
     public void e_bifunction3() {
-        BiFunction<String, String, Integer> bifunc = null; // TODO
+        BiFunction<String, String, Integer> bifunc = String::indexOf;
 
         assertEquals(3, bifunc.apply("abcdefghij", "def").intValue());
         assertEquals(-1, bifunc.apply("abcdefghij", "xyz").intValue());
@@ -315,17 +314,16 @@ public class A_Lambdas {
     // to find the overloaded method that matches.
     // </editor-fold>
 
-
     /**
      * Write a lambda expression that appends the 'suffix'
      * variable (a String) to the sb variable (a StringBuilder).
      */
-    @Test @Ignore
+    @Test
     public void f_runnable1() {
         StringBuilder sb = new StringBuilder("abc");
         String suffix = "xyz";
 
-        Runnable r = null; // TODO
+        Runnable r = () -> sb.append(suffix);
 
         r.run();
         r.run();
@@ -339,9 +337,9 @@ public class A_Lambdas {
      * "abcdefghij", or that returns -1 if the string argument
      * doesn't occur.
      */
-    @Test @Ignore
+    @Test
     public void g_boundMethodRef1() {
-        Function<String, Integer> func = null; // TODO
+        Function<String, Integer> func = s -> "abcdefghij".indexOf(s);
 
         assertEquals(2, func.apply("cde").intValue());
         assertEquals(4, func.apply("efg").intValue());
@@ -360,14 +358,14 @@ public class A_Lambdas {
      * or an expression that evaluates to an instance, on the left-hand
      * side of the :: operator:
      *
-     *     myObject::methodname
+     * myObject::methodname
      *
      * This is in contrast to an unbound method reference, which has
      * a classname on the left-hand side of the :: operator.
      */
-    @Test @Ignore
+    @Test
     public void g_boundMethodRef2() {
-        Function<String, Integer> func = null; // TODO
+        Function<String, Integer> func = "abcdefghij"::indexOf;
 
         assertEquals(2, func.apply("cde").intValue());
         assertEquals(4, func.apply("efg").intValue());
