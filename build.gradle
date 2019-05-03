@@ -36,6 +36,9 @@ dependencies {
     compile 'com.squareup.moshi:moshi:1.8.0'
     compile 'com.alibaba:fastjson:1.2.56'
     compile 'io.reactivex.rxjava2:rxjava:2.2.8'
+    compile 'com.google.flogger:flogger:0.4'
+    runtime 'com.google.flogger:flogger-system-backend:0.4'
+
 
     def junit4Version = '4.12'
     def junitVintageVersion = '5.4.1'
