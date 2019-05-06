@@ -1,14 +1,21 @@
 package lars.tddpracticalguide;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class MovieList {
 
-    private int numberOfMovies;
+    private Collection<Movie> movies = new ArrayList<>();
 
     public int size() {
-        return numberOfMovies;
+        return movies.size();
     }
 
     public void add(Movie movie) {
-        numberOfMovies++;
+        movies.add(movie);
+    }
+
+    public boolean contains(Movie movie) {
+        return movies.contains(movie);
     }
 }
