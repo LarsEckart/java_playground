@@ -15,9 +15,9 @@ class TestMovieListWithTwoMovies {
     @BeforeEach
     void setUp() {
         movieList = new MovieList();
-        starWars = new Movie();
-        starTrek = new Movie();
-        starGate = new Movie();
+        starWars = new Movie("Star Wars");
+        starTrek = new Movie("Star Trek");
+        starGate = new Movie("Stargate");
 
         movieList.add(starWars);
         movieList.add(starTrek);

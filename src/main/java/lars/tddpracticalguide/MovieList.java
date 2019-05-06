@@ -18,4 +18,8 @@ public class MovieList {
     public boolean contains(Movie movie) {
         return movies.contains(movie);
     }
+
+    public Collection<Movie> getMovies() {
+        return this.movies;
+    }
 }

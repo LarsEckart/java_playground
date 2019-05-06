@@ -13,7 +13,7 @@ class TestMovieListWithOneMovie {
     @BeforeEach
     void setUp() {
         movieList = new MovieList();
-        starWars = new Movie();
+        starWars = new Movie("Star Wars");
 
         movieList.add(starWars);
     }
