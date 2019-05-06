@@ -50,6 +50,21 @@ public class EfficientCounter {
         }
     }
 
+    public void evenMoreEfficientApproach() {
+        String s = "one two three two three three";
+        String[] sArr = s.split(" ");
+        Map<String, MutableInteger> efficientCounter = new LinkedHashMap<>();
+
+        for (String a : sArr) {
+            MutableInteger value = efficientCounter.get(a);
+            if (value != null) {
+                value.set(value.get() + 1);
+            } else {
+                efficientCounter.put(a, new MutableInteger(1));
+            }
+        }
+    }
+
     static class MutableInteger {
 
         private int val;
