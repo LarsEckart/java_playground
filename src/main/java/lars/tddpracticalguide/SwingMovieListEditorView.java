@@ -20,6 +20,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
         movieList.setListData(movies);
     }
 
+    @Override
+    public String getNewName() {
+        return "";
+    }
+
     public void init() {
         setTitle("Movie List");
         getContentPane().setLayout(new FlowLayout());

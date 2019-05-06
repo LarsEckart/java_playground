@@ -39,7 +39,7 @@ class TestSwingMovieListEditorView {
     }
 
     @Test
-    void name() {
+    void listContents() {
         mainWindow = new JFrameOperator("Movie List");
         MovieListEditor editor = new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
