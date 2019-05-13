@@ -3,19 +3,29 @@ package lars.refactoring.tpp;
 public class Statement {
 
     public void print(Account account) {
-        System.out.format("Debits: %10.2f\n", account.debits);
-        System.out.format("Credits: %10.2f\n", account.credits);
-        if (account.fees < 0) {
-            System.out.format("Fees: %10.2f-\n", -account.fees);
-        } else {
-            System.out.format("Fees: %10.2f\n", account.credits);
+        reportLine("Debits", account.debits);
+        reportLine("Credits", account.credits);
+        reportLine("Fees", account.fees);
+        System.out.format("              ----\n");
+        reportLine("Balance", account.balance);
+    }
+
+    private void reportLine(String label, float amount) {
+        printLine(label + ":", formatAmount(amount));
+    }
+
+    private void printLine(String label, String amount) {
+        //8 wide, left adjusted
+        System.out.format("%-8s%s\n", label, amount);
+    }
+
+    private String formatAmount(float value) {
+        // 10 wide, 2 after comma
+        String result = String.format("%10.2f", Math.abs(value));
+        if (value < 0) {
+            result += "-";
         }
-        System.out.format("      ----\n");
-        if (account.balance < 0) {
-            System.out.format("Balance: %10.2f-\n", -account.balance);
-        } else {
-            System.out.format("Balance: %10.2f\n", account.balance);
-        }
+        return result;
     }
 
     static class Account {
