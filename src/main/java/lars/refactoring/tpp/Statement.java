@@ -8,7 +8,7 @@ public class Statement {
         if (account.fees < 0) {
             System.out.format("Fees:    %10.2f-\n", -account.fees);
         } else {
-            System.out.format("Fees:    %10.2f\n", account.credits);
+            System.out.format("Fees:    %10.2f\n", account.fees);
         }
         System.out.format("               ----\n");
         if (account.balance < 0) {

@@ -24,16 +24,17 @@ class StatementTest {
 
     @Test
     void print_with_all_positive() {
-        Account account = new Account(1f, 1f, 1f, 1f);
+        Account account = new Account(1f, 10f, 100f, 1000f);
 
         statement.print(account);
 
-        assertThat(out.toString()).isEqualTo(
-                "Debits:        1.00\n"
-                + "Credits:       1.00\n"
-                        + "Fees:          1.00\n"
-                        + "               ----\n"
-                + "Balance:       1.00\n");
+        String actual = out.toString();
+        assertThat(actual).isEqualTo(
+                  "Debits:        1.00\n"
+                + "Credits:      10.00\n"
+                + "Fees:        100.00\n"
+                + "               ----\n"
+                + "Balance:    1000.00\n");
     }
 
     @Test
@@ -45,8 +46,8 @@ class StatementTest {
         assertThat(out.toString()).isEqualTo(
                 "Debits:        1.00\n"
                 + "Credits:       1.00\n"
-                        + "Fees:          1.00-\n"
-                        + "               ----\n"
+                + "Fees:          1.00-\n"
+                + "               ----\n"
                 + "Balance:       1.00\n");
     }
 
@@ -59,8 +60,8 @@ class StatementTest {
         assertThat(out.toString()).isEqualTo(
                 "Debits:        1.00\n"
                 + "Credits:       1.00\n"
-                        + "Fees:          1.00\n"
-                        + "               ----\n"
+                + "Fees:          1.00\n"
+                + "               ----\n"
                 + "Balance:       1.00-\n");
     }
 }
