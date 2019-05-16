@@ -2,6 +2,8 @@ package lars.tddpracticalguide;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 
@@ -10,6 +12,10 @@ import javax.swing.ListModel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * I couldn't get it to work on travis linux machine.
+ */
+@EnabledOnOs({OS.MAC})
 class TestSwingMovieListEditorView {
 
     JFrameOperator mainWindow;
