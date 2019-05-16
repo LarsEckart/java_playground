@@ -1,10 +1,5 @@
 language: java
 
-before_install:
-  - "export DISPLAY=99.0"
-  - "sh -s /etc/init.d/xvfb start"
-  - sleep 3
-
 jdk:
   - openjdk11
 
