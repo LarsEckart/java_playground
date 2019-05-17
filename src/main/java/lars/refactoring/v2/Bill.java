@@ -7,8 +7,8 @@ import java.util.Map;
 class Bill {
 
     String statement(Invoice invoice, Map<String, Play> plays) {
-        var totalAmount = 0;
-        var volumeCredits = 0;
+        int totalAmount = 0;
+        int volumeCredits = 0;
         var result = String.format("Statement for %s\n", invoice.getCustomer());
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
         for (var perf : invoice.getPerformances()) {

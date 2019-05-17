@@ -44,7 +44,7 @@ class StatementTest {
         statement.print(account);
 
         assertThat(out.toString()).isEqualTo(
-                "Debits:        1.00\n"
+                  "Debits:        1.00\n"
                 + "Credits:       1.00\n"
                 + "Fees:          1.00-\n"
                 + "               ----\n"
@@ -58,7 +58,7 @@ class StatementTest {
         statement.print(account);
 
         assertThat(out.toString()).isEqualTo(
-                "Debits:        1.00\n"
+                  "Debits:        1.00\n"
                 + "Credits:       1.00\n"
                 + "Fees:          1.00\n"
                 + "               ----\n"
