@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 class AstroClientTest {
 
-    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-
     private AstroClient client = new AstroClient();
+
+    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     @Test
     void getSync() {
         AstroResponse response = assertTimeoutPreemptively(
                 Duration.ofSeconds(2),
-                () -> client.getSync());
+                () -> client.getSync("http://api.open-notify.org/astros.json"));
 
         int num = response.getNumber();
         List<Assignment> assignments = response.getPeople();
@@ -39,7 +39,7 @@ class AstroClientTest {
     void getAsync() {
         AstroResponse response = assertTimeoutPreemptively(
                 Duration.ofSeconds(2),
-                () -> client.getAsync().get());
+                () -> client.getAsync("http://api.open-notify.org/astros.json").get());
 
         int num = response.getNumber();
         List assignments = response.getPeople();

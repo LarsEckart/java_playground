@@ -1,0 +1,47 @@
+{
+  "headers": [
+    "Breed",
+    "Colour",
+    "Height",
+    "Age",
+    "Shoes"
+  ],
+  "tableData": [
+    [
+      "Thoroughbred",
+      "Bay",
+      "1.6",
+      "3",
+      "true"
+    ],
+    [
+      "Thoroughbred",
+      "Grey",
+      "1.55",
+      "3",
+      "true"
+    ],
+    [
+      "Arabian horse",
+      "Bay",
+      "1.51",
+      "5",
+      "true"
+    ],
+    [
+      "Shetland Pony",
+      "Black",
+      "1.01",
+      "2",
+      "false"
+    ],
+    [
+      "Shire horse",
+      "Black",
+      "1.71",
+      "4",
+      "true"
+    ]
+  ],
+  "totalRows": 5
+}
