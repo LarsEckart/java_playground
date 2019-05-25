@@ -27,7 +27,6 @@ repositories {
     }
     mavenCentral()
 }
-
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.3")
 
@@ -40,34 +39,20 @@ dependencies {
     runtime 'com.google.flogger:flogger-system-backend:0.4'
 
 
-    def junit4Version = '4.12'
-    def junitVintageVersion = '5.4.1'
-    def junitJupiterVersion = '5.4.1'
-    def junitPlatformVersion = '1.4.1'
+    def junitVersion = '5.4.2'
 
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
-    testCompile("junit:junit:${junit4Version}")
-
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
-        because 'allows JUnit 3 and JUnit 4 tests to run'
-    }
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
-        because 'allows tests to run from IDEs that bundle older version of launcher'
-    }
-
-    // https://mvnrepository.com/artifact/org.netbeans/jemmy
-    testCompile group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
-
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
     testImplementation 'org.assertj:assertj-core:3.12.2'
     testImplementation 'org.mockito:mockito-core:3.0.0-beta.1'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.0.0-beta.1'
+
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.1'
-    testImplementation 'com.approvaltests:approvaltests:2.0.2'
+    testImplementation 'org.netbeans:jemmy:2.2.7.5'
+    testImplementation 'com.approvaltests:approvaltests:3.0.0'
     testImplementation 'org.awaitility:awaitility-groovy:3.1.6'
 }
+
 
 task copyDependenciesToLibs(type: Copy) {
     into "libs"
