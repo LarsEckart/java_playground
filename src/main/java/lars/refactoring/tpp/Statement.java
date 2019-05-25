@@ -16,10 +16,37 @@ public class Statement {
         } else {
             System.out.format("Balance: %10.2f\n", account.balance);
         }
+        fees(account);
+    }
+
+    /**
+     * Calculate the fees for this account.
+     *
+     * Each returned check costs $20
+     * If the account is in overdraft for more than 3 days,
+     * charge $10 for each day
+     * If the average account balance is greater that $2,000
+     * reduce the fees by 50%
+     */
+    private int fees(Account a) {
+        int f = 0;
+        if (a.returnedCheckCount > 0) {
+            f += 20 * a.returnedCheckCount;
+        }
+        if (a.overdraftDays > 3) {
+            f += 10 * a.overdraftDays;
+        }
+        if (a.averageBalance > 2_000) {
+            f /= f;
+        }
+        return f;
     }
 
     static class Account {
 
+        int returnedCheckCount;
+        int overdraftDays;
+        int averageBalance;
         float debits;
         float credits;
         float fees;
