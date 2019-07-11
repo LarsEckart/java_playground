@@ -27,49 +27,49 @@ public class GildedRoseTest {
     private GildedRose app;
 
     @Test
-    public void at_the_end_of_each_day_our_system_lowers_both_values_for_every_item() {
+    public void at_the_end_of_each_day_our_system_lowers_sellin_and_quality_for_normal_items() {
         givenItemWithSellinAndQuality("foo", 10, 10);
         whenWeUpdateTheQuality();
         thenItemBecomes("foo", 9, 9);
     }
 
     @Test
-    public void the_Quality_of_an_item_is_never_negative() throws Exception {
+    public void the_quality_of_an_item_does_not_decrease_to_negative_values() {
         givenItemWithSellinAndQuality("foo", 10, 0);
         whenWeUpdateTheQuality();
         thenItemBecomes("foo", 9, 0);
     }
 
     @Test
-    public void once_the_sell_by_date_has_passed_Quality_degrades_twice_as_fast() throws Exception {
+    public void once_the_sell_by_date_has_passed_quality_degrades_twice_as_fast() {
         givenItemWithSellinAndQuality("foo", 0, 10);
         whenWeUpdateTheQuality();
         thenItemBecomes("foo", -1, 8);
     }
 
     @Test
-    public void once_the_sell_by_date_has_passed_Quality_degrades_twice_as_fast_2() throws Exception {
+    public void once_the_sell_by_date_has_passed_Quality_degrades_twice_as_fast_2() {
         givenItemWithSellinAndQuality("foo", 0, 1);
         whenWeUpdateTheQuality();
         thenItemBecomes("foo", -1, 0);
     }
 
     @Test
-    public void Aged_Brie__actually_increases_in_Quality_the_older_it_gets() throws Exception {
+    public void aged_brie_actually_increases_in_quality_the_older_it_gets() {
         givenItemWithSellinAndQuality("Aged Brie", 10, 10);
         whenWeUpdateTheQuality();
         thenItemBecomes("Aged Brie", 9, 11);
     }
 
     @Test
-    public void the_Quality_of_an_item_is_never_more_than_50() throws Exception {
+    public void the_quality_of_an_item_is_never_more_than_50() {
         givenItemWithSellinAndQuality("Aged Brie", 10, 50);
         whenWeUpdateTheQuality();
         thenItemBecomes("Aged Brie", 9, 50);
     }
 
     @Test
-    public void Sulfuras_being_a_legendary_item_never_has_to_be_sold_or_decreases_in_Quality() throws Exception {
+    public void a_legendary_item_never_decreases_in_quality() {
         String sulfuras = "Sulfuras, Hand of Ragnaros";
         givenItemWithSellinAndQuality(sulfuras, 10, 80);
         whenWeUpdateTheQuality();
