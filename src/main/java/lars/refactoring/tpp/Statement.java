@@ -42,6 +42,24 @@ public class Statement {
         return f;
     }
 
+    private void reportLine(String label, float amount) {
+        printLine(label + ":", formatAmount(amount));
+    }
+
+    private void printLine(String label, String amount) {
+        //8 wide, left adjusted
+        System.out.format("%-8s%s\n", label, amount);
+    }
+
+    private String formatAmount(float value) {
+        // 10 wide, 2 after comma
+        String result = String.format("%10.2f", Math.abs(value));
+        if (value < 0) {
+            result += "-";
+        }
+        return result;
+    }
+
     static class Account {
 
         int returnedCheckCount;
