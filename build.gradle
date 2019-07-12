@@ -63,6 +63,8 @@ dependencies {
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
     testImplementation 'org.assertj:assertj-core:3.12.2'
+    testImplementation 'com.google.truth:truth:1.0'
+    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
     testImplementation 'com.approvaltests:approvaltests:3.2.0'
