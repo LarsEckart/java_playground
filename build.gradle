@@ -38,6 +38,10 @@ dependencies {
     compile 'com.google.flogger:flogger:0.4'
     runtime 'com.google.flogger:flogger-system-backend:0.4'
 
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    compile 'net.ttddyy:datasource-proxy:1.5.1'
+    compile 'mysql:mysql-connector-java:6.0.5'
+
 
     def junit4Version = '4.12'
     def junitVintageVersion = '5.5.0'
@@ -69,6 +73,10 @@ dependencies {
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
     testImplementation 'com.approvaltests:approvaltests:3.2.0'
     testImplementation 'org.awaitility:awaitility-groovy:3.1.6'
+    testImplementation "org.testcontainers:testcontainers:1.12.0"
+    testImplementation "org.testcontainers:junit-jupiter:1.12.0"
+    testImplementation 'org.testcontainers:mysql:1.12.0'
+
 }
 
 
