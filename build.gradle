@@ -98,6 +98,10 @@ targetCompatibility = '11'
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
 }
 
 dependencyUpdates.resolutionStrategy {
