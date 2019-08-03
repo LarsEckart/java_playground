@@ -4,13 +4,13 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.21.0'
-        classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.6.0'
+        classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.7.0'
     }
 }
 
 plugins {
     id 'org.kordamp.gradle.jdeprscan' version '0.4.0'
-    id 'org.kordamp.gradle.jdeps' version '0.6.0'
+    id 'org.kordamp.gradle.jdeps' version '0.7.0'
     id 'net.ltgt.errorprone' version '0.8.1'
 }
 
@@ -33,21 +33,21 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.9.1'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.squareup.moshi:moshi:1.8.0'
-    compile 'com.alibaba:fastjson:1.2.58'
-    compile 'io.reactivex.rxjava2:rxjava:2.2.10'
+    compile 'com.alibaba:fastjson:1.2.59'
+    compile 'io.reactivex.rxjava2:rxjava:2.2.11'
     compile 'com.google.flogger:flogger:0.4'
     runtime 'com.google.flogger:flogger-system-backend:0.4'
     compile 'org.threeten:threeten-extra:1.5.0'
 
-    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    compile 'org.hibernate:hibernate-core:5.4.4.Final'
     compile 'net.ttddyy:datasource-proxy:1.5.1'
-    compile 'mysql:mysql-connector-java:6.0.5'
+    compile 'mysql:mysql-connector-java:8.0.17'
 
 
     def junit4Version = '4.12'
-    def junitVintageVersion = '5.5.0'
-    def junitJupiterVersion = '5.5.0'
-    def junitPlatformVersion = '1.5.0'
+    def junitVintageVersion = '5.5.1'
+    def junitJupiterVersion = '5.5.1'
+    def junitPlatformVersion = '1.5.1'
 
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
@@ -64,10 +64,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testCompile group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
 
-    def mockitoVersion = '3.0.1'
+    def mockitoVersion = '3.0.4'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-    testImplementation 'org.assertj:assertj-core:3.12.2'
+    testImplementation 'org.assertj:assertj-core:3.13.1'
     testImplementation 'com.google.truth:truth:1.0'
     testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
