@@ -1,5 +1,6 @@
 package lars.junit5;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AssertJExamples {
 
+    @Disabled("demo for failure message")
     @Test
     void express_intent_date() {
         Date birthday = Date.from(Instant.parse("2020-12-03T10:15:30.00Z"));
@@ -21,6 +23,7 @@ class AssertJExamples {
         assertTrue(birthday.getTime() < today.getTime());
     }
 
+    @Disabled("demo for failure message")
     @Test
     void express_intent_local_date() {
         LocalDate birthday = LocalDate.of(2020, 8, 6);
