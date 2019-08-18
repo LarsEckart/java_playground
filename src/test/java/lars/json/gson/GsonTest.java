@@ -1,4 +1,4 @@
-package lars.gson.gson;
+package lars.json.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,6 @@ import lars.json.BagWithTransientField;
 import lars.json.Card;
 import lars.json.ImmutableBag;
 import lars.json.Suit;
-import lars.json.gson.CardAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

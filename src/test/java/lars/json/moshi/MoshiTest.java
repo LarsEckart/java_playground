@@ -1,4 +1,4 @@
-package lars.gson.moshi;
+package lars.json.moshi;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -9,7 +9,6 @@ import lars.json.BagWithTransientField;
 import lars.json.Card;
 import lars.json.ImmutableBag;
 import lars.json.Suit;
-import lars.json.moshi.CardAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
