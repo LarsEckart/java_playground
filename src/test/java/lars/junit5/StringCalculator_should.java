@@ -1,11 +1,13 @@
 package lars.junit5;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class StringCalculator_should {
+class StringCalculator_should {
 
+    @Disabled("demo of test with switched assertEquals argument order")
     @Test
     void return_zero_when_empty_string() {
         int result = StringCalculator.add("");
