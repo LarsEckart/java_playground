@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.21.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.25.0'
         classpath 'org.kordamp.gradle:jdeps-gradle-plugin:0.7.0'
     }
 }
@@ -30,24 +30,24 @@ repositories {
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.3")
 
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.9.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.squareup.moshi:moshi:1.8.0'
-    compile 'com.alibaba:fastjson:1.2.59'
-    compile 'io.reactivex.rxjava2:rxjava:2.2.11'
+    compile 'com.alibaba:fastjson:1.2.61'
+    compile 'io.reactivex.rxjava2:rxjava:2.2.12'
     compile 'com.google.flogger:flogger:0.4'
     runtime 'com.google.flogger:flogger-system-backend:0.4'
     compile 'org.threeten:threeten-extra:1.5.0'
 
-    compile 'org.hibernate:hibernate-core:5.4.4.Final'
+    compile 'org.hibernate:hibernate-core:5.4.6.Final'
     compile 'net.ttddyy:datasource-proxy:1.5.1'
     compile 'mysql:mysql-connector-java:8.0.17'
 
 
     def junit4Version = '4.12'
-    def junitVintageVersion = '5.5.1'
-    def junitJupiterVersion = '5.5.1'
-    def junitPlatformVersion = '1.5.1'
+    def junitVintageVersion = '5.5.2'
+    def junitJupiterVersion = '5.5.2'
+    def junitPlatformVersion = '1.5.2'
 
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
@@ -64,19 +64,21 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testCompile group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
 
-    def mockitoVersion = '3.0.4'
+    def mockitoVersion = '3.1.1'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-    testImplementation 'org.assertj:assertj-core:3.13.1'
+    testImplementation 'org.assertj:assertj-core:3.13.2'
     testImplementation 'com.google.truth:truth:1.0'
     testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
-    testImplementation 'com.approvaltests:approvaltests:3.2.0'
-    testImplementation 'org.awaitility:awaitility-groovy:3.1.6'
-    testImplementation "org.testcontainers:testcontainers:1.12.0"
-    testImplementation "org.testcontainers:junit-jupiter:1.12.0"
-    testImplementation 'org.testcontainers:mysql:1.12.0'
+    testImplementation 'com.approvaltests:approvaltests:4.0.2'
+    testImplementation 'org.awaitility:awaitility-groovy:4.0.1'
+
+    def testcontainersVersion = '1.12.2'
+    testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+    testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
+    testImplementation "org.testcontainers:mysql:${testcontainersVersion}"
 
 }
 
