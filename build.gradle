@@ -30,7 +30,7 @@ repositories {
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.3")
 
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.0.pr3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.squareup.moshi:moshi:1.8.0'
     compile 'com.alibaba:fastjson:1.2.61'
