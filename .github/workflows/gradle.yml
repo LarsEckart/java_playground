@@ -1,4 +1,4 @@
-name: Check
+name: test
 
 on:
   push:
@@ -20,5 +20,5 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}   
-    - name: Run Gradle's check task
-      run: ./gradlew check
+    - name: Run Gradle's test task
+      run: ./gradlew test
