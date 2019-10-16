@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/LarsEckart/java_playground.svg?branch=master)](https://travis-ci.org/LarsEckart/java_playground)
 
-[![Build Status]([![Actions Status](https://github.com/LarsEckart/java_playground/workflows/Java%20CI/badge.svg)](https://github.com/LarsEckart/java_playground/actions))]
+[![Actions Status](https://github.com/LarsEckart/java_playground/workflows/build/badge.svg)](https://github.com/LarsEckart/java_playground/actions)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/larseckart/java_playground/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/larseckart/java_playground?targetFile=build.gradle)
 
