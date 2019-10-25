@@ -22,4 +22,4 @@ jobs:
       - name: Create jar file for project
         run: ./gradlew assemble
       - name: Run jdeps task
-        run: jdeps --class-path 'libs/*' --multi-release '11'  -recursive build/libs/java_playground.jar
+        run: jdeps --class-path 'libs/*' --multi-release '11' -v -recursive build/libs/java_playground.jar
