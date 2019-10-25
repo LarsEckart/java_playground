@@ -1,0 +1,25 @@
+name: jdeprscan
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  jdeps:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['11.0.4', '12.0.2']
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Copy dependency jar files to libs folder
+        run: ./gradlew copyDependenciesToLibs
+      - name: Create jar file for project
+        run: ./gradlew assemble
+      - name: Run jdeprscan task
+        run: jdeprscan --for-removal --verbose --class-path libs/*.jar build/libs/java_playground.jar
