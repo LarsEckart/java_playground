@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
+      - name: where
+        run: pwd
+      - name: ls
+        run: ls
       - name: Copy dependency jar files to libs folder
         run: ./gradlew copyDependenciesToLibs
       - name: Run jdeps task
