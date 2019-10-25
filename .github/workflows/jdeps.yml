@@ -17,11 +17,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: where
-        run: pwd
-      - name: ls
-        run: ls
       - name: Copy dependency jar files to libs folder
         run: ./gradlew copyDependenciesToLibs
+      - name: Create jar file for project
+        run: ./gradlew assemble
       - name: Run jdeps task
         run: jdeps --class-path 'libs/*' --multi-release '11'  -recursive build/libs/java_playground.jar
