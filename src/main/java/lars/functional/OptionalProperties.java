@@ -1,4 +1,4 @@
-package lars;
+package lars.functional;
 
 import java.util.Map;
 import java.util.Optional;

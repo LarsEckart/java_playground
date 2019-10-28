@@ -1,13 +1,14 @@
 package lars.spielplatz.rx;
 
 import io.reactivex.Flowable;
+import io.reactivex.disposables.Disposable;
 
 import java.util.concurrent.TimeUnit;
 
 public class JavaExamples {
 
     public static void main(String[] args) throws InterruptedException {
-        Flowable.interval(1, 1, TimeUnit.SECONDS)
+        Disposable disposable = Flowable.interval(1, 1, TimeUnit.SECONDS)
                 .map(i -> i * 2)
                 .subscribe(System.out::println);
 

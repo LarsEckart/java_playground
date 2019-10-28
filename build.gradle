@@ -4,7 +4,6 @@ plugins {
     id 'net.ltgt.errorprone' version '1.1.1'
 }
 
-apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'java'
 apply plugin: 'idea'
 
@@ -17,6 +16,7 @@ repositories {
     }
     mavenCentral()
 }
+
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.3")
 
@@ -28,6 +28,8 @@ dependencies {
     runtime 'com.google.flogger:flogger-system-backend:0.4'
     compile 'org.threeten:threeten-extra:1.5.0'
     compile 'org.owasp.encoder:encoder:1.2.2'
+    compile 'com.hazelcast:hazelcast:3.12.3'
+    compile 'javax.cache:cache-api:1.1.1'
 
     compile 'org.hibernate:hibernate-core:5.4.7.Final'
     compile 'net.ttddyy:datasource-proxy:1.5.1'
@@ -83,7 +85,8 @@ tasks.withType(JavaCompile) {
 
     options.errorprone {
         disableWarningsInGeneratedCode = true
-        disableAllChecks = true
+        allErrorsAsWarnings = true
+        //disableAllChecks = true
     }
 }
 sourceCompatibility = '11'

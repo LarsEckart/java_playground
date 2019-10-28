@@ -14,7 +14,7 @@ public class FizzBuzz_03_IsolateTheirCode {
         }
 
         public String result() {
-            JsonObject jsonObject = (JsonObject) new JsonParser().parse(input);
+            JsonObject jsonObject = (JsonObject) JsonParser.parseString(input);
             int input = jsonObject.get("number").getAsInt();
 
             if (IsFizzBuzz(input)) {
