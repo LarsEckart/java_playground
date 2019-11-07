@@ -2,17 +2,20 @@ package lars.katas.horse;
 
 import com.google.gson.Gson;
 import org.approvaltests.Approvals;
-import org.junit.jupiter.api.Test;
+import org.approvaltests.testcommitrevert.FasterTestCommitRevertRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-class HorseTest {
+@RunWith(FasterTestCommitRevertRunner.class)
+public class HorseTest {
 
     @Test
-    void FilterSortPaginate_No_Filters_No_Sorting_No_Pagination() throws IOException {
+    public void FilterSortPaginate_No_Filters_No_Sorting_No_Pagination() throws IOException {
         // Arrange - this is data from another service or database
         List<String> headers = SampleHorseData.GetSampleHeaders();
         List<List<Object>> tableData = SampleHorseData.GetSampleTableData();
@@ -20,7 +23,7 @@ class HorseTest {
         // These objects describe the query we got from the front end
         List<FilterMetadata> filters = Collections.emptyList();
         Optional<SortMetadata> sortMetadata = Optional.empty();
-        PaginationMetadata paginationMetadata = new PaginationMetadata(0, 10);
+        PaginationMetadata paginationMetadata = new PaginationMetadata(0, 9);
 
         // Act
         PaginatedTable table = Horse.FilterSortPaginateTable(headers, tableData, filters, sortMetadata, paginationMetadata);
