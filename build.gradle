@@ -22,13 +22,12 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.moshi:moshi:1.8.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.13'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
     implementation 'com.google.flogger:flogger:0.4'
     runtimeOnly 'com.google.flogger:flogger-system-backend:0.4'
     implementation 'org.threeten:threeten-extra:1.5.0'
     implementation 'org.owasp.encoder:encoder:1.2.2'
-    implementation 'com.hazelcast:hazelcast:3.12.3'
+    implementation 'com.hazelcast:hazelcast:3.12.4'
     implementation 'javax.cache:cache-api:1.1.1'
 
     implementation 'org.hibernate:hibernate-core:5.4.7.Final'
@@ -56,10 +55,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testCompile group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
 
-    def mockitoVersion = '3.1.1'
+    def mockitoVersion = '3.1.8'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-    testImplementation 'org.assertj:assertj-core:3.13.2'
+    testImplementation 'org.assertj:assertj-core:3.14.0'
     testImplementation 'com.google.truth:truth:1.0'
     testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
@@ -67,13 +66,11 @@ dependencies {
     testImplementation 'com.approvaltests:approvaltests:4.0.2'
     testImplementation 'org.awaitility:awaitility-groovy:4.0.1'
 
-    def testcontainersVersion = '1.12.2'
+    def testcontainersVersion = '1.12.3'
     testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
     testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
     testImplementation "org.testcontainers:mysql:${testcontainersVersion}"
-
 }
-
 
 task copyDependenciesToLibs(type: Copy) {
     into "libs"
@@ -82,6 +79,7 @@ task copyDependenciesToLibs(type: Copy) {
 
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:all" //<< "-Werror"
+    options.compilerArgs += ["--enable-preview"]
 
     options.errorprone {
         disableWarningsInGeneratedCode = true
@@ -99,6 +97,7 @@ test {
         exceptionFormat "full"
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    jvmArgs '--enable-preview'
 }
 
 dependencyUpdates.resolutionStrategy {
