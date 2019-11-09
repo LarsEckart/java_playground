@@ -2,16 +2,14 @@ package lars.katas.horse;
 
 import com.google.gson.Gson;
 import org.approvaltests.Approvals;
-import org.approvaltests.testcommitrevert.FasterTestCommitRevertRunner;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(FasterTestCommitRevertRunner.class)
+//@RunWith(FasterTestCommitRevertRunner.class)
 public class HorseTest {
 
     @Test
