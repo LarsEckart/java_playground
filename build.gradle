@@ -33,6 +33,8 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.4.7.Final'
     implementation 'net.ttddyy:datasource-proxy:1.5.1'
     implementation 'mysql:mysql-connector-java:8.0.18'
+    implementation 'org.eclipse.collections:eclipse-collections-api:10.0.0'
+    implementation 'org.eclipse.collections:eclipse-collections:10.0.0'
 
 
     def junit4Version = '4.12'
