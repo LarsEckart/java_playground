@@ -81,12 +81,11 @@ task copyDependenciesToLibs(type: Copy) {
 
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:all" //<< "-Werror"
-    options.compilerArgs += ["--enable-preview"]
 
     options.errorprone {
         disableWarningsInGeneratedCode = true
         allErrorsAsWarnings = true
-        //disableAllChecks = true
+        disableAllChecks = true
     }
 }
 sourceCompatibility = JavaVersion.VERSION_11
@@ -99,7 +98,6 @@ test {
         exceptionFormat "full"
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-    jvmArgs '--enable-preview'
 }
 
 dependencyUpdates.resolutionStrategy {
