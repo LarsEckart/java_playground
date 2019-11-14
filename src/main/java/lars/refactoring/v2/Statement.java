@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
 
-class Bill {
+class Statement {
 
     String statement(Invoice invoice, Map<String, Play> plays) {
         int totalAmount = 0;
@@ -29,7 +29,7 @@ class Bill {
                     thisAmount += 300 * perf.getAudience();
                     break;
                 default:
-                    throw new Error(String.format("unknown type: %s", play.getType()));
+                    throw new IllegalArgumentException(String.format("unknown type: %s", play.getType()));
             }
             // add volume credits
             volumeCredits += Math.max(perf.getAudience() - 30, 0);
