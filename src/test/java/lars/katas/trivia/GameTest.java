@@ -1,5 +1,6 @@
 package lars.katas.trivia;
 
+import lars.katas.trivia.runner.GameRunner;
 import org.approvaltests.Approvals;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -25,7 +26,7 @@ class GameTest {
 
         @Test
         void multiple_inputs_for_an_approval_test() throws Exception {
-            Long[] seeds = new Long[100];
+            Long[] seeds = new Long[1000];
             for (int i = 0; i < seeds.length; i++) {
                 seeds[i] = (long) i + i + i;
             }

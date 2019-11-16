@@ -1,9 +1,9 @@
-package lars.katas.trivia;
+package lars.katas.trivia.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-class Game {
+public class Game {
 
     ArrayList players = new ArrayList();
     int[] places = new int[6];

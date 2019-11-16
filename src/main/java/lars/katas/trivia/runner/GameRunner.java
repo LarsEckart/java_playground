@@ -1,8 +1,10 @@
-package lars.katas.trivia;
+package lars.katas.trivia.runner;
+
+import lars.katas.trivia.uglytrivia.Game;
 
 import java.util.Random;
 
-class GameRunner {
+public class GameRunner {
 
     private static boolean notAWinner;
 
