@@ -15,7 +15,7 @@ class CountTheTrailingZeroesInAFactorialTest {
     }
 
     private static Stream[] groupsOfExamples() {
-        return new Stream[]{
+        return new Stream[] {
                 Stream.range(1, 5).map(expectThisManyTrailingZeroes(0)),
                 Stream.range(5, 10).map(expectThisManyTrailingZeroes(1)),
                 Stream.range(10, 15).map(expectThisManyTrailingZeroes(2)),
@@ -58,5 +58,43 @@ class CountTheTrailingZeroesInAFactorialTest {
             return 1;
         }
         return 0;
+    }
+
+    static class CountFactorsOfFiveInANaturalNumberTest {
+
+        private static java.util.stream.Stream<Arguments> examples() {
+            return Stream.of(groupsOfExamples()).reduce(Stream::appendAll).toJavaStream();
+        }
+
+        private static Stream[] groupsOfExamples() {
+            return new Stream[] {
+                    Stream.of(5, 10, 15, 20).map(expectThisManyFactorsOfFive(1)),
+                    Stream.of(25).map(expectThisManyFactorsOfFive(2)),
+                    Stream.of(
+                            Stream.range(1, 5),
+                            Stream.range(6, 10),
+                            Stream.range(11, 15),
+                            Stream.range(16, 20),
+                            Stream.range(21, 25)
+                    ).reduce(Stream::appendAll).map(expectThisManyFactorsOfFive(0))
+            };
+        }
+
+        private static Function<Integer, Arguments> expectThisManyFactorsOfFive(int expected) {
+            return n -> Arguments.of(n, expected);
+        }
+
+        @ParameterizedTest
+        @MethodSource("examples")
+        void checkTheNumberOfFactorsOfFiveInANaturalNumber(int n, int expected) {
+            Assertions.assertEquals(
+                    expected,
+                    factorsOfFiveIn(n),
+                    String.format("Wrong number of factors of 5 in %d", n));
+        }
+
+        public static int factorsOfFiveIn(int n) {
+            return n >= 25 ? 2 : (n % 5 == 0 ? 1 : 0);
+        }
     }
 }
