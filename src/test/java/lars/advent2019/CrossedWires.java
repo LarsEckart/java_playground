@@ -28,6 +28,15 @@ class CrossedWires {
         assertThat(grid.wireAt(Location.of(3, 0))).isTrue();
     }
 
+    @Test
+    void medium_wire_going_down_from_start() {
+        Grid grid = new Grid();
+
+        grid.pathTo("D3");
+
+        assertThat(grid.wireAt(Location.of(0, -3))).isTrue();
+    }
+
     static class Location {
 
         private final int x;
@@ -57,6 +66,10 @@ class CrossedWires {
         Location right() {
             return Location.of(this.x + 1, y);
         }
+
+        Location down() {
+            return Location.of(this.x, this.y - 1);
+        }
     }
 
     static class Grid {
@@ -75,6 +88,12 @@ class CrossedWires {
             if (chars[0] == 'R') {
                 for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
                     current = current.right();
+                    wires.add(current);
+                }
+            }
+            if (chars[0] == 'D') {
+                for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                    current = current.down();
                     wires.add(current);
                 }
             }
