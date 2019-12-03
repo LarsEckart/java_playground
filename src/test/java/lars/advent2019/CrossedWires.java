@@ -1,8 +1,10 @@
 package lars.advent2019;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +66,24 @@ class CrossedWires {
         assertThat(grid.wireAt(Location.of(3, 3))).isTrue();
     }
 
+    @Test
+    void example_wire() {
+        Grid grid = new Grid();
+
+        grid.pathTo("R8,U5,L5,D3");
+
+        assertThat(grid.wireAt(Location.of(3, 2))).isTrue();
+    }
+
+    @Test
+    void second_wire() {
+        Grid grid = new Grid();
+
+        grid.pathTo("R8,U5,L5,D3\nU7,R6,D4,L4");
+
+        assertThat(grid.intersection(Location.of(3, 3))).isTrue();
+    }
+
     static class Location {
 
         private final int x;
@@ -90,6 +110,13 @@ class CrossedWires {
             return Objects.hash(x, y);
         }
 
+        @Override public String toString() {
+            return "Location{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    '}';
+        }
+
         Location right() {
             return Location.of(this.x + 1, y);
         }
@@ -114,39 +141,55 @@ class CrossedWires {
 
         private List<Location> wires = new ArrayList<>();
 
-        boolean wireAt(Location of) {
-            return wires.contains(of);
+        boolean wireAt(Location location) {
+            return wires.contains(location);
         }
 
         void pathTo(String pathCommand) {
-            String[] split = pathCommand.split(",");
-            for (String p : split) {
-                char[] chars = p.toCharArray();
-                if (chars[0] == 'R') {
-                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                        current = current.right();
-                        wires.add(current);
+            String[] inputWires = pathCommand.split("\n");
+            for (String wire : inputWires) {
+                current = origin;
+                String[] directions = wire.split(",");
+                for (String direction : directions) {
+                    char[] chars = direction.toCharArray();
+                    if (chars[0] == 'R') {
+                        for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                            current = current.right();
+                            wires.add(current);
+                        }
                     }
-                }
-                if (chars[0] == 'D') {
-                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                        current = current.down();
-                        wires.add(current);
+                    if (chars[0] == 'D') {
+                        for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                            current = current.down();
+                            wires.add(current);
+                        }
                     }
-                }
-                if (chars[0] == 'L') {
-                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                        current = current.left();
-                        wires.add(current);
+                    if (chars[0] == 'L') {
+                        for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                            current = current.left();
+                            wires.add(current);
+                        }
                     }
-                }
-                if (chars[0] == 'U') {
-                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                        current = current.up();
-                        wires.add(current);
+                    if (chars[0] == 'U') {
+                        for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                            current = current.up();
+                            wires.add(current);
+                        }
                     }
                 }
             }
+        }
+
+        boolean intersection(Location location) {
+            Set<Location> intersections = new LinkedHashSet<>();
+            for (int i = 0; i < wires.size(); i++) {
+                for (int j = i + 1; j < wires.size(); j++) {
+                    if (wires.get(i).equals(wires.get(j))) {
+                        intersections.add(wires.get(i));
+                    }
+                }
+            }
+            return intersections.contains(location);
         }
     }
 }
