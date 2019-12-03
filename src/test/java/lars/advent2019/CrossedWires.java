@@ -37,6 +37,33 @@ class CrossedWires {
         assertThat(grid.wireAt(Location.of(0, -3))).isTrue();
     }
 
+    @Test
+    void medium_wire_going_left_from_start() {
+        Grid grid = new Grid();
+
+        grid.pathTo("L3");
+
+        assertThat(grid.wireAt(Location.of(-3, 0))).isTrue();
+    }
+
+    @Test
+    void medium_wire_going_up_from_start() {
+        Grid grid = new Grid();
+
+        grid.pathTo("U3");
+
+        assertThat(grid.wireAt(Location.of(0, 3))).isTrue();
+    }
+
+    @Test
+    void medium_wire_going_up_then_right_from_start() {
+        Grid grid = new Grid();
+
+        grid.pathTo("U3,R3");
+
+        assertThat(grid.wireAt(Location.of(3, 3))).isTrue();
+    }
+
     static class Location {
 
         private final int x;
@@ -70,6 +97,14 @@ class CrossedWires {
         Location down() {
             return Location.of(this.x, this.y - 1);
         }
+
+        Location left() {
+            return Location.of(this.x - 1, this.y);
+        }
+
+        Location up() {
+            return Location.of(this.x, this.y + 1);
+        }
     }
 
     static class Grid {
@@ -84,17 +119,32 @@ class CrossedWires {
         }
 
         void pathTo(String pathCommand) {
-            char[] chars = pathCommand.toCharArray();
-            if (chars[0] == 'R') {
-                for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                    current = current.right();
-                    wires.add(current);
+            String[] split = pathCommand.split(",");
+            for (String p : split) {
+                char[] chars = p.toCharArray();
+                if (chars[0] == 'R') {
+                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                        current = current.right();
+                        wires.add(current);
+                    }
                 }
-            }
-            if (chars[0] == 'D') {
-                for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
-                    current = current.down();
-                    wires.add(current);
+                if (chars[0] == 'D') {
+                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                        current = current.down();
+                        wires.add(current);
+                    }
+                }
+                if (chars[0] == 'L') {
+                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                        current = current.left();
+                        wires.add(current);
+                    }
+                }
+                if (chars[0] == 'U') {
+                    for (int i = 1; i <= Character.getNumericValue(chars[1]); i++) {
+                        current = current.up();
+                        wires.add(current);
+                    }
                 }
             }
         }
