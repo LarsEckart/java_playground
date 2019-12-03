@@ -84,6 +84,15 @@ class CrossedWires {
         assertThat(grid.intersection(Location.of(3, 3))).isTrue();
     }
 
+    @Test
+    void closest_wire_intersection() {
+        Grid grid = new Grid();
+
+        grid.pathTo("R8,U5,L5,D3\nU7,R6,D4,L4");
+
+        assertThat(grid.closestIntersectionDistance()).isEqualTo(6);
+    }
+
     static class Location {
 
         private final int x;
@@ -96,6 +105,10 @@ class CrossedWires {
 
         public static Location of(int x, int y) {
             return new Location(x, y);
+        }
+
+        int manhatten() {
+            return Math.abs(this.x) + Math.abs(this.y);
         }
 
         @Override public boolean equals(Object o) {
@@ -140,6 +153,7 @@ class CrossedWires {
         private Location current = origin;
 
         private List<Location> wires = new ArrayList<>();
+        private Set<Location> intersections = new LinkedHashSet<>();
 
         boolean wireAt(Location location) {
             return wires.contains(location);
@@ -178,10 +192,6 @@ class CrossedWires {
                     }
                 }
             }
-        }
-
-        boolean intersection(Location location) {
-            Set<Location> intersections = new LinkedHashSet<>();
             for (int i = 0; i < wires.size(); i++) {
                 for (int j = i + 1; j < wires.size(); j++) {
                     if (wires.get(i).equals(wires.get(j))) {
@@ -189,7 +199,18 @@ class CrossedWires {
                     }
                 }
             }
+        }
+
+        boolean intersection(Location location) {
             return intersections.contains(location);
         }
+
+        int closestIntersectionDistance() {
+            return intersections.stream()
+                    .mapToInt(Location::manhatten)
+                    .min()
+                    .orElseThrow(() -> new IllegalStateException("no intersections"));
+        }
+
     }
 }
