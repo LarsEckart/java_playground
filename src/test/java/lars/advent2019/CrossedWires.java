@@ -1,7 +1,6 @@
 package lars.advent2019;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -96,6 +95,16 @@ class CrossedWires {
         assertThat(grid.closestIntersectionDistance()).isEqualTo(6);
     }
 
+    @Disabled("lest refactor first")
+    @Test
+    void idea_why_it_might_be_wrong() {
+        Grid grid = new Grid();
+
+        grid.pathTo("R3,U3,L2,D4\nL1,U2,R3");
+
+        assertThat(grid.closestIntersectionDistance()).isEqualTo(3);
+    }
+
     @Disabled("why?????????????? somehow has an intersection with distance 157")
     @Test
     void more_example() {
@@ -146,8 +155,7 @@ class CrossedWires {
         private Command(String command) {
             char[] chars = command.toCharArray();
             this.direction = chars[0];
-            char[] rest = Arrays.copyOfRange(chars, 1, chars.length);
-            this.distance = Integer.parseInt(new String(rest));
+            this.distance = Integer.parseInt(command.substring(1));
         }
 
         public static Command of(String command) {
