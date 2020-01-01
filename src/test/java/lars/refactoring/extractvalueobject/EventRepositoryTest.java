@@ -26,7 +26,7 @@ class EventRepositoryTest {
     void should_not_add_null_event() {
         assertThatThrownBy(
                 () -> repository.add(null)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -45,7 +45,7 @@ class EventRepositoryTest {
 
         assertThatThrownBy(
                 () -> repository.removeOverlappingEvents(null)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(NullPointerException.class);
 
         assertThat(repository.count()).isEqualTo(1);
     }

@@ -20,7 +20,8 @@ class EventRepository {
         Objects.requireNonNull(date);
 
         for (Event storedEvent : events.values()) {
-            if (storedEvent.getFrom().isBefore(date) && storedEvent.getTo().isAfter(date)
+            if (storedEvent.getFrom().isBefore(date)
+                    && storedEvent.getTo().isAfter(date)
                     || storedEvent.getFrom().isEqual(date)
                     || storedEvent.getTo().isEqual(date)) {
                 events.remove(storedEvent.getName());

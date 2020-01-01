@@ -12,21 +12,21 @@ class EventTest {
     void should_not_create_event_without_name() {
         assertThatThrownBy(
                 () -> Event.of(null, FROM_DATE, TO_DATE)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void should_not_create_event_without_fromDate() {
         assertThatThrownBy(
                 () -> Event.of(EVENT_NAME, null, TO_DATE)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void should_not_create_event_without_toDate() {
         assertThatThrownBy(
                 () -> Event.of(EVENT_NAME, FROM_DATE, null)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(NullPointerException.class);
     }
 
     @Test
