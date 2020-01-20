@@ -2,19 +2,12 @@ package lars.refactoring.v2;
 
 class Play {
 
-    private String name;
-    private String type;
+    public String name;
+    public String type;
 
     Play(String name, String type) {
         this.type = type;
         this.name = name;
     }
 
-    String getName() {
-        return name;
-    }
-
-    String getType() {
-        return type;
-    }
 }
