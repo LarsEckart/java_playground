@@ -1,5 +1,7 @@
 package lars.spielplatz.ttddyydataproxy;
 
+import java.util.Date;
+
 import net.ttddyy.dsproxy.QueryCount;
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.hibernate.Session;
@@ -11,8 +13,6 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.Date;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 // from https://blog.codecentric.de/en/2019/07/hibernate-caching/
@@ -22,7 +22,9 @@ class HibernateSessionTest {
 
     @Container
     private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer()
-            .withUsername("hibernateuser").withPassword("hibernatepassword").withDatabaseName("hibernatetest");
+            .withUsername("hibernateuser")
+            .withPassword("hibernatepassword")
+            .withDatabaseName("hibernatetest");
 
     private static void deleteAllEntities() {
         try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {

@@ -1,9 +1,9 @@
 package lars.spielplatz.rx;
 
-import io.reactivex.Flowable;
-import io.reactivex.disposables.Disposable;
-
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class JavaExamples {
 
