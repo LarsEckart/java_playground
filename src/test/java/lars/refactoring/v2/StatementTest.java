@@ -53,7 +53,7 @@ public class StatementTest {
     }
 
     @Test
-    void approval() throws Exception {
+    void golden_master() throws Exception {
         CombinationApprovals.verifyAllCombinations(this::createStatement,
                 new String[]{"hamlet", "as-like", "othello"},
                 new Integer[]{5, 10, 15, 20, 25, 30, 35, 40, 45});
