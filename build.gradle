@@ -2,7 +2,6 @@
 plugins {
     id "com.github.ben-manes.versions" version "0.27.0"
     id 'net.ltgt.errorprone' version '1.1.1'
-    id 'pmd'
     id 'java'
     id 'idea'
 }
@@ -48,16 +47,16 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
     testImplementation("junit:junit:${junit4Version}")
 
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
         because 'allows JUnit 3 and JUnit 4 tests to run'
     }
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
         because 'allows tests to run from IDEs that bundle older version of launcher'
     }
 
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
-    testCompile group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
+    testImplementation group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
 
     def mockitoVersion = '3.1.8'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
@@ -82,7 +81,8 @@ task copyDependenciesToLibs(type: Copy) {
 }
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:all" //<< "-Werror"
+    options.compilerArgs.add("-Xlint:all")
+    options.compilerArgs.add("--enable-preview")
 
     options.errorprone {
         disableWarningsInGeneratedCode = true
@@ -90,8 +90,8 @@ tasks.withType(JavaCompile) {
         disableAllChecks = true
     }
 }
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_13
+targetCompatibility = JavaVersion.VERSION_13
 
 test {
     useJUnitPlatform()
@@ -100,10 +100,7 @@ test {
         exceptionFormat "full"
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-}
-
-pmd {
-    ignoreFailures = true
+    jvmArgs("--enable-preview")
 }
 
 dependencyUpdates.resolutionStrategy {
