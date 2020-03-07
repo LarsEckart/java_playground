@@ -1,10 +1,11 @@
 package lars.java11;
 
-import com.google.common.flogger.FluentLogger;
-import org.junit.jupiter.api.Test;
-
 import java.time.Duration;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ class AstroClientTest {
 
     private AstroClient client = new AstroClient();
 
-    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+    private static final Logger logger = LoggerFactory.getLogger(AstroClientTest.class);
 
     @Test
     void getSync() {
@@ -51,7 +52,7 @@ class AstroClientTest {
     }
 
     private void logResponse(int num, List<Assignment> assignments) {
-        logger.atInfo().log("There are %d people in space", num);
+        logger.info("There are {} people in space", num);
         assignments.forEach(person -> logger.atInfo().log("%s aboard %s",
                 person.getName(),
                 person.getCraft()));
