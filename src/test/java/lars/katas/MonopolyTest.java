@@ -27,7 +27,6 @@ class MonopolyTest {
   }
 
   @Test
-  @Disabled
   void go() throws Exception {
     alice.setBalance(100);
     alice.landsOn("GO");
@@ -36,7 +35,6 @@ class MonopolyTest {
   }
 
   @Test
-  @Disabled
   void luxuryTax() throws Exception {
     alice.setBalance(100);
     alice.landsOn("LUXURY TAX");
@@ -45,14 +43,12 @@ class MonopolyTest {
   }
 
   @Test
-  @Disabled
   void goToJail() throws Exception {
     alice.landsOn("GO TO JAIL");
     assertEquals("JAIL", alice.location());
   }
 
   @Test
-  @Disabled
   void incomeTax() throws Exception {
     // if balance is more than 2000 then pay 200
     alice.setBalance(3000);
@@ -66,7 +62,6 @@ class MonopolyTest {
   }
 
   @Test
-  @Disabled
   void nameGift() throws Exception {
     // This square exists only in some very rare editions of Monopoly
     // The player receives one euro for each letter of his or her name
@@ -75,12 +70,11 @@ class MonopolyTest {
     assertEquals(100 + 5, alice.balance());
 
     bob.setBalance(100);
-    bob.landsOn("GITF OF NAME");
-    assertEquals(1000 + 3, bob.balance());
+    bob.landsOn("GIFT OF NAME");
+    assertEquals(100 + 3, bob.balance());
   }
 
   @Test
-  @Disabled
   void utilityTax() throws Exception {
     // This square exists only in some very rare editions of Monopoly
     // The player pays 10 for every Utility he or she owns
