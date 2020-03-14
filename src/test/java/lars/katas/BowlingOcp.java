@@ -1,9 +1,15 @@
 package lars.katas;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*
+Write the first failing test. Then write a factory that returns an object, or an aggregate of objects, that make the test pass.
+
+The factory should be limited to creating objects and linking them together. No conditionals allowed.
+ */
 public class BowlingOcp {
 
   @Test
@@ -22,6 +28,19 @@ public class BowlingOcp {
       game.roll(1);
     }
     assertEquals(20, game.score());
+  }
+
+  @Test
+  @Disabled
+  void oneSpareAllGutter() {
+    BowlingGame game = new BowlingGameFactory().create();
+    game.roll(5);
+    game.roll(5);
+    game.roll(1);
+    for (int i = 0; i < 17; i++) {
+      game.roll(0);
+    }
+    assertEquals(12, game.score());
   }
 
   interface Rolls {
