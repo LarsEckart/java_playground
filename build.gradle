@@ -1,6 +1,6 @@
 
 plugins {
-    id "com.github.ben-manes.versions" version "0.27.0"
+    id "com.github.ben-manes.versions" version "0.28.0"
     id 'net.ltgt.errorprone' version '1.1.1'
     id 'java'
     id 'idea'
@@ -17,31 +17,31 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.3.3")
+    errorprone("com.google.errorprone:error_prone_core:2.3.4")
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
-    implementation 'io.projectreactor:reactor-core:3.3.2.RELEASE'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.1'
+    implementation 'io.projectreactor:reactor-core:3.3.3.RELEASE'
     implementation 'org.threeten:threeten-extra:1.5.0'
     implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
     implementation 'ch.qos.logback:logback-core:1.3.0-alpha5'
     implementation 'org.owasp.encoder:encoder:1.2.2'
-    implementation 'com.hazelcast:hazelcast:3.12.4'
+    implementation 'com.hazelcast:hazelcast:4.0'
     implementation 'javax.cache:cache-api:1.1.1'
-    implementation 'io.vavr:vavr:0.9.3'
+    implementation 'io.vavr:vavr:0.10.2'
 
-    implementation 'org.hibernate:hibernate-core:5.4.7.Final'
-    implementation 'net.ttddyy:datasource-proxy:1.5.1'
-    implementation 'mysql:mysql-connector-java:8.0.18'
-    implementation 'org.eclipse.collections:eclipse-collections-api:10.1.0'
-    implementation 'org.eclipse.collections:eclipse-collections:10.1.0'
+    implementation 'org.hibernate:hibernate-core:5.4.12.Final'
+    implementation 'net.ttddyy:datasource-proxy:1.6'
+    implementation 'mysql:mysql-connector-java:8.0.19'
+    implementation 'org.eclipse.collections:eclipse-collections-api:10.2.0'
+    implementation 'org.eclipse.collections:eclipse-collections:10.2.0'
 
 
     def junit4Version = '4.13'
-    def junitVintageVersion = '5.5.2'
-    def junitJupiterVersion = '5.5.2'
-    def junitPlatformVersion = '1.5.2'
+    def junitVintageVersion = '5.6.0'
+    def junitJupiterVersion = '5.6.0'
+    def junitPlatformVersion = '1.6.0'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
@@ -58,18 +58,18 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testImplementation group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
 
-    def mockitoVersion = '3.1.8'
+    def mockitoVersion = '3.3.3'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-    testImplementation 'org.assertj:assertj-core:3.14.0'
-    testImplementation 'com.google.truth:truth:1.0'
-    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0'
+    testImplementation 'org.assertj:assertj-core:3.15.0'
+    testImplementation 'com.google.truth:truth:1.0.1'
+    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.4.1'
     testImplementation 'com.approvaltests:approvaltests:4.0.2'
-    testImplementation 'org.awaitility:awaitility-groovy:4.0.1'
+    testImplementation 'org.awaitility:awaitility-groovy:4.0.2'
 
-    def testcontainersVersion = '1.12.3'
+    def testcontainersVersion = '1.13.0'
     testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
     testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
     testImplementation "org.testcontainers:mysql:${testcontainersVersion}"
