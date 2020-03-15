@@ -6,11 +6,12 @@ import java.util.Locale;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class CompactNumberFormatting {
 
   @Test
-  void name() {
+  void format_numbers_when_space_is_limited() {
     NumberFormat nf = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
 
     assertThat(nf.format(10000)).isEqualTo("10K");
@@ -20,26 +21,28 @@ class CompactNumberFormatting {
 
     nf = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);
 
-    assertThat( nf.format(10000)).isEqualTo("10 thousand");
-    assertThat( nf.format(120300)).isEqualTo("120 thousand");
-    assertThat( nf.format(2120000)).isEqualTo("2 million");
-    assertThat( nf.format(1950000300)).isEqualTo("2 billion");
+    assertThat(nf.format(10000)).isEqualTo("10 thousand");
+    assertThat(nf.format(120300)).isEqualTo("120 thousand");
+    assertThat(nf.format(2120000)).isEqualTo("2 million");
+    assertThat(nf.format(1950000300)).isEqualTo("2 billion");
 
-    NumberFormat german = NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.SHORT);
+    NumberFormat germanShort =
+        NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.SHORT);
 
-    assertThat(german.format(10000)).isEqualTo("10.000");
-    assertThat(german.format(120300)).isEqualTo("120.300");
-    assertThat(german.format(2120000)).isEqualTo("2 Mio.");
-    assertThat(german.format(1950000300)).isEqualTo("2 Mrd.");
+    assertThat(germanShort.format(10000)).isEqualTo("10.000");
+    assertThat(germanShort.format(120300)).isEqualTo("120.300");
+    assertThat(germanShort.format(2120000)).isEqualTo("2 Mio.");
+    assertThat(germanShort.format(1950000300)).isEqualTo("2 Mrd.");
 
-    german = NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.LONG);
+    NumberFormat germanLong = NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.LONG);
 
-    assertThat(german.format(10000)).isEqualTo("10 Tausend");
-    assertThat(german.format(120300)).isEqualTo("120 Tausend");
-    // TODO: bug with locales? passes locally with zulu-13 but fails on github&travis
-    assertThat(german.format(1120000)).isEqualTo("1 Million");
-    assertThat(german.format(2120000)).isEqualTo("2 Million");
-    assertThat(german.format(1150000300)).isEqualTo("1 Milliarde");
-    assertThat(german.format(1950000300)).isEqualTo("2 Milliarde");
+    assertAll(
+        () -> assertThat(germanLong.format(10000)).isEqualTo("10 Tausend"),
+        () -> assertThat(germanLong.format(120300)).isEqualTo("120 Tausend"),
+        // TODO: bug with locales? passes locally with zulu-13 but fails on github&travis
+        () -> assertThat(germanLong.format(1120000)).isEqualTo("1 Millionen"),
+        () -> assertThat(germanLong.format(2120000)).isEqualTo("2 Millionen"),
+        () -> assertThat(germanLong.format(1150000300)).isEqualTo("1 Milliarde"),
+        () -> assertThat(germanLong.format(1950000300)).isEqualTo("2 Milliarden"));
   }
 }
