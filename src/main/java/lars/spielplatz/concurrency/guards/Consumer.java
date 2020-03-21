@@ -5,25 +5,25 @@ import java.util.concurrent.BlockingQueue;
 
 public class Consumer implements Runnable {
 
-    private BlockingQueue<String> drop;
+  private BlockingQueue<String> drop;
 
-    public Consumer(BlockingQueue<String> drop) {
-        this.drop = drop;
-    }
+  public Consumer(BlockingQueue<String> drop) {
+    this.drop = drop;
+  }
 
-    @Override
-    public void run() {
-        Random random = new Random();
+  @Override
+  public void run() {
+    Random random = new Random();
+    try {
+      for (String message = drop.take(); !message.equals("DONE"); message = drop.take()) {
+        System.out.format("MESSAGE RECEIVED: %s%n", message);
         try {
-            for (String message = drop.take(); !message.equals("DONE"); message = drop.take()) {
-                System.out.format("MESSAGE RECEIVED: %s%n", message);
-                try {
-                    Thread.sleep(random.nextInt(5000));
-                } catch (InterruptedException e) {
-                }
-            }
+          Thread.sleep(random.nextInt(5000));
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
+      }
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
+  }
 }

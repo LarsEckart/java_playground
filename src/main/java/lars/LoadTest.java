@@ -10,27 +10,33 @@ import java.util.concurrent.TimeoutException;
 
 public class LoadTest {
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
-        HttpClient httpClient = HttpClient.newHttpClient();
+  public static void main(String[] args)
+      throws ExecutionException, InterruptedException, TimeoutException {
+    HttpClient httpClient = HttpClient.newHttpClient();
 
-        HttpRequest request =
-                HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/test"))
-                        .header("Client-Id", "Lars:1.2.3").build();
+    HttpRequest request =
+        HttpRequest.newBuilder()
+            .GET()
+            .uri(URI.create("http://localhost:8080/test"))
+            .header("Client-Id", "Lars:1.2.3")
+            .build();
 
-        int i = 0;
-        while (i < 100) {
-            var httpResponseCompletableFuture =
-                    httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+    int i = 0;
+    while (i < 100) {
+      var httpResponseCompletableFuture =
+          httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(i);
-            try {
-                httpResponseCompletableFuture.thenApply(HttpResponse::body)
-                        .thenAccept(System.out::println).get(100, TimeUnit.MILLISECONDS);
-            } catch (TimeoutException e) {
+      System.out.println(i);
+      try {
+        httpResponseCompletableFuture
+            .thenApply(HttpResponse::body)
+            .thenAccept(System.out::println)
+            .get(100, TimeUnit.MILLISECONDS);
+      } catch (TimeoutException e) {
 
-            }
-            i++;
-        }
-        System.out.println("sent");
+      }
+      i++;
     }
+    System.out.println("sent");
+  }
 }

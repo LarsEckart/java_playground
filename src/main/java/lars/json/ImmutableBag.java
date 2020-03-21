@@ -2,13 +2,13 @@ package lars.json;
 
 public class ImmutableBag {
 
-    private final String name;
+  private final String name;
 
-    public ImmutableBag(String name) {
-        this.name = name;
-    }
+  public ImmutableBag(String name) {
+    this.name = name;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  public String getName() {
+    return this.name;
+  }
 }

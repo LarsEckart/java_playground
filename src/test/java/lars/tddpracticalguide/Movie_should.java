@@ -7,20 +7,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Movie_should {
 
-    private Movie movie;
+  private Movie movie;
 
-    @BeforeEach
-    void setUp() {
-        movie = new Movie("Star Wars");
-    }
+  @BeforeEach
+  void setUp() {
+    movie = new Movie("Star Wars");
+  }
 
-    @Test
-    void have_a_name() {
-        assertThat(movie.getName()).isEqualTo("Star Wars");
-    }
+  @Test
+  void have_a_name() {
+    assertThat(movie.getName()).isEqualTo("Star Wars");
+  }
 
-    @Test
-    void display_movie_name_for_toString() {
-        assertThat(movie.toString()).isEqualTo("Star Wars");
-    }
+  @Test
+  void display_movie_name_for_toString() {
+    assertThat(movie.toString()).isEqualTo("Star Wars");
+  }
 }

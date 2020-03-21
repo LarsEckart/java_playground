@@ -1,5 +1,8 @@
 package lars.tddpracticalguide;
 
+import java.util.Vector;
+import javax.swing.ListModel;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -7,53 +10,49 @@ import org.junit.jupiter.api.condition.OS;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 
-import java.util.Vector;
-import javax.swing.ListModel;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * I couldn't get it to work on travis linux machine.
- */
+/** I couldn't get it to work on travis linux machine. */
 @EnabledOnOs({OS.MAC})
 class TestSwingMovieListEditorView {
 
-    JFrameOperator mainWindow;
-    private MovieList movieList;
-    private Movie starWars;
-    private Movie starTrek;
-    private Movie starGate;
-    private Vector<Object> movies;
+  JFrameOperator mainWindow;
+  private MovieList movieList;
+  private Movie starWars;
+  private Movie starTrek;
+  private Movie starGate;
+  private Vector<Object> movies;
 
-    @BeforeEach
-    void setUp() {
-        SwingMovieListEditorView.start();
-        movieList = new MovieList();
-        starWars = new Movie("Star Wars");
-        starTrek = new Movie("Star Trek");
-        starGate = new Movie("Stargate");
+  @BeforeEach
+  void setUp() {
+    SwingMovieListEditorView.start();
+    movieList = new MovieList();
+    starWars = new Movie("Star Wars");
+    starTrek = new Movie("Star Trek");
+    starGate = new Movie("Stargate");
 
-        movies = new Vector<>();
-        movies.add(starWars);
-        movies.add(starTrek);
-        movies.add(starGate);
+    movies = new Vector<>();
+    movies.add(starWars);
+    movies.add(starTrek);
+    movies.add(starGate);
 
-        movieList = new MovieList();
-        movieList.add(starWars);
-        movieList.add(starTrek);
-        movieList.add(starGate);
+    movieList = new MovieList();
+    movieList.add(starWars);
+    movieList.add(starTrek);
+    movieList.add(starGate);
+  }
+
+  @Test
+  void listContents() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    ListModel listModel = movieList.getModel();
+    assertThat(listModel.getSize()).isEqualTo(movies.size());
+    for (int i = 0; i < movies.size(); i++) {
+      assertThat(movies.get(i)).isEqualTo(listModel.getElementAt(i));
     }
-
-    @Test
-    void listContents() {
-        mainWindow = new JFrameOperator("Movie List");
-        MovieListEditor editor = new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
-
-        JListOperator movieList = new JListOperator(mainWindow);
-        ListModel listModel = movieList.getModel();
-        assertThat(listModel.getSize()).isEqualTo(movies.size());
-        for (int i = 0; i < movies.size(); i++) {
-            assertThat(movies.get(i)).isEqualTo(listModel.getElementAt(i));
-        }
-    }
+  }
 }

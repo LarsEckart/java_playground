@@ -8,8 +8,8 @@ import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
 
 /**
- * code from https://bsideup.github.io/posts/daily_reactive/thread_locals/
- * explaining the issue with threadlocals in reactive code.
+ * code from https://bsideup.github.io/posts/daily_reactive/thread_locals/ explaining the issue with
+ * threadlocals in reactive code.
  */
 public class ThreadLocals {
 

@@ -7,32 +7,30 @@ import javax.persistence.Id;
 @Entity
 public class SomeEntity {
 
-    public SomeEntity() {
-    }
+  public SomeEntity() {}
 
-    public SomeEntity(final int id) {
-        setId(id);
-        setCreatedDate(new Date());
-    }
+  public SomeEntity(final int id) {
+    setId(id);
+    setCreatedDate(new Date());
+  }
 
-    @Id
-    private Integer id;
+  @Id private Integer id;
 
-    private Date createdDate;
+  private Date createdDate;
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+  public Date getCreatedDate() {
+    return createdDate;
+  }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 }

@@ -10,30 +10,28 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
-    private UserService userService;
+  private UserService userService;
 
-    @Mock UserRepository repository;
+  @Mock UserRepository repository;
 
-    @Test
-    void givenValidUser_whenSaveUser_thenSucceed() {
-        assertNotNull(repository);
+  @Test
+  void givenValidUser_whenSaveUser_thenSucceed() {
+    assertNotNull(repository);
+  }
+
+  private class User {
+
+    public Object getId() {
+      throw new UnsupportedOperationException("implement me!");
     }
+  }
 
-    private class User {
+  private class UserService {}
 
-        public Object getId() {
-            throw new UnsupportedOperationException("implement me!");
-        }
+  private class UserRepository {
+
+    public void insert(User user) {
+      throw new UnsupportedOperationException("implement me!");
     }
-
-    private class UserService {
-
-    }
-
-    private class UserRepository {
-
-        public void insert(User user) {
-            throw new UnsupportedOperationException("implement me!");
-        }
-    }
+  }
 }

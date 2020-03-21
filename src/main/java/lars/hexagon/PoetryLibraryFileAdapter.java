@@ -6,18 +6,18 @@ import java.nio.file.Paths;
 
 class PoetryLibraryFileAdapter implements IObtainPoetry {
 
-    private final String path;
+  private final String path;
 
-    public PoetryLibraryFileAdapter(String path) {
-        this.path = path;
-    }
+  public PoetryLibraryFileAdapter(String path) {
+    this.path = path;
+  }
 
-    @Override
-    public String getMeAPoem() {
-        try {
-            return String.join("\n", Files.readAllLines(Paths.get(path)));
-        } catch (IOException e) {
-            throw new RuntimeException("Expected to read file from " + path + " but failed.");
-        }
+  @Override
+  public String getMeAPoem() {
+    try {
+      return String.join("\n", Files.readAllLines(Paths.get(path)));
+    } catch (IOException e) {
+      throw new RuntimeException("Expected to read file from " + path + " but failed.");
     }
+  }
 }

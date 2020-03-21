@@ -8,18 +8,18 @@ import org.junit.jupiter.api.Test;
 
 class LifeCycle {
 
-    @BeforeAll
-    static void initAll() { }
+  @BeforeAll
+  static void initAll() {}
 
-    @BeforeEach
-    void init() { }
+  @BeforeEach
+  void init() {}
 
-    @Test
-    void myTest() { }
+  @Test
+  void myTest() {}
 
-    @AfterEach
-    void tearDown() { }
+  @AfterEach
+  void tearDown() {}
 
-    @AfterAll
-    static void tearDownAll() { }
+  @AfterAll
+  static void tearDownAll() {}
 }

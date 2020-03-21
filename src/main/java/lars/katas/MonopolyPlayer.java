@@ -60,9 +60,10 @@ class MonopolyPlayer {
       this.balance += this.playerName.toCharArray().length;
     }
     if ("UTILITY TAX".equals(squareName)) {
-      long count = ownedProperties.stream()
-          .filter(x -> "ELECTRIC COMPANY".equals(x) || "WATER WORKS".equals(x))
-          .count();
+      long count =
+          ownedProperties.stream()
+              .filter(x -> "ELECTRIC COMPANY".equals(x) || "WATER WORKS".equals(x))
+              .count();
       this.balance -= 10 * count;
     }
   }

@@ -34,15 +34,16 @@ class CompactNumberFormatting {
     assertThat(germanShort.format(2120000)).isEqualTo("2 Mio.");
     assertThat(germanShort.format(1950000300)).isEqualTo("2 Mrd.");
 
-    NumberFormat germanLong = NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.LONG);
+    NumberFormat germanLong =
+        NumberFormat.getCompactNumberInstance(Locale.GERMANY, NumberFormat.Style.LONG);
 
     assertAll(
         () -> assertThat(germanLong.format(10000)).isEqualTo("10 Tausend"),
         () -> assertThat(germanLong.format(120300)).isEqualTo("120 Tausend"),
         // TODO: bug with locales? passes either locally or on github&travis
-        //() -> assertThat(germanLong.format(1120000)).isEqualTo("1 Millionen"),
+        // () -> assertThat(germanLong.format(1120000)).isEqualTo("1 Millionen"),
         () -> assertThat(germanLong.format(2120000)).isEqualTo("2 Millionen"),
-        //() -> assertThat(germanLong.format(1150000300)).isEqualTo("1 Milliarde"),
+        // () -> assertThat(germanLong.format(1150000300)).isEqualTo("1 Milliarde"),
         () -> assertThat(germanLong.format(1950000300)).isEqualTo("2 Milliarden"));
   }
 }

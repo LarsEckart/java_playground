@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 class Json {
 
-    public static ObjectMapper mapper() {
-        JsonFactory f = new JsonFactory().enable(JsonParser.Feature.ALLOW_COMMENTS);
-        return new ObjectMapper(f);
-    }
+  public static ObjectMapper mapper() {
+    JsonFactory f = new JsonFactory().enable(JsonParser.Feature.ALLOW_COMMENTS);
+    return new ObjectMapper(f);
+  }
 }

@@ -2,64 +2,64 @@ package lars.quinngil;
 
 public class FizzBuzz_05_NoNewInline {
 
-    class FizzBuzz {
+  class FizzBuzz {
 
-        private int input;
+    private int input;
 
-        public FizzBuzz(int input) {
-            this.input = input;
-        }
-
-        public String Result() {
-            if (new Mod15(input).remainder() == 0) {
-                return "FizzBuzz";
-            }
-            if (new Mod3(input).remainder() == 0) {
-                return "Fizz";
-            }
-            if (new Mod5(input).remainder() == 0) {
-                return "Buzz";
-            }
-            return String.valueOf(input);
-        }
+    public FizzBuzz(int input) {
+      this.input = input;
     }
 
-    class Mod15 {
+    public String Result() {
+      if (new Mod15(input).remainder() == 0) {
+        return "FizzBuzz";
+      }
+      if (new Mod3(input).remainder() == 0) {
+        return "Fizz";
+      }
+      if (new Mod5(input).remainder() == 0) {
+        return "Buzz";
+      }
+      return String.valueOf(input);
+    }
+  }
 
-        private final int input;
+  class Mod15 {
 
-        public Mod15(int input) {
-            this.input = input;
-        }
+    private final int input;
 
-        public int remainder() {
-            return input % 15;
-        }
+    public Mod15(int input) {
+      this.input = input;
     }
 
-    class Mod3 {
+    public int remainder() {
+      return input % 15;
+    }
+  }
 
-        private final int input;
+  class Mod3 {
 
-        public Mod3(int input) {
-            this.input = input;
-        }
+    private final int input;
 
-        public int remainder() {
-            return input % 3;
-        }
+    public Mod3(int input) {
+      this.input = input;
     }
 
-    class Mod5 {
-
-        private final int input;
-
-        public Mod5(int input) {
-            this.input = input;
-        }
-
-        public int remainder() {
-            return input % 5;
-        }
+    public int remainder() {
+      return input % 3;
     }
+  }
+
+  class Mod5 {
+
+    private final int input;
+
+    public Mod5(int input) {
+      this.input = input;
+    }
+
+    public int remainder() {
+      return input % 5;
+    }
+  }
 }

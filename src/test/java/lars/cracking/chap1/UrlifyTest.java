@@ -7,19 +7,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UrlifyTest {
 
-    private Urlify urlify;
+  private Urlify urlify;
 
-    @Before
-    public void initialize() throws Exception {
-        this.urlify = new Urlify();
-    }
+  @Before
+  public void initialize() throws Exception {
+    this.urlify = new Urlify();
+  }
 
-    @Test
-    public void should_replace_space_with_percent_20() throws Exception {
-        // when
-        final String url = this.urlify.urlify("Mr John Smith", 13);
+  @Test
+  public void should_replace_space_with_percent_20() throws Exception {
+    // when
+    final String url = this.urlify.urlify("Mr John Smith", 13);
 
-        // then
-        assertThat(url).isEqualTo("Mr%20John%20Smith");
-    }
+    // then
+    assertThat(url).isEqualTo("Mr%20John%20Smith");
+  }
 }

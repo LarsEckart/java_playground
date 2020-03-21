@@ -2,17 +2,17 @@ package lars.spielplatz.concurrency.synchronization;
 
 public class Counter {
 
-    private int c = 0;
+  private int c = 0;
 
-    public void increment() {
-        c++;
-    }
+  public void increment() {
+    c++;
+  }
 
-    public void decrement() {
-        c--;
-    }
+  public void decrement() {
+    c--;
+  }
 
-    public int value() {
-        return c;
-    }
+  public int value() {
+    return c;
+  }
 }

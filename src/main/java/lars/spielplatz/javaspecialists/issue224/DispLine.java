@@ -2,20 +2,20 @@ package lars.spielplatz.javaspecialists.issue224;
 
 public class DispLine {
 
-    private final long disp;
-    private final CharSequence line;
+  private final long disp;
+  private final CharSequence line;
 
-    public DispLine(long disp, CharSequence line) {
-        this.disp = disp;
-        this.line = line;
-    }
+  public DispLine(long disp, CharSequence line) {
+    this.disp = disp;
+    this.line = line;
+  }
 
-    public CharSequence getLine() {
-        return line;
-    }
+  public CharSequence getLine() {
+    return line;
+  }
 
-    @Override
-    public String toString() {
-        return disp + ":" + line;
-    }
+  @Override
+  public String toString() {
+    return disp + ":" + line;
+  }
 }

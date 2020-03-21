@@ -9,68 +9,84 @@ import static org.mockito.Mockito.verify;
 
 public class AcceptanceTest {
 
-    // IRequestVerses = left side port
-    // PoetryReader = hexagon
-    @Test
-    void should_give_verses_when_asked_for_poetry() {
-        IRequestVerses poetryReader = new PoetryReader();
+  // IRequestVerses = left side port
+  // PoetryReader = hexagon
+  @Test
+  void should_give_verses_when_asked_for_poetry() {
+    IRequestVerses poetryReader = new PoetryReader();
 
-        String verses = poetryReader.giveMeSomePoetry();
+    String verses = poetryReader.giveMeSomePoetry();
 
-        assertThat(verses).isEqualTo("Sie sagt, ich sei so oldschool, oldschool\n"
+    assertThat(verses)
+        .isEqualTo(
+            "Sie sagt, ich sei so oldschool, oldschool\n"
                 + "Ich weiß nicht mal, was das heißt\n"
                 + "Die Bärte werden länger, die Hosen enger\n"
                 + "Doch ich trag' immer noch 501");
-    }
+  }
 
-    @Test
-    void should_give_verses_when_asked_for_poetry_with_support_of_poetry_library() {
-        IObtainPoetry poetryLibrary = stub(IObtainPoetry.class, p -> p.getMeAPoem(), "Ich bin dein 1999, deine Flucht zurück\n"
+  @Test
+  void should_give_verses_when_asked_for_poetry_with_support_of_poetry_library() {
+    IObtainPoetry poetryLibrary =
+        stub(
+            IObtainPoetry.class,
+            p -> p.getMeAPoem(),
+            "Ich bin dein 1999, deine Flucht zurück\n"
                 + "Ich hol’ mein Batmobil und Babe, dann kommst du mit\n"
                 + "Ich halte dir die Türen auf wie Gentleman\n"
                 + "Ich kämpf' für dich wie Jackie Chan");
-        IRequestVerses poetryReader = new PoetryReader(poetryLibrary);
+    IRequestVerses poetryReader = new PoetryReader(poetryLibrary);
 
-        String verses = poetryReader.giveMeSomePoetry();
+    String verses = poetryReader.giveMeSomePoetry();
 
-        assertThat(verses).isEqualTo("Ich bin dein 1999, deine Flucht zurück\n"
+    assertThat(verses)
+        .isEqualTo(
+            "Ich bin dein 1999, deine Flucht zurück\n"
                 + "Ich hol’ mein Batmobil und Babe, dann kommst du mit\n"
                 + "Ich halte dir die Türen auf wie Gentleman\n"
                 + "Ich kämpf' für dich wie Jackie Chan");
-    }
+  }
 
-    @Test
-    void should_provide_verses_when_asked_for_poetry_with_support_of_console_adapter() {
-        // init the right side adapter (i want to go outside hexagon)
-        IObtainPoetry poetryLibrary = stub(IObtainPoetry.class, p -> p.getMeAPoem(), "Ich bin dein 1999, deine Flucht zurück\n"
+  @Test
+  void should_provide_verses_when_asked_for_poetry_with_support_of_console_adapter() {
+    // init the right side adapter (i want to go outside hexagon)
+    IObtainPoetry poetryLibrary =
+        stub(
+            IObtainPoetry.class,
+            p -> p.getMeAPoem(),
+            "Ich bin dein 1999, deine Flucht zurück\n"
                 + "Ich hol’ mein Batmobil und Babe, dann kommst du mit\n"
                 + "Ich halte dir die Türen auf wie Gentleman\n"
                 + "Ich kämpf' für dich wie Jackie Chan");
 
-        // init the hexagon
-        IRequestVerses poetryReader = new PoetryReader(poetryLibrary);
+    // init the hexagon
+    IRequestVerses poetryReader = new PoetryReader(poetryLibrary);
 
-        IWriteLines publicationStrategy = mock(IWriteLines.class);
-        ConsoleAdapter consoleAdapter = new ConsoleAdapter(poetryReader, publicationStrategy);
+    IWriteLines publicationStrategy = mock(IWriteLines.class);
+    ConsoleAdapter consoleAdapter = new ConsoleAdapter(poetryReader, publicationStrategy);
 
-        consoleAdapter.ask();
+    consoleAdapter.ask();
 
-        // check that console.writeLine has been called
-        verify(publicationStrategy).writeLines("Ich bin dein 1999, deine Flucht zurück\n"
+    // check that console.writeLine has been called
+    verify(publicationStrategy)
+        .writeLines(
+            "Ich bin dein 1999, deine Flucht zurück\n"
                 + "Ich hol’ mein Batmobil und Babe, dann kommst du mit\n"
                 + "Ich halte dir die Türen auf wie Gentleman\n"
                 + "Ich kämpf' für dich wie Jackie Chan");
-    }
+  }
 
-    @Test
-    void should_give_verses_when_asked_for_poetry_with_the_support_of_a_file_adapter() {
-        var fileAdapter = new PoetryLibraryFileAdapter("src/main/resources/lyrics.txt");
+  @Test
+  void should_give_verses_when_asked_for_poetry_with_the_support_of_a_file_adapter() {
+    var fileAdapter = new PoetryLibraryFileAdapter("src/main/resources/lyrics.txt");
 
-        var poetryReader = new PoetryReader(fileAdapter);
+    var poetryReader = new PoetryReader(fileAdapter);
 
-        String verses = poetryReader.giveMeSomePoetry();
+    String verses = poetryReader.giveMeSomePoetry();
 
-        assertThat(verses).isEqualTo("Sie sagt, ich sei so oldschool, oldschool\n"
+    assertThat(verses)
+        .isEqualTo(
+            "Sie sagt, ich sei so oldschool, oldschool\n"
                 + "Ich weiß nicht mal, was das heißt\n"
                 + "Die Bärte werden länger, die Hosen enger\n"
                 + "Doch ich trag' immer noch 501\n"
@@ -138,5 +154,5 @@ public class AcceptanceTest {
                 + "Ich weiß nicht mal, was das heißt\n"
                 + "Die Bärte werden länger, die Hosen enger\n"
                 + "Doch ich trag' immer noch 501\uFEFF");
-    }
+  }
 }

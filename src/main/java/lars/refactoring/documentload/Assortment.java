@@ -5,9 +5,9 @@ import java.util.List;
 
 class Assortment {
 
-    private List<Album> albums;
+  private List<Album> albums;
 
-    public List<Album> getAlbums() {
-        return Collections.unmodifiableList(albums);
-    }
+  public List<Album> getAlbums() {
+    return Collections.unmodifiableList(albums);
+  }
 }

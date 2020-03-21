@@ -1,16 +1,17 @@
 package lars.ooad;
 
 public enum Type {
-    ACOUSTIC, ELECTRIC;
+  ACOUSTIC,
+  ELECTRIC;
 
-    public String toString() {
-        switch (this) {
-            case ACOUSTIC:
-                return "acoustic";
-            case ELECTRIC:
-                return "electric";
-            default:
-                return "unspecified";
-        }
+  public String toString() {
+    switch (this) {
+      case ACOUSTIC:
+        return "acoustic";
+      case ELECTRIC:
+        return "electric";
+      default:
+        return "unspecified";
     }
+  }
 }

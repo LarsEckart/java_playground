@@ -20,70 +20,71 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 class HibernateSessionTest {
 
-    @Container
-    private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer()
-            .withUsername("hibernateuser")
-            .withPassword("hibernatepassword")
-            .withDatabaseName("hibernatetest");
+  @Container
+  private static final MySQLContainer MY_SQL_CONTAINER =
+      new MySQLContainer()
+          .withUsername("hibernateuser")
+          .withPassword("hibernatepassword")
+          .withDatabaseName("hibernatetest");
 
-    private static void deleteAllEntities() {
-        try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
-            final Transaction transaction = session.beginTransaction();
-            session.createQuery("DELETE FROM SomeEntity").executeUpdate();
-            transaction.commit();
+  private static void deleteAllEntities() {
+    try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
+      final Transaction transaction = session.beginTransaction();
+      session.createQuery("DELETE FROM SomeEntity").executeUpdate();
+      transaction.commit();
 
-            QueryCountHolder.clear();
-        }
+      QueryCountHolder.clear();
     }
+  }
 
-    @BeforeAll
-    static void setUp() {
-        deleteAllEntities();
+  @BeforeAll
+  static void setUp() {
+    deleteAllEntities();
+  }
+
+  @AfterAll
+  static void tearDown() {
+    deleteAllEntities();
+    HibernateUtil.shutdown();
+  }
+
+  @Test
+  void sessionCacheIsInterTransactional() {
+    try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
+
+      final Transaction transactionA = session.beginTransaction();
+      final int entityId = 1;
+      createEntity(session, entityId);
+      transactionA.commit();
+
+      final Transaction transactionB = session.beginTransaction();
+      // clear cache after entity creation, otherwise we would have no select at all
+      session.clear();
+      // intended only select
+      final Date entityCreationDateA = readEntityCreationDate(session, entityId);
+      transactionB.commit();
+
+      final Transaction transactionC = session.beginTransaction();
+      // another read, but no further select expected although we opened a different transaction
+      // context
+      final Date entityCreationDateB = readEntityCreationDate(session, entityId);
+      transactionC.commit();
+
+      assertThat(entityCreationDateB).isEqualTo(entityCreationDateA);
+
+      final QueryCount grandTotal = QueryCountHolder.getGrandTotal();
+      assertThat(grandTotal.getInsert()).isEqualTo(1);
+      assertThat(grandTotal.getSelect()).isEqualTo(1);
+      assertThat(grandTotal.getDelete()).isEqualTo(0);
+      assertThat(grandTotal.getUpdate()).isEqualTo(0);
     }
+  }
 
-    @AfterAll
-    static void tearDown() {
-        deleteAllEntities();
-        HibernateUtil.shutdown();
-    }
+  private Date readEntityCreationDate(final Session session, final int entityId) {
+    return session.load(SomeEntity.class, entityId).getCreatedDate();
+  }
 
-    @Test
-    void sessionCacheIsInterTransactional() {
-        try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
-
-            final Transaction transactionA = session.beginTransaction();
-            final int entityId = 1;
-            createEntity(session, entityId);
-            transactionA.commit();
-
-            final Transaction transactionB = session.beginTransaction();
-            // clear cache after entity creation, otherwise we would have no select at all
-            session.clear();
-            // intended only select
-            final Date entityCreationDateA = readEntityCreationDate(session, entityId);
-            transactionB.commit();
-
-            final Transaction transactionC = session.beginTransaction();
-            // another read, but no further select expected although we opened a different transaction context
-            final Date entityCreationDateB = readEntityCreationDate(session, entityId);
-            transactionC.commit();
-
-            assertThat(entityCreationDateB).isEqualTo(entityCreationDateA);
-
-            final QueryCount grandTotal = QueryCountHolder.getGrandTotal();
-            assertThat(grandTotal.getInsert()).isEqualTo(1);
-            assertThat(grandTotal.getSelect()).isEqualTo(1);
-            assertThat(grandTotal.getDelete()).isEqualTo(0);
-            assertThat(grandTotal.getUpdate()).isEqualTo(0);
-        }
-    }
-
-    private Date readEntityCreationDate(final Session session, final int entityId) {
-        return session.load(SomeEntity.class, entityId).getCreatedDate();
-    }
-
-    private void createEntity(final Session session, final int entityId) {
-        session.save(new SomeEntity(entityId));
-    }
+  private void createEntity(final Session session, final int entityId) {
+    session.save(new SomeEntity(entityId));
+  }
 }
-

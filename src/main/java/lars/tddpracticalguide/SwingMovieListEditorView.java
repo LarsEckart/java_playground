@@ -9,35 +9,38 @@ import javax.swing.ScrollPaneConstants;
 
 public class SwingMovieListEditorView extends JFrame implements MovieListEditorView {
 
-    private JList<Movie> movieList;
+  private JList<Movie> movieList;
 
-    public SwingMovieListEditorView() {
-        super();
-    }
+  public SwingMovieListEditorView() {
+    super();
+  }
 
-    @Override
-    public void setMovies(Vector<Movie> movies) {
-        movieList.setListData(movies);
-    }
+  @Override
+  public void setMovies(Vector<Movie> movies) {
+    movieList.setListData(movies);
+  }
 
-    @Override
-    public String getNewName() {
-        return "";
-    }
+  @Override
+  public String getNewName() {
+    return "";
+  }
 
-    public void init() {
-        setTitle("Movie List");
-        getContentPane().setLayout(new FlowLayout());
-        movieList = new JList<>(new Vector<>());
-        JScrollPane scroller =
-                new JScrollPane(movieList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        getContentPane().add(scroller);
-        pack();
-    }
+  public void init() {
+    setTitle("Movie List");
+    getContentPane().setLayout(new FlowLayout());
+    movieList = new JList<>(new Vector<>());
+    JScrollPane scroller =
+        new JScrollPane(
+            movieList,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    getContentPane().add(scroller);
+    pack();
+  }
 
-    public static void start() {
-        SwingMovieListEditorView window = new SwingMovieListEditorView();
-        window.init();
-        window.show();
-    }
+  public static void start() {
+    SwingMovieListEditorView window = new SwingMovieListEditorView();
+    window.init();
+    window.show();
+  }
 }

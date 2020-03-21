@@ -6,15 +6,15 @@ import java.nio.file.Paths;
 
 public class ObtainPath {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        Path path = Paths.get("a", "b");
-        System.out.println(path);
+    Path path = Paths.get("a", "b");
+    System.out.println(path);
 
-        path = Paths.get(FileSystems.getDefault().getSeparator() + "a", "b", "c");
-        System.out.println(path);
+    path = Paths.get(FileSystems.getDefault().getSeparator() + "a", "b", "c");
+    System.out.println(path);
 
-        path = Paths.get("a", ":", "b");
-        System.out.println(path);
-    }
+    path = Paths.get("a", ":", "b");
+    System.out.println(path);
+  }
 }

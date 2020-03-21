@@ -3,9 +3,7 @@ package lars.katas.untangled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * https://github.com/tomphp/untangled-conditionals-kata/
- */
+/** https://github.com/tomphp/untangled-conditionals-kata/ */
 class Pipeline {
   private final Config config;
   private final Emailer emailer;

@@ -22,7 +22,7 @@ class HashtableExamples {
     @Override
     public boolean equals(Object obj) {
       if (!(obj instanceof Person)) return false;
-      System.out.println("equals(" + ((Person)obj).name+")");
+      System.out.println("equals(" + ((Person) obj).name + ")");
       return name.equals(((Person) obj).name);
     }
   }

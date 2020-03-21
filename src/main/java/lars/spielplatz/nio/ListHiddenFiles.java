@@ -8,19 +8,19 @@ import java.nio.file.Paths;
 
 public class ListHiddenFiles {
 
-    public static void main(String[] args) throws IOException {
-        if (args.length != 1) {
-            System.err.println("usage: java ListHiddenFiles directory");
-            return;
-        }
-
-        Path dir = Paths.get(args[0]);
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-            for (Path file : stream) {
-                if (Files.isHidden(file)) {
-                    System.out.println(file);
-                }
-            }
-        }
+  public static void main(String[] args) throws IOException {
+    if (args.length != 1) {
+      System.err.println("usage: java ListHiddenFiles directory");
+      return;
     }
+
+    Path dir = Paths.get(args[0]);
+    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+      for (Path file : stream) {
+        if (Files.isHidden(file)) {
+          System.out.println(file);
+        }
+      }
+    }
+  }
 }

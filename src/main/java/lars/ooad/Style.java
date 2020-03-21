@@ -1,15 +1,17 @@
 package lars.ooad;
 
 enum Style {
+  A,
+  F;
 
-    A, F;
-
-    public String toString() {
-        switch(this) {
-            case A:   return "A style";
-            case F:   return "F style";
-            default:  return "Unspecified";
-        }
+  public String toString() {
+    switch (this) {
+      case A:
+        return "A style";
+      case F:
+        return "F style";
+      default:
+        return "Unspecified";
     }
+  }
 }
-

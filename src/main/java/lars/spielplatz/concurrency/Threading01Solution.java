@@ -12,7 +12,6 @@ public class Threading01Solution<E> {
       notifyAll();
       return true;
     }
-
   }
 
   public E take() throws InterruptedException {
@@ -23,5 +22,4 @@ public class Threading01Solution<E> {
       return elements.removeFirst();
     }
   }
-
 }

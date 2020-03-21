@@ -14,47 +14,48 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 class AstroClientTest {
 
-    private AstroClient client = new AstroClient();
+  private AstroClient client = new AstroClient();
 
-    private static final Logger logger = LoggerFactory.getLogger(AstroClientTest.class);
+  private static final Logger logger = LoggerFactory.getLogger(AstroClientTest.class);
 
-    @Test
-    void getSync() {
-        AstroResponse response = assertTimeoutPreemptively(
-                Duration.ofSeconds(2),
-                () -> client.getSync("http://api.open-notify.org/astros.json"));
+  @Test
+  void getSync() {
+    AstroResponse response =
+        assertTimeoutPreemptively(
+            Duration.ofSeconds(2), () -> client.getSync("http://api.open-notify.org/astros.json"));
 
-        int num = response.getNumber();
-        List<Assignment> assignments = response.getPeople();
+    int num = response.getNumber();
+    List<Assignment> assignments = response.getPeople();
 
-        assertEquals("success", response.getMessage());
-        assertEquals(num, assignments.size());
-        assignments.forEach(assignment ->
-                assertAll(() -> assertFalse(assignment.getName().isEmpty()),
-                        () -> assertFalse(assignment.getCraft().isEmpty())));
+    assertEquals("success", response.getMessage());
+    assertEquals(num, assignments.size());
+    assignments.forEach(
+        assignment ->
+            assertAll(
+                () -> assertFalse(assignment.getName().isEmpty()),
+                () -> assertFalse(assignment.getCraft().isEmpty())));
 
-        logResponse(num, assignments);
-    }
+    logResponse(num, assignments);
+  }
 
-    @Test
-    void getAsync() {
-        AstroResponse response = assertTimeoutPreemptively(
-                Duration.ofSeconds(2),
-                () -> client.getAsync("http://api.open-notify.org/astros.json").get());
+  @Test
+  void getAsync() {
+    AstroResponse response =
+        assertTimeoutPreemptively(
+            Duration.ofSeconds(2),
+            () -> client.getAsync("http://api.open-notify.org/astros.json").get());
 
-        int num = response.getNumber();
-        List<Assignment> assignments = response.getPeople();
+    int num = response.getNumber();
+    List<Assignment> assignments = response.getPeople();
 
-        assertEquals("success", response.getMessage());
-        assertEquals(num, assignments.size());
+    assertEquals("success", response.getMessage());
+    assertEquals(num, assignments.size());
 
-        logResponse(num, assignments);
-    }
+    logResponse(num, assignments);
+  }
 
-    private void logResponse(int num, List<Assignment> assignments) {
-        logger.info("There are {} people in space", num);
-        assignments.forEach(person -> logger.info("{} aboard {}",
-                person.getName(),
-                person.getCraft()));
-    }
+  private void logResponse(int num, List<Assignment> assignments) {
+    logger.info("There are {} people in space", num);
+    assignments.forEach(person -> logger.info("{} aboard {}", person.getName(), person.getCraft()));
+  }
 }
