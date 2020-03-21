@@ -1,0 +1,16 @@
+[true, NO_TESTS] => [Test worker] INFO  lars.katas.untangled.Pipeline - No tests
+[Test worker] INFO  lars.katas.untangled.Pipeline - Deployment successful
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[true, PASSING_TESTS] => [Test worker] INFO  lars.katas.untangled.Pipeline - Tests passed
+[Test worker] INFO  lars.katas.untangled.Pipeline - Deployment successful
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[true, FAILING_TESTS] => [Test worker] ERROR lars.katas.untangled.Pipeline - Tests failed
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, NO_TESTS] => [Test worker] INFO  lars.katas.untangled.Pipeline - No tests
+[Test worker] ERROR lars.katas.untangled.Pipeline - Deployment failed
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, PASSING_TESTS] => [Test worker] INFO  lars.katas.untangled.Pipeline - Tests passed
+[Test worker] ERROR lars.katas.untangled.Pipeline - Deployment failed
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, FAILING_TESTS] => [Test worker] ERROR lars.katas.untangled.Pipeline - Tests failed
+[Test worker] INFO  lars.katas.untangled.Pipeline - Email disabled 

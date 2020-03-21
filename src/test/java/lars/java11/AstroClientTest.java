@@ -53,7 +53,7 @@ class AstroClientTest {
 
     private void logResponse(int num, List<Assignment> assignments) {
         logger.info("There are {} people in space", num);
-        assignments.forEach(person -> logger.atInfo().log("%s aboard %s",
+        assignments.forEach(person -> logger.info("{} aboard {}",
                 person.getName(),
                 person.getCraft()));
     }
