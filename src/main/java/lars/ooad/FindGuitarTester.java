@@ -11,12 +11,12 @@ class FindGuitarTester {
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Map properties = new HashMap();
+        Map<String, Object> properties = new HashMap<>();
         properties.put("builder", Builder.GIBSON);
         properties.put("backWood", Wood.MAPLE);
         InstrumentSpec whatBryanLikes = new InstrumentSpec(properties);
 
-        List matchingInstruments = inventory.search(whatBryanLikes);
+        List<Instrument> matchingInstruments = inventory.search(whatBryanLikes);
         if (!matchingInstruments.isEmpty()) {
             System.out.println("Bryan, you might like these instruments:");
             for (Object matchingInstrument : matchingInstruments) {
@@ -42,7 +42,7 @@ class FindGuitarTester {
     }
 
     private static void initializeInventory(Inventory inventory) {
-        Map properties = new HashMap();
+        Map<String, Object> properties = new HashMap<>();
         properties.put("instrumentType", InstrumentType.GUITAR);
         properties.put("builder", Builder.COLLINGS);
         properties.put("model", "CJ");

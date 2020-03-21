@@ -43,7 +43,7 @@ class AstroClientTest {
                 () -> client.getAsync("http://api.open-notify.org/astros.json").get());
 
         int num = response.getNumber();
-        List assignments = response.getPeople();
+        List<Assignment> assignments = response.getPeople();
 
         assertEquals("success", response.getMessage());
         assertEquals(num, assignments.size());
