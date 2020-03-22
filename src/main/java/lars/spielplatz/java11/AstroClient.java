@@ -1,4 +1,4 @@
-package lars.java11;
+package lars.spielplatz.java11;
 
 import java.io.IOException;
 import java.net.URI;

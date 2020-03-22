@@ -1,4 +1,4 @@
-package lars.java11;
+package lars.spielplatz.java11;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

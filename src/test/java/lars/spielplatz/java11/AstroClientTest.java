@@ -1,4 +1,4 @@
-package lars.java11;
+package lars.spielplatz.java11;
 
 import java.time.Duration;
 import java.util.List;
