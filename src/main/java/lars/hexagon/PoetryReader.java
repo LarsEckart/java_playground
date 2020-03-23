@@ -1,5 +1,6 @@
 package lars.hexagon;
 
+// domain
 class PoetryReader implements IRequestVerses {
 
   private IObtainPoetry poetryLibrary;

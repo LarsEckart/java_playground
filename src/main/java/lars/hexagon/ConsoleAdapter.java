@@ -1,5 +1,6 @@
 package lars.hexagon;
 
+// left side adapter
 public class ConsoleAdapter {
 
   private final IRequestVerses poetryReader;
