@@ -8,10 +8,16 @@
 
 This is a place for me to explore java core api and various libraries.
 
-# jdeps
+## jdeps
 
 ```
 jdeps --class-path 'libs/*' -R build/libs/java_playground.jar
+```
+
+## Dependency graph
+
+```
+gradlew generateDependencyGraph
 ```
 
 ### License
