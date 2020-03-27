@@ -2,6 +2,7 @@ package lars.katas;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Acronym {
 
@@ -12,10 +13,10 @@ public class Acronym {
   }
 
   public String get() {
-    String r = phrase.replace("-", " ");
-    String rr = r.replace("_", "");
-    String[] split = rr.split(" ");
-    return Arrays.stream(split)
+    return Stream.of(phrase)
+        .map(p -> p.replace("-", " "))
+        .map(s -> s.replace("_", ""))
+        .flatMap(s -> Arrays.stream(s.split(" ")))
         .filter(s -> !s.isEmpty())
         .map(s -> s.substring(0, 1))
         .filter(s -> Character.isLetter(s.charAt(0)))
