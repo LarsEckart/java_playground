@@ -1,7 +1,6 @@
 package lars.katas;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Acronym {
@@ -16,7 +15,9 @@ public class Acronym {
     String r = phrase.replace("-", " ");
     String[] split = r.split(" ");
     return Arrays.stream(split)
+        .filter(s -> !s.isEmpty())
         .map(s -> s.substring(0, 1))
+        .filter(s -> Character.isLetter(s.charAt(0)))
         .map(String::toUpperCase)
         .collect(Collectors.joining());
   }

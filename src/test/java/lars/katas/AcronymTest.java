@@ -40,4 +40,18 @@ class AcronymTest {
     String expected = "CMOS";
     assertThat(new Acronym(phrase).get()).isEqualTo(expected);
   }
+
+  @Test
+  void veryLongAbbreviation() {
+    String phrase = "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me";
+    String expected = "ROTFLSHTMDCOALM";
+    assertThat(new Acronym(phrase).get()).isEqualTo(expected);
+  }
+
+  @Test
+  void consecutiveDelimiters() {
+    String phrase = "Something - I made up from thin air";
+    String expected = "SIMUFTA";
+    assertThat(new Acronym(phrase).get()).isEqualTo(expected);
+  }
 }
