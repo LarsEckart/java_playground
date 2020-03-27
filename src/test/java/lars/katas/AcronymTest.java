@@ -54,4 +54,18 @@ class AcronymTest {
     String expected = "SIMUFTA";
     assertThat(new Acronym(phrase).get()).isEqualTo(expected);
   }
+
+  @Test
+  void apostrophes() {
+    String phrase = "Halley's Comet";
+    String expected = "HC";
+    assertThat(new Acronym(phrase).get()).isEqualTo(expected);
+  }
+
+  @Test
+  void underscoreEmphasis() {
+    String phrase = "The Road _Not_ Taken";
+    String expected = "TRNT";
+    assertThat(new Acronym(phrase).get()).isEqualTo(expected);
+  }
 }

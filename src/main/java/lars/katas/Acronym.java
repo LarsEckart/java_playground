@@ -13,7 +13,8 @@ public class Acronym {
 
   public String get() {
     String r = phrase.replace("-", " ");
-    String[] split = r.split(" ");
+    String rr = r.replace("_", "");
+    String[] split = rr.split(" ");
     return Arrays.stream(split)
         .filter(s -> !s.isEmpty())
         .map(s -> s.substring(0, 1))
