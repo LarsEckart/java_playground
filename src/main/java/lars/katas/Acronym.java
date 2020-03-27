@@ -16,10 +16,8 @@ public class Acronym {
     return Stream.of(phrase)
         .map(p -> p.replace("-", " "))
         .map(s -> s.replace("_", ""))
-        .flatMap(s -> Arrays.stream(s.split(" ")))
-        .filter(s -> !s.isEmpty())
+        .flatMap(s -> Arrays.stream(s.split("\\p{Zs}+")))
         .map(s -> s.substring(0, 1))
-        .filter(s -> Character.isLetter(s.charAt(0)))
         .map(String::toUpperCase)
         .collect(Collectors.joining());
   }
