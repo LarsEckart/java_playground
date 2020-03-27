@@ -13,6 +13,9 @@ public class Acronym {
 
   public String get() {
     String[] split = phrase.split(" ");
-    return Arrays.stream(split).map(s -> s.substring(0, 1)).collect(Collectors.joining());
+    return Arrays.stream(split)
+            .map(s -> s.substring(0, 1))
+            .map(String::toUpperCase)
+            .collect(Collectors.joining());
   }
 }
