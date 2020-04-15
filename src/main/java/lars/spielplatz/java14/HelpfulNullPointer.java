@@ -7,6 +7,7 @@ public class HelpfulNullPointer {
   // -XX:+ShowCodeDetailsInExceptionMessages
   public static void main(String[] args) {
     Person person = new Person();
+
     System.out.println(person.hobbies.contains("programming"));
   }
 
