@@ -12,9 +12,6 @@ class SonarParser {
         for (int i = 0; i < split.length; i += 2) {
             String s = split[i + 1].strip();
             int value = Integer.parseInt(s);
-            if (value > 200) {
-                continue;
-            }
             result.put(split[i], value);
         }
         return result;

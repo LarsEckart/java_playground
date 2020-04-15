@@ -21,7 +21,13 @@ class Main {
 
         Map<String, Data> result = combine(complexity, churn);
 
-        result.forEach((key, value) -> System.out.println(String.format("[%s, %s],", value.churn(), value.complexity())));
+        //result.forEach((key, value) -> System.out.println(String.format("[%s, %s],", value.churn(), value.complexity())));
+
+        result.forEach((key, value) -> {
+            if (value.churn() > 20) {
+                System.out.println(value);
+            }
+        });
     }
 
     private static Map<String, Data> combine(Map<String, Integer> complexity, Map<String, Integer> churn) {
@@ -31,6 +37,9 @@ class Main {
         allKeys.addAll(complexity.keySet());
         allKeys.addAll(churn.keySet());
         for (String key : allKeys) {
+            if (key.contains("SoneraUser")) {
+                continue;
+            }
             int churnValue = churn.getOrDefault(key, -1);
             if (churnValue == -1) {
                 continue;
