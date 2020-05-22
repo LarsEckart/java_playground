@@ -87,6 +87,8 @@ tasks.withType(JavaCompile) {
     options.compilerArgs.add("-Xlint:all")
     options.compilerArgs.add("--enable-preview")
 
+    options.incremental = true
+
     options.errorprone {
         disableWarningsInGeneratedCode = true
         allErrorsAsWarnings = true
