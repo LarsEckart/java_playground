@@ -48,6 +48,7 @@ class SoundexTests {
   @Test
   void soundexEncodingIgnoresVowelLikeLetters() {
     assertThat(soundex.encode("Baeiouhycdl")).isEqualTo("B234");
+    assertThat(soundex.encode("BaAeEiIoOuUhHyYcdl")).isEqualTo("B234");
   }
 
   @Test
