@@ -28,8 +28,12 @@ class Soundex {
           Map.entry('r', "6"));
 
   public String encode(String word) {
-    String encoded = head(word) + encodeDigits(tail(word));
+    String encoded = upperFront(head(word)) + encodeDigits(tail(word));
     return zeroPad(encoded);
+  }
+
+  private String upperFront(String head) {
+    return head.toUpperCase();
   }
 
   private String head(String word) {
@@ -42,20 +46,29 @@ class Soundex {
 
   private String encodeDigits(String word) {
     String result = "";
-    for (char c : word.toCharArray()) {
+    for (char letter : word.toCharArray()) {
       if (isComplete(result)) {
         break;
       }
-      result += encodedDigit(c);
+      if (!encodedDigit(letter).equals(lastDigit(result))) {
+        result += encodedDigit(letter);
+      }
     }
     return result;
+  }
+
+  private String lastDigit(String encoding) {
+    if (encoding.isEmpty()) {
+      return "";
+    }
+    return encoding.substring(encoding.length() - 1);
   }
 
   private boolean isComplete(String result) {
     return result.length() == MAX_CODE_LENGTH - 1;
   }
 
-  private String encodedDigit(char letter) {
+  public String encodedDigit(char letter) {
     return encodings.getOrDefault(letter, "");
   }
 

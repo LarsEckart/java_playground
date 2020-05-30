@@ -2,6 +2,7 @@ package lars.katas.soundex;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +52,14 @@ class SoundexTests {
 
   @Test
   void soundexEncodingCombinesDuplicateEncodings() {
+    Assumptions.assumeTrue(soundex.encodedDigit('b').equals(soundex.encodedDigit('f')));
+    Assumptions.assumeTrue(soundex.encodedDigit('c').equals(soundex.encodedDigit('g')));
+    Assumptions.assumeTrue(soundex.encodedDigit('d').equals(soundex.encodedDigit('t')));
     assertThat(soundex.encode("Abfcgdt")).isEqualTo("A123");
   }
 
+  @Test
+  void soundexEncodingUppercasesFirstLetter() {
+    assertThat(soundex.encode("abcd")).startsWith("A");
+  }
 }
