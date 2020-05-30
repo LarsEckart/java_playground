@@ -63,4 +63,9 @@ class SoundexTests {
   void soundexEncodingUppercasesFirstLetter() {
     assertThat(soundex.encode("abcd")).startsWith("A");
   }
+
+  @Test
+  void soundexEncodingIgnoresCaseWhenEncodingConsonants() {
+    assertThat(soundex.encode("BCDL")).isEqualTo(soundex.encode("Bcdl"));
+  }
 }

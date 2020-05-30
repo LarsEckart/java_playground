@@ -51,12 +51,16 @@ class Soundex {
       if (isComplete(result)) {
         break;
       }
-      String digit = encodedDigit(letter);
+      String digit = encodedDigit(lower(letter));
       if (!digit.isEmpty() && !digit.equals(lastDigit(result))) {
-        result += encodedDigit(letter);
+        result += digit;
       }
     }
     return result;
+  }
+
+  private char lower(char letter) {
+    return Character.toLowerCase(letter);
   }
 
   private String lastDigit(String encoding) {
@@ -71,6 +75,7 @@ class Soundex {
   }
 
   public String encodedDigit(char letter) {
+    System.out.println("look up for " + letter);
     return encodings.getOrDefault(letter, NOT_A_DIGIT);
   }
 
