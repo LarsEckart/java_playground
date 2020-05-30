@@ -40,7 +40,7 @@ class Soundex {
   }
 
   private String encodedDigit(char letter) {
-    return encodings.get(letter);
+    return encodings.getOrDefault(letter, "");
   }
 
   private String head(String word) {

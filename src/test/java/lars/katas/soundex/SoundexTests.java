@@ -29,4 +29,9 @@ class SoundexTests {
     assertThat(soundex.encode("Ax")).isEqualTo("A200");
   }
 
+  @Test
+  void soundexEncodingIgnoresNonAlphabetics() {
+    assertThat(soundex.encode("A#")).isEqualTo("A000");
+  }
+
 }
