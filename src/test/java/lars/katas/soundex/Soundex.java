@@ -28,23 +28,35 @@ class Soundex {
           Map.entry('r', "6"));
 
   public String encode(String word) {
-    String encoded = head(word) + encodeDigits(word);
+    String encoded = head(word) + encodeDigits(tail(word));
     return zeroPad(encoded);
-  }
-
-  private String encodeDigits(String word) {
-    if (word.length() > 1) {
-      return encodedDigit(word.charAt(1));
-    }
-    return "";
-  }
-
-  private String encodedDigit(char letter) {
-    return encodings.getOrDefault(letter, "");
   }
 
   private String head(String word) {
     return word.substring(0, 1);
+  }
+
+  private String tail(String word) {
+    return word.substring(1);
+  }
+
+  private String encodeDigits(String word) {
+    String result = "";
+    for (char c : word.toCharArray()) {
+      if (isComplete(result)) {
+        break;
+      }
+      result += encodedDigit(c);
+    }
+    return result;
+  }
+
+  private boolean isComplete(String result) {
+    return result.length() == MAX_CODE_LENGTH - 1;
+  }
+
+  private String encodedDigit(char letter) {
+    return encodings.getOrDefault(letter, "");
   }
 
   private String zeroPad(String word) {

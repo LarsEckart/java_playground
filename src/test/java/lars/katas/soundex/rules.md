@@ -19,6 +19,8 @@ Af -> A100
 
     r: 6
 
-3) If two adjacent letters encode to the same number, encode them instead as a single number. Also, do so if two letters with the same number are separated by h or w (but code them twice if separated by a vowel). This rule also applies to the first letter.
+3) If two adjacent letters encode to the same number, encode them instead as a single number.
+   Also, do so if two letters with the same number are separated by h or w (but code them twice if
+   separated by a vowel). This rule also applies to the first letter.
 
 4) Stop when you have a letter and three digits. Zero-pad if needed.

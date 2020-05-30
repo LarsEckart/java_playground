@@ -34,4 +34,24 @@ class SoundexTests {
     assertThat(soundex.encode("A#")).isEqualTo("A000");
   }
 
+  @Test
+  void soundexEncodingReplacesMultipleConsonantsWithDigits() {
+    assertThat(soundex.encode("Acdl")).isEqualTo("A234");
+  }
+
+  @Test
+  void soundexEncodingLimitsLengthToFourCharacters() {
+    assertThat(soundex.encode("Dcdlb")).hasSizeLessThan(5);
+  }
+
+  @Test
+  void soundexEncodingIgnoresVowelLikeLetters() {
+    assertThat(soundex.encode("Baeiouhycdl")).isEqualTo("B234");
+  }
+
+  @Test
+  void soundexEncodingCombinesDuplicateEncodings() {
+    assertThat(soundex.encode("Abfcgdt")).isEqualTo("A123");
+  }
+
 }
