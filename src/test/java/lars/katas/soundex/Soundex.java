@@ -46,15 +46,29 @@ class Soundex {
   }
 
   private String encodeDigits(String word) {
-    String result = encodedDigit(lower(word.charAt(0)));
+    String result;
+    result = encodeHead(word);
+    result = encodeTail(word, result);
+    return result;
+  }
+
+  private String encodeHead(String word) {
+    return encodedDigit(word.charAt(0));
+  }
+
+  private String encodeTail(String word, String result) {
     for (char letter : tail(word).toCharArray()) {
-      if (isComplete(result)) {
-        break;
+      if (!isComplete(result)) {
+        result = encodeLetter(result, letter);
       }
-      String digit = encodedDigit(lower(letter));
-      if (!digit.isEmpty() && !digit.equals(lastDigit(result))) {
-        result += digit;
-      }
+    }
+    return result;
+  }
+
+  private String encodeLetter(String result, char letter) {
+    String digit = encodedDigit(letter);
+    if (!digit.equals(NOT_A_DIGIT) && !digit.equals(lastDigit(result))) {
+      result += digit;
     }
     return result;
   }
@@ -75,7 +89,7 @@ class Soundex {
   }
 
   public String encodedDigit(char letter) {
-    return encodings.getOrDefault(letter, NOT_A_DIGIT);
+    return encodings.getOrDefault(lower(letter), NOT_A_DIGIT);
   }
 
   private String zeroPad(String word) {
