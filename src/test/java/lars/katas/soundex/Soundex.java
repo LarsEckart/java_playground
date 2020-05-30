@@ -5,7 +5,7 @@ import java.util.Map;
 class Soundex {
 
   public static final int MAX_CODE_LENGTH = 4;
-  public static final String NOT_A_DIGIT = "";
+  public static final String NOT_A_DIGIT = "*";
 
   private static final Map<Character, String> encodings =
       Map.ofEntries(
@@ -29,7 +29,7 @@ class Soundex {
           Map.entry('r', "6"));
 
   public String encode(String word) {
-    String encoded = upperFront(head(word)) + encodeDigits(tail(word));
+    String encoded = upperFront(head(word)) + tail(encodeDigits(word));
     return zeroPad(encoded);
   }
 
@@ -46,8 +46,8 @@ class Soundex {
   }
 
   private String encodeDigits(String word) {
-    String result = NOT_A_DIGIT;
-    for (char letter : word.toCharArray()) {
+    String result = encodedDigit(lower(word.charAt(0)));
+    for (char letter : tail(word).toCharArray()) {
       if (isComplete(result)) {
         break;
       }
@@ -71,11 +71,10 @@ class Soundex {
   }
 
   private boolean isComplete(String result) {
-    return result.length() == MAX_CODE_LENGTH - 1;
+    return result.length() == MAX_CODE_LENGTH;
   }
 
   public String encodedDigit(char letter) {
-    System.out.println("look up for " + letter);
     return encodings.getOrDefault(letter, NOT_A_DIGIT);
   }
 

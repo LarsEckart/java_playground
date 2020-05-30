@@ -68,4 +68,9 @@ class SoundexTests {
   void soundexEncodingIgnoresCaseWhenEncodingConsonants() {
     assertThat(soundex.encode("BCDL")).isEqualTo(soundex.encode("Bcdl"));
   }
+
+  @Test
+  void soundexEncodingCombinesDuplicateCodesWhen2ndLetterDuplicates1st() {
+    assertThat(soundex.encode("Bbcd")).isEqualTo("B230");
+  }
 }
