@@ -2,32 +2,46 @@ package lars.katas.soundex;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SoundexTests {
 
+  private Soundex soundex;
+
+  @BeforeEach
+  void setUp() {
+    soundex = new Soundex();
+  }
+
   @Test
   void soundexEncodingRetainsSoleLetterOfOneLetterWord() {
-    Soundex soundex = new Soundex();
-    String encoded = soundex.encode("A");
-    assertThat(encoded).isEqualTo("A000");
+    assertThat(soundex.encode("A")).isEqualTo("A000");
   }
 
   @Test
   void soundexEncodingPadsWithZerosToEnsureThreeDigits() {
-    Soundex soundex = new Soundex();
-    String encoded = soundex.encode("I");
-    assertThat(encoded).isEqualTo("I000");
+    assertThat(soundex.encode("I")).isEqualTo("I000");
+  }
+
+  @Test
+  void soundexEncodingReplacesConsonantsWithAppropriateDigits() {
+    assertThat(soundex.encode("Ab")).isEqualTo("A100");
   }
 
   private static class Soundex {
 
     public String encode(String word) {
-      return zeroPad(word);
+      var encoded = word.substring(0, 1);
+      if (word.length() > 1) {
+        encoded += "1";
+      }
+      return zeroPad(encoded);
     }
 
     private String zeroPad(String word) {
-      return word + "000";
+      var zeroesNeeded = 4 - word.length();
+      return word + "0".repeat(zeroesNeeded);
     }
   }
 }
