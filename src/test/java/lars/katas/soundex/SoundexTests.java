@@ -73,4 +73,9 @@ class SoundexTests {
   void soundexEncodingCombinesDuplicateCodesWhen2ndLetterDuplicates1st() {
     assertThat(soundex.encode("Bbcd")).isEqualTo("B230");
   }
+
+  @Test
+  void soundexEncodingDoesNotCombineDuplicateEncodingsSeparatedByVowels() {
+    assertThat(soundex.encode("Jbob")).isEqualTo("J110");
+  }
 }

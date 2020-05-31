@@ -29,8 +29,7 @@ class Soundex {
           Map.entry('r', "6"));
 
   public String encode(String word) {
-    String encoded = upperFront(head(word)) + tail(encodeDigits(word));
-    return zeroPad(encoded);
+    return zeroPad(upperFront(head(word)) + tail(encodeDigits(word)));
   }
 
   private String upperFront(String head) {
@@ -57,20 +56,26 @@ class Soundex {
   }
 
   private String encodeTail(String word, String result) {
-    for (char letter : tail(word).toCharArray()) {
+    char[] charArray = word.toCharArray();
+    for (int i = 1; i < charArray.length; i++) {
       if (!isComplete(result)) {
-        result = encodeLetter(result, letter);
+        result = encodeLetter(result, charArray[i], charArray[i - 1]);
       }
     }
     return result;
   }
 
-  private String encodeLetter(String result, char letter) {
+  private String encodeLetter(String result, char letter, char lastLetter) {
     String digit = encodedDigit(letter);
-    if (!digit.equals(NOT_A_DIGIT) && !digit.equals(lastDigit(result))) {
+    if (!digit.equals(NOT_A_DIGIT) &&
+        (!digit.equals(lastDigit(result)) || isVowel(lastLetter))) {
       result += digit;
     }
     return result;
+  }
+
+  private boolean isVowel(char letter) {
+    return "aeiou".contains(String.valueOf(letter));
   }
 
   private char lower(char letter) {
