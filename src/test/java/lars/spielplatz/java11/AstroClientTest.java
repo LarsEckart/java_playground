@@ -23,10 +23,10 @@ class AstroClientTest {
         assertTimeoutPreemptively(
             Duration.ofSeconds(2), () -> client.getSync("http://api.open-notify.org/astros.json"));
 
-    int num = response.getNumber();
-    List<Assignment> assignments = response.getPeople();
+    int num = response.number();
+    List<Assignment> assignments = response.people();
 
-    assertEquals("success", response.getMessage());
+    assertEquals("success", response.message());
     assertEquals(num, assignments.size());
     assignments.forEach(
         assignment ->
@@ -44,10 +44,10 @@ class AstroClientTest {
             Duration.ofSeconds(2),
             () -> client.getAsync("http://api.open-notify.org/astros.json").get());
 
-    int num = response.getNumber();
-    List<Assignment> assignments = response.getPeople();
+    int num = response.number();
+    List<Assignment> assignments = response.people();
 
-    assertEquals("success", response.getMessage());
+    assertEquals("success", response.message());
     assertEquals(num, assignments.size());
 
     logResponse(num, assignments);
