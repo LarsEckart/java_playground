@@ -1,17 +1,17 @@
 
 plugins {
     id "com.github.ben-manes.versions" version "0.28.0"
-    id 'net.ltgt.errorprone' version '1.1.1'
-    id 'java'
-    id 'idea'
+    id "net.ltgt.errorprone" version "1.1.1"
+    id "java"
+    id "idea"
     id "com.vanniktech.dependency.graph.generator" version "0.5.0"
 }
 
 repositories {
     maven() {
-        url 'https://dl.bintray.com/mockito/maven/'
+        url "https://dl.bintray.com/mockito/maven/"
         content {
-            includeGroup 'org.mockito'
+            includeGroup "org.mockito"
         }
     }
     mavenCentral()
@@ -20,30 +20,30 @@ repositories {
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.4")
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.1'
-    implementation 'io.projectreactor:reactor-core:3.3.3.RELEASE'
-    implementation 'org.threeten:threeten-extra:1.5.0'
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
-    implementation 'ch.qos.logback:logback-core:1.3.0-alpha5'
-    implementation 'org.owasp.encoder:encoder:1.2.2'
-    implementation 'com.hazelcast:hazelcast:4.0.1'
-    implementation 'javax.cache:cache-api:1.1.1'
-    implementation 'io.vavr:vavr:0.10.2'
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.10.3")
+    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.1")
+    implementation("io.projectreactor:reactor-core:3.3.3.RELEASE")
+    implementation("org.threeten:threeten-extra:1.5.0")
+    implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation("ch.qos.logback:logback-classic:1.3.0-alpha5")
+    implementation("ch.qos.logback:logback-core:1.3.0-alpha5")
+    implementation("org.owasp.encoder:encoder:1.2.2")
+    implementation("com.hazelcast:hazelcast:4.0.1")
+    implementation("javax.cache:cache-api:1.1.1")
+    implementation("io.vavr:vavr:0.10.2")
 
-    implementation 'org.hibernate:hibernate-core:5.4.14.Final'
-    implementation 'net.ttddyy:datasource-proxy:1.6'
-    implementation 'mysql:mysql-connector-java:8.0.19'
-    implementation 'org.eclipse.collections:eclipse-collections-api:10.2.0'
-    implementation 'org.eclipse.collections:eclipse-collections:10.2.0'
+    implementation("org.hibernate:hibernate-core:5.4.14.Final")
+    implementation("net.ttddyy:datasource-proxy:1.6")
+    implementation("mysql:mysql-connector-java:8.0.19")
+    implementation("org.eclipse.collections:eclipse-collections-api:10.2.0")
+    implementation("org.eclipse.collections:eclipse-collections:10.2.0")
 
 
-    def junit4Version = '4.13'
-    def junitVintageVersion = '5.6.2'
-    def junitJupiterVersion = '5.6.2'
-    def junitPlatformVersion = '1.6.2'
+    def junit4Version = "4.13"
+    def junitVintageVersion = "5.6.2"
+    def junitJupiterVersion = "5.6.2"
+    def junitPlatformVersion = "1.6.2"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
@@ -51,31 +51,35 @@ dependencies {
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
-        because 'allows JUnit 3 and JUnit 4 tests to run'
+        because "allows JUnit 3 and JUnit 4 tests to run"
     }
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
-        because 'allows tests to run from IDEs that bundle older version of launcher'
+        because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
-    testImplementation group: 'org.netbeans', name: 'jemmy', version: '2.2.7.5'
+    testImplementation group: "org.netbeans", name: "jemmy", version: "2.2.7.5"
 
-    def mockitoVersion = '3.3.9'
-    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
-    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-    testImplementation 'org.assertj:assertj-core:3.16.0'
-    testImplementation 'com.google.truth:truth:1.0.1'
-    testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
-    testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:4.5.0'
-    testImplementation 'com.approvaltests:approvaltests:4.0.2'
-    testImplementation 'org.awaitility:awaitility-groovy:4.0.2'
-    testImplementation 'com.tngtech.archunit:archunit:0.13.1'
+    def mockitoVersion = "3.3.9"
+    testImplementation("org.mockito:mockito-core:${mockitoVersion}")
+    testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
+    testImplementation("org.assertj:assertj-core:3.16.0")
+    testImplementation("com.google.truth:truth:1.0.1")
+    testImplementation("com.google.truth.extensions:truth-java8-extension:1.0.1")
+    testImplementation("pl.pragmatists:JUnitParams:1.1.1")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.5.0")
+    testImplementation("com.approvaltests:approvaltests:4.0.2")
+    testImplementation("org.awaitility:awaitility-groovy:4.0.2")
+    testImplementation("com.tngtech.archunit:archunit:0.13.1")
 
-    def testcontainersVersion = '1.14.1'
-    testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
-    testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
-    testImplementation "org.testcontainers:mysql:${testcontainersVersion}"
+    testImplementation("org.slf4j:slf4j-simple:1.7.30") {
+        because "allows a library to log during tests even when only log4j api is on path"
+    }
+
+    def testcontainersVersion = "1.14.1"
+    testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
+    testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
+    testImplementation("org.testcontainers:mysql:${testcontainersVersion}")
 }
 
 task copyDependenciesToLibs(type: Copy) {
@@ -110,11 +114,11 @@ test {
 dependencyUpdates.resolutionStrategy {
   componentSelection { rules ->
     rules.all { ComponentSelection selection ->
-      boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview', 'b', 'ea'].any { qualifier ->
+      boolean rejected = ["alpha", "beta", "rc", "cr", "m", "preview", "b", "ea"].any { qualifier ->
         selection.candidate.version ==~ /(?i).*[.-]$qualifier[.\d-+]*/
       }
       if (rejected) {
-        selection.reject('Release candidate')
+        selection.reject("Release candidate")
       }
     }
   }
