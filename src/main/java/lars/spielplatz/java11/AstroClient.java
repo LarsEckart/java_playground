@@ -1,5 +1,7 @@
 package lars.spielplatz.java11;
 
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,16 +10,12 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
-import com.google.gson.Gson;
-
 public class AstroClient {
 
   private HttpClient client;
-  private Gson gson;
 
-  public AstroClient(HttpClient client, Gson gson) {
+  public AstroClient(HttpClient client) {
     this.client = client;
-    this.gson = gson;
   }
 
   public AstroClient() {
@@ -26,7 +24,6 @@ public class AstroClient {
             .version(HttpClient.Version.HTTP_2)
             .connectTimeout(Duration.ofSeconds(2))
             .build();
-    gson = new Gson();
   }
 
   public AstroResponse getSync(String url) throws IOException, InterruptedException {
@@ -46,6 +43,13 @@ public class AstroClient {
   }
 
   private AstroResponse getResponse(String json) {
-    return gson.fromJson(json, AstroResponse.class);
+    Moshi moshi = new Moshi.Builder().build();
+    JsonAdapter<AstroResponse> jsonAdapter = moshi.adapter(AstroResponse.class);
+
+    try {
+      return jsonAdapter.fromJson(json);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
