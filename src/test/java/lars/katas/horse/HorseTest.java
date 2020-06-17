@@ -1,7 +1,7 @@
 package lars.katas.horse;
 
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -31,12 +31,10 @@ public class HorseTest {
         Horse.FilterSortPaginateTable(
             headers, tableData, filters, sortMetadata, paginationMetadata);
 
-    Moshi moshi = new Moshi.Builder().build();
-    JsonAdapter<PaginatedTable> jsonAdapter = moshi.adapter(PaginatedTable.class);
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    String json = mapper.writeValueAsString(table);
 
-    String json = jsonAdapter.toJson(table);
-    // Assert the data to be sent to the front end
-    // TODO: get moshi support for ApprovalTests?
     Approvals.verify(json);
   }
 }
