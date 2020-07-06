@@ -1,9 +1,11 @@
 package lars.katas;
 
 import static com.google.common.truth.Truth.assertThat;
+import static java.util.function.Predicate.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -25,8 +27,8 @@ class QueryParserTest {
     Set<String> unwantedWords = Set.of("and", "with");
 
     return Stream.of(input.split(" "))
-        .filter(unwantedWords::contains)
-        .filter(w -> w.chars().allMatch(Character::isDigit))
+        .filter(not(unwantedWords::contains))
+        .filter(w -> !w.chars().allMatch(Character::isDigit))
         .map(String::toLowerCase)
         .map(w -> w.endsWith("s") ? w.substring(0, w.length() - 1) : w)
         .collect(Collectors.toList());
