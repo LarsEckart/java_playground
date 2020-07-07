@@ -22,7 +22,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-databind:2.10.3")
     implementation("com.squareup.moshi:moshi:1.9.3")
-    implementation("io.reactivex.rxjava3:rxjava:3.0.1")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.4")
     implementation("io.projectreactor:reactor-core:3.3.3.RELEASE")
     implementation("org.threeten:threeten-extra:1.5.0")
     implementation("org.slf4j:slf4j-api:1.7.30")
