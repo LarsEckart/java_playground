@@ -20,7 +20,7 @@ repositories {
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.3.4")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.10.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
     implementation("com.squareup.moshi:moshi:1.9.3")
     implementation("io.reactivex.rxjava3:rxjava:3.0.4")
     implementation("io.projectreactor:reactor-core:3.3.3.RELEASE")
