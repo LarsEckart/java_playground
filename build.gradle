@@ -33,7 +33,7 @@ dependencies {
     implementation("javax.cache:cache-api:1.1.1")
 
     implementation("org.hibernate:hibernate-core:5.4.14.Final")
-    implementation("net.ttddyy:datasource-proxy:1.6")
+    implementation("net.ttddyy:datasource-proxy:1.7")
     implementation("mysql:mysql-connector-java:8.0.20")
     implementation("org.eclipse.collections:eclipse-collections-api:10.2.0")
     implementation("org.eclipse.collections:eclipse-collections:10.2.0")
