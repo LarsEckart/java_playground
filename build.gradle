@@ -35,7 +35,7 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.4.19.Final")
     implementation("net.ttddyy:datasource-proxy:1.7")
     implementation("mysql:mysql-connector-java:8.0.21")
-    implementation("org.eclipse.collections:eclipse-collections-api:10.2.0")
+    implementation("org.eclipse.collections:eclipse-collections-api:10.3.0")
     implementation("org.eclipse.collections:eclipse-collections:10.2.0")
 
 
