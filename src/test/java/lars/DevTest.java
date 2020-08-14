@@ -73,6 +73,14 @@ class DevTest {
       }
     }
 
+    private static void revertGit(File gitDir)
+    {
+      runOnConsole(gitDir, "git", "clean", "-fd");
+      runOnConsole(gitDir, "git", "reset", "--hard", "HEAD");
+      String helpMessage = "Test Failed, reverting...\n\n Remember to auto refresh \n preferences > general>  workspace > ✓ refresh using native Hooks";
+      System.out.println(helpMessage);
+    }
+
     private static boolean isGitEmpty(File gitDir) {
       runOnConsole(gitDir, new String[] {"git", "status"});
       try {
@@ -103,6 +111,18 @@ class DevTest {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
+      try {
+        File gitDir = getHeadOfGit();
+        if (gitDir == null) {
+          System.out.println("No .git repo found at " + new File(".").getAbsolutePath());
+          return;
+        }
+        System.out.println("lets commit");
+        revertGit(gitDir);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
       System.out.println("test failed");
     }
   }
