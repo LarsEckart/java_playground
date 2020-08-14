@@ -27,13 +27,13 @@ class DevTest {
 
     @Override
     public void testSuccessful(ExtensionContext context) {
+      System.out.println("testSuccessful");
       try {
         File gitDir = getHeadOfGit();
         if (gitDir == null) {
           System.out.println("No .git repo found at " + new File(".").getAbsolutePath());
           return;
         }
-        System.out.println("lets commit");
         commit(gitDir);
       } catch (IOException e) {
         e.printStackTrace();
@@ -111,6 +111,7 @@ class DevTest {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
+      System.out.println("testFailed");
       try {
         File gitDir = getHeadOfGit();
         if (gitDir == null) {
@@ -123,7 +124,6 @@ class DevTest {
         e.printStackTrace();
       }
 
-      System.out.println("test failed");
     }
   }
 }
