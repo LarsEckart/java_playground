@@ -1,5 +1,7 @@
 package lars.spielplatz.java11;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -8,13 +10,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class HttpClientExamples {
 
@@ -133,7 +132,7 @@ public class HttpClientExamples {
     assertThat(recordedRequest.getHeader("Content-Length")).isEqualTo("0");
     assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
     assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/1");
-    assertThat(recordedRequest.getHeader("Host")).contains("localhost:");
+    assertThat(recordedRequest.getHeader("Host")).isNotBlank();
   }
 
   @Test

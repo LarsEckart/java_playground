@@ -1,7 +1,8 @@
 package lars.spielplatz.ttddyydataproxy;
 
-import java.util.Date;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Date;
 import net.ttddyy.dsproxy.QueryCount;
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.hibernate.Session;
@@ -9,15 +10,16 @@ import org.hibernate.Transaction;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 // from https://blog.codecentric.de/en/2019/07/hibernate-caching/
 
 @Testcontainers
+@EnabledOnOs({OS.LINUX, OS.MAC})
 class HibernateSessionTest {
 
   @Container
