@@ -3,7 +3,7 @@ package lars.refactoring;
 class ExampleConditionals {
 
   static boolean deMorgan(int x) {
-    return !(x!=5 && x!=7);
+    return !(x != 5 && x != 7);
   }
 
   static int normalize(String s1, String s2) {
@@ -29,7 +29,7 @@ class ExampleConditionals {
 
   static int split(int x, int y) {
     if (x == 3 && y == 4) {
-      return x+y;
+      return x + y;
     } else {
       return 0;
     }
@@ -48,10 +48,10 @@ class ExampleConditionals {
     int result = 0;
     int factor = 1;
     if (x > 3) {
-      result += y*3;
+      result += y * 3;
       factor = x;
     }
-    return result*factor;
+    return result * factor;
   }
 
   static int join_statements(int x, int y) {
@@ -61,9 +61,9 @@ class ExampleConditionals {
       factor = x;
     }
     if (x > 3) {
-      result += y*3;
+      result += y * 3;
     }
-    return result*factor;
+    return result * factor;
   }
 
   static int redundant_else(int x) {
@@ -85,5 +85,4 @@ class ExampleConditionals {
       return 4;
     }
   }
-
 }
