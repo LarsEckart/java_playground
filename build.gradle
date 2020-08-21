@@ -87,6 +87,7 @@ task copyDependenciesToLibs(type: Copy) {
 }
 
 tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
     options.compilerArgs.add("-Xlint:all")
     options.compilerArgs.add("--enable-preview")
 
