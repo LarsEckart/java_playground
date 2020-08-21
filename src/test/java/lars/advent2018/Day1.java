@@ -1,17 +1,16 @@
 package lars.advent2018;
 
+import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
-
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class Day1 {
 
@@ -44,21 +43,28 @@ class Day1 {
 
     @Test
     void parse_multiple_positive_change_inputs() {
-      var input = "+1\n+3";
+      var input = "+1" + System.lineSeparator() + "+3";
 
       assertThat(frequency(input)).isEqualTo(4);
     }
 
     @Test
     void parse_multiple_negative_change_inputs() {
-      var input = "-1\n-2";
+      var input = "-1" + System.lineSeparator() + "-2";
 
       assertThat(frequency(input)).isEqualTo(-3);
     }
 
     @Test
     void parse_positive_and_negative_frequency_change_inputs() {
-      var input = "+1\n-2\n+3\n+1";
+      var input =
+          "+1"
+              + System.lineSeparator()
+              + "-2"
+              + System.lineSeparator()
+              + "+3"
+              + System.lineSeparator()
+              + "+1";
 
       assertThat(frequency(input)).isEqualTo(3);
     }
@@ -86,14 +92,23 @@ class Day1 {
 
     @Test
     void detects_simple_repetition() {
-      var input = "1\n-1";
+      var input = "1" + System.lineSeparator() + "-1";
 
       assertThat(firstFrequencyTwice(input)).isEqualTo(0);
     }
 
     @Test
     void detects_repetition() {
-      var input = "+3\n+3\n+4\n-2\n-4";
+      var input =
+          "+3"
+              + System.lineSeparator()
+              + "3"
+              + System.lineSeparator()
+              + "4"
+              + System.lineSeparator()
+              + "-2"
+              + System.lineSeparator()
+              + "-4";
 
       assertThat(firstFrequencyTwice(input)).isEqualTo(10);
     }
