@@ -16,10 +16,10 @@ class ExampleConditionals {
     if (s1 == "hello") {
       return 5;
     }
+    if (s2 != "world" && s1 != "foo") {
+      return 6;
+    }
     if (s2 != "world") {
-      if (s1 != "foo") {
-        return 6;
-      }
       return 1;
     } else if (s1 != "foo") {
       return 2;
