@@ -3,10 +3,13 @@ package lars.refactoring;
 import static lars.refactoring.ExampleConditionals.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.github.larseckart.tcr.TestCommitRevertExtension;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(TestCommitRevertExtension.class)
 @DisplayNameGeneration(ReplaceUnderscores.class)
 class ExampleConditionalsTest {
 
