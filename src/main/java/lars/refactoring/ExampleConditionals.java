@@ -3,7 +3,7 @@ package lars.refactoring;
 class ExampleConditionals {
 
   static boolean deMorgan(int x) {
-    return !(x != 5 && x != 7);
+    return x == 5 || x == 7;
   }
 
   static int normalize(String s1, String s2) {
