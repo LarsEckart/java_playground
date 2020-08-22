@@ -36,10 +36,8 @@ class ExampleConditionals {
   }
 
   static int join(int x, int y) {
-    if (x == 3) {
-      if (y == 4) {
-        return x + y;
-      }
+    if (x == 3 && y == 4) {
+      return x + y;
     }
     return 0;
   }
