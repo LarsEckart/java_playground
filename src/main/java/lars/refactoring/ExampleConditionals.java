@@ -11,9 +11,7 @@ class ExampleConditionals {
       return 3;
     }
     if (s1 == "hello") {
-      if (s2 == "bar") {
-        return 3;
-      } else if (s2 != "world") {
+      if (s2 != "world") {
         return 4;
       }
       return 5;
