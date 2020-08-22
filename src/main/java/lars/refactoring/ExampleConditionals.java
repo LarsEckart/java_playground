@@ -67,7 +67,8 @@ class ExampleConditionals {
   static int redundant_else(int x) {
     if (x < 3) {
       return 1;
-    } else if (x < 10) {
+    }
+    if (x < 10) {
       return 10;
     }
     if (x < 30) {
