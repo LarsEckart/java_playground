@@ -7,7 +7,17 @@ class ExampleConditionals {
   }
 
   static int normalize(String s1, String s2) {
-    if (s1 != "hello") {
+    if (s1 == "hello" && s2 == "bar") {
+      return 3;
+    }
+    if (s1 == "hello") {
+      if (s2 == "bar") {
+        return 3;
+      } else if (s2 != "world") {
+        return 4;
+      }
+      return 5;
+    } else {
       if (s2 != "world") {
         if (s1 != "foo") {
           return 6;
@@ -16,13 +26,6 @@ class ExampleConditionals {
       } else if (s1 != "foo") {
         return 2;
       }
-    } else {
-      if (s2 == "bar") {
-        return 3;
-      } else if (s2 != "world") {
-        return 4;
-      }
-      return 5;
     }
     return 0;
   }
