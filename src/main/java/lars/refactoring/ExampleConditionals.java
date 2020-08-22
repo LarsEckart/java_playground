@@ -10,20 +10,19 @@ class ExampleConditionals {
     if (s1 == "hello" && s2 == "bar") {
       return 3;
     }
+    if (s1 == "hello" && s2 != "world") {
+      return 4;
+    }
     if (s1 == "hello") {
-      if (s2 != "world") {
-        return 4;
-      }
       return 5;
-    } else {
-      if (s2 != "world") {
-        if (s1 != "foo") {
-          return 6;
-        }
-        return 1;
-      } else if (s1 != "foo") {
-        return 2;
+    }
+    if (s2 != "world") {
+      if (s1 != "foo") {
+        return 6;
       }
+      return 1;
+    } else if (s1 != "foo") {
+      return 2;
     }
     return 0;
   }
