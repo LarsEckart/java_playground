@@ -8,7 +8,16 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/LarsEckart/tcr-extension")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GH_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
+            }
+        }
+    }
     maven() {
         url "https://dl.bintray.com/mockito/maven/"
         content {
@@ -81,7 +90,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:mysql:${testcontainersVersion}")
 
-    testImplementation("com.github.larseckart.tcr:tcr-extension:0.1")
+    testImplementation("com.github.larseckart:tcr-extension:0.1")
 }
 
 task copyDependenciesToLibs(type: Copy) {
