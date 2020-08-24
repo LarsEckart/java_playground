@@ -1,7 +1,5 @@
 # my java playground
 
-[![Build Status](https://travis-ci.org/LarsEckart/java_playground.svg?branch=master)](https://travis-ci.org/LarsEckart/java_playground)
-
 [![Actions Status](https://github.com/LarsEckart/java_playground/workflows/test/badge.svg)](https://github.com/LarsEckart/java_playground/actions)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/larseckart/java_playground/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/larseckart/java_playground?targetFile=build.gradle)
