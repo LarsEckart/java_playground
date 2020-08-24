@@ -31,3 +31,6 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Run Gradle's test task
         run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
+        env:
+          GH_USERNAME: 'GitHub Action'
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
