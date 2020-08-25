@@ -32,7 +32,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.2")
     implementation("com.squareup.moshi:moshi:1.9.3")
-    implementation("io.reactivex.rxjava3:rxjava:3.0.5")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.6")
     implementation("io.projectreactor:reactor-core:3.3.9.RELEASE")
     implementation("org.threeten:threeten-extra:1.5.0")
     implementation("org.slf4j:slf4j-api:1.7.30")
@@ -45,7 +45,7 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.4.20.Final")
     implementation("net.ttddyy:datasource-proxy:1.7")
     implementation("mysql:mysql-connector-java:8.0.21")
-    implementation("org.eclipse.collections:eclipse-collections-api:10.3.0")
+    implementation("org.eclipse.collections:eclipse-collections-api:10.4.0")
     implementation("org.eclipse.collections:eclipse-collections:10.3.0")
 
 
@@ -69,7 +69,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testImplementation group: "org.netbeans", name: "jemmy", version: "2.2.7.5"
 
-    def mockitoVersion = "3.5.2"
+    def mockitoVersion = "3.5.6"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation("org.assertj:assertj-core:3.17.0")
