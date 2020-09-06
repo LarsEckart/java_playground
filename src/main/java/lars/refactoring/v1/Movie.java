@@ -2,10 +2,9 @@ package lars.refactoring.v1;
 
 class Movie {
 
-  static final int CHILDRENS = 2;
-  static final int REGULAR = 0;
-  static final int NEW_RELEASE = 1;
-
+  public static final int CHILDRENS = 2;
+  public static final int REGULAR = 0;
+  public static final int NEW_RELEASE = 1;
   private String _title;
   private int _priceCode;
 
@@ -14,11 +13,15 @@ class Movie {
     _priceCode = priceCode;
   }
 
-  int getPriceCode() {
+  public int getPriceCode() {
     return _priceCode;
   }
 
-  String getTitle() {
+  public void setPriceCode(int arg) {
+    _priceCode = arg;
+  }
+
+  public String getTitle() {
     return _title;
   }
 }

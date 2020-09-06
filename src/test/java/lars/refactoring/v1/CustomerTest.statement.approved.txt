@@ -1,0 +1,9 @@
+Rental Record for Any
+	Harry Potter	1.5
+	Harry Potter II	3.0
+	Die Hard	2.0
+	Die Hard II	2.0
+	Die Hard III	3.5
+	Fantastic BBeasts And Where To Find Them	12.0
+Amount owed is 24.0
+Your earned 7 frequent renter points

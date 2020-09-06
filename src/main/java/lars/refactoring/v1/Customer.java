@@ -1,34 +1,33 @@
 package lars.refactoring.v1;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Enumeration;
+import java.util.Vector;
 
 class Customer {
 
-  private String name;
-  private List<Rental> rentals = new ArrayList<>();
+  private String _name;
+  private Vector _rentals = new Vector();
 
   public Customer(String name) {
-    this.name = name;
+    _name = name;
   }
 
   public void addRental(Rental arg) {
-    rentals.add(arg);
+    _rentals.addElement(arg);
   }
 
   public String getName() {
-    return name;
+    return _name;
   }
 
   public String statement() {
     double totalAmount = 0;
     int frequentRenterPoints = 0;
-    Iterator<Rental> rentals = this.rentals.iterator();
+    Enumeration rentals = _rentals.elements();
     String result = "Rental Record for " + getName() + "\n";
-    while (rentals.hasNext()) {
+    while (rentals.hasMoreElements()) {
       double thisAmount = 0;
-      Rental each = rentals.next();
+      Rental each = (Rental) rentals.nextElement();
       // determine amounts for each line
       switch (each.getMovie().getPriceCode()) {
         case Movie.REGULAR:

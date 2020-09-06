@@ -1,7 +1,6 @@
 package lars.refactoring.v1;
 
 class Rental {
-
   private Movie _movie;
   private int _daysRented;
 
@@ -10,11 +9,11 @@ class Rental {
     _daysRented = daysRented;
   }
 
-  int getDaysRented() {
+  public int getDaysRented() {
     return _daysRented;
   }
 
-  Movie getMovie() {
+  public Movie getMovie() {
     return _movie;
   }
 }
