@@ -55,12 +55,11 @@ public class Program {
     String command = "expand";
 
     while (stateStack.size() <= 9 * 9) {
-      if (command == "expand") {
+      if (command.equals("expand")) {
         int[] currentState = new int[9 * 9];
 
-        if (stateStack.size() > 0) {
+        if (!stateStack.isEmpty()) {
           System.arraycopy(stateStack.peek(), 0, currentState, 0, currentState.length);
-          // Array.Copy(stateStack.Peek(), currentState, currentState.Length);
         }
 
         int bestRow = -1;
@@ -68,7 +67,7 @@ public class Program {
         Boolean[] bestUsedDigits = null;
         int bestCandidatesCount = -1;
         int bestRandomValue = -1;
-        Boolean containsUnsolvableCells = false;
+        boolean containsUnsolvableCells = false;
 
         for (int index = 0; index < currentState.length; index++) {
           if (currentState[index] == 0) {
@@ -79,7 +78,6 @@ public class Program {
             int blockCol = col / 3;
 
             Boolean[] isDigitUsed = new Boolean[9];
-            Arrays.fill(isDigitUsed, Boolean.FALSE);
 
             for (int i = 0; i < 9; i++) {
               int rowDigit = currentState[9 * i + col];
@@ -96,9 +94,7 @@ public class Program {
               if (blockDigit > 0) {
                 isDigitUsed[blockDigit - 1] = true;
               }
-            } // for (i = 0..8)
-
-            // int candidatesCount = isDigitUsed.Where(used => !used).Count();
+            }
 
             long count = Arrays.stream(isDigitUsed).filter(used -> !used).count();
             int candidatesCount = Math.toIntExact(count);
@@ -119,7 +115,7 @@ public class Program {
               bestCandidatesCount = candidatesCount;
               bestRandomValue = randomValue;
             }
-          } // for (index = 0..81)
+          }
         }
 
         if (!containsUnsolvableCells) {
@@ -132,8 +128,8 @@ public class Program {
 
         // Always try to move after expand
         command = "move";
-      } // if (command == "expand")
-      else if (command == "collapse") {
+      }
+      else if (command.equals("collapse")) {
         stateStack.pop();
         rowIndexStack.pop();
         colIndexStack.pop();
@@ -141,7 +137,7 @@ public class Program {
         lastDigitStack.pop();
 
         command = "move"; // Always try to move after collapse
-      } else if (command == "move") {
+      } else if (command.equals("move")) {
 
         int rowToMove = rowIndexStack.peek();
         int colToMove = colIndexStack.peek();
@@ -179,13 +175,12 @@ public class Program {
           lastDigitStack.push(0);
           command = "collapse";
         }
-      } // if (command == "move")
+      }
     }
 
     System.out.println();
     System.out.println("Final look of the solved board:");
-    // System.out.println(String.Join(Environment.NewLine, board.Select(s => new
-    // String(s)).ToArray()));
+
     Arrays.stream(board).forEach(s -> System.out.println(s));
 
     // Generate inital board from the completely solved one
@@ -198,7 +193,6 @@ public class Program {
     int[] state = stateStack.peek();
 
     int[] finalState = new int[state.length];
-    // Array.Copy(state, finalState, finalState.length);
     System.arraycopy(state, 0, finalState, 0, finalState.length);
 
     int removedPos = 0;
@@ -456,7 +450,7 @@ public class Program {
             } // for (cellGroup = 0..8)
           } // for (digit = 1..9)
 
-          if (candidates.size() > 0) {
+          if (!candidates.isEmpty()) {
             int index = rng.nextInt(candidates.size());
             String description = groupDescriptions.get(index);
             int row = candidateRowIndices.get(index);
