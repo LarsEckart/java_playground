@@ -3,6 +3,6 @@ package lars.katas;
 class StringCalculatorFactory {
 
   public StringCalculator create() {
-    return new StringCalculator();
+    return new StringCalculator(new Transformer());
   }
 }

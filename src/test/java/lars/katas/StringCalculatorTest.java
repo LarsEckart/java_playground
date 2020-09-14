@@ -1,6 +1,7 @@
 package lars.katas;
 
 import com.github.larseckart.tcr.TestCommitRevertMainExtension;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Test;
@@ -17,5 +18,13 @@ class StringCalculatorTest {
     StringCalculator calculator = new StringCalculatorFactory().create();
     int result = calculator.add("1");
     assertThat(result).isEqualTo(1);
+  }
+
+  @Disabled("first refactor the program to make it easy to add the feature, then add the feature")
+  @Test
+  void return_digit_when_single_number2() throws Exception {
+    StringCalculator calculator = new StringCalculatorFactory().create();
+    int result = calculator.add("2");
+    assertThat(result).isEqualTo(2);
   }
 }
