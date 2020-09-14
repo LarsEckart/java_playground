@@ -20,7 +20,6 @@ class StringCalculatorTest {
     assertThat(result).isEqualTo(1);
   }
 
-  @Disabled("first refactor the program to make it easy to add the feature, then add the feature")
   @Test
   void return_digit_when_single_number2() throws Exception {
     StringCalculator calculator = new StringCalculatorFactory().create();
