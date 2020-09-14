@@ -27,7 +27,6 @@ class StringCalculatorTest {
     assertThat(result).isEqualTo(2);
   }
 
-  @Disabled("first refactor the program to make it easy to add the feature, then add the feature")
   @Test
   void return_sum_when_two_numbers_separated_by_comma() throws Exception {
     StringCalculator calculator = new StringCalculatorFactory().create();
