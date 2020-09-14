@@ -12,9 +12,13 @@ class AdaptParameterPattern {
   }
 
   public void populateAdapted(ParameterSource parameterSource) {
+    String value = null;
     String[] values = parameterSource.getRequest().getParameterValues("pageStateName");
     if (values != null && values.length > 0) {
-      doSomething(values[0]);
+      value = values[0];
+    }
+    if (values != null && values.length > 0) {
+      doSomething(value);
     }
   }
 
