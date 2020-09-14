@@ -1,9 +1,6 @@
 package lars.katas;
 
-class Splitter {
+public interface Splitter {
 
-  public String[] split(String numbers) {
-    return numbers.split(",");
-  }
-
+  String[] split(String numbers);
 }
