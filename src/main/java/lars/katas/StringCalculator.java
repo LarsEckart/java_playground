@@ -13,6 +13,10 @@ public class StringCalculator {
   public int add(String numbers) {
     String[] split = splitter.split(numbers);
 
-    return transformer.transform(split[0]);
+    int sum = 0;
+    for (String s : split) {
+      sum += transformer.transform(s);
+    }
+    return sum;
   }
 }
