@@ -18,12 +18,13 @@ class DiceGame {
       die.roll();
       sum += die.faceValue();
     }
+    if (sum > 7) {
+      balance += 1;
+    }
+    balance -= 1;
   }
 
   public int balance() {
-    if (sum > 7) {
-      return 1;
-    }
-    return -1;
+    return balance;
   }
 }
