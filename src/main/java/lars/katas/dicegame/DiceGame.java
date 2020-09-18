@@ -20,7 +20,7 @@ class DiceGame {
     }
     if (sum > 7) {
       balance += 1;
-    } else {
+    } else if (sum < 7) {
       balance -= 1;
     }
   }
