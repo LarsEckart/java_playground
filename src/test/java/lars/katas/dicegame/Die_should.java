@@ -40,7 +40,6 @@ class Die_should {
   }
 
   private void verifyDieValue(Die die) {
-    assertThat(die.faceValue()).isGreaterThanOrEqualTo(1);
-    assertThat(die.faceValue()).isLessThanOrEqualTo(6);
+    assertThat(die.faceValue()).isBetween(1, 6);
   }
 }
