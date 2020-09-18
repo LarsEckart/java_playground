@@ -20,8 +20,9 @@ class DiceGame {
     }
     if (sum > 7) {
       balance += 1;
+    } else {
+      balance -= 1;
     }
-    balance -= 1;
   }
 
   public int balance() {
