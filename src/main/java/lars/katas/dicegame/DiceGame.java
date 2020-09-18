@@ -14,10 +14,9 @@ class DiceGame {
 
   public void play() {
     dice.roll();
-    int current = dice.total();
-    if (current > 7) {
+    if (dice.total() > 7) {
       balance += 1;
-    } else if (current < 7) {
+    } else if (dice.total() < 7) {
       balance -= 1;
     }
   }
