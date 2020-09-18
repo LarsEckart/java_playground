@@ -26,7 +26,6 @@ class Die_should {
       die.roll();
       outcome[die.faceValue() - 1] = outcome[die.faceValue() - 1] + 1;
     }
-    System.out.println(Arrays.toString(outcome));
     for (int j : outcome) {
       assertThat(j).isBetween(95000, 105000);
     }
