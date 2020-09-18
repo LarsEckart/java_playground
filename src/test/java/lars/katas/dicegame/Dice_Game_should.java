@@ -14,4 +14,13 @@ class Dice_Game_should {
     game.play();
     assertThat(game.balance()).isEqualTo(-1);
   }
+
+  @Test
+  void increase_balance_for_win() throws Exception {
+    Die d1 = new LoadedDie(4);
+    Die d2 = new LoadedDie(4);
+    DiceGame game = new DiceGame(d1, d2);
+    game.play();
+    assertThat(game.balance()).isEqualTo(1);
+  }
 }
