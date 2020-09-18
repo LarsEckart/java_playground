@@ -4,23 +4,19 @@ import java.util.List;
 
 class DiceGame {
 
-  private final List<Die> dice;
   private int balance;
+  private final Cup cup;
 
   public DiceGame(Die d1, Die d2) {
-    this.balance = 0;
-    this.dice = List.of(d1, d2);
+    balance = 0;
+    cup = new Cup(List.of(d1, d2));
   }
 
   public void play() {
-    int sum = 0;
-    for (Die die : dice) {
-      die.roll();
-      sum += die.faceValue();
-    }
-    if (sum > 7) {
+    int current = cup.total();
+    if (current > 7) {
       balance += 1;
-    } else if (sum < 7) {
+    } else if (current < 7) {
       balance -= 1;
     }
   }
