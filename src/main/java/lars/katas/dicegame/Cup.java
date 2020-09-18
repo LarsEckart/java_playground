@@ -10,10 +10,15 @@ public class Cup {
     this.dice = dice;
   }
 
-  int total() {
-    int total = 0;
+  public void roll() {
     for (Die die : dice) {
       die.roll();
+    }
+  }
+
+  public int total() {
+    int total = 0;
+    for (Die die : dice) {
       total += die.faceValue();
     }
     return total;

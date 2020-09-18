@@ -5,15 +5,16 @@ import java.util.List;
 class DiceGame {
 
   private int balance;
-  private final Cup cup;
+  private final Cup dice;
 
   public DiceGame(Die d1, Die d2) {
     balance = 0;
-    cup = new Cup(List.of(d1, d2));
+    dice = new Cup(List.of(d1, d2));
   }
 
   public void play() {
-    int current = cup.total();
+    dice.roll();
+    int current = dice.total();
     if (current > 7) {
       balance += 1;
     } else if (current < 7) {
