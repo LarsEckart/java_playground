@@ -70,7 +70,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.netbeans/jemmy
     testImplementation group: "org.netbeans", name: "jemmy", version: "2.2.7.5"
 
-    def mockitoVersion = "3.5.11"
+    def mockitoVersion = "3.5.13"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation("org.assertj:assertj-core:3.17.2")
