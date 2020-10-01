@@ -20,7 +20,8 @@ gradlew generateDependencyGraph
 
 ### GitHub Markdown Task Lists
 
-- [ ] use JDK 15
+- [x] use JDK 15
+- [ ] try JDK 16 early access
 
 ### License
 
