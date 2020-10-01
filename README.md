@@ -18,10 +18,14 @@ jdeps --class-path 'libs/*' -R build/libs/java_playground.jar
 gradlew generateDependencyGraph
 ```
 
+### GitHub Markdown Task Lists
+
+- [ ] use JDK 15
+
 ### License
 
 ```
-Copyright 2017 Lars Eckart
+Copyright 2020 Lars Eckart
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
