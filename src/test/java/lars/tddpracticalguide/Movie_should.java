@@ -23,4 +23,12 @@ class Movie_should {
   void display_movie_name_for_toString() {
     assertThat(movie.toString()).isEqualTo("Star Wars");
   }
+
+  @Test
+  void bad_rating() {
+    movie.addRating(5);
+    movie.addRating(3);
+
+    assertThat(movie.getAverageRating()).isEqualTo(4);
+  }
 }

@@ -5,6 +5,8 @@ import java.util.Objects;
 public class Movie {
 
   private final String name;
+  private int totalRating;
+  private int numberOfRatings;
 
   public Movie(String name) {
     this.name = name;
@@ -12,6 +14,15 @@ public class Movie {
 
   public String getName() {
     return this.name;
+  }
+
+  public void addRating(int rating) {
+    totalRating += rating;
+    numberOfRatings++;
+  }
+
+  public int getAverageRating() {
+    return totalRating / numberOfRatings;
   }
 
   @Override
