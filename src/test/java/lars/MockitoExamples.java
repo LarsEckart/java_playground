@@ -1,10 +1,9 @@
 package lars;
 
 import java.util.LinkedList;
-
 import org.junit.jupiter.api.Test;
 
-import static lars.MockitoExtension.stub;
+import static lars.MockitoExtended.stub;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
