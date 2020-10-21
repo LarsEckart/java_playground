@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SwitchPreview {
 
