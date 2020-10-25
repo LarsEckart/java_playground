@@ -7,7 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-class FixerApi implements ExchangeRates {
+class FixerApiTreeModel implements ExchangeRates {
 
   private HttpClient httpClient = HttpClient.newHttpClient();
   private String accessKey = System.getenv("fixer_api_access_key");
