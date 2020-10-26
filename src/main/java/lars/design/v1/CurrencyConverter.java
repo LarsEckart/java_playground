@@ -1,7 +1,9 @@
 package lars.design.v1;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -13,16 +15,18 @@ class CurrencyConverter {
     HttpClient httpClient = HttpClient.newHttpClient();
     String accessKey = System.getenv("fixer_api_access_key");
 
-    var url =
+    String url =
         "http://data.fixer.io/api/latest?access_key=%s&base=%s&symbols=%s".formatted(
             accessKey,
-            money.getCurrency().toString(),
+            money.getCurrency().asString(),
             to.asString());
-    var request = HttpRequest.newBuilder(URI.create(url)).GET().build();
-    var response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
-    var json = new ObjectMapper().readTree(response.body());
 
-    var rate = json.get("rates").get("USD").asDouble();
+    HttpRequest request = HttpRequest.newBuilder(URI.create(url)).GET().build();
+    HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+
+    JsonNode json = new ObjectMapper().readTree(response.body());
+
+    double rate = json.get("rates").get(to.asString()).asDouble();
 
     return money.convert(to, rate);
   }
