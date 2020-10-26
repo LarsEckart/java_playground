@@ -28,6 +28,7 @@ class FixerApiJsonPointer implements ExchangeRates {
       JsonPointer pointer = JsonPointer.compile("/rates/" + to.asString());
 
       var rate = json.at(pointer).asDouble();
+
       return new ExchangeRate(from, to, rate);
     } catch (InterruptedException | IOException e) {
       throw new CouldNotRetrieveExchangeRate(e);
