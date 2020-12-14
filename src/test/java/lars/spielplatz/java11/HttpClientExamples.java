@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HttpClientExamples {
 
@@ -165,18 +166,12 @@ public class HttpClientExamples {
 
   @Test
   public void handling_failure() throws Exception {
-    // given
     mockWebServer.enqueue(new MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START));
 
     var request = HttpRequest.newBuilder().uri(URI.create(mockWebServerUrl())).timeout(
         Duration.ofSeconds(2)).build();
 
-    // when
-    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-    // then
-    assertThat(response.body()).isEqualTo("hello world");
-    var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
-    assertThat(recordedRequest.getMethod()).isEqualTo("GET");
+    assertThrows(java.net.http.HttpTimeoutException.class,
+        () -> client.send(request, HttpResponse.BodyHandlers.ofString()));
   }
 }
