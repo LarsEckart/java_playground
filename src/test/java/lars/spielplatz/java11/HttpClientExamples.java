@@ -1,19 +1,21 @@
 package lars.spielplatz.java11;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.SocketPolicy;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HttpClientExamples {
 
@@ -159,5 +161,22 @@ public class HttpClientExamples {
         .join(); // just to wait that main thread doesnt die and kill daemon threads with it
 
     executorService.shutdown();
+  }
+
+  @Test
+  public void handling_failure() throws Exception {
+    // given
+    mockWebServer.enqueue(new MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START));
+
+    var request = HttpRequest.newBuilder().uri(URI.create(mockWebServerUrl())).timeout(
+        Duration.ofSeconds(2)).build();
+
+    // when
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    // then
+    assertThat(response.body()).isEqualTo("hello world");
+    var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+    assertThat(recordedRequest.getMethod()).isEqualTo("GET");
   }
 }
