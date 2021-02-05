@@ -52,7 +52,7 @@ dependencies {
 
     def junit4Version = "4.13.1"
     def junitVintageVersion = "5.7.0"
-    def junitJupiterVersion = "5.7.0"
+    def junitJupiterVersion = "5.7.1"
     def junitPlatformVersion = "1.7.0"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
