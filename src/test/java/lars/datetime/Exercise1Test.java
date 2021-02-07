@@ -1,7 +1,8 @@
 package lars.datetime;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -10,9 +11,9 @@ import java.util.TimeZone;
 
 import static lars.datetime.LenientAssert.FIX_WITH_RIGHT_CALL;
 import static lars.datetime.LenientAssert.assertAlmostEqual;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Instant and Date interoperability.
@@ -27,7 +28,7 @@ public class Exercise1Test {
     private Instant java8Instant;
     private SimpleDateFormat classicDateFormatter = new SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-    @Before
+    @BeforeEach
     public void setup() {
 
         classicDate = new Date();
@@ -45,9 +46,7 @@ public class Exercise1Test {
         // In some tests below, we use an 'assertAlmostEquals()'
         // to circumvent this.
         // *****************************************************
-        // TODO: Replace with Date to instant conversion
-        fail("Delete this fail() and FIX the line below.");
-        // java8Instant = classicDate.???;
+        java8Instant = classicDate.toInstant();
     }
 
     @Test
@@ -63,7 +62,7 @@ public class Exercise1Test {
         // TODO: Assert that the Instant milliseconds form epoch almost equals the date milliseconds.
         // REPLACE the FIX_WITH_RIGHT_CALL below with a method call on Instant.
         //-----------------------------------------
-        assertAlmostEqual("Date and Instant milliseconds should almost match", classicDate.getTime(), FIX_WITH_RIGHT_CALL, 10);
+        assertAlmostEqual("Date and Instant milliseconds should almost match", classicDate.getTime(), java8Instant.toEpochMilli(), 10);
     }
 
     @Test
@@ -79,16 +78,15 @@ public class Exercise1Test {
         long classicDateInSeconds = classicDate.getTime() / 1000;
         // TODO: Assert that the Instant seconds form epoch almost equals the date seconds from epoch calculation.
         // REPLACE the FIX_WITH_RIGHT_CALL below with a method call on Instant.
-        assertAlmostEqual("Date and Instant seconds should almost match", classicDateInSeconds, FIX_WITH_RIGHT_CALL, 1);
+        assertAlmostEqual("Date and Instant seconds should almost match", classicDateInSeconds, java8Instant.getEpochSecond(), 1);
     }
 
     @Test
     public void instantHasNanoseconds() {
 
         // TODO: Assert that instant has nano seconds > 0
-        fail("Delete this fail() and FIX the assertion below.");
         //-----------------------------------------
-        // assertTrue("Instant should have nanoseconds", java8Instant.??? > 0);
+         assertTrue(java8Instant.getNano() > 0, "Instant should have nanoseconds");
     }
 
     @Test
@@ -98,7 +96,7 @@ public class Exercise1Test {
 
         // TODO: Assert that instant default toString matches the ISO8601 full date format.
         // REPLACE the FIX_WITH_RIGHT_CALL below with a method call on Instant.
-        assertEquals("Instant toString() should match ISO8601 format", classicDateFormatter.format(classicDate), FIX_WITH_RIGHT_CALL);
+        assertEquals(classicDateFormatter.format(classicDate), java8Instant.toString(), "Instant toString() should match ISO8601 format");
     }
 
     @Test
@@ -111,10 +109,9 @@ public class Exercise1Test {
         // TODO: Verify interoperability between classic and java8 styles
         // REPLACE with conversion from Date to Instant below
         //-----------------------------------------
-        Instant anotherInstant = null;
-        fail("Delete this fail() and FIX the assertion below.");
+        Instant anotherInstant = classicDate.toInstant();
         //-----------------------------------------
-        //assertEquals("The milliseconds from classic date and the anotherInstant should match", classicDate.getTime(), anotherInstant.toEpochMilli());
+        assertEquals(classicDate.getTime(), anotherInstant.toEpochMilli(), "The milliseconds from classic date and the anotherInstant should match");
 
 
         // *****************************************************
@@ -123,10 +120,9 @@ public class Exercise1Test {
 
         // REPLACE with conversion from Instant to Date below
         //-----------------------------------------
-        Date anotherDate = null;
-        fail("Delete this fail() and FIX the assertion below.");
+        Date anotherDate = Date.from(java8Instant);
         //-----------------------------------------
-        //assertEquals("Classic date should match the converted Date", classicDate, anotherDate);
+        assertEquals(classicDate, anotherDate, "Classic date should match the converted Date");
 
         // *****************************************************
         // Think about why all conversions and inter-ops are
