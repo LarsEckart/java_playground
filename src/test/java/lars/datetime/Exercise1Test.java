@@ -9,11 +9,9 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static lars.datetime.LenientAssert.FIX_WITH_RIGHT_CALL;
 import static lars.datetime.LenientAssert.assertAlmostEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Instant and Date interoperability.
@@ -86,7 +84,7 @@ public class Exercise1Test {
 
         // TODO: Assert that instant has nano seconds > 0
         //-----------------------------------------
-         assertTrue(java8Instant.getNano() > 0, "Instant should have nanoseconds");
+        assertTrue(java8Instant.getNano() > 0, "Instant should have nanoseconds");
     }
 
     @Test
