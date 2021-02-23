@@ -30,23 +30,4 @@ public class Newly_Created_Calculator_should {
     calculator.setAccumulator(value);
     assertThat(calculator.getAccumulator()).isEqualTo(value);
   }
-
-  @Test
-  void allow_multiple_values_to_be_stored() {
-    BigDecimal value = new BigDecimal(42);
-    BigDecimal value2 = new BigDecimal(2);
-    BigDecimal value3 = new BigDecimal(3);
-    calculator.setAccumulator(value);
-    calculator.enter();
-    calculator.setAccumulator(value2);
-    calculator.enter();
-    calculator.setAccumulator(value3);
-    assertThat(calculator.getAccumulator()).isEqualTo(value3);
-    calculator.drop();
-    assertThat(calculator.getAccumulator()).isEqualTo(value2);
-    calculator.drop();
-    assertThat(calculator.getAccumulator()).isEqualTo(value);
-    calculator.drop();
-    assertThat(calculator.getAccumulator()).isEqualTo(BigDecimal.ZERO);
-  }
 }
