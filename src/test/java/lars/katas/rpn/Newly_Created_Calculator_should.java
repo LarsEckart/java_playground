@@ -1,6 +1,7 @@
 package lars.katas.rpn;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 import com.github.larseckart.tcr.CommitOnGreenExtension;
 import java.math.BigDecimal;
@@ -29,5 +30,10 @@ public class Newly_Created_Calculator_should {
     RpnCalculator calculator = new RpnCalculator();
     calculator.setAccumulator(value);
     assertThat(calculator.getAccumulator()).isEqualTo(value);
+  }
+
+  @Test
+  void not_throw_an_exception_when_drop_is_called() {
+    assertThatCode(() -> calculator.drop()).doesNotThrowAnyException();
   }
 }

@@ -26,6 +26,8 @@ public class RpnCalculator {
   }
 
   public void drop() {
-    values.pop();
+    if (values.size() > 0) {
+      values.pop();
+    }
   }
 }
