@@ -85,7 +85,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:mysql:${testcontainersVersion}")
-    testImplementation("com.github.larseckart:tcr-extension:0.3.0")
+    testImplementation("com.github.larseckart:tcr-extension:0.4.0")
 }
 
 task copyDependenciesToLibs(type: Copy) {
