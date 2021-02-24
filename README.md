@@ -4,6 +4,8 @@
 
 [![Known Vulnerabilities](https://snyk.io/test/github/larseckart/java_playground/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/larseckart/java_playground?targetFile=build.gradle)
 
+[![Gradle Status](https://gradleupdate.appspot.com/LarsEckart/java_playground/status.svg)](https://gradleupdate.appspot.com/LarsEckart/java_playground/status)
+
 This is a place for me to explore java core api and various libraries.
 
 ## jdeps
