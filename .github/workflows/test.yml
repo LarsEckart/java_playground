@@ -14,8 +14,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        java: [ 15 ]
-        os: [ubuntu, windows ]
+        java: [ 16 ]
+        os: [ ubuntu, windows ]
     steps:
       - name: Check out repo
         uses: actions/checkout@v2.3.2
