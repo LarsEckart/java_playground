@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
 
-import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +11,7 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import static org.hibernate.cfg.AvailableSettings.AUTOCOMMIT;
 import static org.hibernate.cfg.Environment.CURRENT_SESSION_CONTEXT_CLASS;
@@ -52,7 +51,7 @@ public class HibernateUtil {
       settings.put(ORDER_UPDATES, true);
       settings.put(ORDER_INSERTS, true);
       settings.put(STATEMENT_BATCH_SIZE, 10);
-      settings.put(DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+      settings.put(DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
       settings.put(CURRENT_SESSION_CONTEXT_CLASS, "thread");
       settings.put(AUTOCOMMIT, false);
       settings.put(HBM2DDL_AUTO, "create");
@@ -81,7 +80,7 @@ public class HibernateUtil {
   }
 
   private static DataSource buildDataSource(String url) {
-    final MysqlDataSource dataSource = new MysqlConnectionPoolDataSource();
+    final PGSimpleDataSource dataSource = new PGSimpleDataSource();
     dataSource.setUser("hibernateuser");
     dataSource.setPassword("hibernatepassword");
     dataSource.setURL(url);
