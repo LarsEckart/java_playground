@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
-import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -23,8 +23,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 class HibernateSessionTest {
 
   @Container
-  private static final MySQLContainer MY_SQL_CONTAINER =
-      new MySQLContainer()
+  private static final PostgreSQLContainer MY_SQL_CONTAINER =
+      new PostgreSQLContainer()
           .withUsername("hibernateuser")
           .withPassword("hibernatepassword")
           .withDatabaseName("hibernatetest");
