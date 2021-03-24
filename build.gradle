@@ -94,7 +94,7 @@ dependencies {
 
 task copyDependenciesToLibs(type: Copy) {
     into "libs"
-    from configurations.implementation
+    from configurations.compileClasspath
 }
 
 tasks.withType(JavaCompile) {
