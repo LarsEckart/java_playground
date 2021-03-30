@@ -35,7 +35,7 @@ class Money {
     if (o == null || getClass() != o.getClass()) return false;
     Money money = (Money) o;
     return Objects.equals(currency, money.currency) &&
-        amount != null && amount.compareTo(money.amount) == 0;
+           Objects.equals(amount, money.amount);
   }
 
   @Override public int hashCode() {
