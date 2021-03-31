@@ -10,8 +10,8 @@ class Money {
   private final BigDecimal amount;
 
   public Money(Currency currency, BigDecimal amount) {
-    this.currency = currency;
-    this.amount = amount;
+    this.currency = Objects.requireNonNull(currency);
+    this.amount = Objects.requireNonNull(amount);
   }
 
   public Money convert(ExchangeRate exchangeRate) {
@@ -34,8 +34,7 @@ class Money {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Money money = (Money) o;
-    return Objects.equals(currency, money.currency) &&
-           Objects.equals(amount, money.amount);
+    return Objects.equals(currency, money.currency) && amount.compareTo(money.amount) == 0;
   }
 
   @Override public int hashCode() {

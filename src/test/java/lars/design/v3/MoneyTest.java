@@ -24,6 +24,6 @@ class MoneyTest {
 
   @Test
   void equalsVerified() {
-    EqualsVerifier.simple().forClass(Money.class).verify();
+    EqualsVerifier.simple().forClass(Money.class).withNonnullFields("amount").verify();
   }
 }
