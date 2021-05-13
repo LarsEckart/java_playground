@@ -15,7 +15,7 @@ public class CustomerTest {
     customer.addRental(new Rental(new Movie("Die Hard II", Movie.REGULAR), 1));
     customer.addRental(new Rental(new Movie("Die Hard III", Movie.REGULAR), 3));
     customer.addRental(
-        new Rental(new Movie("Fantastic BBeasts And Where To Find Them", Movie.NEW_RELEASE), 4));
+        new Rental(new Movie("Fantastic Beasts And Where To Find Them", Movie.NEW_RELEASE), 4));
 
     Approvals.verify(customer.statement());
   }
