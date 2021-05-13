@@ -11,7 +11,6 @@ import org.approvaltests.reporters.ClipboardReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.Test;
 
-// @RunWith(FasterTestCommitRevertRunner.class)
 public class HorseTest {
 
   @UseReporter(ClipboardReporter.class)

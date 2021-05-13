@@ -97,7 +97,7 @@ dependencies {
     testImplementation("net.java.dev.jna:jna:5.8.0") {
         because "testcontainers, docker and M1 chip"
     }
-    testImplementation("com.github.larseckart:tcr-extension:0.4.0")
+    testImplementation("com.larseckart:junit-tcr-extensions:0.0.1")
 }
 
 task copyDependenciesToLibs(type: Copy) {
