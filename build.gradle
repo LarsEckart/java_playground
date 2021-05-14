@@ -80,7 +80,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
-    testImplementation("com.approvaltests:approvaltests:10.4.1")
+    testImplementation("com.approvaltests:approvaltests:11.2.3")
     testImplementation("org.awaitility:awaitility-groovy:4.0.3")
     testImplementation("com.tngtech.archunit:archunit:0.18.0")
     testImplementation("com.github.javafaker:javafaker:1.0.2")
