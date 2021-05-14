@@ -11,6 +11,6 @@ jobs:
     name: on ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
