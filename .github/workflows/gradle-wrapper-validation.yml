@@ -13,4 +13,4 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2.3.4
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1.0.3
+        uses: gradle/wrapper-validation-action@v1.0.4
