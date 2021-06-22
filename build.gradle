@@ -80,13 +80,13 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
-    testImplementation("com.approvaltests:approvaltests:11.2.3")
+    testImplementation("com.approvaltests:approvaltests:11.7.0")
     testImplementation("org.awaitility:awaitility-groovy:4.1.0")
     testImplementation("com.tngtech.archunit:archunit:0.18.0")
     testImplementation("com.github.javafaker:javafaker:1.0.2")
     testImplementation("nl.jqno.equalsverifier:equalsverifier:3.6")
 
-    testImplementation("org.slf4j:slf4j-simple:1.7.30") {
+    testImplementation("org.slf4j:slf4j-simple:1.7.31") {
         because "allows a library to log during tests even when only log4j api is on path"
     }
 
