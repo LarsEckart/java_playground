@@ -90,7 +90,7 @@ dependencies {
         because "allows a library to log during tests even when only log4j api is on path"
     }
 
-    def testcontainersVersion = "1.15.3"
+    def testcontainersVersion = "1.16.0"
     testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:postgresql:${testcontainersVersion}")
