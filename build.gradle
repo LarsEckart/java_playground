@@ -74,7 +74,7 @@ dependencies {
         because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
-    def mockitoVersion = "3.11.2"
+    def mockitoVersion = "3.12.4"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation("org.assertj:assertj-core:3.20.2")
@@ -94,7 +94,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:postgresql:${testcontainersVersion}")
-    testImplementation("net.java.dev.jna:jna:5.8.0") {
+    testImplementation("net.java.dev.jna:jna:5.9.0") {
         because "testcontainers, docker and M1 chip"
     }
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.1")
