@@ -1,16 +1,16 @@
-[true, NO_TESTS] => [main] INFO  lars.katas.untangled.Pipeline - No tests
-[main] INFO  lars.katas.untangled.Pipeline - Deployment successful
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
-[true, PASSING_TESTS] => [main] INFO  lars.katas.untangled.Pipeline - Tests passed
-[main] INFO  lars.katas.untangled.Pipeline - Deployment successful
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
-[true, FAILING_TESTS] => [main] ERROR lars.katas.untangled.Pipeline - Tests failed
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
-[false, NO_TESTS] => [main] INFO  lars.katas.untangled.Pipeline - No tests
-[main] ERROR lars.katas.untangled.Pipeline - Deployment failed
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
-[false, PASSING_TESTS] => [main] INFO  lars.katas.untangled.Pipeline - Tests passed
-[main] ERROR lars.katas.untangled.Pipeline - Deployment failed
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
-[false, FAILING_TESTS] => [main] ERROR lars.katas.untangled.Pipeline - Tests failed
-[main] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[true, NO_TESTS] => [thread-name] INFO  lars.katas.untangled.Pipeline - No tests
+[thread-name] INFO  lars.katas.untangled.Pipeline - Deployment successful
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[true, PASSING_TESTS] => [thread-name] INFO  lars.katas.untangled.Pipeline - Tests passed
+[thread-name] INFO  lars.katas.untangled.Pipeline - Deployment successful
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[true, FAILING_TESTS] => [thread-name] ERROR lars.katas.untangled.Pipeline - Tests failed
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, NO_TESTS] => [thread-name] INFO  lars.katas.untangled.Pipeline - No tests
+[thread-name] ERROR lars.katas.untangled.Pipeline - Deployment failed
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, PASSING_TESTS] => [thread-name] INFO  lars.katas.untangled.Pipeline - Tests passed
+[thread-name] ERROR lars.katas.untangled.Pipeline - Deployment failed
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 
+[false, FAILING_TESTS] => [thread-name] ERROR lars.katas.untangled.Pipeline - Tests failed
+[thread-name] INFO  lars.katas.untangled.Pipeline - Email disabled 

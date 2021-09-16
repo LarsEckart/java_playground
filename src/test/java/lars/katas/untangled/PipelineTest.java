@@ -5,6 +5,8 @@ import java.io.PrintStream;
 import java.util.stream.Collectors;
 
 import org.approvaltests.combinations.CombinationApprovals;
+import org.approvaltests.core.Options;
+import org.approvaltests.scrubbers.RegExScrubber;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
@@ -15,7 +17,6 @@ class PipelineTest {
   void golden_master() {
     CombinationApprovals.verifyAllCombinations(
         this::executeProgram, new Boolean[] {true, false}, TestStatus.values());
-    // might have to scrub thread name
   }
 
   private String executeProgram(boolean buildsSuccessfully, TestStatus noTests) {
@@ -30,6 +31,10 @@ class PipelineTest {
             .build());
 
     String response = baos.toString();
-    return response.lines().map(l -> l.substring(13)).collect(Collectors.joining("\n"));
+    return response
+        .lines()
+        .map(l -> l.substring(13)) // could use Scrubbers instead
+        .map(l -> l.replaceAll("\\[\\w*\\]", "[thread-name]"))
+        .collect(Collectors.joining("\n"));
   }
 }
