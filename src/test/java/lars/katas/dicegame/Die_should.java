@@ -28,7 +28,7 @@ class Die_should {
     }
   }
 
-  @RepeatedTest(1000)
+  @RepeatedTest(100)
   void roll_between_1_and_6() {
     Die die = new Die();
     die.roll();

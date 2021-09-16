@@ -59,7 +59,7 @@ dependencies {
 
     def junit4Version = "4.13.2"
     def junitVintageVersion = "5.8.0"
-    def junitJupiterVersion = "5.7.2"
+    def junitJupiterVersion = "5.8.0"
     def junitPlatformVersion = "1.8.0"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
@@ -147,5 +147,5 @@ libyear {
     // gw -q dependencies --configuration compileClasspath
     configurations = ['compileClasspath']
     failOnError = false
-    validator = allArtifactsCombinedMustNotBeOlderThan(years(30)) // just so that build doesnt fail
+    validator = allArtifactsCombinedMustNotBeOlderThan(years(100)) // just so that build doesnt fail
 }

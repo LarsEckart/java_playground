@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -20,6 +21,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @EnabledOnOs({OS.LINUX, OS.MAC})
+@Tag("slow")
 class HibernateSessionTest {
 
   @Container
