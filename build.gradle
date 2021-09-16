@@ -123,7 +123,7 @@ tasks.withType(JavaCompile) {
 test {
     useJUnitPlatform()
     testLogging {
-        events "skipped", "failed"
+        events "PASSED", "SKIPPED", "FAILED"
         exceptionFormat "full"
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
