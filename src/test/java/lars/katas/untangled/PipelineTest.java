@@ -34,7 +34,6 @@ class PipelineTest {
     return response
         .lines()
         .map(l -> l.substring(13)) // could use Scrubbers instead
-        .map(l -> l.replaceAll("\\[\\w*\\]", "[thread-name]"))
         .collect(Collectors.joining("\n"));
   }
 }
