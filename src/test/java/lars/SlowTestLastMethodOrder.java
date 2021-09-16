@@ -8,22 +8,22 @@ import org.junit.jupiter.api.MethodOrdererContext;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
-public class MyTestMethodOrder implements MethodOrderer {
+public class SlowTestLastMethodOrder implements MethodOrderer {
 
-  private Comparator<MethodDescriptor> comparator =
+  private final Comparator<MethodDescriptor> comparator =
       (o1, o2) -> {
         Optional<Tag> annotation = o1.findAnnotation(Tag.class);
         boolean present = annotation.isPresent();
         if (present) {
           String value = annotation.get().value();
-          return "slow".equalsIgnoreCase(value) ? -1 : 1;
+          return "slow".equalsIgnoreCase(value) ? 1 : -1;
         }
         return 0;
       };
 
   @Override
   public void orderMethods(MethodOrdererContext context) {
-    context.getMethodDescriptors().sort(comparator.reversed());
+    context.getMethodDescriptors().sort(comparator);
   }
 
   @Override

@@ -15,6 +15,7 @@ class PipelineTest {
   void golden_master() {
     CombinationApprovals.verifyAllCombinations(
         this::executeProgram, new Boolean[] {true, false}, TestStatus.values());
+    // might have to scrub thread name
   }
 
   private String executeProgram(boolean buildsSuccessfully, TestStatus noTests) {

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.ClassOrdererContext;
 import org.junit.jupiter.api.Tag;
 
-public class MyTestClassOrder implements ClassOrderer {
+public class SlowTestLastClassOrder implements ClassOrderer {
 
-  private Comparator<ClassDescriptor> comparator =
+  private final Comparator<ClassDescriptor> comparator =
       (o1, o2) -> {
         Optional<Tag> annotation = o1.findAnnotation(Tag.class);
         boolean present = annotation.isPresent();
@@ -22,8 +22,6 @@ public class MyTestClassOrder implements ClassOrderer {
 
   @Override
   public void orderClasses(ClassOrdererContext context) {
-    context
-        .getClassDescriptors()
-        .sort((o1, o2) -> o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName()));
+    context.getClassDescriptors().sort(comparator);
   }
 }
