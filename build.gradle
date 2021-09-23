@@ -58,7 +58,7 @@ dependencies {
     implementation("javax.servlet:servlet-api:2.5")
 
     def junit4Version = "4.13.2"
-    def junitVintageVersion = "5.8.0"
+    def junitVintageVersion = "5.8.1"
     def junitJupiterVersion = "5.8.0"
     def junitPlatformVersion = "1.8.0"
 
