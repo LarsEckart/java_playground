@@ -74,7 +74,7 @@ dependencies {
         because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
-    def mockitoVersion = "3.12.4"
+    def mockitoVersion = "4.0.0"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation("org.assertj:assertj-core:3.21.0")
