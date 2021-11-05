@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.9.0")
+    errorprone("com.google.errorprone:error_prone_core:2.10.0")
 
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation("com.squareup.moshi:moshi:1.12.0")
