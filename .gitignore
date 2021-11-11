@@ -19,6 +19,9 @@ out/
 # Maven
 target
 
+# Testcontainers cloud
+agent
+
 logs/
 lib
 libs
