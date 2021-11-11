@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(CommitOnGreenExtension.class)
+//@ExtendWith(CommitOnGreenExtension.class)
 public class Newly_Created_Calculator_should {
 
   private RpnCalculator calculator;
