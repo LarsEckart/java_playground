@@ -1,0 +1,4 @@
+Expenses [Date1]
+Breakfast	1	 
+Meal expenses: 1
+Total expenses: 1
