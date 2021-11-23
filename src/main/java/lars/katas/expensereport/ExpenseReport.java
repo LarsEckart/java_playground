@@ -10,24 +10,24 @@ import java.util.List;
 enum ExpenseType {
   DINNER,
   BREAKFAST,
-  CAR_RENTAL
-}
-
-class Expense {
-  ExpenseType type;
-  int amount;
+  CAR_RENTAL;
 
   boolean isMeal() {
-    return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+    return this == DINNER || this == BREAKFAST;
   }
 
-  String name() {
-    return switch (type) {
+  String typeName() {
+    return switch (this) {
       case DINNER -> "Dinner";
       case BREAKFAST -> "Breakfast";
       case CAR_RENTAL -> "Car Rental";
     };
   }
+}
+
+class Expense {
+  ExpenseType type;
+  int amount;
 
   boolean aboveLimit() {
     return type == ExpenseType.DINNER && amount > 5000
@@ -47,7 +47,7 @@ public class ExpenseReport {
               ? "X"
               : " ";
 
-      System.out.println(expense.name() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+      System.out.println(expense.type.typeName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
     }
 
     System.out.println("Meal expenses: " + expenses.calculateMealExpenses());

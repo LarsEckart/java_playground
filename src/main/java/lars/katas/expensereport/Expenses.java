@@ -23,7 +23,7 @@ public final class Expenses implements Iterable<Expense> {
   int calculateMealExpenses() {
     int mealExpenses = 0;
     for (Expense expense : expenses) {
-      if (expense.isMeal()) {
+      if (expense.type.isMeal()) {
         mealExpenses += expense.amount;
       }
     }
