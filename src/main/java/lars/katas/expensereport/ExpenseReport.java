@@ -42,15 +42,13 @@ public class ExpenseReport {
         mealExpenses += expense.amount;
       }
 
-      String expenseName = expense.name();
-
       String mealOverExpensesMarker =
           expense.type == ExpenseType.DINNER && expense.amount > 5000
                   || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
               ? "X"
               : " ";
 
-      System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+      System.out.println(expense.name() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
       total += expense.amount;
     }
