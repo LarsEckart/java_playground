@@ -36,10 +36,12 @@ class Expense {
 }
 
 public class ExpenseReport {
-  public void printReport(List<Expense> expenses) {
+  public void printReport(List<Expense> expenseList) {
+    Expenses expenses = new Expenses(expenseList);
+
     System.out.println("Expenses " + new Date());
 
-    for (Expense expense : expenses) {
+    for (Expense expense : expenseList) {
       String mealOverExpensesMarker =
           expense.aboveLimit()
               ? "X"
@@ -48,26 +50,8 @@ public class ExpenseReport {
       System.out.println(expense.name() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
     }
 
-    System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
-    System.out.println("Total expenses: " + total(expenses));
-  }
-
-  private int total(List<Expense> expenses) {
-    int total = 0;
-    for (Expense expense : expenses) {
-      total += expense.amount;
-    }
-    return total;
-  }
-
-  private int calculateMealExpenses(List<Expense> expenses) {
-    int mealExpenses = 0;
-    for (Expense expense : expenses) {
-      if (expense.isMeal()) {
-        mealExpenses += expense.amount;
-      }
-    }
-    return mealExpenses;
+    System.out.println("Meal expenses: " + expenses.calculateMealExpenses());
+    System.out.println("Total expenses: " + expenses.total());
   }
 
 }
