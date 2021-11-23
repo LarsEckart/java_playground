@@ -1,9 +1,10 @@
 package lars.katas.expensereport;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public final class Expenses {
+public final class Expenses implements Iterable<Expense> {
 
   private final List<Expense> expenses;
 
@@ -31,10 +32,8 @@ public final class Expenses {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == this)
-      return true;
-    if (obj == null || obj.getClass() != this.getClass())
-      return false;
+    if (obj == this) return true;
+    if (obj == null || obj.getClass() != this.getClass()) return false;
     var that = (Expenses) obj;
     return Objects.equals(this.expenses, that.expenses);
   }
@@ -46,8 +45,11 @@ public final class Expenses {
 
   @Override
   public String toString() {
-    return "Expenses[" +
-        "expenses=" + expenses + ']';
+    return "Expenses[" + "expenses=" + expenses + ']';
   }
 
+  @Override
+  public Iterator<Expense> iterator() {
+    return expenses.iterator();
+  }
 }

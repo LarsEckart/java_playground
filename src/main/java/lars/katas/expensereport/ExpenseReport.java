@@ -41,7 +41,7 @@ public class ExpenseReport {
 
     System.out.println("Expenses " + new Date());
 
-    for (Expense expense : expenseList) {
+    for (Expense expense : expenses) {
       String mealOverExpensesMarker =
           expense.aboveLimit()
               ? "X"
