@@ -16,6 +16,18 @@ enum ExpenseType {
 class Expense {
   ExpenseType type;
   int amount;
+
+  boolean isMeal() {
+    return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+  }
+
+  String name() {
+    return switch (type) {
+      case DINNER -> "Dinner";
+      case BREAKFAST -> "Breakfast";
+      case CAR_RENTAL -> "Car Rental";
+    };
+  }
 }
 
 public class ExpenseReport {
@@ -26,15 +38,11 @@ public class ExpenseReport {
     System.out.println("Expenses " + new Date());
 
     for (Expense expense : expenses) {
-      if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
+      if (expense.isMeal()) {
         mealExpenses += expense.amount;
       }
 
-      String expenseName = switch (expense.type) {
-        case DINNER -> "Dinner";
-        case BREAKFAST -> "Breakfast";
-        case CAR_RENTAL -> "Car Rental";
-      };
+      String expenseName = expense.name();
 
       String mealOverExpensesMarker =
           expense.type == ExpenseType.DINNER && expense.amount > 5000
@@ -50,4 +58,5 @@ public class ExpenseReport {
     System.out.println("Meal expenses: " + mealExpenses);
     System.out.println("Total expenses: " + total);
   }
+
 }
