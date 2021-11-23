@@ -30,18 +30,11 @@ public class ExpenseReport {
         mealExpenses += expense.amount;
       }
 
-      String expenseName = "";
-      switch (expense.type) {
-        case DINNER:
-          expenseName = "Dinner";
-          break;
-        case BREAKFAST:
-          expenseName = "Breakfast";
-          break;
-        case CAR_RENTAL:
-          expenseName = "Car Rental";
-          break;
-      }
+      String expenseName = switch (expense.type) {
+        case DINNER -> "Dinner";
+        case BREAKFAST -> "Breakfast";
+        case CAR_RENTAL -> "Car Rental";
+      };
 
       String mealOverExpensesMarker =
           expense.type == ExpenseType.DINNER && expense.amount > 5000
