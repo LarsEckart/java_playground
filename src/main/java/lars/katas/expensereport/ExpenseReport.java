@@ -37,8 +37,6 @@ class Expense {
 
 public class ExpenseReport {
   public void printReport(List<Expense> expenses) {
-    int total = 0;
-
     System.out.println("Expenses " + new Date());
 
     for (Expense expense : expenses) {
@@ -48,13 +46,18 @@ public class ExpenseReport {
               : " ";
 
       System.out.println(expense.name() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+    }
 
+    System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
+    System.out.println("Total expenses: " + total(expenses));
+  }
+
+  private int total(List<Expense> expenses) {
+    int total = 0;
+    for (Expense expense : expenses) {
       total += expense.amount;
     }
-    int mealExpenses = calculateMealExpenses(expenses);
-
-    System.out.println("Meal expenses: " + mealExpenses);
-    System.out.println("Total expenses: " + total);
+    return total;
   }
 
   private int calculateMealExpenses(List<Expense> expenses) {
