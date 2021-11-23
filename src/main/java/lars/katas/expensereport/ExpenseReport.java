@@ -28,6 +28,11 @@ class Expense {
       case CAR_RENTAL -> "Car Rental";
     };
   }
+
+  boolean aboveLimit() {
+    return type == ExpenseType.DINNER && amount > 5000
+            || type == ExpenseType.BREAKFAST && amount > 1000;
+  }
 }
 
 public class ExpenseReport {
@@ -43,8 +48,7 @@ public class ExpenseReport {
       }
 
       String mealOverExpensesMarker =
-          expense.type == ExpenseType.DINNER && expense.amount > 5000
-                  || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
+          expense.aboveLimit()
               ? "X"
               : " ";
 
