@@ -14,6 +14,10 @@ java {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.10.0")
 
