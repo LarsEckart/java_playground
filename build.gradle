@@ -14,26 +14,6 @@ java {
     }
 }
 
-repositories {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/LarsEckart/tcr-extension")
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GH_USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
-            }
-        }
-    }
-    maven() {
-        url "https://dl.bintray.com/mockito/maven/"
-        content {
-            includeGroup "org.mockito"
-        }
-    }
-    mavenCentral()
-}
-
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.10.0")
 
