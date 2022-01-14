@@ -9,11 +9,14 @@ import java.util.List;
 import org.approvaltests.Approvals;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.approvaltests.core.Options;
+import org.approvaltests.reporters.Junit5Reporter;
+import org.approvaltests.reporters.UseReporter;
 import org.approvaltests.scrubbers.DateScrubber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(FastTestCommitRevertMainExtension.class)
+@UseReporter(Junit5Reporter.class)
 class ExpenseReportTest {
 
   @Test
