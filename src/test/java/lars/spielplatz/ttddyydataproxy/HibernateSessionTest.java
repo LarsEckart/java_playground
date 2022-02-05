@@ -16,6 +16,7 @@ import org.junit.jupiter.api.condition.OS;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 // from https://blog.codecentric.de/en/2019/07/hibernate-caching/
 
@@ -25,14 +26,14 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 class HibernateSessionTest {
 
   @Container
-  private static final PostgreSQLContainer MY_SQL_CONTAINER =
-      new PostgreSQLContainer()
+  private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER =
+      new PostgreSQLContainer(DockerImageName.parse("postgres"))
           .withUsername("hibernateuser")
           .withPassword("hibernatepassword")
           .withDatabaseName("hibernatetest");
 
   private static void deleteAllEntities() {
-    try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
+    try (final Session session = HibernateUtil.getSession(POSTGRE_SQL_CONTAINER.getJdbcUrl())) {
       final Transaction transaction = session.beginTransaction();
       session.createQuery("DELETE FROM SomeEntity").executeUpdate();
       transaction.commit();
@@ -54,7 +55,7 @@ class HibernateSessionTest {
 
   @Test
   void sessionCacheIsInterTransactional() {
-    try (final Session session = HibernateUtil.getSession(MY_SQL_CONTAINER.getJdbcUrl())) {
+    try (final Session session = HibernateUtil.getSession(POSTGRE_SQL_CONTAINER.getJdbcUrl())) {
 
       final Transaction transactionA = session.beginTransaction();
       final int entityId = 1;
