@@ -13,10 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-dependabot-auto-merge@v2
-        with:
-          target: major
-          github-token: ${{ secrets.DEPENDABOT_TOKEN }}
+      #- run: gh pr merge --auto --merge "$PR_URL"
+      - run: env
+        #env:
+        #  PR_URL: ${{github.event.workflow_run.html_url}}
+        #  GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
 
   test-failed:
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
