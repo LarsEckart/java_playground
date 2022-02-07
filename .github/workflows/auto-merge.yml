@@ -15,9 +15,10 @@ jobs:
     steps:
       #- run: gh pr merge --auto --merge "$PR_URL"
       - run: env
-        #env:
-        #  PR_URL: ${{github.event.workflow_run.html_url}}
-        #  GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+        env:
+          PR_URL: ${{github.event.workflow_run.html_url}}
+          WORKFLOW_URL: ${{github.event.workflow_run}}
+          #GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
 
   test-failed:
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
