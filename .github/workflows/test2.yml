@@ -1,9 +1,6 @@
 name: Run tests2
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -16,10 +13,10 @@ jobs:
       - name: Save PR number
         env:
           PR_NUMBER: ${{ github.event.number }}
+        - uses: actions/upload-artifact@v2
+          with:
+            name: pr_number
+            path: pr/
         run: |
           mkdir -p ./pr
           echo $PR_NUMBER > ./pr/pr_number
-          - uses: actions/upload-artifact@v2
-            with:
-              name: pr_number
-              path: pr/
