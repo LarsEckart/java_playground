@@ -70,7 +70,7 @@ dependencies {
     testImplementation("com.github.javafaker:javafaker:1.0.2")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.8.2')
 
-    testImplementation("org.slf4j:slf4j-simple:1.7.32") {
+    testImplementation("org.slf4j:slf4j-simple:1.7.36") {
         because "allows a library to log during tests even when only log4j api is on path"
     }
 
