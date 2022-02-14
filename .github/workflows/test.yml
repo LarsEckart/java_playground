@@ -17,8 +17,7 @@ jobs:
     strategy:
       matrix:
         java: [ 17 ]
-#        os: [ ubuntu, windows ]
-        os: [ ubuntu ]
+        os: [ ubuntu, windows ]
     steps:
       - name: Check out repo
         uses: actions/checkout@v2.4.0
@@ -57,10 +56,8 @@ jobs:
           github.actor == 'dependabot[bot]' &&
           github.event_name == 'pull_request'
         run: |
-          echo "we made it to here"
-          echo "URL: $PR_URL"
           gh pr merge --auto --merge "$PR_URL"
-          echo "we did it"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
+          # this secret needs to be in the settings.secrets.dependabot
           GITHUB_TOKEN: ${{secrets.GH_ACTION_TOKEN}}
