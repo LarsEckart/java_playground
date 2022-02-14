@@ -17,7 +17,8 @@ jobs:
     strategy:
       matrix:
         java: [ 17 ]
-        os: [ ubuntu, windows ]
+#        os: [ ubuntu, windows ]
+        os: [ ubuntu ]
     steps:
       - name: Check out repo
         uses: actions/checkout@v2.4.0
@@ -49,22 +50,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: print env
-        if: |
-          github.event_name == 'pull_request'
-        run: |
-          echo "printing env"
-          echo "$PR_URL"
-        env:
-          PR_URL: ${{github.event.workflow_run.html_url}}
+      - name: Check out repo
+        uses: actions/checkout@v2.4.0
       - name: auto-merge
         if: |
           github.actor == 'dependabot[bot]' &&
           github.event_name == 'pull_request'
         run: |
           echo "we made it to here"
+          echo "URL: $PR_URL"
           gh pr merge --auto --merge "$PR_URL"
           echo "we did it"
         env:
-          PR_URL: ${{github.event.workflow_run.html_url}}
+          PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GH_ACTION_TOKEN}}
