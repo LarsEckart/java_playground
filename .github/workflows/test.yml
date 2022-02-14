@@ -4,9 +4,9 @@ on:
   push:
     branches:
     - master
-#  pull_request:
-#    branches:
-#    - master
+  pull_request:
+    branches:
+    - master
   schedule:
     - cron: "0 */3 * * *"
 
@@ -45,3 +45,11 @@ jobs:
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: auto-merge
+        if: |
+          github.actor == 'dependabot[bot]' &&
+          github.event_name == 'pull_request'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.workflow_run.html_url}}
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
