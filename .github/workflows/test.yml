@@ -53,7 +53,9 @@ jobs:
         if: |
           github.actor == 'dependabot[bot]' &&
           github.event_name == 'pull_request'
-        run: gh pr merge --auto --merge "$PR_URL"
+        run: |
+          gh auth login --with-token $GITHUB_TOKEN
+          gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.workflow_run.html_url}}
-          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GH_ACTION_TOKEN}}
