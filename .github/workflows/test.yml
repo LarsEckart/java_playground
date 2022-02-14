@@ -45,6 +45,10 @@ jobs:
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  auto-merge:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: auto-merge
         if: |
           github.actor == 'dependabot[bot]' &&
