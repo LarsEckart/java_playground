@@ -31,15 +31,15 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle-
-      - name: Prepare Testcontainers Cloud agent
-        env:
-          TC_CLOUD_TOKEN: ${{ secrets.TC_CLOUD_TOKEN }}
-        if: env.TC_CLOUD_TOKEN != ''
-        run: |
-          curl -L -o agent https://app.testcontainers.cloud/download/testcontainers-cloud-agent_linux_x86-64
-          chmod +x agent
-          ./agent &
-          ./agent wait --timeout-seconds 60
+#      - name: Prepare Testcontainers Cloud agent
+#        env:
+#          TC_CLOUD_TOKEN: ${{ secrets.TC_CLOUD_TOKEN }}
+#        if: env.TC_CLOUD_TOKEN != ''
+#        run: |
+#          curl -L -o agent https://app.testcontainers.cloud/download/testcontainers-cloud-agent_linux_x86-64
+#          chmod +x agent
+#          ./agent &
+#          ./agent wait --timeout-seconds 60
       - name: Run Gradle's test task
         run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
         env:
