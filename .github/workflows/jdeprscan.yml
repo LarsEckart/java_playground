@@ -1,7 +1,7 @@
 name: jdeprscan
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     types: jdeprscan
 
 jobs:

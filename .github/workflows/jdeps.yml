@@ -1,7 +1,7 @@
 name: jdeps
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     types: jdeps
 
 jobs:
