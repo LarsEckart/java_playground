@@ -69,7 +69,7 @@ dependencies {
     testImplementation("com.approvaltests:approvaltests:14.0.0")
     testImplementation("org.awaitility:awaitility-groovy:4.1.1")
     testImplementation("com.tngtech.archunit:archunit:0.23.1")
-    testImplementation("net.datafaker:datafaker:1.1.0")
+    testImplementation("net.datafaker:datafaker:1.2.0")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.9')
 
     testImplementation("org.slf4j:slf4j-simple:1.7.36") {
