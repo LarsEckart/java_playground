@@ -1,7 +1,5 @@
 package lars.spielplatz.java11;
 
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -27,29 +25,18 @@ public class AstroClient {
   }
 
   public AstroResponse getSync(String url) throws IOException, InterruptedException {
-    HttpResponse<String> response = client.send(request(url), HttpResponse.BodyHandlers.ofString());
-    return getResponse(response.body());
+    HttpResponse<AstroResponse> response = client.send(request(url),
+        JsonBodyHandler.jsonBodyHandler(AstroResponse.class));
+    return response.body();
   }
 
   public CompletableFuture<AstroResponse> getAsync(String url) {
     return client
-        .sendAsync(request(url), HttpResponse.BodyHandlers.ofString())
-        .thenApply(HttpResponse::body)
-        .thenApply(this::getResponse);
+        .sendAsync(request(url), JsonBodyHandler.jsonBodyHandler(AstroResponse.class))
+        .thenApply(HttpResponse::body);
   }
 
   private HttpRequest request(String url) {
     return HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
-  }
-
-  private AstroResponse getResponse(String json) {
-    Moshi moshi = new Moshi.Builder().build();
-    JsonAdapter<AstroResponse> jsonAdapter = moshi.adapter(AstroResponse.class);
-
-    try {
-      return jsonAdapter.fromJson(json);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 }
