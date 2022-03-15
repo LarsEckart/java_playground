@@ -2,7 +2,6 @@ package lars.scripts;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -66,7 +65,6 @@ public class FindGradleRepoAndReportVersion {
     }
   }
 
-  @NotNull
   private static String determineGradleWrapperVersion(Path gradleProject) throws IOException {
     final Path path = gradleProject.resolve("gradle/wrapper/gradle-wrapper.properties");
     final String version =
