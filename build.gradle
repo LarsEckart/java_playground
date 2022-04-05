@@ -66,7 +66,7 @@ dependencies {
     testImplementation('org.assertj:assertj-core:3.22.0')
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation('com.squareup.okhttp3:mockwebserver:4.9.3')
-    testImplementation("com.approvaltests:approvaltests:14.0.0")
+    testImplementation("com.approvaltests:approvaltests:15.1.0")
     testImplementation("org.awaitility:awaitility-groovy:4.2.0")
     testImplementation("com.tngtech.archunit:archunit:0.23.1")
     testImplementation("net.datafaker:datafaker:1.2.0")
