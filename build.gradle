@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.11.0")
+    errorprone("com.google.errorprone:error_prone_core:2.12.1")
 
     implementation('com.fasterxml.jackson.core:jackson-databind:2.13.2.2')
     implementation("io.reactivex.rxjava3:rxjava:3.1.4")
@@ -70,7 +70,7 @@ dependencies {
     testImplementation('com.squareup.okhttp3:mockwebserver:4.9.3')
     testImplementation("org.awaitility:awaitility-groovy:4.2.0")
     testImplementation("com.tngtech.archunit:archunit:0.23.1")
-    testImplementation("net.datafaker:datafaker:1.2.0")
+    testImplementation("net.datafaker:datafaker:1.3.0")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.10')
 
     testImplementation("org.slf4j:slf4j-simple:1.7.36") {
