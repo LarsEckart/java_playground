@@ -1,8 +1,8 @@
 package lars.spielplatz.ttddyydataproxy;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class SomeEntity {
@@ -14,7 +14,8 @@ public class SomeEntity {
     setCreatedDate(new Date());
   }
 
-  @Id private Integer id;
+  @Id
+  private Integer id;
 
   private Date createdDate;
 
