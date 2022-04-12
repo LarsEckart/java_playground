@@ -6,7 +6,7 @@ on:
       jdk:
         description: 'jdk version, like 11 or 17'     
         required: true
-        default: 'warning'
+        default: '17'
 
 jobs:
   jdeps:
@@ -25,4 +25,4 @@ jobs:
       - name: Create jar file for project
         run: ./gradlew assemble
       - name: Run jdeps task
-        run: jdeps --class-path 'libs/*' --multi-release '${{ github.event.inputs.jdk }}"' -v -recursive build/libs/java_playground.jar
+        run: jdeps --class-path 'libs/*' --multi-release '${{ github.event.inputs.jdk }}' -v -recursive build/libs/java_playground.jar
