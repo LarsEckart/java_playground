@@ -2,7 +2,11 @@ name: jdeps
 
 on:
   workflow_dispatch:
-    types: jdeps
+    inputs:
+      jdk:
+        description: 'jdk version, like 11 or 17'     
+        required: true
+        default: 'warning'
 
 jobs:
   jdeps:
@@ -21,4 +25,4 @@ jobs:
       - name: Create jar file for project
         run: ./gradlew assemble
       - name: Run jdeps task
-        run: jdeps --class-path 'libs/*' --multi-release '17' -v -recursive build/libs/java_playground.jar
+        run: jdeps --class-path 'libs/*' --multi-release '${{ github.event.inputs.jdk }}"' -v -recursive build/libs/java_playground.jar
