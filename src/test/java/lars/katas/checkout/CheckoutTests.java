@@ -31,6 +31,18 @@ public class CheckoutTests {
         priceOfA.add(priceOfA).subtract(discountForA));
   }
 
+  @Test
+  public void discountForTwoAs2() {
+    Money priceOfA = randomPrice();
+    Money discountForA = Money.fromPence(20);
+    Checkout checkout = new Checkout(priceOfA, discountForA);
+    checkout.scan("A");
+    checkout.scan("B");
+    checkout.scan("A");
+    assertThat(checkout.currentBalance()).isEqualTo(
+        priceOfA.add(priceOfA).subtract(discountForA));
+  }
+
   private Money randomPrice() {
     return Money.fromPence(new Random().nextInt(1000));
   }

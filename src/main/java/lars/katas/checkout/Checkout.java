@@ -6,16 +6,16 @@ public class Checkout {
   private Money priceOfB;
   private Money currentBalance = Money.ZERO;
   private String previousSku = "";
+  private int countOfAs = 0;
   private Money discountForA;
+
+  public Checkout(Money priceOfA, Money discountForA) {
+    this(priceOfA, Money.ZERO, discountForA);
+  }
 
   public Checkout(Money priceOfA, Money priceOfB, Money discountForA) {
     this.priceOfA = priceOfA;
     this.priceOfB = priceOfB;
-    this.discountForA = discountForA;
-  }
-
-  public Checkout(Money priceOfA, Money discountForA) {
-    this.priceOfA = priceOfA;
     this.discountForA = discountForA;
   }
 
@@ -25,9 +25,11 @@ public class Checkout {
     } else {
       this.currentBalance = this.currentBalance.add(priceOfB);
     }
-    if ("A".equals(previousSku)) {
-      this.currentBalance = currentBalance.subtract(discountForA);
+    if ("A".equals(item)) {
+      countOfAs++;
     }
+    if (countOfAs == 2)
+      currentBalance = currentBalance.subtract(discountForA);
     this.previousSku = item;
   }
 
