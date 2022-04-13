@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public final class Money {
 
+  public static final Money ZERO = new Money(0);
+
   private final int pence;
 
   private Money(int pence) {
@@ -29,5 +31,14 @@ public final class Money {
     return Objects.hash(pence);
   }
 
+  public Money add(Money other) {
+    return new Money(this.pence + other.pence);
+  }
 
+  @Override
+  public String toString() {
+    return "Money{" +
+        "pence=" + pence +
+        '}';
+  }
 }
