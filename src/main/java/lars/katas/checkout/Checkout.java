@@ -22,11 +22,9 @@ public class Checkout {
   public void scan(String item) {
     if ("A".equals(item)) {
       this.currentBalance = this.currentBalance.add(priceOfA);
+      countOfAs++;
     } else {
       this.currentBalance = this.currentBalance.add(priceOfB);
-    }
-    if ("A".equals(item)) {
-      countOfAs++;
     }
     if (countOfAs == 2)
       currentBalance = currentBalance.subtract(discountForA);
