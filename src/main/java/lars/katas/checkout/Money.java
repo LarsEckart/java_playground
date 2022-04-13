@@ -16,6 +16,14 @@ public final class Money {
     return new Money(pence);
   }
 
+  public Money add(Money other) {
+    return new Money(this.pence + other.pence);
+  }
+
+  public Money subtract(Money other) {
+    return new Money(this.pence - other.pence);
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj == this)
@@ -29,10 +37,6 @@ public final class Money {
   @Override
   public int hashCode() {
     return Objects.hash(pence);
-  }
-
-  public Money add(Money other) {
-    return new Money(this.pence + other.pence);
   }
 
   @Override

@@ -2,12 +2,12 @@ package lars.katas.checkout;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.larseckart.tcr.FastTestCommitRevertMainExtension;
+import com.github.larseckart.tcr.CommitOnGreenExtension;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(FastTestCommitRevertMainExtension.class)
+@ExtendWith(CommitOnGreenExtension.class)
 public class CheckoutTests {
 
   @Test
@@ -15,9 +15,19 @@ public class CheckoutTests {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
     Checkout checkout = new Checkout(priceOfA, priceOfB);
-    checkout.scan("A");
     checkout.scan("B");
+    checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(priceOfA.add(priceOfB));
+  }
+
+  @Test
+  public void discountForTwoAs() {
+    Money priceOfA = randomPrice();
+    Checkout checkout = new Checkout(priceOfA);
+    checkout.scan("A");
+    checkout.scan("A");
+    assertThat(checkout.currentBalance()).isEqualTo(
+        priceOfA.add(priceOfA).subtract(Money.fromPence(20)));
   }
 
   private Money randomPrice() {
