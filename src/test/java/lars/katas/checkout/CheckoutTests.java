@@ -1,5 +1,6 @@
 package lars.katas.checkout;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.larseckart.tcr.CommitOnGreenExtension;
@@ -45,6 +46,18 @@ public class CheckoutTests {
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(
         priceOfA.add(priceOfA).add(priceOfB).subtract(discountOfA));
+  }
+
+  @Test
+  public void independentCheckouts() {
+    Money priceOfA = randomPrice();
+    MultiBuyDiscountFactory discountFactory = new MultiBuyDiscountFactory("A", Money.fromPence(20), 2);
+    Checkout checkout1 = new Checkout(priceOfA, Money.ZERO, discountFactory);
+    Checkout checkout2 = new Checkout(priceOfA, Money.ZERO, discountFactory);
+    checkout1.scan("A");
+    checkout2.scan("A");
+    assertThat(checkout1.currentBalance()).isEqualTo(priceOfA);
+    assertThat(checkout2.currentBalance()).isEqualTo(priceOfA);
   }
 
   private Money randomPrice() {
