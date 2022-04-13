@@ -4,8 +4,7 @@ public class Checkout {
 
   private final Money priceOfA;
   private Money priceOfB;
-  private MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("", Money.ZERO,
-      Integer.MAX_VALUE);
+  private MultiBuyDiscount multiBuyDiscount;
   private Money currentBalance = Money.ZERO;
   private int discountForACount;
 
