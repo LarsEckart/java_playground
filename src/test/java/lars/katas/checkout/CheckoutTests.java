@@ -24,25 +24,27 @@ public class CheckoutTests {
   @Test
   public void discountForTwoAs() {
     Money priceOfA = randomPrice();
-    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", Money.fromPence(20), 2);
+    Money discountOfA = Money.fromPence(20);
+    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", discountOfA, 2);
     Checkout checkout = new Checkout(priceOfA, Money.ZERO, multiBuyDiscount);
     checkout.scan("A");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(
-        priceOfA.add(priceOfA).subtract(multiBuyDiscount.discount()));
+        priceOfA.add(priceOfA).subtract(discountOfA));
   }
 
   @Test
   public void discountForTwoAs2() {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
-    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", Money.fromPence(20), 2);
+    Money discountOfA = Money.fromPence(20);
+    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", discountOfA, 2);
     Checkout checkout = new Checkout(priceOfA, priceOfB, multiBuyDiscount);
     checkout.scan("A");
     checkout.scan("B");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(
-        priceOfA.add(priceOfA).add(priceOfB).subtract(multiBuyDiscount.discount()));
+        priceOfA.add(priceOfA).add(priceOfB).subtract(discountOfA));
   }
 
   private Money randomPrice() {

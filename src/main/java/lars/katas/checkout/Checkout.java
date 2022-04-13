@@ -21,12 +21,7 @@ public class Checkout {
     } else {
       this.currentBalance = this.currentBalance.add(priceOfB);
     }
-    if (item.equals(multiBuyDiscount.item())) {
-      discountForACount++;
-    }
-    if (discountForACount == multiBuyDiscount.count()) {
-      currentBalance = currentBalance.subtract(multiBuyDiscount.discount());
-    }
+    currentBalance = currentBalance.subtract(multiBuyDiscount.apply(item));
   }
 
   public Money currentBalance() {
