@@ -6,7 +6,6 @@ public class Checkout {
   private Money priceOfB;
   private MultiBuyDiscount multiBuyDiscount;
   private Money currentBalance = Money.ZERO;
-  private int discountForACount;
 
 
   public Checkout(Money priceOfA, Money priceOfB, MultiBuyDiscount multiBuyDiscount) {
@@ -21,7 +20,7 @@ public class Checkout {
     } else {
       this.currentBalance = this.currentBalance.add(priceOfB);
     }
-    this.currentBalance = currentBalance.subtract(multiBuyDiscount.apply(item));
+    this.currentBalance = multiBuyDiscount.apply(currentBalance, item);
   }
 
   public Money currentBalance() {

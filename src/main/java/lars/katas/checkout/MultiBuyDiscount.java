@@ -15,26 +15,28 @@ public final class MultiBuyDiscount {
     this.count = count;
   }
 
-  public MultiBuyDiscount reset() {
-    return new MultiBuyDiscount(item, discount, count);
-  }
-
-  public Money apply(String item) {
+  public Money apply(Money currentBalance, String item) {
     if (item.equals(this.item)) {
       itemsSeen++;
     }
     if (itemsSeen == count) {
-      return discount;
+      return currentBalance.subtract(discount);
     }
-    return Money.ZERO;
+    return currentBalance;
+  }
+
+  public MultiBuyDiscount reset() {
+    return new MultiBuyDiscount(item, discount, count);
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == this)
+    if (obj == this) {
       return true;
-    if (obj == null || obj.getClass() != this.getClass())
+    }
+    if (obj == null || obj.getClass() != this.getClass()) {
       return false;
+    }
     var that = (MultiBuyDiscount) obj;
     return Objects.equals(this.item, that.item) &&
         Objects.equals(this.discount, that.discount) &&
