@@ -15,7 +15,7 @@ public class CheckoutTests {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
     Checkout checkout = new Checkout(priceOfA, priceOfB,
-        new MultiBuyDiscount("", Money.ZERO, Integer.MAX_VALUE));
+        new MultiBuyDiscountFactory ("", Money.ZERO, Integer.MAX_VALUE));
     checkout.scan("B");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(priceOfA.add(priceOfB));
@@ -25,8 +25,8 @@ public class CheckoutTests {
   public void discountForTwoAs() {
     Money priceOfA = randomPrice();
     Money discountOfA = Money.fromPence(20);
-    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", discountOfA, 2);
-    Checkout checkout = new Checkout(priceOfA, Money.ZERO, multiBuyDiscount);
+    MultiBuyDiscountFactory discountFactory = new MultiBuyDiscountFactory("A", discountOfA, 2);
+    Checkout checkout = new Checkout(priceOfA, Money.ZERO, discountFactory);
     checkout.scan("A");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(
@@ -38,8 +38,8 @@ public class CheckoutTests {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
     Money discountOfA = Money.fromPence(20);
-    MultiBuyDiscount multiBuyDiscount = new MultiBuyDiscount("A", discountOfA, 2);
-    Checkout checkout = new Checkout(priceOfA, priceOfB, multiBuyDiscount);
+    MultiBuyDiscountFactory discountFactory = new MultiBuyDiscountFactory("A", discountOfA, 2);
+    Checkout checkout = new Checkout(priceOfA, priceOfB, discountFactory);
     checkout.scan("A");
     checkout.scan("B");
     checkout.scan("A");
