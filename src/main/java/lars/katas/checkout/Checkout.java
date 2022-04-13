@@ -2,17 +2,17 @@ package lars.katas.checkout;
 
 public class Checkout {
 
-  private int itemPrice;
+  private Money itemPrice;
 
-  public Checkout(int itemPrice) {
-    this.itemPrice = itemPrice;
+  public Checkout(Money money) {
+    this.itemPrice = money;
   }
 
   public void scan(String item) {
 
   }
 
-  public int currentBalance() {
+  public Money currentBalance() {
     return itemPrice;
   }
 }

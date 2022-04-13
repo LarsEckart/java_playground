@@ -11,14 +11,14 @@ public class CheckoutTests {
 
   @Test
   public void basicPrices() {
-    int priceOfA = randomPrice();
+    Money priceOfA = randomPrice();
     Checkout checkout = new Checkout(priceOfA);
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(priceOfA);
   }
 
-  private int randomPrice() {
-    return 50;
+  private Money randomPrice() {
+    return new Money(50);
   }
 
 }
