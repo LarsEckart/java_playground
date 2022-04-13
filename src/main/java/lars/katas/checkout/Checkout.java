@@ -9,10 +9,10 @@ public class Checkout {
   private int discountForACount;
 
 
-  public Checkout(Money priceOfA, Money priceOfB, MultiBuyDiscountFactory multiBuyDiscount) {
+  public Checkout(Money priceOfA, Money priceOfB, MultiBuyDiscount multiBuyDiscount) {
     this.priceOfA = priceOfA;
     this.priceOfB = priceOfB;
-    this.multiBuyDiscount = multiBuyDiscount.create();
+    this.multiBuyDiscount = multiBuyDiscount.reset();
   }
 
   public void scan(String item) {

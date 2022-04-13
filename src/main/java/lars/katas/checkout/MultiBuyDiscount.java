@@ -15,6 +15,10 @@ public final class MultiBuyDiscount {
     this.count = count;
   }
 
+  public MultiBuyDiscount reset() {
+    return new MultiBuyDiscount(item, discount, count);
+  }
+
   public Money apply(String item) {
     if (item.equals(this.item)) {
       itemsSeen++;
