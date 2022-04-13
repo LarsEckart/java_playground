@@ -14,7 +14,7 @@ public class CheckoutTests {
   public void basicPrices() {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
-    Checkout checkout = new Checkout(priceOfA, priceOfB);
+    Checkout checkout = new Checkout(priceOfA, priceOfB, Money.fromPence(20));
     checkout.scan("B");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(priceOfA.add(priceOfB));
@@ -23,11 +23,12 @@ public class CheckoutTests {
   @Test
   public void discountForTwoAs() {
     Money priceOfA = randomPrice();
-    Checkout checkout = new Checkout(priceOfA);
+    Money discountForA = Money.fromPence(20);
+    Checkout checkout = new Checkout(priceOfA, discountForA);
     checkout.scan("A");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(
-        priceOfA.add(priceOfA).subtract(Money.fromPence(20)));
+        priceOfA.add(priceOfA).subtract(discountForA));
   }
 
   private Money randomPrice() {
