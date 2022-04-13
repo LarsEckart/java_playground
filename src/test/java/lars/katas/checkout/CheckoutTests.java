@@ -11,7 +11,7 @@ public class CheckoutTests {
 
   @Test
   public void basicPrices() {
-    Checkout checkout = new Checkout();
+    Checkout checkout = new Checkout(50);
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(50);
   }
