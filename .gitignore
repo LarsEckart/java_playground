@@ -22,6 +22,9 @@ target
 # Testcontainers cloud
 agent
 
+# approvaltests
+*.received.*
+
 logs/
 lib
 libs
