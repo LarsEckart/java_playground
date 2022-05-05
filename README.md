@@ -1,6 +1,6 @@
 # my java playground
 
-[![Actions Status](https://github.com/LarsEckart/java_playground/workflows/test/badge.svg)](https://github.com/LarsEckart/java_playground/actions)
+[![Test Status](../../workflows/test/badge.svg)](https://github.com/LarsEckart/java_playground/actions)
 [![Known Vulnerabilities](https://snyk.io/test/github/larseckart/java_playground/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/larseckart/java_playground?targetFile=build.gradle)
 [![Gradle Status](https://gradleupdate.appspot.com/LarsEckart/java_playground/status.svg)](https://gradleupdate.appspot.com/LarsEckart/java_playground/status)
 
