@@ -35,7 +35,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("org.apache.commons:commons-csv:1.9.0")
 
-    implementation("org.hibernate:hibernate-core:6.0.0.Final")
+    implementation("org.hibernate:hibernate-core:6.0.1.Final")
     implementation("net.ttddyy:datasource-proxy:1.7")
     implementation("org.postgresql:postgresql:42.3.5")
     implementation("org.eclipse.collections:eclipse-collections-api:11.0.0")
