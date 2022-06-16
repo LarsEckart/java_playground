@@ -34,6 +34,7 @@ dependencies {
     implementation('commons-codec:commons-codec:1.15')
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("org.apache.commons:commons-csv:1.9.0")
+    implementation('org.apache.commons:commons-lang3:3.12.0')
 
     implementation("org.hibernate:hibernate-core:6.0.2.Final")
     implementation("net.ttddyy:datasource-proxy:1.7")
@@ -42,6 +43,12 @@ dependencies {
     implementation("org.eclipse.collections:eclipse-collections:11.0.0")
 
     implementation("javax.servlet:servlet-api:2.5")
+
+    // jep 320
+    implementation("org.glassfish.jaxb:jaxb-runtime:3.0.2")
+    implementation("org.glassfish.jaxb:jaxb-xjc:3.0.2")
+    implementation("com.sun.xml.ws:jaxws-rt:3.0.2")
+    implementation("javax.activation:activation:1.1.1")
 
     def junit4Version = "4.13.2"
     def junitVintageVersion = "5.8.2"
