@@ -37,7 +37,7 @@ dependencies {
     implementation('org.apache.commons:commons-lang3:3.12.0')
 
     implementation("org.hibernate:hibernate-core:6.0.2.Final")
-    implementation("net.ttddyy:datasource-proxy:1.7")
+    implementation("net.ttddyy:datasource-proxy:1.8")
     implementation("org.postgresql:postgresql:42.3.6")
     implementation("org.eclipse.collections:eclipse-collections-api:11.0.0")
     implementation("org.eclipse.collections:eclipse-collections:11.0.0")
