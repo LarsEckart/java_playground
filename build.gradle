@@ -45,7 +45,7 @@ dependencies {
     implementation("javax.servlet:servlet-api:2.5")
 
     // jep 320
-    implementation("org.glassfish.jaxb:jaxb-runtime:3.0.2")
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.0")
     implementation("org.glassfish.jaxb:jaxb-xjc:3.0.2")
     implementation("com.sun.xml.ws:jaxws-rt:3.0.2")
     implementation("javax.activation:activation:1.1.1")
@@ -74,7 +74,7 @@ dependencies {
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation('org.assertj:assertj-core:3.23.1')
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
-    testImplementation('com.squareup.okhttp3:mockwebserver:4.9.3')
+    testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
     testImplementation("org.awaitility:awaitility-groovy:4.2.0")
     testImplementation("com.tngtech.archunit:archunit:0.23.1")
     testImplementation("net.datafaker:datafaker:1.4.0")
