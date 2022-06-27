@@ -35,7 +35,7 @@ dependencies {
     implementation("org.apache.commons:commons-csv:1.9.0")
     implementation('org.apache.commons:commons-lang3:3.12.0')
 
-    implementation("org.hibernate:hibernate-core:6.0.2.Final")
+    implementation("org.hibernate:hibernate-core:6.1.0.Final")
     implementation("net.ttddyy:datasource-proxy:1.8")
     implementation("org.postgresql:postgresql:42.4.0")
     implementation("io.lettuce:lettuce-core:6.1.8.RELEASE")
@@ -67,7 +67,7 @@ dependencies {
         because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
-    testImplementation("com.approvaltests:approvaltests:15.6.0")
+    testImplementation("com.approvaltests:approvaltests:15.8.0")
 
     def mockitoVersion = "4.6.1"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
