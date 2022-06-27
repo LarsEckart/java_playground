@@ -3,7 +3,7 @@ plugins {
     id "net.ltgt.errorprone" version "2.0.2"
     id "java"
     id "idea"
-    id "com.vanniktech.dependency.graph.generator" version "0.7.0"
+    id "com.vanniktech.dependency.graph.generator" version "0.8.0"
     id "com.libyear.libyear-gradle-plugin" version "0.1.6"
 }
 
