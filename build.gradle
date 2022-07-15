@@ -41,6 +41,9 @@ dependencies {
     implementation("io.lettuce:lettuce-core:6.1.8.RELEASE")
     implementation("org.eclipse.collections:eclipse-collections-api:11.1.0")
     implementation("org.eclipse.collections:eclipse-collections:11.1.0")
+    implementation("org.apache.commons:commons-pool2:2.4.3")
+    implementation("org.eclipse.collections:eclipse-collections-api:11.0.0")
+    implementation("org.eclipse.collections:eclipse-collections:11.0.0")
 
     implementation("javax.servlet:servlet-api:2.5")
 
