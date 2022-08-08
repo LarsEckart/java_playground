@@ -26,8 +26,8 @@ import org.testcontainers.utility.DockerImageName;
 class HibernateSessionTest {
 
   @Container
-  private static final PostgreSQLContainer POSTGRE_SQL_CONTAINER =
-      new PostgreSQLContainer(DockerImageName.parse("postgres"))
+  private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER =
+      new PostgreSQLContainer<>(DockerImageName.parse("postgres"))
           .withUsername("hibernateuser")
           .withPassword("hibernatepassword")
           .withDatabaseName("hibernatetest");
@@ -35,7 +35,7 @@ class HibernateSessionTest {
   private static void deleteAllEntities() {
     try (final Session session = HibernateUtil.getSession(POSTGRE_SQL_CONTAINER.getJdbcUrl())) {
       final Transaction transaction = session.beginTransaction();
-      session.createQuery("DELETE FROM SomeEntity").executeUpdate();
+      session.createMutationQuery("DELETE FROM SomeEntity").executeUpdate();
       transaction.commit();
 
       QueryCountHolder.clear();
