@@ -63,6 +63,7 @@ dependencies {
     testImplementation("junit:junit:${junit4Version}")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+    testImplementation("org.junit.platform:junit-platform-suite-engine:${junitPlatformVersion}")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
         because "allows JUnit 3 and JUnit 4 tests to run"
     }
