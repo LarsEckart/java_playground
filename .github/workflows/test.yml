@@ -36,7 +36,7 @@ jobs:
           ./agent &
           ./agent wait --timeout-seconds 60
       - name: Run Gradle's test task
-        run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
+        run: ./gradlew -i --no-daemon --parallel --continue --build-cache --stacktrace test
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
