@@ -1,31 +1,35 @@
 package lars.katas.expensereport;
 
-import com.github.larseckart.tcr.FastTestCommitRevertMainExtension;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
-import org.approvaltests.Approvals;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.approvaltests.core.Options;
 import org.approvaltests.reporters.Junit5Reporter;
 import org.approvaltests.reporters.UseReporter;
 import org.approvaltests.scrubbers.DateScrubber;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(FastTestCommitRevertMainExtension.class)
+// @ExtendWith(FastTestCommitRevertMainExtension.class)
 @UseReporter(Junit5Reporter.class)
 class ExpenseReportTest {
 
+  Clock clock = Clock.fixed(Instant.parse("2019-01-01T10:15:30.00Z"), ZoneOffset.UTC);
+
   @Test
   void approval() {
-    ExpenseType[] expenseType = new ExpenseType[]{ExpenseType.BREAKFAST, ExpenseType.DINNER, ExpenseType.CAR_RENTAL};
+    ExpenseType[] expenseType = new ExpenseType[]{ExpenseType.BREAKFAST, ExpenseType.DINNER,
+        ExpenseType.CAR_RENTAL};
     Integer[] amount = new Integer[]{0, 1, 999, 1000, 1001, 4999, 5000, 5001};
 
     CombinationApprovals.verifyAllCombinations(
-        this::createReport, expenseType, amount, new Options(DateScrubber.getScrubberFor("Wed Nov 17 22:28:33 EET 2021")));
+        this::createReport, expenseType, amount,
+        new Options());
   }
 
   private String createReport(ExpenseType expenseType, int amount) {
@@ -44,7 +48,7 @@ class ExpenseReportTest {
   }
 
   private void run(ExpenseType expenseType, int amount) {
-    ExpenseReport expenseReport = new ExpenseReport();
+    ExpenseReport expenseReport = new ExpenseReport(clock);
 
     Expense expense = new Expense();
     expense.type = expenseType;

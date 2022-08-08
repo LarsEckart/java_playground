@@ -1,119 +1,119 @@
-[BREAKFAST, 0] => Expenses [Date1]
+[BREAKFAST, 0] => Expenses 2019-01-01 10:15
 Breakfast	0	 
 Meal expenses: 0
 Total expenses: 0
  
-[BREAKFAST, 1] => Expenses [Date1]
+[BREAKFAST, 1] => Expenses 2019-01-01 10:15
 Breakfast	1	 
 Meal expenses: 1
 Total expenses: 1
  
-[BREAKFAST, 999] => Expenses [Date1]
+[BREAKFAST, 999] => Expenses 2019-01-01 10:15
 Breakfast	999	 
 Meal expenses: 999
 Total expenses: 999
  
-[BREAKFAST, 1000] => Expenses [Date1]
+[BREAKFAST, 1000] => Expenses 2019-01-01 10:15
 Breakfast	1000	 
 Meal expenses: 1000
 Total expenses: 1000
  
-[BREAKFAST, 1001] => Expenses [Date1]
+[BREAKFAST, 1001] => Expenses 2019-01-01 10:15
 Breakfast	1001	X
 Meal expenses: 1001
 Total expenses: 1001
  
-[BREAKFAST, 4999] => Expenses [Date1]
+[BREAKFAST, 4999] => Expenses 2019-01-01 10:15
 Breakfast	4999	X
 Meal expenses: 4999
 Total expenses: 4999
  
-[BREAKFAST, 5000] => Expenses [Date1]
+[BREAKFAST, 5000] => Expenses 2019-01-01 10:15
 Breakfast	5000	X
 Meal expenses: 5000
 Total expenses: 5000
  
-[BREAKFAST, 5001] => Expenses [Date1]
+[BREAKFAST, 5001] => Expenses 2019-01-01 10:15
 Breakfast	5001	X
 Meal expenses: 5001
 Total expenses: 5001
  
-[DINNER, 0] => Expenses [Date1]
+[DINNER, 0] => Expenses 2019-01-01 10:15
 Dinner	0	 
 Meal expenses: 0
 Total expenses: 0
  
-[DINNER, 1] => Expenses [Date1]
+[DINNER, 1] => Expenses 2019-01-01 10:15
 Dinner	1	 
 Meal expenses: 1
 Total expenses: 1
  
-[DINNER, 999] => Expenses [Date1]
+[DINNER, 999] => Expenses 2019-01-01 10:15
 Dinner	999	 
 Meal expenses: 999
 Total expenses: 999
  
-[DINNER, 1000] => Expenses [Date1]
+[DINNER, 1000] => Expenses 2019-01-01 10:15
 Dinner	1000	 
 Meal expenses: 1000
 Total expenses: 1000
  
-[DINNER, 1001] => Expenses [Date1]
+[DINNER, 1001] => Expenses 2019-01-01 10:15
 Dinner	1001	 
 Meal expenses: 1001
 Total expenses: 1001
  
-[DINNER, 4999] => Expenses [Date1]
+[DINNER, 4999] => Expenses 2019-01-01 10:15
 Dinner	4999	 
 Meal expenses: 4999
 Total expenses: 4999
  
-[DINNER, 5000] => Expenses [Date1]
+[DINNER, 5000] => Expenses 2019-01-01 10:15
 Dinner	5000	 
 Meal expenses: 5000
 Total expenses: 5000
  
-[DINNER, 5001] => Expenses [Date1]
+[DINNER, 5001] => Expenses 2019-01-01 10:15
 Dinner	5001	X
 Meal expenses: 5001
 Total expenses: 5001
  
-[CAR_RENTAL, 0] => Expenses [Date1]
+[CAR_RENTAL, 0] => Expenses 2019-01-01 10:15
 Car Rental	0	 
 Meal expenses: 0
 Total expenses: 0
  
-[CAR_RENTAL, 1] => Expenses [Date1]
+[CAR_RENTAL, 1] => Expenses 2019-01-01 10:15
 Car Rental	1	 
 Meal expenses: 0
 Total expenses: 1
  
-[CAR_RENTAL, 999] => Expenses [Date1]
+[CAR_RENTAL, 999] => Expenses 2019-01-01 10:15
 Car Rental	999	 
 Meal expenses: 0
 Total expenses: 999
  
-[CAR_RENTAL, 1000] => Expenses [Date1]
+[CAR_RENTAL, 1000] => Expenses 2019-01-01 10:15
 Car Rental	1000	 
 Meal expenses: 0
 Total expenses: 1000
  
-[CAR_RENTAL, 1001] => Expenses [Date1]
+[CAR_RENTAL, 1001] => Expenses 2019-01-01 10:15
 Car Rental	1001	 
 Meal expenses: 0
 Total expenses: 1001
  
-[CAR_RENTAL, 4999] => Expenses [Date1]
+[CAR_RENTAL, 4999] => Expenses 2019-01-01 10:15
 Car Rental	4999	 
 Meal expenses: 0
 Total expenses: 4999
  
-[CAR_RENTAL, 5000] => Expenses [Date1]
+[CAR_RENTAL, 5000] => Expenses 2019-01-01 10:15
 Car Rental	5000	 
 Meal expenses: 0
 Total expenses: 5000
  
-[CAR_RENTAL, 5001] => Expenses [Date1]
+[CAR_RENTAL, 5001] => Expenses 2019-01-01 10:15
 Car Rental	5001	 
 Meal expenses: 0
 Total expenses: 5001
