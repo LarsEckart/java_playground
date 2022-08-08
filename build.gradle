@@ -35,7 +35,7 @@ dependencies {
     implementation("org.apache.commons:commons-csv:1.9.0")
     implementation('org.apache.commons:commons-lang3:3.12.0')
 
-    implementation("org.hibernate:hibernate-core:6.1.1.Final")
+    implementation("org.hibernate:hibernate-core:6.1.2.Final")
     implementation("net.ttddyy:datasource-proxy:1.8")
     implementation("org.postgresql:postgresql:42.4.0")
     implementation("io.lettuce:lettuce-core:6.2.0.RELEASE")
@@ -54,7 +54,7 @@ dependencies {
     implementation("javax.activation:activation:1.1.1")
 
     def junit4Version = "4.13.2"
-    def junitVintageVersion = "5.8.2"
+    def junitVintageVersion = "5.9.0"
     def junitJupiterVersion = "5.9.0"
     def junitPlatformVersion = "1.9.0"
 
