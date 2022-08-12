@@ -15,22 +15,11 @@ class SwitchPreview {
   }
 
   String whatIsToday(DayOfWeek day) {
-    var today = "";
-    switch (day) {
-      case SATURDAY:
-      case SUNDAY:
-        today = "Weekend";
-        break;
-      case MONDAY:
-      case TUESDAY:
-      case WEDNESDAY:
-      case THURSDAY:
-      case FRIDAY:
-        today = "work day";
-        break;
-      default:
-        today = "N/A";
-    }
+    var today = switch (day) {
+      case SATURDAY, SUNDAY -> "Weekend";
+      case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "work day";
+      default -> "N/A";
+    };
     return today;
   }
 
