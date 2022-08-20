@@ -18,6 +18,9 @@ public class Game {
   public String shoot(int p) {
     if (list.contains(p)) {
       hits.remove((Integer) p);
+      if (hits.isEmpty()) {
+        return "sunk";
+      }
       return "hit";
     }
 

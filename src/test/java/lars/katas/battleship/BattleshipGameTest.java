@@ -62,4 +62,15 @@ class BattleshipGameTest {
 
     assertThat(result).isTrue();
   }
+
+  @Test
+  void ship_sunk_when_last_position_hit() {
+    Game game = new Game();
+    game.addShipAt(1, 2);
+    game.shoot(1);
+
+    String result = game.shoot(2);
+
+    assertThat(result).isEqualTo("sunk");
+  }
 }
