@@ -1,16 +1,17 @@
 package lars.katas.battleship;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class Ship {
 
-  private final List<Coordinate> coordinates;
-  private final List<Coordinate> undamaged;
+  private final Set<Coordinate> coordinates;
+  private final Set<Coordinate> undamaged;
 
   public Ship(List<Coordinate> coordinates) {
-    this.coordinates = coordinates;
-    this.undamaged = new ArrayList<>(coordinates);
+    this.coordinates = new HashSet<>(coordinates);
+    this.undamaged = new HashSet<>(coordinates);
   }
 
   public boolean isAlive() {
