@@ -30,7 +30,6 @@ class BattleshipGameTest {
     assertThat(result).isEqualTo("miss");
   }
 
-  @Disabled
   @Test
   void not_game_over_when_ship_still_partly_alive() {
     Game game = new Game();
