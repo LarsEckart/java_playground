@@ -12,9 +12,18 @@ public class Game {
     fleet.add(new Ship(List.of(new Coordinate(9), new Coordinate(10), new Coordinate(11))));
 
     while (fleet.anyAlive()) {
-      Scanner scanner = new Scanner(System.in);
-      int nextGuess = scanner.nextInt();
-      fleet.shoot(new Coordinate(nextGuess));
+      int nextGuess = getUserInput("next guess?");
+      String result = fleet.shoot(new Coordinate(nextGuess));
+      System.out.println(result);
     }
+    System.out.println("you won");
+
   }
+
+  public static int getUserInput(String prompt) {
+    System.out.print(prompt + ": ");
+    Scanner scanner = new Scanner(System.in);
+    return scanner.nextInt();
+  }
+
 }
