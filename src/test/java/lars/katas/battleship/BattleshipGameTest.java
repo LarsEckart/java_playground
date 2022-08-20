@@ -50,4 +50,16 @@ class BattleshipGameTest {
 
     assertThat(result).isFalse();
   }
+
+  @Test
+  void game_over_when_ship_hit_everywhere() {
+    Game game = new Game();
+    game.addShipAt(1, 2);
+    game.shoot(1);
+    game.shoot(2);
+
+    boolean result = game.gameOver();
+
+    assertThat(result).isTrue();
+  }
 }
