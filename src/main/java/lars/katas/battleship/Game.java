@@ -36,21 +36,11 @@ public class Game {
       int nextGuess = getUserInput("next guess?");
       counter++;
       Result result1 = fleet.shoot(new Coordinate(nextGuess));
-      System.out.println(toOutput(result1));
+      System.out.println(result1.message());
     }
     System.out.println(shipLocations);
     System.out.println("it took you " + counter + " guesses");
     System.out.println("you won");
-  }
-
-  public static String toOutput(Result result) {
-    if ("hit".equals(result.message())) {
-      return result.name() + " was hit.";
-    }
-    if ("sunk".equals(result.message())) {
-      return result.name() + " was sunk!";
-    }
-    return result.message();
   }
 
   public static int getUserInput(String prompt) {

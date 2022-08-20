@@ -38,7 +38,7 @@ class ShipTest {
   void hit_when_shoot_where_ship_is() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2), new Coordinate(3)));
 
-    String result = ship.shot(new Coordinate(2)).message();
+    String result = ship.shot(new Coordinate(2)).outcome();
 
     assertThat(result).isEqualTo("hit");
   }
@@ -47,7 +47,7 @@ class ShipTest {
   void miss_when_shoot_where_ship_not_is() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2), new Coordinate(3)));
 
-    String result = ship.shot(new Coordinate(4)).message();
+    String result = ship.shot(new Coordinate(4)).outcome();
 
     assertThat(result).isEqualTo("miss");
   }
@@ -57,7 +57,7 @@ class ShipTest {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2)));
 
     ship.shot(new Coordinate(2));
-    String result = ship.shot(new Coordinate(1)).message();
+    String result = ship.shot(new Coordinate(1)).outcome();
 
     assertThat(result).isEqualTo("sunk");
   }
@@ -67,7 +67,7 @@ class ShipTest {
     Ship ship = new Ship(List.of(new Coordinate("A1"), new Coordinate("A2")));
 
     ship.shot(new Coordinate("A2"));
-    String result = ship.shot(new Coordinate("A1")).message();
+    String result = ship.shot(new Coordinate("A1")).outcome();
 
     assertThat(result).isEqualTo("sunk");
   }

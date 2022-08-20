@@ -5,22 +5,28 @@ import java.util.Objects;
 public final class Result {
 
   private final String name;
-  private final String message;
+  private final String outcome;
 
-  public Result(String message) {
-    this("any", message);
+  public Result(String outcome) {
+    this("any", outcome);
   }
-  public Result(String name, String message) {
+  public Result(String name, String outcome) {
     this.name = name;
-    this.message = message;
-  }
-
-  public String name() {
-    return name;
+    this.outcome = outcome;
   }
 
   public String message() {
-    return message;
+    if ("hit".equals(outcome())) {
+      return name + " was hit.";
+    }
+    if ("sunk".equals(outcome())) {
+      return name + " was sunk!";
+    }
+    return outcome();
+  }
+
+  public String outcome() {
+    return outcome;
   }
 
   @Override
@@ -32,18 +38,18 @@ public final class Result {
       return false;
     }
     var that = (Result) obj;
-    return Objects.equals(this.message, that.message);
+    return Objects.equals(this.outcome, that.outcome);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(message);
+    return Objects.hash(outcome);
   }
 
   @Override
   public String toString() {
     return "Result[" +
-        "message=" + message + ']';
+        "message=" + outcome + ']';
   }
 
 

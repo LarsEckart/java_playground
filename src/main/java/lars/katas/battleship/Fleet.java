@@ -19,10 +19,10 @@ public class Fleet {
     Result result = new Result("miss");
     for (Ship ship : ships) {
       result = ship.shot(p);
-      if (result.message().equals("sunk")) {
+      if (result.outcome().equals("sunk")) {
         return result;
       }
-      if (result.message().equals("hit")) {
+      if (result.outcome().equals("hit")) {
         return result;
       }
     }
