@@ -23,8 +23,8 @@ public class Fleet {
     return result;
   }
 
-  public boolean gameOver() {
-    return this.ships.stream().noneMatch(Ship::isAlive);
+  public boolean anyAlive() {
+    return this.ships.stream().anyMatch(Ship::isAlive);
   }
 
 }

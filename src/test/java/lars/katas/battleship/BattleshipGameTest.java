@@ -12,36 +12,22 @@ class BattleshipGameTest {
 
 
   @Test
-  void not_game_over_when_ship_still_partly_alive() {
-    Fleet game = new Fleet();
-    game.add(new Ship(List.of(new Coordinate(1), new Coordinate(2))));
-    game.shoot(new Coordinate(1));
+  void none_alive_when_all_ship_shot() {
+    Fleet fleet = new Fleet();
+    fleet.add(new Ship(List.of(new Coordinate(1))));
+    fleet.shoot(new Coordinate(1));
 
-    boolean result = game.gameOver();
-
-    assertThat(result).isFalse();
+    assertThat(fleet.anyAlive()).isFalse();
   }
 
-  @Test
-  void game_over_when_ship_hit_everywhere() {
-    Fleet game = new Fleet();
-    game.add(new Ship(List.of(new Coordinate(1), new Coordinate(2))));
-    game.shoot(new Coordinate(1));
-    game.shoot(new Coordinate(2));
-
-    boolean result = game.gameOver();
-
-    assertThat(result).isTrue();
-  }
 
   @Test
-  void ship_sunk_when_last_position_hit() {
-    Fleet game = new Fleet();
-    game.add(new Ship(List.of(new Coordinate(1), new Coordinate(2))));
-    game.shoot(new Coordinate(1));
+  void alive_when_all_ship_shot() {
+    Fleet fleet = new Fleet();
+    fleet.add(new Ship(List.of(new Coordinate(1))));
+    fleet.add(new Ship(List.of(new Coordinate(2))));
+    fleet.shoot(new Coordinate(1));
 
-    String result = game.shoot(new Coordinate(2));
-
-    assertThat(result).isEqualTo("sunk");
+    assertThat(fleet.anyAlive()).isTrue();
   }
 }
