@@ -20,7 +20,7 @@ class ShipTest {
   void ship_is_alive_when_only_partly_damaged() {
     Coordinate coordinate = new Coordinate(1);
     Ship ship = new Ship(List.of(coordinate, new Coordinate(2)));
-    ship.shotLegacy(coordinate);
+    ship.shot(coordinate);
 
     assertThat(ship.isAlive()).isTrue();
   }
@@ -29,7 +29,7 @@ class ShipTest {
   void ship_is_not_alive_when_fully_damaged() {
     Coordinate coordinate = new Coordinate(1);
     Ship ship = new Ship(List.of(coordinate));
-    ship.shotLegacy(coordinate);
+    ship.shot(coordinate);
 
     assertThat(ship.isAlive()).isFalse();
   }
@@ -38,7 +38,7 @@ class ShipTest {
   void hit_when_shoot_where_ship_is() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2), new Coordinate(3)));
 
-    String result = ship.shotLegacy(new Coordinate(2));
+    String result = ship.shot(new Coordinate(2)).message();
 
     assertThat(result).isEqualTo("hit");
   }
@@ -47,7 +47,7 @@ class ShipTest {
   void miss_when_shoot_where_ship_not_is() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2), new Coordinate(3)));
 
-    String result = ship.shotLegacy(new Coordinate(4));
+    String result = ship.shot(new Coordinate(4)).message();
 
     assertThat(result).isEqualTo("miss");
   }
@@ -56,8 +56,8 @@ class ShipTest {
   void sunk_when_shoot_where_ship_is_and_all_damaged() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2)));
 
-    ship.shotLegacy(new Coordinate(2));
-    String result = ship.shotLegacy(new Coordinate(1));
+    ship.shot(new Coordinate(2));
+    String result = ship.shot(new Coordinate(1)).message();
 
     assertThat(result).isEqualTo("sunk");
   }
@@ -66,8 +66,8 @@ class ShipTest {
   void do_we_support_2d_coordinates() {
     Ship ship = new Ship(List.of(new Coordinate("A1"), new Coordinate("A2")));
 
-    ship.shotLegacy(new Coordinate("A2"));
-    String result = ship.shotLegacy(new Coordinate("A1"));
+    ship.shot(new Coordinate("A2"));
+    String result = ship.shot(new Coordinate("A1")).message();
 
     assertThat(result).isEqualTo("sunk");
   }

@@ -1,6 +1,5 @@
 package lars.katas.battleship;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.larseckart.tcr.CommitOnGreenExtension;
@@ -36,7 +35,7 @@ class FleetTest {
     Fleet fleet = new Fleet();
     fleet.add(new Ship(List.of(new Coordinate(1))));
     fleet.add(new Ship(List.of(new Coordinate(3))));
-    String result = fleet.shoot(new Coordinate(1));
+    String result = fleet.shoot(new Coordinate(1)).message();
 
     assertThat(result).isEqualTo("sunk");
   }

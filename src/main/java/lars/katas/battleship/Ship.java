@@ -18,10 +18,6 @@ class Ship {
     return !undamaged.isEmpty();
   }
 
-  public String shotLegacy(Coordinate p) {
-    return shot(p).message();
-  }
-
   public Result shot(Coordinate p) {
     if (coordinates.contains(p)) {
       undamaged.remove(p);

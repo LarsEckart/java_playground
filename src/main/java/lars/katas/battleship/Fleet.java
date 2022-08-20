@@ -15,15 +15,15 @@ public class Fleet {
     ships.add(ship);
   }
 
-  public String shoot(Coordinate p) {
-    String result = "";
+  public Result shoot(Coordinate p) {
+    Result result = new Result("");
     for (Ship ship : ships) {
-      result = ship.shotLegacy(p);
-      if (result.equals("sunk")) {
-        return "sunk";
+      result = ship.shot(p);
+      if (result.message().equals("sunk")) {
+        return result;
       }
-      if (result.equals("hit")) {
-        return "hit";
+      if (result.message().equals("hit")) {
+        return result;
       }
     }
     return result;

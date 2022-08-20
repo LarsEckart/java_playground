@@ -29,7 +29,7 @@ public class Game {
 
     while (fleet.anyAlive()) {
       int nextGuess = getUserInput("next guess?");
-      String result = fleet.shoot(new Coordinate(nextGuess));
+      String result = fleet.shoot(new Coordinate(nextGuess)).message();
       System.out.println(result);
     }
     System.out.println("you won");
