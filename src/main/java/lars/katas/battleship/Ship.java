@@ -18,15 +18,19 @@ class Ship {
     return !undamaged.isEmpty();
   }
 
-  public String shot(Coordinate p) {
+  public String shotLegacy(Coordinate p) {
+    return shot(p).message();
+  }
+
+  public Result shot(Coordinate p) {
     if (coordinates.contains(p)) {
       undamaged.remove(p);
       if (undamaged.isEmpty()) {
-        return "sunk";
+        return new Result("sunk");
       }
-      return "hit";
+      return new Result("hit");
     }
 
-    return "miss";
+    return new Result("miss");
   }
 }

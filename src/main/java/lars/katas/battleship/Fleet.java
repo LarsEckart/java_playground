@@ -18,7 +18,7 @@ public class Fleet {
   public String shoot(Coordinate p) {
     String result = "";
     for (Ship ship : ships) {
-      result = ship.shot(p);
+      result = ship.shotLegacy(p);
       if (result.equals("sunk")) {
         return "sunk";
       }
