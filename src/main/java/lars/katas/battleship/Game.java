@@ -25,13 +25,21 @@ public class Game {
     while (shipLocations.contains(new Coordinate(nextInt))) {
       nextInt = random.nextInt(17);
     }
-    fleet.add(new Ship(List.of(new Coordinate(nextInt))));
+    Coordinate e11 = new Coordinate(nextInt);
+    shipLocations.add(e11);
+    fleet.add(new Ship(List.of(e11)));
 
-    while (fleet.anyAlive()) {
+    int counter = 0;
+    System.out.println(shipLocations);
+
+    while (fleet.anyAlive() && counter < 10) {
       int nextGuess = getUserInput("next guess?");
-      String result = fleet.shoot(new Coordinate(nextGuess)).message();
-      System.out.println(result);
+      counter++;
+      Result result1 = fleet.shoot(new Coordinate(nextGuess));
+      System.out.println(result1.message());
     }
+    System.out.println(shipLocations);
+    System.out.println("it took you " + counter + " guesses");
     System.out.println("you won");
 
   }
