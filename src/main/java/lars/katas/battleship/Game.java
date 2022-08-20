@@ -19,7 +19,7 @@ public class Game {
     shipLocations.add(e1);
     shipLocations.add(e2);
     shipLocations.add(e3);
-    fleet.add(new Ship(List.of(e1, e2, e3)));
+    fleet.add(new Ship("BigBoy", List.of(e1, e2, e3)));
 
     int nextInt = random.nextInt(17);
     while (shipLocations.contains(new Coordinate(nextInt))) {
@@ -27,7 +27,7 @@ public class Game {
     }
     Coordinate e11 = new Coordinate(nextInt);
     shipLocations.add(e11);
-    fleet.add(new Ship(List.of(e11)));
+    fleet.add(new Ship("Swift", List.of(e11)));
 
     int counter = 0;
     System.out.println(shipLocations);
@@ -36,12 +36,21 @@ public class Game {
       int nextGuess = getUserInput("next guess?");
       counter++;
       Result result1 = fleet.shoot(new Coordinate(nextGuess));
-      System.out.println(result1.message());
+      System.out.println(toOutput(result1));
     }
     System.out.println(shipLocations);
     System.out.println("it took you " + counter + " guesses");
     System.out.println("you won");
+  }
 
+  public static String toOutput(Result result) {
+    if ("hit".equals(result.message())) {
+      return result.name() + " was hit.";
+    }
+    if ("sunk".equals(result.message())) {
+      return result.name() + " was sunk!";
+    }
+    return result.message();
   }
 
   public static int getUserInput(String prompt) {

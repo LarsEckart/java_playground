@@ -15,6 +15,10 @@ public final class Result {
     this.message = message;
   }
 
+  public String name() {
+    return name;
+  }
+
   public String message() {
     return message;
   }
