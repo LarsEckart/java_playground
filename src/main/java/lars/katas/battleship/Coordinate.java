@@ -37,4 +37,12 @@ final class Coordinate {
   public int hashCode() {
     return Objects.hash(row, column);
   }
+
+  @Override
+  public String toString() {
+    return "Coordinate{" +
+        "row='" + row + '\'' +
+        ", column='" + column + '\'' +
+        '}';
+  }
 }
