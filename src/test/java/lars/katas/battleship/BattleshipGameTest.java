@@ -3,7 +3,6 @@ package lars.katas.battleship;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.larseckart.tcr.CommitOnGreenExtension;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -13,9 +12,9 @@ class BattleshipGameTest {
   @Test
   void hit_when_shoot_where_ship_is() {
     Game game = new Game();
-    game.addShipAt(1, 2, 3);
+    game.addShipAt(new Coordinate(1), new Coordinate(2), new Coordinate(3));
 
-    String result = game.shoot(2);
+    String result = game.shoot(new Coordinate(2));
 
     assertThat(result).isEqualTo("hit");
   }
@@ -23,9 +22,9 @@ class BattleshipGameTest {
   @Test
   void miss_when_shoot_where_ship_is() {
     Game game = new Game();
-    game.addShipAt(1, 2, 3);
+    game.addShipAt(new Coordinate(1), new Coordinate(2), new Coordinate(3));
 
-    String result = game.shoot(4);
+    String result = game.shoot(new Coordinate(4));
 
     assertThat(result).isEqualTo("miss");
   }
@@ -33,7 +32,7 @@ class BattleshipGameTest {
   @Test
   void not_game_over_when_ship_still_fully_alive() {
     Game game = new Game();
-    game.addShipAt(1, 2);
+    game.addShipAt(new Coordinate(1), new Coordinate(2));
 
     boolean result = game.gameOver();
 
@@ -43,8 +42,8 @@ class BattleshipGameTest {
   @Test
   void not_game_over_when_ship_still_partly_alive() {
     Game game = new Game();
-    game.addShipAt(1, 2);
-    game.shoot(1);
+    game.addShipAt(new Coordinate(1), new Coordinate(2));
+    game.shoot(new Coordinate(1));
 
     boolean result = game.gameOver();
 
@@ -54,9 +53,9 @@ class BattleshipGameTest {
   @Test
   void game_over_when_ship_hit_everywhere() {
     Game game = new Game();
-    game.addShipAt(1, 2);
-    game.shoot(1);
-    game.shoot(2);
+    game.addShipAt(new Coordinate(1), new Coordinate(2));
+    game.shoot(new Coordinate(1));
+    game.shoot(new Coordinate(2));
 
     boolean result = game.gameOver();
 
@@ -66,10 +65,10 @@ class BattleshipGameTest {
   @Test
   void ship_sunk_when_last_position_hit() {
     Game game = new Game();
-    game.addShipAt(1, 2);
-    game.shoot(1);
+    game.addShipAt(new Coordinate(1), new Coordinate(2));
+    game.shoot(new Coordinate(1));
 
-    String result = game.shoot(2);
+    String result = game.shoot(new Coordinate(2));
 
     assertThat(result).isEqualTo("sunk");
   }
