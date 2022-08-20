@@ -31,9 +31,20 @@ class BattleshipGameTest {
   }
 
   @Test
+  void not_game_over_when_ship_still_fully_alive() {
+    Game game = new Game();
+    game.addShipAt(1, 2);
+
+    boolean result = game.gameOver();
+
+    assertThat(result).isFalse();
+  }
+
+  @Test
   void not_game_over_when_ship_still_partly_alive() {
     Game game = new Game();
     game.addShipAt(1, 2);
+    game.shoot(1);
 
     boolean result = game.gameOver();
 
