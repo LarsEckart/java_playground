@@ -1,6 +1,7 @@
 package lars.katas.battleship;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -59,5 +60,22 @@ class ShipTest {
     String result = ship.shot(new Coordinate(1));
 
     assertThat(result).isEqualTo("sunk");
+  }
+
+  @Test
+  void do_we_support_2d_coordinates() {
+    Ship ship = new Ship(List.of(new Coordinate("A1"), new Coordinate("A2")));
+
+    ship.shot(new Coordinate("A2"));
+    String result = ship.shot(new Coordinate("A1"));
+
+    assertThat(result).isEqualTo("sunk");
+  }
+
+  @Test
+  void coordinates_from_string_must_be_2_letters() {
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> new Coordinate("1"))
+        .withMessage("not a valid coordinate, e.g. 'A1'");
   }
 }
