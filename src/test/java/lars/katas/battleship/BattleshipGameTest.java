@@ -3,6 +3,7 @@ package lars.katas.battleship;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.larseckart.tcr.CommitOnGreenExtension;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -27,5 +28,16 @@ class BattleshipGameTest {
     String result = game.shoot(4);
 
     assertThat(result).isEqualTo("miss");
+  }
+
+  @Disabled
+  @Test
+  void not_game_over_when_ship_still_partly_alive() {
+    Game game = new Game();
+    game.addShipAt(1, 2);
+
+    boolean result = game.gameOver();
+
+    assertThat(result).isFalse();
   }
 }

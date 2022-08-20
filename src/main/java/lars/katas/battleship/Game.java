@@ -7,10 +7,10 @@ public class Game {
 
   private List<Integer> list = new ArrayList<>();
 
-  public void addShipAt(int p1, int p2, int p3) {
-    list.add(p1);
-    list.add(p2);
-    list.add(p3);
+  public void addShipAt(int... i) {
+    for (int i1 : i) {
+      list.add(i1);
+    }
   }
 
   public String shoot(int p) {
@@ -19,5 +19,9 @@ public class Game {
     }
 
     return "miss";
+  }
+
+  public boolean gameOver() {
+    return true;
   }
 }
