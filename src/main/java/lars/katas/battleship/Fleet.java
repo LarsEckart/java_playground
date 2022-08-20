@@ -3,16 +3,16 @@ package lars.katas.battleship;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Fleet {
 
-  private final List<Ship> ships = new ArrayList<>();
+  private final List<Ship> ships;
 
-  public void addShipAt(Coordinate e, Coordinate e1) {
-    ships.add(new Ship(List.of(e, e1)));
+  public Fleet() {
+    ships = new ArrayList<>();
   }
 
-  public void addShipAt(Coordinate e, Coordinate e1, Coordinate e2) {
-    ships.add(new Ship(List.of(e, e1, e2)));
+  public void add(Ship ship) {
+    ships.add(ship);
   }
 
   public String shoot(Coordinate p) {
