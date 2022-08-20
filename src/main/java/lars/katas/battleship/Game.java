@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Game {
 
-  private List<Coordinate> coordinates = new ArrayList<>();
-  private List<Coordinate> hitss = new ArrayList<>();
+  private final List<Coordinate> coordinates = new ArrayList<>();
+  private final List<Coordinate> hits = new ArrayList<>();
 
   public void addShipAt(Coordinate e, Coordinate e1) {
     addShipAt(e);
@@ -21,13 +21,13 @@ public class Game {
 
   public void addShipAt(Coordinate c) {
     coordinates.add(c);
-    hitss.add(c);
+    hits.add(c);
   }
 
   public String shoot(Coordinate p) {
     if (coordinates.contains(p)) {
-      hitss.remove(p);
-      if (hitss.isEmpty()) {
+      hits.remove(p);
+      if (hits.isEmpty()) {
         return "sunk";
       }
       return "hit";
@@ -37,6 +37,6 @@ public class Game {
   }
 
   public boolean gameOver() {
-    return hitss.isEmpty();
+    return hits.isEmpty();
   }
 }
