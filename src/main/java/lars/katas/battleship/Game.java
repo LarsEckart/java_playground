@@ -5,9 +5,7 @@ import java.util.List;
 
 public class Game {
 
-  private List<Integer> list = new ArrayList<>();
   private List<Coordinate> coordinates = new ArrayList<>();
-  private List<Integer> hits = new ArrayList<>();
   private List<Coordinate> hitss = new ArrayList<>();
 
   public void addShipAt(Coordinate e, Coordinate e1) {
