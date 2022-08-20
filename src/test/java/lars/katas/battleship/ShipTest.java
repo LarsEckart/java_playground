@@ -43,11 +43,21 @@ class ShipTest {
   }
 
   @Test
-  void miss_when_shoot_where_ship_is() {
+  void miss_when_shoot_where_ship_not_is() {
     Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2), new Coordinate(3)));
 
     String result = ship.shot(new Coordinate(4));
 
     assertThat(result).isEqualTo("miss");
+  }
+
+  @Test
+  void sunk_when_shoot_where_ship_is_and_all_damaged() {
+    Ship ship = new Ship(List.of(new Coordinate(1), new Coordinate(2)));
+
+    ship.shot(new Coordinate(2));
+    String result = ship.shot(new Coordinate(1));
+
+    assertThat(result).isEqualTo("sunk");
   }
 }
