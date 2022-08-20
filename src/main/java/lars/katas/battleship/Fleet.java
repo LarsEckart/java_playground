@@ -19,6 +19,12 @@ public class Fleet {
     String result = "";
     for (Ship ship : ships) {
       result = ship.shot(p);
+      if (result.equals("sunk")) {
+        return "sunk";
+      }
+      if (result.equals("hit")) {
+        return "hit";
+      }
     }
     return result;
   }
