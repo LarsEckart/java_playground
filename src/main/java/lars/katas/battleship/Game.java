@@ -5,38 +5,26 @@ import java.util.List;
 
 public class Game {
 
-  private final List<Coordinate> coordinates = new ArrayList<>();
-  private final List<Coordinate> hits = new ArrayList<>();
+  private final List<Ship> ships = new ArrayList<>();
 
   public void addShipAt(Coordinate e, Coordinate e1) {
-    addShipAt(e);
-    addShipAt(e1);
+    ships.add(new Ship(List.of(e, e1)));
   }
 
   public void addShipAt(Coordinate e, Coordinate e1, Coordinate e2) {
-    addShipAt(e);
-    addShipAt(e1);
-    addShipAt(e2);
-  }
-
-  public void addShipAt(Coordinate c) {
-    coordinates.add(c);
-    hits.add(c);
+    ships.add(new Ship(List.of(e, e1, e2)));
   }
 
   public String shoot(Coordinate p) {
-    if (coordinates.contains(p)) {
-      hits.remove(p);
-      if (hits.isEmpty()) {
-        return "sunk";
-      }
-      return "hit";
+    String result = "";
+    for (Ship ship : ships) {
+      result = ship.shot(p);
     }
-
-    return "miss";
+    return result;
   }
 
   public boolean gameOver() {
-    return hits.isEmpty();
+    return this.ships.stream().noneMatch(Ship::isAlive);
   }
+
 }
