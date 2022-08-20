@@ -35,6 +35,7 @@ class FleetTest {
     Fleet fleet = new Fleet();
     fleet.add(new Ship(List.of(new Coordinate(1))));
     fleet.add(new Ship(List.of(new Coordinate(3))));
+
     String result = fleet.shoot(new Coordinate(1)).message();
 
     assertThat(result).isEqualTo("sunk");

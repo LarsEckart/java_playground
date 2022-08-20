@@ -6,10 +6,16 @@ import java.util.Set;
 
 class Ship {
 
+  private final String name;
   private final Set<Coordinate> coordinates;
   private final Set<Coordinate> undamaged;
 
   public Ship(List<Coordinate> coordinates) {
+    this("any", coordinates);
+  }
+
+  public Ship(String name, List<Coordinate> coordinates) {
+    this.name = name;
     this.coordinates = new HashSet<>(coordinates);
     this.undamaged = new HashSet<>(coordinates);
   }
@@ -22,11 +28,11 @@ class Ship {
     if (coordinates.contains(p)) {
       undamaged.remove(p);
       if (undamaged.isEmpty()) {
-        return new Result("sunk");
+        return new Result(name, "sunk");
       }
-      return new Result("hit");
+      return new Result(name, "hit");
     }
 
-    return new Result("miss");
+    return new Result(name, "miss");
   }
 }

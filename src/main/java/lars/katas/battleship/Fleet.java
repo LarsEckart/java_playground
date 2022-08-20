@@ -16,7 +16,7 @@ public class Fleet {
   }
 
   public Result shoot(Coordinate p) {
-    Result result = new Result("");
+    Result result = new Result("miss");
     for (Ship ship : ships) {
       result = ship.shot(p);
       if (result.message().equals("sunk")) {
