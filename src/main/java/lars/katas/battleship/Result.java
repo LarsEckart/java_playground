@@ -1,7 +1,5 @@
 package lars.katas.battleship;
 
-import java.util.Objects;
-
 public final class Result {
 
   private final String name;
@@ -10,6 +8,7 @@ public final class Result {
   public Result(String outcome) {
     this("any", outcome);
   }
+
   public Result(String name, String outcome) {
     this.name = name;
     this.outcome = outcome;
