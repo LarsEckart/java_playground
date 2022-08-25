@@ -28,29 +28,4 @@ public final class Result {
   public String outcome() {
     return outcome;
   }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    if (obj == null || obj.getClass() != this.getClass()) {
-      return false;
-    }
-    var that = (Result) obj;
-    return Objects.equals(this.outcome, that.outcome);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(outcome);
-  }
-
-  @Override
-  public String toString() {
-    return "Result[" +
-        "message=" + outcome + ']';
-  }
-
-
 }
