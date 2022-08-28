@@ -1,35 +1,32 @@
 package lars.katas.wordcounter;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WordCounter {
 
   public String countsLegacy(String text) {
     if (text.contains(" ")) {
-      return "happy=2";
+      String[] words = text.split(" ");
+      if (words[0].equals(words[1])) {
+        return words[0] + "=" + words.length;
+      }
+      return words[0] + "=1 " + words[1] + "=1";
     }
     return text + "=1";
   }
 
   public String counts(String text) {
     if (text.contains(" ")) {
-      String[] strings = text.split(" ");
-      String result = "";
-      Map<String, Integer> map = new HashMap<>();
-      for (String string : strings) {
-        if (map.containsKey(string)) {
-          Integer integer = map.get(string);
-          map.put(string, integer + 1);
-        } else {
-          map.put(string, 1);
-        }
-      }
-      for (Entry<String, Integer> entry : map.entrySet()) {
-        result += entry.getKey() + "=" + entry.getValue() + " ";
-      }
-      return result.trim();
+      return Arrays.stream(text.split(" "))
+          .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+          .entrySet().stream()
+          .map(c -> c.getKey() + "=" + c.getValue())
+          .collect(Collectors.joining(" "));
     }
     return "happy=1";
   }

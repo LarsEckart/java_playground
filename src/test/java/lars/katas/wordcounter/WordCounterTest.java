@@ -32,4 +32,9 @@ class WordCounterTest {
     assertThat(new WordCounter().countsLegacy("happy happy")).isEqualTo("happy=2");
   }
 
+  @Test
+  void differentSingleWordIsCounted2() {
+    assertThat(new WordCounter().countsLegacy("happy monday")).isEqualTo("happy=1 monday=1");
+  }
+
 }
