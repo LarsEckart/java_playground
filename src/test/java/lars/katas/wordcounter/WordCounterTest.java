@@ -16,4 +16,20 @@ class WordCounterTest {
   void repeatedWordIsCounted() {
     assertThat(new WordCounter().counts("happy happy")).isEqualTo("happy=2");
   }
+
+  @Test
+  void differentSingleWordIsCounted() {
+    assertThat(new WordCounter().counts("happy monday")).isEqualTo("happy=1 monday=1");
+  }
+
+  @Test
+  void singleWordIsCounted2() {
+    assertThat(new WordCounter().countsLegacy("happy")).isEqualTo("happy=1");
+  }
+
+  @Test
+  void repeatedWordIsCounted2() {
+    assertThat(new WordCounter().countsLegacy("happy happy")).isEqualTo("happy=2");
+  }
+
 }
