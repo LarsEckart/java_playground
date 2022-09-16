@@ -26,7 +26,7 @@ gradlew generateDependencyGraph
 ### License
 
 ```
-Copyright 2021 Lars Eckart
+Copyright 2022 Lars Eckart
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
