@@ -11,8 +11,14 @@ import com.jcraft.jsch.SftpException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Vector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.approvaltests.scrubbers.DateScrubber;
@@ -37,7 +43,7 @@ public class SFtpUploadWithTestContainersTest {
   private static File directory;
 
   @Container
-  private static final GenericContainer sftp = new GenericContainer(
+  private static final GenericContainer<?> sftp = new GenericContainer<>(
       new ImageFromDockerfile()
           .withDockerfileFromBuilder(builder ->
               builder
@@ -50,9 +56,9 @@ public class SFtpUploadWithTestContainersTest {
   @Test
   void uploadOnlyCsvFiles() throws IOException {
     var folderWithFiles = createTempFilesOnLocalStorage(
-        "users1.csv", "users2.csv", "users3.csv", "secrets.txt", "users4.csv");
+        "users1.csv", "users2.csv", "users3.csv", "secrets.txt", "config", "users4.csv");
 
-    uploadAllCsvFiles(folderWithFiles);
+    newUploadAllCsvFiles(folderWithFiles);
   }
 
   private static File createTempFilesOnLocalStorage(String... fileNames) {
@@ -68,7 +74,7 @@ public class SFtpUploadWithTestContainersTest {
     return new File(directory.getAbsolutePath());
   }
 
-  private void uploadAllCsvFiles(File workDir) {
+  private void uploadAllCsvFiles(File directory) {
     final JSch jsch = new JSch();
     Session session = null;
     ChannelSftp channel = null;
@@ -85,8 +91,7 @@ public class SFtpUploadWithTestContainersTest {
       String path = "/upload/";
       channel.cd(path);
 
-      //upload files
-      for (File file : workDir.listFiles()) {
+      for (File file : directory.listFiles()) {
         if (file.isFile()) {
           String extension = "";
           int i = file.getName().lastIndexOf('.');
@@ -106,7 +111,8 @@ public class SFtpUploadWithTestContainersTest {
           }
         }
       }
-      String collect = channel.ls(path).stream().map(LsEntry::toString)
+      Vector<LsEntry> files = channel.ls(path);
+      String collect = files.stream().map(LsEntry::toString)
           .collect(Collectors.joining("\n"));
       Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
     } catch (JSchException | SftpException | IOException e) {
@@ -121,4 +127,32 @@ public class SFtpUploadWithTestContainersTest {
     }
   }
 
+  private void newUploadAllCsvFiles(File directory) {
+    try (Ssh ssh = Ssh.with(USER, PASSWORD, "localhost", sftp.getFirstMappedPort())) {
+      Path path = Path.of("/upload/");
+      ssh.changeDirectory(path);
+
+      try (Stream<Path> stream = Files.list(directory.toPath())) {
+        stream
+            .filter(file -> !Files.isDirectory(file))
+            .filter(
+                p -> fileExtension(p.toFile().getName()).equals("csv"))
+            .forEach(ssh::copyTo);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+
+      List<String> files = ssh.listFiles(path);
+      String collect = String.join("\n", files);
+      Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
+    }
+  }
+
+  public String fileExtension(String filename) {
+    return Optional.ofNullable(filename)
+        .filter(f -> f.contains("."))
+        .map(f -> f.substring(filename.lastIndexOf(".") + 1))
+        .orElse("");
+  }
 }
+
