@@ -21,7 +21,7 @@ import org.testcontainers.utility.DockerImageName;
 // from https://blog.codecentric.de/en/2019/07/hibernate-caching/
 
 @Testcontainers
-@EnabledOnOs({OS.LINUX, OS.MAC})
+@EnabledOnOs({OS.MAC})
 @Tag("slow")
 class HibernateSessionTest {
 
