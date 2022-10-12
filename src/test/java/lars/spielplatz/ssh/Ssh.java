@@ -17,7 +17,7 @@ public class Ssh implements AutoCloseable {
   private final Session session;
   private final ChannelSftp channel;
 
-  public Ssh(String user, String password, String server, Integer port) {
+  private Ssh(String user, String password, String server, Integer port) {
     try {
       JSch jsch = new JSch();
       session = jsch.getSession(user, server, port);

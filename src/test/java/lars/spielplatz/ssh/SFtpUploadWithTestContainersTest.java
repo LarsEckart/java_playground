@@ -79,7 +79,7 @@ public class SFtpUploadWithTestContainersTest {
     Session session = null;
     ChannelSftp channel = null;
     try {
-      session = jsch.getSession(USER, "localhost", sftp.getFirstMappedPort());
+      session = jsch.getSession(USER, sftp.getHost(), sftp.getFirstMappedPort());
       session.setPassword(PASSWORD);
       java.util.Properties config = new java.util.Properties();
       config.put("StrictHostKeyChecking", "no");
@@ -111,10 +111,13 @@ public class SFtpUploadWithTestContainersTest {
           }
         }
       }
+
       Vector<LsEntry> files = channel.ls(path);
       String collect = files.stream().map(LsEntry::toString).sorted()
           .collect(Collectors.joining("\n"));
+
       Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
+
     } catch (JSchException | SftpException | IOException e) {
       throw new RuntimeException(e);
     } finally {
@@ -128,7 +131,7 @@ public class SFtpUploadWithTestContainersTest {
   }
 
   private void newUploadAllCsvFiles(File directory) {
-    try (Ssh ssh = Ssh.with(USER, PASSWORD, "localhost", sftp.getFirstMappedPort())) {
+    try (Ssh ssh = Ssh.with(USER, PASSWORD, sftp.getHost(), sftp.getFirstMappedPort())) {
       Path path = Path.of("/upload/");
       ssh.changeDirectory(path);
 
