@@ -112,7 +112,7 @@ public class SFtpUploadWithTestContainersTest {
         }
       }
       Vector<LsEntry> files = channel.ls(path);
-      String collect = files.stream().map(LsEntry::toString)
+      String collect = files.stream().map(LsEntry::toString).sorted()
           .collect(Collectors.joining("\n"));
       Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
     } catch (JSchException | SftpException | IOException e) {
@@ -142,7 +142,7 @@ public class SFtpUploadWithTestContainersTest {
         throw new RuntimeException(e);
       }
 
-      List<String> files = ssh.listFiles(path);
+      List<String> files = ssh.listFiles(path).stream().sorted().toList();
       String collect = String.join("\n", files);
       Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
     }

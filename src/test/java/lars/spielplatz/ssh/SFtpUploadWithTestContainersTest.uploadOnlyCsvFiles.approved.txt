@@ -1,6 +1,6 @@
-d------rwx    1 root     root         4096 [Date1] .
-drwxr-xr-x    1 root     root         4096 [Date1] ..
--rw-r--r--    1 1001     100             0 [Date1] users4.csv
 -rw-r--r--    1 1001     100             0 [Date1] users1.csv
 -rw-r--r--    1 1001     100             0 [Date1] users2.csv
 -rw-r--r--    1 1001     100             0 [Date1] users3.csv
+-rw-r--r--    1 1001     100             0 [Date1] users4.csv
+d------rwx    1 root     root         4096 [Date1] .
+drwxr-xr-x    1 root     root         4096 [Date1] ..
