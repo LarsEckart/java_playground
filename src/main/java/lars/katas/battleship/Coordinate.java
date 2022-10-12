@@ -2,7 +2,7 @@ package lars.katas.battleship;
 
 import java.util.Objects;
 
-final class Coordinate {
+class Coordinate {
 
   private final String row;
   private final String column;

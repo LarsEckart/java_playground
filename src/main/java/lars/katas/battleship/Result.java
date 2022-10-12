@@ -1,6 +1,6 @@
 package lars.katas.battleship;
 
-public final class Result {
+class Result {
 
   private final String name;
   private final String outcome;

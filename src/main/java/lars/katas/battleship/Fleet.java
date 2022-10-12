@@ -3,7 +3,7 @@ package lars.katas.battleship;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fleet {
+class Fleet {
 
   private final List<Ship> ships;
 

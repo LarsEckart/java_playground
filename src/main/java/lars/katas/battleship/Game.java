@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Game {
+class Game {
 
   public static void main(String[] args) {
     Fleet fleet = new Fleet();
