@@ -35,7 +35,7 @@ public class SFtpUploadWithTestContainersTest {
 
   private static final Logger log = getLogger(SFtpUploadWithTestContainersTest.class);
 
-  private static final String USER = "user";
+  private static final String USERNAME = "user";
   private static final String PASSWORD = "password";
   private static final String REMOTE_PATH = "upload";
 
@@ -48,10 +48,10 @@ public class SFtpUploadWithTestContainersTest {
           .withDockerfileFromBuilder(builder ->
               builder
                   .from("atmoz/sftp:latest")
-                  .run("mkdir -p /home/" + USER + "/upload; chmod -R 007 /home/" + USER)
+                  .run("mkdir -p /home/" + USERNAME + "/upload; chmod -R 007 /home/" + USERNAME)
                   .build()))
       .withExposedPorts(22)
-      .withCommand(USER + ":" + PASSWORD + ":1001:::" + REMOTE_PATH);
+      .withCommand(USERNAME + ":" + PASSWORD + ":1001:::" + REMOTE_PATH);
 
   @Test
   void uploadOnlyCsvFiles() throws IOException {
@@ -74,12 +74,12 @@ public class SFtpUploadWithTestContainersTest {
     return new File(directory.getAbsolutePath());
   }
 
-  private void uploadAllCsvFiles(File directory) {
+  private void legacyUploadAllCsvFiles(File directory) {
     final JSch jsch = new JSch();
     Session session = null;
     ChannelSftp channel = null;
     try {
-      session = jsch.getSession(USER, sftp.getHost(), sftp.getFirstMappedPort());
+      session = jsch.getSession(USERNAME, sftp.getHost(), sftp.getFirstMappedPort());
       session.setPassword(PASSWORD);
       java.util.Properties config = new java.util.Properties();
       config.put("StrictHostKeyChecking", "no");
@@ -131,15 +131,14 @@ public class SFtpUploadWithTestContainersTest {
   }
 
   private void newUploadAllCsvFiles(File directory) {
-    try (Ssh ssh = Ssh.with(USER, PASSWORD, sftp.getHost(), sftp.getFirstMappedPort())) {
+    try (SftpOperations ssh = SftpOperations.withJsch(USERNAME, PASSWORD, sftp.getHost(), sftp.getFirstMappedPort())) {
       Path path = Path.of("/upload/");
       ssh.changeDirectory(path);
 
       try (Stream<Path> stream = Files.list(directory.toPath())) {
         stream
             .filter(file -> !Files.isDirectory(file))
-            .filter(
-                p -> fileExtension(p.toFile().getName()).equals("csv"))
+            .filter(p -> "csv".equals(fileExtension(p.toFile().getName())))
             .forEach(ssh::copyTo);
       } catch (IOException e) {
         throw new RuntimeException(e);

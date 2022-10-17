@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-public class Ssh implements AutoCloseable {
+public class JSchSftpOperations implements SftpOperations {
 
   private final Session session;
   private final ChannelSftp channel;
 
-  private Ssh(String user, String password, String server, Integer port) {
+  private JSchSftpOperations(String user, String password, String server, Integer port) {
     try {
       JSch jsch = new JSch();
       session = jsch.getSession(user, server, port);
@@ -33,8 +33,8 @@ public class Ssh implements AutoCloseable {
     }
   }
 
-  public static Ssh with(String user, String password, String localhost, Integer port) {
-    return new Ssh(user, password, localhost, port);
+  public static JSchSftpOperations with(String user, String password, String localhost, Integer port) {
+    return new JSchSftpOperations(user, password, localhost, port);
   }
 
   @Override
@@ -47,6 +47,7 @@ public class Ssh implements AutoCloseable {
     }
   }
 
+  @Override
   public void changeDirectory(Path path) {
     try {
       this.channel.cd(path.toString());
@@ -55,6 +56,7 @@ public class Ssh implements AutoCloseable {
     }
   }
 
+  @Override
   public void copyTo(Path path) {
     File file = path.toFile();
     try (FileInputStream input = new FileInputStream(file)) {
@@ -68,9 +70,13 @@ public class Ssh implements AutoCloseable {
     }
   }
 
+  @Override
   public List<String> listFiles(Path path) {
     try {
-      return channel.ls(path.toString()).stream().map(LsEntry::toString).toList();
+      return channel.ls(path.toString()).stream()
+          .map(LsEntry::getFilename)
+          .filter(filename -> !(".".equals(filename) || "..".equals(filename)))
+          .toList();
     } catch (SftpException e) {
       throw new RuntimeException(e);
     }
