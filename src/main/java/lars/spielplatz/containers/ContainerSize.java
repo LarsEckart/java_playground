@@ -29,21 +29,33 @@ class ContainerSize {
     dummy_val_20,
   }
 
+  /*
+   * add "--add-opens java.base/java.util=ALL-UNNAMED" to vm options in intellij otherwise this
+   * won't work.
+   */
   public static void main(String[] args) throws Exception {
     var oldWay = new HashMap<>(States.values().length);
     var newWay = HashMap.newHashMap(States.values().length);
+
+    System.out.println("threshold after creation");
+    System.out.println(getThreshold(newWay));
+    System.out.println(getThreshold(oldWay));
 
     for (States s : States.values()) {
       oldWay.put(s.name(), s);
       newWay.put(s.name(), s);
     }
 
-    Field f = oldWay.getClass().getDeclaredField("threshold"); //NoSuchFieldException
+    System.out.println("threshold after filling");
+    System.out.println(getThreshold(newWay));
+    System.out.println(getThreshold(oldWay));
+  }
+
+  private static int getThreshold(HashMap<Object, Object> map)
+      throws NoSuchFieldException, IllegalAccessException {
+    Field f = map.getClass().getDeclaredField("threshold"); //NoSuchFieldException
     f.setAccessible(true);
-    int oldWaySize = (int) f.get(oldWay); //IllegalAccessException
-
-    System.out.println(oldWaySize);
-
+    return (int) f.get(map); //IllegalAccessException
   }
 
 }
