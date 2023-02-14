@@ -1,12 +1,15 @@
 package lars.spielplatz.containers;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 class ContainerSize {
 
+  public static void main(String[] args) throws Exception {
+    var oldWay = new HashMap<>(MyDummyEnum.values().length);
+    var newWay = HashMap.newHashMap(MyDummyEnum.values().length);
+  }
 
-  private enum States {
+  private enum MyDummyEnum {
     dummy_val_01,
     dummy_val_02,
     dummy_val_03,
@@ -27,35 +30,25 @@ class ContainerSize {
     dummy_val_18,
     dummy_val_19,
     dummy_val_20,
+    dummy_val_21,
+    dummy_val_22,
+    dummy_val_23,
+    dummy_val_34,
+    dummy_val_35,
+    dummy_val_36,
+    dummy_val_37,
+    dummy_val_38,
+    dummy_val_39,
+    dummy_val_40,
+    dummy_val_41,
+    dummy_val_42,
+    dummy_val_43,
+    dummy_val_44,
+    dummy_val_45,
+    dummy_val_46,
+    dummy_val_47,
+    dummy_val_48,
+    dummy_val_49,
+    dummy_val_50,
   }
-
-  /*
-   * add "--add-opens java.base/java.util=ALL-UNNAMED" to vm options in intellij otherwise this
-   * won't work.
-   */
-  public static void main(String[] args) throws Exception {
-    var oldWay = new HashMap<>(States.values().length);
-    var newWay = HashMap.newHashMap(States.values().length);
-
-    System.out.println("threshold after creation");
-    System.out.println(getThreshold(newWay));
-    System.out.println(getThreshold(oldWay));
-
-    for (States s : States.values()) {
-      oldWay.put(s.name(), s);
-      newWay.put(s.name(), s);
-    }
-
-    System.out.println("threshold after filling");
-    System.out.println(getThreshold(newWay));
-    System.out.println(getThreshold(oldWay));
-  }
-
-  private static int getThreshold(HashMap<Object, Object> map)
-      throws NoSuchFieldException, IllegalAccessException {
-    Field f = map.getClass().getDeclaredField("threshold"); //NoSuchFieldException
-    f.setAccessible(true);
-    return (int) f.get(map); //IllegalAccessException
-  }
-
 }
