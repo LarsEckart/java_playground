@@ -100,6 +100,10 @@ dependencies {
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.1")
 }
 
+jar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
 task copyDependenciesToLibs(type: Copy) {
     into "libs"
     from configurations.compileClasspath
