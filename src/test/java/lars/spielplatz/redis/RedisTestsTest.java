@@ -7,10 +7,14 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.testcontainers.DockerClientFactory;
 import org.testcontainers.containers.GenericContainer;
 
+@DisabledOnOs(OS.WINDOWS) // no docker on github actions windows
 public class RedisTestsTest {
 
   private static final GenericContainer<?> redis = new GenericContainer<>("confluent/kafka")

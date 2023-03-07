@@ -23,6 +23,8 @@ import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.approvaltests.scrubbers.DateScrubber;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.Logger;
 import org.testcontainers.containers.GenericContainer;
@@ -30,6 +32,7 @@ import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+@DisabledOnOs(OS.WINDOWS) // no docker on github actions windows
 @Testcontainers
 public class SFtpUploadWithTestContainersTest {
 
@@ -131,7 +134,8 @@ public class SFtpUploadWithTestContainersTest {
   }
 
   private void newUploadAllCsvFiles(File directory) {
-    try (SftpOperations ssh = SftpOperations.withJsch(USERNAME, PASSWORD, sftp.getHost(), sftp.getFirstMappedPort())) {
+    try (SftpOperations ssh = SftpOperations.withJsch(USERNAME, PASSWORD, sftp.getHost(),
+        sftp.getFirstMappedPort())) {
       Path path = Path.of("/upload/");
       ssh.changeDirectory(path);
 
