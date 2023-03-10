@@ -26,15 +26,10 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
           cache: 'gradle'
-      - name: Prepare Testcontainers Cloud agent
-        env:
-          TC_CLOUD_TOKEN: ${{ secrets.TC_CLOUD_TOKEN }}
-        if: env.TC_CLOUD_TOKEN != ''
-        run: |
-          curl -L -o agent https://app.testcontainers.cloud/download/testcontainers-cloud-agent_linux_x86-64
-          chmod +x agent
-          ./agent &
-          ./agent wait --timeout-seconds 60
+      - name: Setup Testcontainers Cloud Client
+        uses: atomicjar/testcontainers-cloud-setup-action@v1
+        with:
+          token: ${{ secrets.TC_CLOUD_TOKEN }}
       - name: Run Gradle's test task
         run: ./gradlew -i --no-daemon --parallel --continue --build-cache --stacktrace test
         env:
