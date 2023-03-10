@@ -31,3 +31,5 @@ libs
 bin
 /src/test/java/lars/exercism/
 /src/main/java/lars/exercism/
+
+tcc-agent
