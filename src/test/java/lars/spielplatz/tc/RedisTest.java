@@ -23,7 +23,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@EnabledOnOs({OS.LINUX, OS.MAC})
+// @EnabledOnOs({OS.LINUX, OS.MAC})
 public class RedisTest {
 
   private static final Logger log = getLogger(RedisTest.class);
