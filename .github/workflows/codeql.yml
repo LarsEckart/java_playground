@@ -71,7 +71,7 @@ jobs:
 
     - run: |
         echo "Run, Build Application using script"
-        ./gradlew -i --no-daemon --parallel --continue assemble
+        ./gradlew -i --no-daemon --parallel --continue --build-cache assemble
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
