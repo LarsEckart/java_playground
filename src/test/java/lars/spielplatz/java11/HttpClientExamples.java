@@ -14,6 +14,9 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.SocketPolicy;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -121,7 +124,8 @@ public class HttpClientExamples {
   }
 
   @Test
-  public void out_of_the_box_headers() throws Exception {
+  @EnabledForJreRange(min = JRE.JAVA_18)
+  void out_of_the_box_headers() throws Exception {
     mockWebServer.enqueue(new MockResponse().setResponseCode(200));
 
     var request = HttpRequest.newBuilder().uri(URI.create(mockWebServerUrl())).build();
@@ -133,6 +137,25 @@ public class HttpClientExamples {
     var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
     assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
     assertThat(recordedRequest.getHeader("Content-Length")).isNull(); // was 0 previously!
+    assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
+    assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/1");
+    assertThat(recordedRequest.getHeader("Host")).isNotBlank();
+  }
+
+  @Test
+  @EnabledOnJre(JRE.JAVA_17)
+  void out_of_the_box_headers_jdk_17() throws Exception {
+    mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+
+    var request = HttpRequest.newBuilder().uri(URI.create(mockWebServerUrl())).build();
+
+    // when
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    // then
+    var recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+    assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
+    assertThat(recordedRequest.getHeader("Content-Length")).isEqualTo(0);
     assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
     assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/1");
     assertThat(recordedRequest.getHeader("Host")).isNotBlank();
