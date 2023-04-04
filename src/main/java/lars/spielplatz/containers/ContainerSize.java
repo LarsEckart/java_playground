@@ -6,7 +6,7 @@ class ContainerSize {
 
   public static void main(String[] args) throws Exception {
     var oldWay = new HashMap<>(MyDummyEnum.values().length);
-    var newWay = HashMap.newHashMap(MyDummyEnum.values().length);
+    // var newWay = HashMap.newHashMap(MyDummyEnum.values().length);
   }
 
   private enum MyDummyEnum {
