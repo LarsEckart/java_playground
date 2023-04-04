@@ -1,6 +1,6 @@
 version: 2
 updates:
-  -
+
   # Maintain dependencies for this gradle project
   - package-ecosystem: "gradle"
     directory: "/"
