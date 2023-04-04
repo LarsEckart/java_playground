@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.SocketPolicy;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
@@ -31,7 +31,7 @@ public class HttpClientExamples {
     return mockWebServer.url("/").toString();
   }
 
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     mockWebServer.start();
     client = HttpClient.newHttpClient();
