@@ -1,7 +1,5 @@
 package lars.refactoring.jbrains;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
@@ -25,15 +23,19 @@ class DeliveryTest {
 
   private static void assertAddressUpdatedInDeliveryBigObject(Delivery redirected,
       String addressLine1, String addressLine2, String city, String province, String postalCode) {
-    assertTrue(addressEquals(redirected, addressLine1, addressLine2, city, province, postalCode));
+    assertTrue(addressEquals(redirected,
+        new Address(addressLine1, addressLine2, city, province, postalCode)));
   }
 
-  private static boolean addressEquals(Delivery delivery, String addressLine1, String addressLine2,
-      String city, String province, String postalCode) {
-    return Objects.equals(delivery.getAddressLine1(), addressLine1)
-        && Objects.equals(delivery.getAddressLine2(), addressLine2)
-        && Objects.equals(delivery.getCity(), city)
-        && Objects.equals(delivery.getProvince(), province)
-        && Objects.equals(delivery.getPostalCode(), postalCode);
+  private static boolean addressEquals(Delivery delivery, Address address) {
+    return Objects.equals(delivery.getAddressLine1(), address.addressLine1())
+        && Objects.equals(delivery.getAddressLine2(), address.addressLine2())
+        && Objects.equals(delivery.getCity(), address.city())
+        && Objects.equals(delivery.getProvince(), address.province())
+        && Objects.equals(delivery.getPostalCode(), address.postalCode());
+  }
+
+  private static record Address(
+      String addressLine1, String addressLine2, String city, String province, String postalCode) {
   }
 }
