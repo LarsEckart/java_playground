@@ -2,7 +2,6 @@ package lars.refactoring.jbrains;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
 class DeliveryTest {
@@ -23,7 +22,7 @@ class DeliveryTest {
 
   private static void assertAddressUpdatedInDeliveryBigObject(Delivery redirected,
       String addressLine1, String addressLine2, String city, String province, String postalCode) {
-    assertTrue(addressEquals(addressOf(redirected),
+    assertTrue(addressEquals(redirected.addressOf(),
         new Address(addressLine1, addressLine2, city, province, postalCode)));
   }
 
@@ -31,12 +30,4 @@ class DeliveryTest {
     return first.equals(second);
   }
 
-  private static Address addressOf(Delivery delivery) {
-    return new Address(delivery.getAddressLine1(), delivery.getAddressLine2(), delivery.getCity(),
-        delivery.getProvince(), delivery.getPostalCode());
-  }
-
-  private static record Address(
-      String addressLine1, String addressLine2, String city, String province, String postalCode) {
-  }
 }

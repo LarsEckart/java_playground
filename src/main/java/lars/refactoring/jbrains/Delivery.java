@@ -32,6 +32,10 @@ class Delivery {
     this.fragile = fragile;
   }
 
+  public Address addressOf() {
+    return new Address(addressLine1, addressLine2, city, province, postalCode);
+  }
+
   public String getAddressLine1() {
     return addressLine1;
   }
