@@ -23,16 +23,12 @@ class DeliveryTest {
 
   private static void assertAddressUpdatedInDeliveryBigObject(Delivery redirected,
       String addressLine1, String addressLine2, String city, String province, String postalCode) {
-    assertTrue(addressEquals(redirected,
+    assertTrue(addressEquals(addressOf(redirected),
         new Address(addressLine1, addressLine2, city, province, postalCode)));
   }
 
-  private static boolean addressEquals(Delivery delivery, Address other) {
-    return Objects.equals(delivery.getAddressLine1(), other.addressLine1())
-        && Objects.equals(delivery.getAddressLine2(), other.addressLine2())
-        && Objects.equals(delivery.getCity(), other.city())
-        && Objects.equals(delivery.getProvince(), other.province())
-        && Objects.equals(delivery.getPostalCode(), other.postalCode());
+  private static boolean addressEquals(Address first, Address second) {
+    return first.equals(second);
   }
 
   private static Address addressOf(Delivery delivery) {
