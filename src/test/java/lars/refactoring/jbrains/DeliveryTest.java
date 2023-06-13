@@ -27,12 +27,17 @@ class DeliveryTest {
         new Address(addressLine1, addressLine2, city, province, postalCode)));
   }
 
-  private static boolean addressEquals(Delivery delivery, Address address) {
-    return Objects.equals(delivery.getAddressLine1(), address.addressLine1())
-        && Objects.equals(delivery.getAddressLine2(), address.addressLine2())
-        && Objects.equals(delivery.getCity(), address.city())
-        && Objects.equals(delivery.getProvince(), address.province())
-        && Objects.equals(delivery.getPostalCode(), address.postalCode());
+  private static boolean addressEquals(Delivery delivery, Address other) {
+    return Objects.equals(delivery.getAddressLine1(), other.addressLine1())
+        && Objects.equals(delivery.getAddressLine2(), other.addressLine2())
+        && Objects.equals(delivery.getCity(), other.city())
+        && Objects.equals(delivery.getProvince(), other.province())
+        && Objects.equals(delivery.getPostalCode(), other.postalCode());
+  }
+
+  private static Address addressOf(Delivery delivery) {
+    return new Address(delivery.getAddressLine1(), delivery.getAddressLine2(), delivery.getCity(),
+        delivery.getProvince(), delivery.getPostalCode());
   }
 
   private static record Address(
