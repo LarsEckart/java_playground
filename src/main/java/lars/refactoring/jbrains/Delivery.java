@@ -36,26 +36,6 @@ class Delivery {
     return new Address(addressLine1, addressLine2, city, province, postalCode);
   }
 
-  public String getAddressLine1() {
-    return addressLine1;
-  }
-
-  public String getAddressLine2() {
-    return addressLine2;
-  }
-
-  public String getCity() {
-    return city;
-  }
-
-  public String getProvince() {
-    return province;
-  }
-
-  public String getPostalCode() {
-    return postalCode;
-  }
-
   public String getRecipientName() {
     return recipientName;
   }
