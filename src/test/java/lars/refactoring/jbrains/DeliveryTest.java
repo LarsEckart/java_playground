@@ -2,7 +2,6 @@ package lars.refactoring.jbrains;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +17,16 @@ class DeliveryTest {
     Delivery redirectedDelivery = delivery.redirect("456 Main Street", "Apt 2A", "Example City",
         "Example Province", "A1B 2C3");
 
-    assertAddressUpdatedInDeliveryBigObject(redirectedDelivery);
+    assertAddressUpdatedInDeliveryBigObject(redirectedDelivery, "456 Main Street", "Apt 2A",
+        "Example City", "Example Province", "A1B 2C3");
   }
 
-  private static void assertAddressUpdatedInDeliveryBigObject(Delivery redirected) {
-    assertEquals("456 Main Street", redirected.getAddressLine1());
-    assertEquals("Apt 2A", redirected.getAddressLine2());
-    assertEquals("Example City", redirected.getCity());
-    assertEquals("Example Province", redirected.getProvince());
-    assertEquals("A1B 2C3", redirected.getPostalCode());
+  private static void assertAddressUpdatedInDeliveryBigObject(Delivery redirected,
+      String addressLine1, String addressLine2, String city, String province, String postalCode) {
+    assertEquals(addressLine1, redirected.getAddressLine1());
+    assertEquals(addressLine2, redirected.getAddressLine2());
+    assertEquals(city, redirected.getCity());
+    assertEquals(province, redirected.getProvince());
+    assertEquals(postalCode, redirected.getPostalCode());
   }
 }
