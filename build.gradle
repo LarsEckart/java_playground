@@ -43,8 +43,6 @@ dependencies {
     implementation("org.eclipse.collections:eclipse-collections-api:11.1.0")
     implementation("org.eclipse.collections:eclipse-collections:11.1.0")
     implementation("org.apache.commons:commons-pool2:2.11.1")
-    implementation("org.eclipse.collections:eclipse-collections-api:11.0.0")
-    implementation("org.eclipse.collections:eclipse-collections:11.0.0")
     implementation 'org.dom4j:dom4j:2.1.4'
 
     testImplementation 'com.github.mwiede:jsch:0.2.4'

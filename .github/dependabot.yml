@@ -6,6 +6,21 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      groups:
+        logback:
+          patterns:
+            - "ch.qos.logback"
+        eclipse-collections:
+          patterns:
+            - "org.eclipse.collections"
+        glassfish:
+          patterns:
+            - "org.glassfish.jaxb"
+        junit:
+          patterns:
+            - "org.junit.jupiter"
+            - "junit"
+
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
