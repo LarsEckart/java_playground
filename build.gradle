@@ -4,7 +4,7 @@ plugins {
     id "java"
     id "idea"
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
-    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
+//    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
 }
 
 java {
@@ -148,9 +148,9 @@ dependencyUpdates.resolutionStrategy {
     }
 }
 
-libyear {
-    // gw -q dependencies --configuration compileClasspath
-    configurations = ['compileClasspath']
-    failOnError = false
-    validator = allArtifactsCombinedMustNotBeOlderThan(years(100)) // just so that build doesnt fail
-}
+//libyear {
+//    // gw -q dependencies --configuration compileClasspath
+//    configurations = ['compileClasspath']
+//    failOnError = false
+//    validator = allArtifactsCombinedMustNotBeOlderThan(years(100)) // just so that build doesnt fail
+//}
