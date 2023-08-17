@@ -7,6 +7,7 @@ on:
     paths:
       - '**.java'
       - 'build.gradle'
+      - 'gradle/wrapper/**'
       - '.github/workflows/test.yml'
   pull_request:
     branches:
@@ -14,6 +15,7 @@ on:
     paths:
       - '**.java'
       - 'build.gradle'
+      - 'gradle/wrapper/**'
 #  schedule:
 #    - cron: "0 */3 * * *"
 
