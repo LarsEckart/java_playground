@@ -83,7 +83,7 @@ dependencies {
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
     testImplementation("org.awaitility:awaitility-groovy:4.2.0")
-    testImplementation("com.tngtech.archunit:archunit:0.23.1")
+    testImplementation("com.tngtech.archunit:archunit:1.1.0")
     testImplementation("net.datafaker:datafaker:1.5.0")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.10.1')
 
