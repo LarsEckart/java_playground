@@ -18,6 +18,7 @@ updates:
             - "org.glassfish.jaxb"
         junit:
           patterns:
+            - "org.junit.vintage"
             - "org.junit.jupiter"
             - "junit"
 
