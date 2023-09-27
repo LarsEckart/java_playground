@@ -55,7 +55,7 @@ jobs:
           artifact: /test-results-(.*)/
           # Name of the Check Run which will be created
           name: 'junit5 test report'
-          path: '**/build/test-results/test/TEST-*.xml'
+          path: 'build/test-results/test/TEST-*.xml'
           reporter: 'java-junit'
           only-summary: 'false'
           list-suites: 'all'
