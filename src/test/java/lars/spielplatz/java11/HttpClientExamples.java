@@ -138,7 +138,7 @@ public class HttpClientExamples {
     assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
     assertThat(recordedRequest.getHeader("Content-Length")).isNull(); // was 0 previously!
     assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
-    assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/1");
+    assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/(\\d+)");
     assertThat(recordedRequest.getHeader("Host")).isNotBlank();
   }
 
@@ -157,7 +157,7 @@ public class HttpClientExamples {
     assertThat(recordedRequest.getHeader("Connection")).isEqualTo("Upgrade, HTTP2-Settings");
     assertThat(recordedRequest.getHeader("Content-Length")).isEqualTo("0");
     assertThat(recordedRequest.getHeader("Upgrade")).isEqualTo("h2c");
-    assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/1");
+    assertThat(recordedRequest.getHeader("User-Agent")).containsPattern("Java-http-client/17");
     assertThat(recordedRequest.getHeader("Host")).isNotBlank();
   }
 
