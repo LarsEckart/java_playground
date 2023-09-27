@@ -54,6 +54,8 @@ class MultiLineStringTest {
         .hmacHex(String.join(System.lineSeparator(), "a", "b", "c", "d").getBytes(UTF_8))
         .toUpperCase();
 
+    System.out.println("applesauce: " + text1);
+
     Assertions.assertAll(
         () -> assertThat(text1).isEqualTo(text2),
         () -> assertThat(text2).isEqualTo(text3),
