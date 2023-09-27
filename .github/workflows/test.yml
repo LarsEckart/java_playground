@@ -60,9 +60,6 @@ jobs:
           only-summary: 'false'
           list-suites: 'all'
           list-tests: 'all'
-          max-annotations: '10'
-          fail-on-error: 'true'
-          fail-on-empty: 'true'
           working-directory: ''
           #token: ''
   auto-merge:
