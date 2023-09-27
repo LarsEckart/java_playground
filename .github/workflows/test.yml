@@ -52,7 +52,7 @@ jobs:
       - name: Test Report
         uses: dorny/test-reporter@v1
         with:
-          artifact: /test-results-(.*)/
+          artifact: test-result-${{ matrix.os }}
           # Name of the Check Run which will be created
           name: 'junit5 test report'
           path: 'build/test-results/test/TEST-*.xml'
