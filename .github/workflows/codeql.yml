@@ -12,13 +12,8 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
   schedule:
-    - cron: '37 15 * * 2'
+    - cron: "0 0 * * 0"
 
 # Cancel existing executions when new commits are pushed onto the branch
 concurrency:
