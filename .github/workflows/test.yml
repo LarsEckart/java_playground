@@ -49,17 +49,6 @@ jobs:
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: actions/upload-artifact@v3  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
-        with:
-          name: test-results
-          path: build/test-results/test
-      - uses: dorny/test-reporter@v1
-        with:
-          name: JUnit Tests                  # Name of the check run which will be created
-          artifact: test-results            # artifact name
-          path: '**/*.xml'                     # Path to test results (inside artifact .zip)
-          reporter: java-junit              # Format of test results
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
