@@ -49,11 +49,22 @@ jobs:
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v4
-        if: success() || failure() # always run even if the previous step fails
+      - name: Test Report
+        uses: dorny/test-reporter@v1
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          artifact: /test-results-(.*)/
+          # Name of the Check Run which will be created
+          name: 'junit5 test report'
+          path: '**/build/test-results/test/TEST-*.xml'
+          reporter: 'java-junit'
+          only-summary: 'false'
+          list-suites: 'all'
+          list-tests: 'all'
+          max-annotations: '10'
+          fail-on-error: 'true'
+          fail-on-empty: 'true'
+          working-directory: ''
+          #token: ''
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
