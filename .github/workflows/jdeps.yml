@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       jdk:
-        description: 'jdk version, like 11 or 17'     
+        description: 'jdk version, like 11 or 21'
         required: true
-        default: '17'
+        default: '21'
 
 jobs:
   jdeps:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: ['17']
+        java: ['21']
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
