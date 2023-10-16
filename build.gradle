@@ -45,7 +45,7 @@ dependencies {
     implementation("org.apache.commons:commons-pool2:2.12.0")
     implementation 'org.dom4j:dom4j:2.1.4'
 
-    testImplementation 'com.github.mwiede:jsch:0.2.4'
+    testImplementation 'com.github.mwiede:jsch:0.2.11'
     testImplementation 'com.hierynomus:sshj:0.32.0'
 
     implementation("javax.servlet:servlet-api:2.5")
