@@ -51,7 +51,7 @@ class House4 {
   public static void main(String[] args) {
     System.out.println("\n----\n" + new House4(Order.ordererFor("")).line(12));
     System.out.println("\n--:random--\n" + new House4(Order.ordererFor("randomized")).line(12));
-    System.out.println("\n--:mostly_random--\n" + new House4(Order.ordererFor("mostly_randomized")).line(12));
+    System.out.println(
+        "\n--:mostly_random--\n" + new House4(Order.ordererFor("mostly_randomized")).line(12));
   }
-
 }

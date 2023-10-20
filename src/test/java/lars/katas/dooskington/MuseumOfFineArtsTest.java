@@ -2,13 +2,8 @@ package lars.katas.dooskington;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import lars.katas.dooskington.MuseumOfFineArts.Museum;
 import lars.katas.dooskington.MuseumOfFineArts.Painting;
-import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
 class MuseumOfFineArtsTest {
@@ -55,7 +50,8 @@ class MuseumOfFineArtsTest {
   }
 
   @Test
-  public void UniquePaintingWithNonTrendingArtMarketAndPopularRarity_FinalPaintingValue_IsCorrect() {
+  public void
+      UniquePaintingWithNonTrendingArtMarketAndPopularRarity_FinalPaintingValue_IsCorrect() {
     Museum m = new Museum();
     m.IsArtCurrentlyTrending = false;
     m.CurrentlyPopularRarity = "unique";

@@ -25,8 +25,9 @@ public class EarthQuakeParser {
     try {
       DocumentBuilder builder = factory.newDocumentBuilder();
 
-      //Document document = builder.parse(new File(source));
-      //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom");
+      // Document document = builder.parse(new File(source));
+      // Document document =
+      // builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom");
       Document document = null;
 
       if (source.startsWith("http")) {
@@ -34,7 +35,8 @@ public class EarthQuakeParser {
       } else {
         document = builder.parse(new File(source));
       }
-      //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom");
+      // Document document =
+      // builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom");
 
       NodeList nodeList = document.getDocumentElement().getChildNodes();
 
@@ -54,7 +56,7 @@ public class EarthQuakeParser {
 
           if (t1 != null) {
             String s2 = t1.item(0).getChildNodes().item(0).getNodeValue();
-            //System.out.print("point2: "+s2);
+            // System.out.print("point2: "+s2);
             String[] args = s2.split(" ");
             lat = Double.parseDouble(args[0]);
             lon = Double.parseDouble(args[1]);
@@ -68,7 +70,7 @@ public class EarthQuakeParser {
               System.err.println("unknown magnitude in data");
             } else {
               mag = Double.parseDouble(mags);
-              //System.out.println("mag= "+mag);
+              // System.out.println("mag= "+mag);
             }
             int sp = s2.indexOf(" ", 5);
             title = s2.substring(sp + 1);
@@ -84,7 +86,6 @@ public class EarthQuakeParser {
           QuakeEntry loc = new QuakeEntry(lat, lon, mag, title, depth);
           list.add(loc);
         }
-
       }
       return list;
     } catch (ParserConfigurationException pce) {
@@ -100,8 +101,8 @@ public class EarthQuakeParser {
   public static void main(String[] args)
       throws ParserConfigurationException, SAXException, IOException {
     EarthQuakeParser xp = new EarthQuakeParser();
-    //String source = "data/2.5_week.atom";
-    //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+    // String source = "data/2.5_week.atom";
+    // String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
     String source = "data/nov20quakedata.atom";
     ArrayList<QuakeEntry> list = xp.read(source);
     Collections.sort(list);
@@ -109,7 +110,5 @@ public class EarthQuakeParser {
       System.out.println(loc);
     }
     System.out.println("# quakes = " + list.size());
-
   }
-
 }

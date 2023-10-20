@@ -1,12 +1,11 @@
 package lars.spielplatz.java12;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+import org.junit.jupiter.api.Test;
 
 class CompactNumberFormatting {
 

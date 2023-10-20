@@ -28,8 +28,8 @@ public class SshJSftpOperations implements SftpOperations {
     }
   }
 
-  public static SshJSftpOperations with(String user, String password, String localhost,
-      Integer port) {
+  public static SshJSftpOperations with(
+      String user, String password, String localhost, Integer port) {
     return new SshJSftpOperations(user, password, localhost, port);
   }
 

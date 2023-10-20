@@ -1,9 +1,8 @@
 package lars.spielplatz.hazel;
 
-import java.util.List;
-
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import java.util.List;
 
 public class ListSample {
   public static void main(String[] args) {

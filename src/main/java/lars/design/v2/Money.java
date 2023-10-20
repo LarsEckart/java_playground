@@ -25,7 +25,6 @@ class Money {
 
   @Override
   public String toString() {
-    return "Money{" +
-        amount.setScale(2, RoundingMode.CEILING) + " " + currency.asString() + "}";
+    return "Money{" + amount.setScale(2, RoundingMode.CEILING) + " " + currency.asString() + "}";
   }
 }

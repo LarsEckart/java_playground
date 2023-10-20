@@ -19,7 +19,6 @@ class CsvFileAnalysis {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   private static Person lineToPerson(String line) {
@@ -29,7 +28,5 @@ class CsvFileAnalysis {
     return new Person(name, age);
   }
 
-  record Person(String name, int age) {
-
-  }
+  record Person(String name, int age) {}
 }

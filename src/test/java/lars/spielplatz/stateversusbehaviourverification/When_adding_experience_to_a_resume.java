@@ -1,11 +1,9 @@
 package lars.spielplatz.stateversusbehaviourverification;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
-import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class When_adding_experience_to_a_resume {
 

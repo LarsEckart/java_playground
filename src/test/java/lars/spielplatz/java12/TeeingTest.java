@@ -1,12 +1,11 @@
 package lars.spielplatz.java12;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class TeeingTest {
 

@@ -26,10 +26,8 @@ public final class Money {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == this)
-      return true;
-    if (obj == null || obj.getClass() != this.getClass())
-      return false;
+    if (obj == this) return true;
+    if (obj == null || obj.getClass() != this.getClass()) return false;
     var that = (Money) obj;
     return this.pence == that.pence;
   }
@@ -41,8 +39,6 @@ public final class Money {
 
   @Override
   public String toString() {
-    return "Money{" +
-        "pence=" + pence +
-        '}';
+    return "Money{" + "pence=" + pence + '}';
   }
 }

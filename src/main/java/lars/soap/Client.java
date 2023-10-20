@@ -21,10 +21,11 @@ class Client {
     String wsURL = "http://dwws.herokuapp.com/application/soap/hello";
     URL url = new URL(wsURL);
     URLConnection connection = url.openConnection();
-    HttpURLConnection httpConn = (HttpURLConnection)connection;
+    HttpURLConnection httpConn = (HttpURLConnection) connection;
     byte[] b;
     try (ByteArrayOutputStream bout = new ByteArrayOutputStream()) {
-      String xmlInput = """
+      String xmlInput =
+          """
           <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dwws="http://dwws/">
              <soapenv:Header/>
              <soapenv:Body>
@@ -39,7 +40,7 @@ class Client {
     }
     httpConn.setRequestProperty("Content-Length", String.valueOf(b.length));
     httpConn.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
-    //httpConn.setRequestProperty("SOAPAction", SOAPAction);
+    // httpConn.setRequestProperty("SOAPAction", SOAPAction);
     httpConn.setRequestMethod("POST");
     httpConn.setDoOutput(true);
     httpConn.setDoInput(true);
@@ -57,4 +58,3 @@ class Client {
     System.out.println(outputString);
   }
 }
-

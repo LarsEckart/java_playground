@@ -1,8 +1,8 @@
 package lars.advent2017;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
 
 public class SequenceSumCalculator_Should {
 

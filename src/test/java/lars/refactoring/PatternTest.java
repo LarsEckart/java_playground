@@ -22,7 +22,7 @@ class PatternTest {
 
   @Test
   void approvals() {
-    String[] input = new String[]{null, "", "plain text", "<>", "this is <b>important</b>"};
+    String[] input = new String[] {null, "", "plain text", "<>", "this is <b>important</b>"};
     Approvals.verifyAll("Stripping html tags", input, a -> testFormatText(a));
   }
 

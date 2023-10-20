@@ -26,7 +26,8 @@ public class JsonBodyHandler<T> implements HttpResponse.BodyHandler<T> {
 
   @Override
   public HttpResponse.BodySubscriber<T> apply(HttpResponse.ResponseInfo responseInfo) {
-    return BodySubscribers.mapping(BodySubscribers.ofByteArray(),
+    return BodySubscribers.mapping(
+        BodySubscribers.ofByteArray(),
         byteArray -> {
           try {
             return this.objectMapper.readValue(new ByteArrayInputStream(byteArray), this.type);
@@ -36,4 +37,3 @@ public class JsonBodyHandler<T> implements HttpResponse.BodyHandler<T> {
         });
   }
 }
-

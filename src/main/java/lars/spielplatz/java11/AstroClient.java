@@ -25,8 +25,8 @@ public class AstroClient {
   }
 
   public AstroResponse getSync(String url) throws IOException, InterruptedException {
-    HttpResponse<AstroResponse> response = client.send(request(url),
-        JsonBodyHandler.jsonBodyHandler(AstroResponse.class));
+    HttpResponse<AstroResponse> response =
+        client.send(request(url), JsonBodyHandler.jsonBodyHandler(AstroResponse.class));
     return response.body();
   }
 

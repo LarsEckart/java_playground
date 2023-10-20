@@ -16,9 +16,18 @@ class Delivery {
   private int packageCount;
   private boolean fragile;
 
-  public Delivery(String addressLine1, String addressLine2, String city, String province,
-      String postalCode, String recipientName, String phoneNumber, String deliveryInstructions,
-      double weight, int packageCount, boolean fragile) {
+  public Delivery(
+      String addressLine1,
+      String addressLine2,
+      String city,
+      String province,
+      String postalCode,
+      String recipientName,
+      String phoneNumber,
+      String deliveryInstructions,
+      double weight,
+      int packageCount,
+      boolean fragile) {
     this.addressLine1 = addressLine1;
     this.addressLine2 = addressLine2;
     this.city = city;
@@ -63,25 +72,48 @@ class Delivery {
   public Delivery redirect(
       String addressLine1, String addressLine2, String city, String province, String postalCode) {
     return new Delivery(
-        addressLine1, addressLine2, city, province, postalCode, recipientName,
-        phoneNumber, deliveryInstructions, weight, packageCount, fragile);
+        addressLine1,
+        addressLine2,
+        city,
+        province,
+        postalCode,
+        recipientName,
+        phoneNumber,
+        deliveryInstructions,
+        weight,
+        packageCount,
+        fragile);
   }
 
   @Override
   public boolean equals(Object o) {
-    return o instanceof Delivery that &&  Double.compare(that.weight, weight) == 0
-        && packageCount == that.packageCount && fragile == that.fragile
-        && Objects.equals(addressLine1, that.addressLine1) && Objects.equals(
-        addressLine2, that.addressLine2) && Objects.equals(city, that.city)
-        && Objects.equals(province, that.province) && Objects.equals(
-        postalCode, that.postalCode) && Objects.equals(recipientName,
-        that.recipientName) && Objects.equals(phoneNumber, that.phoneNumber)
+    return o instanceof Delivery that
+        && Double.compare(that.weight, weight) == 0
+        && packageCount == that.packageCount
+        && fragile == that.fragile
+        && Objects.equals(addressLine1, that.addressLine1)
+        && Objects.equals(addressLine2, that.addressLine2)
+        && Objects.equals(city, that.city)
+        && Objects.equals(province, that.province)
+        && Objects.equals(postalCode, that.postalCode)
+        && Objects.equals(recipientName, that.recipientName)
+        && Objects.equals(phoneNumber, that.phoneNumber)
         && Objects.equals(deliveryInstructions, that.deliveryInstructions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressLine1, addressLine2, city, province, postalCode, recipientName,
-        phoneNumber, deliveryInstructions, weight, packageCount, fragile);
+    return Objects.hash(
+        addressLine1,
+        addressLine2,
+        city,
+        province,
+        postalCode,
+        recipientName,
+        phoneNumber,
+        deliveryInstructions,
+        weight,
+        packageCount,
+        fragile);
   }
 }

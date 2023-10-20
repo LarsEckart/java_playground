@@ -1,5 +1,9 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,13 +22,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class H_Challenges {
 
@@ -67,6 +66,7 @@ public class H_Challenges {
     assertTrue(result.contains("scorpion:10"));
     assertTrue(result.contains("millipede:750"));
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // There are several ways to approach this. You could use a stream of map keys,
@@ -117,6 +117,7 @@ public class H_Challenges {
     assertEquals(new HashSet<>(Arrays.asList("d", "e", "f")), result.get(4));
     assertEquals(4, result.size());
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // A general approach is to flatten the input structure in one stage
@@ -147,6 +148,7 @@ public class H_Challenges {
 
     assertEquals(Arrays.asList("charlie", "foxtrot"), result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // There are several ways to solve this exercise, but one approach is to
@@ -168,6 +170,7 @@ public class H_Challenges {
 
     assertEquals("[aaaaa, bb, cccc, d, eeeeee, aaa, fff]", result.toString());
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // One possibility is a two-pass approach: one pass to gather data about
@@ -195,6 +198,7 @@ public class H_Challenges {
             .collect(Collectors.toList()),
         new ArrayList<>(result));
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // ArrayDeque supports fast insertion at the front.
@@ -216,6 +220,7 @@ public class H_Challenges {
   OptionalInt majority(int[] array) {
     return null; // TODO
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // A two-pass approach may be called for here: a counting pass
@@ -246,6 +251,7 @@ public class H_Challenges {
   Supplier<Shoe> makeShoeSupplier(IntFunction<Shoe> ifunc, int size) {
     return null; // TODO
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // You don't want to return the result of calling the IntFunction.
@@ -311,6 +317,7 @@ public class H_Challenges {
                     Collection.class)),
         result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // The beginning of this challenge begins with the same kind of pattern

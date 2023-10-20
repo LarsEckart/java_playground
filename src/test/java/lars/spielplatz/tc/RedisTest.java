@@ -27,9 +27,9 @@ public class RedisTest {
   private static final Logger log = getLogger(RedisTest.class);
 
   @Container
-  private GenericContainer<?> redis = new GenericContainer<>(
-      DockerImageName.parse("redis:6.2.7-alpine"))
-      .withExposedPorts(6379);
+  private GenericContainer<?> redis =
+      new GenericContainer<>(DockerImageName.parse("redis:6.2.7-alpine")).withExposedPorts(6379);
+
   private RedisCommands<String, String> syncCommands;
   private RedisCommands<String, String> otherSyncCommands;
   private RedisClient redisClient;
@@ -38,8 +38,8 @@ public class RedisTest {
 
   @BeforeEach
   void setUp() {
-    redisClient = RedisClient.create(
-        "redis://" + redis.getHost() + ":" + redis.getMappedPort(6379));
+    redisClient =
+        RedisClient.create("redis://" + redis.getHost() + ":" + redis.getMappedPort(6379));
     connection = redisClient.connect();
     otherConnection = redisClient.connect();
     syncCommands = connection.sync();
@@ -130,14 +130,16 @@ public class RedisTest {
     var currentBalance = Integer.parseInt(syncCommands.get("balance"));
     currentBalance += 5;
 
-    Runnable r = () -> {
-      var currentBalance2 = Integer.parseInt(otherSyncCommands.get("balance"));
-      String otherResult = otherSyncCommands.set("balance", String.valueOf(currentBalance2 + 1));
-      log.info("other result " + otherResult);
-      log.info("other thread called set");
-      var currentBalance3 = Integer.parseInt(otherSyncCommands.get("balance"));
-      log.info("other thread balance: " + currentBalance3);
-    };
+    Runnable r =
+        () -> {
+          var currentBalance2 = Integer.parseInt(otherSyncCommands.get("balance"));
+          String otherResult =
+              otherSyncCommands.set("balance", String.valueOf(currentBalance2 + 1));
+          log.info("other result " + otherResult);
+          log.info("other thread called set");
+          var currentBalance3 = Integer.parseInt(otherSyncCommands.get("balance"));
+          log.info("other thread balance: " + currentBalance3);
+        };
     Thread thread = new Thread(r);
     thread.start();
 

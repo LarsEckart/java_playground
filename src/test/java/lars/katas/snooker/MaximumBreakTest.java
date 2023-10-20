@@ -24,15 +24,10 @@ class MaximumBreakTest {
     alice.pots("blue");
     alice.pots("pink");
 
-    var result = subject.record(
-        ShotBuilder
-            .forPlayer("Alice")
-            .hits("black")
-            .pots("black")
-            .shot());
+    var result = subject.record(ShotBuilder.forPlayer("Alice").hits("black").pots("black").shot());
 
-    assertThat(result).isEqualTo(
-        new Turn("Alice", false, (8 * times) + 2 + 3 + 4 + 5 + 6 + 7, "Alice"));
+    assertThat(result)
+        .isEqualTo(new Turn("Alice", false, (8 * times) + 2 + 3 + 4 + 5 + 6 + 7, "Alice"));
 
     assertThat(subject.getTotalScore("Alice")).isEqualTo((8 * times) + 2 + 3 + 4 + 5 + 6 + 7);
   }

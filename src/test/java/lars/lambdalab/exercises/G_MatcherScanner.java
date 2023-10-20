@@ -1,18 +1,17 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * JDK 9 added several new streams-producing APIs in the java.util.regex.Matcher and
@@ -38,6 +37,7 @@ public class G_MatcherScanner {
 
     assertEquals(Set.of("Feed'st", "mak'st"), result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the Matcher.results() method, then convert each MatchResult into a String.
@@ -55,6 +55,7 @@ public class G_MatcherScanner {
 
     assertEquals(Set.of("Feed'st", "mak'st"), result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the Scanner.findAll() method, then convert each MatchResult into a String.
@@ -75,6 +76,7 @@ public class G_MatcherScanner {
     assertTrue(result.contains("b[EAU]ty's"));
     assertEquals(614, result.length());
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the Matcher.replaceAll() method.
@@ -96,6 +98,7 @@ public class G_MatcherScanner {
 
     assertEquals("contracted", result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the Scanner.tokens() method.

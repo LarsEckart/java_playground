@@ -1,13 +1,11 @@
 package lars.refactoring.xmljson;
 
+import java.net.URL;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 
-import java.net.URL;
-
-public class XMLDocumentReader
-{
+public class XMLDocumentReader {
 
   private final SAXReader reader;
 
@@ -15,8 +13,7 @@ public class XMLDocumentReader
     this.reader = new SAXReader();
   }
 
-  public Document fromURL(URL url)
-  {
+  public Document fromURL(URL url) {
     Document document = null;
 
     try {

@@ -36,7 +36,7 @@ class PseudoThingyClient {
     Gizmo g = new Gizmo();
     g.doTheThing(
         thingyId); // here also rewrite to new ThingyId(thingyId).intValue() and extract parameter
-                   // then
+    // then
   }
 }
 

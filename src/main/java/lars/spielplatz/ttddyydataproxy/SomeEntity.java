@@ -14,8 +14,7 @@ public class SomeEntity {
     setCreatedDate(new Date());
   }
 
-  @Id
-  private Integer id;
+  @Id private Integer id;
 
   private Date createdDate;
 

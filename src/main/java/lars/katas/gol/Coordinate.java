@@ -1,3 +1,3 @@
 package lars.katas.gol;
 
-record Coordinate(int x,int y){}
+record Coordinate(int x, int y) {}

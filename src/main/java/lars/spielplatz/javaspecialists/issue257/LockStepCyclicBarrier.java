@@ -1,10 +1,10 @@
 package lars.spielplatz.javaspecialists.issue257;
 
+import static java.util.concurrent.Executors.newFixedThreadPool;
+
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
-
-import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class LockStepCyclicBarrier extends LockStepExample {
 

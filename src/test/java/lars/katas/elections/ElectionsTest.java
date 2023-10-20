@@ -10,11 +10,11 @@ class ElectionsTest {
 
   @Test
   void electionWithoutDistricts() {
-    Map<String, List<String>> list = Map.of(
-        "District 1", Arrays.asList("Bob", "Anna", "Jess", "July"),
-        "District 2", Arrays.asList("Jerry", "Simon"),
-        "District 3", Arrays.asList("Johnny", "Matt", "Carole")
-    );
+    Map<String, List<String>> list =
+        Map.of(
+            "District 1", Arrays.asList("Bob", "Anna", "Jess", "July"),
+            "District 2", Arrays.asList("Jerry", "Simon"),
+            "District 3", Arrays.asList("Johnny", "Matt", "Carole"));
     Elections elections = new Elections(list, false);
     elections.addCandidate("Michel");
     elections.addCandidate("Jerry");
@@ -31,23 +31,24 @@ class ElectionsTest {
 
     Map<String, String> results = elections.results();
 
-    Map<String, String> expectedResults = Map.of(
-        "Jerry", "50,00%",
-        "Johnny", "50,00%",
-        "Michel", "0,00%",
-        "Blank", "25,00%",
-        "Null", "25,00%",
-        "Abstention", "11,11%");
+    Map<String, String> expectedResults =
+        Map.of(
+            "Jerry", "50,00%",
+            "Johnny", "50,00%",
+            "Michel", "0,00%",
+            "Blank", "25,00%",
+            "Null", "25,00%",
+            "Abstention", "11,11%");
     Assertions.assertThat(results).isEqualTo(expectedResults);
   }
 
   @Test
   void electionWithDistricts() {
-    Map<String, List<String>> list = Map.of(
-        "District 1", Arrays.asList("Bob", "Anna", "Jess", "July"),
-        "District 2", Arrays.asList("Jerry", "Simon"),
-        "District 3", Arrays.asList("Johnny", "Matt", "Carole")
-    );
+    Map<String, List<String>> list =
+        Map.of(
+            "District 1", Arrays.asList("Bob", "Anna", "Jess", "July"),
+            "District 2", Arrays.asList("Jerry", "Simon"),
+            "District 3", Arrays.asList("Johnny", "Matt", "Carole"));
     Elections elections = new Elections(list, true);
     elections.addCandidate("Michel");
     elections.addCandidate("Jerry");
@@ -65,13 +66,14 @@ class ElectionsTest {
 
     Map<String, String> results = elections.results();
 
-    Map<String, String> expectedResults = Map.of(
-        "Jerry", "66,67%",
-        "Johnny", "33,33%",
-        "Michel", "0,00%",
-        "Blank", "22,22%",
-        "Null", "22,22%",
-        "Abstention", "0,00%");
+    Map<String, String> expectedResults =
+        Map.of(
+            "Jerry", "66,67%",
+            "Johnny", "33,33%",
+            "Michel", "0,00%",
+            "Blank", "22,22%",
+            "Null", "22,22%",
+            "Abstention", "0,00%");
     Assertions.assertThat(results).isEqualTo(expectedResults);
   }
 }

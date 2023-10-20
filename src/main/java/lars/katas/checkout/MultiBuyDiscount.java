@@ -38,9 +38,9 @@ public final class MultiBuyDiscount {
       return false;
     }
     var that = (MultiBuyDiscount) obj;
-    return Objects.equals(this.item, that.item) &&
-        Objects.equals(this.discount, that.discount) &&
-        this.count == that.count;
+    return Objects.equals(this.item, that.item)
+        && Objects.equals(this.discount, that.discount)
+        && this.count == that.count;
   }
 
   @Override
@@ -50,10 +50,15 @@ public final class MultiBuyDiscount {
 
   @Override
   public String toString() {
-    return "MultiBuyDiscount[" +
-        "item=" + item + ", " +
-        "discount=" + discount + ", " +
-        "count=" + count + ']';
+    return "MultiBuyDiscount["
+        + "item="
+        + item
+        + ", "
+        + "discount="
+        + discount
+        + ", "
+        + "count="
+        + count
+        + ']';
   }
-
 }

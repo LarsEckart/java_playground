@@ -1,5 +1,8 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -13,14 +16,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * This set of exercises covers more advanced stream operations longer stream pipelines, and simple
@@ -39,6 +38,7 @@ public class E_IntermediateStreams {
     assertEquals("[a, l, f, a, b, r, a, v, o, c, h, a, r, l, i, e]", result.toString());
     assertTrue(result.stream().allMatch(x -> x instanceof Character));
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use String.chars() and Stream.flatMap().
@@ -172,6 +172,7 @@ public class E_IntermediateStreams {
             "thee"),
         output);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.flatMap().
@@ -200,6 +201,7 @@ public class E_IntermediateStreams {
             "substantial"),
         output);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.sorted().
@@ -229,6 +231,7 @@ public class E_IntermediateStreams {
             "abundance"),
         result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Comparator.reverseOrder().
@@ -330,6 +333,7 @@ public class E_IntermediateStreams {
             "substantial"),
         result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.distinct().
@@ -350,6 +354,7 @@ public class E_IntermediateStreams {
 
     assertEquals(new BigInteger("51090942171709440000"), result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use one of the range methods of LongStream to help create
@@ -373,6 +378,7 @@ public class E_IntermediateStreams {
 
     assertEquals("thee", result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.reduce() and think about the order of the arguments.
@@ -390,6 +396,7 @@ public class E_IntermediateStreams {
         List.of(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class),
         result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // There is a getSuperClass() method on the Class class.
@@ -419,6 +426,7 @@ public class E_IntermediateStreams {
 
     assertEquals(53, count);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Java 9 added the dropWhile() method on the stream interface.

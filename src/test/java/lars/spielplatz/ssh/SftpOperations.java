@@ -5,11 +5,13 @@ import java.util.List;
 
 public interface SftpOperations extends AutoCloseable {
 
-  public static SftpOperations withJsch(String user, String password, String localhost, Integer port) {
+  public static SftpOperations withJsch(
+      String user, String password, String localhost, Integer port) {
     return JSchSftpOperations.with(user, password, localhost, port);
   }
 
-  public static SftpOperations withSshJ(String user, String password, String localhost, Integer port) {
+  public static SftpOperations withSshJ(
+      String user, String password, String localhost, Integer port) {
     return SshJSftpOperations.with(user, password, localhost, port);
   }
 

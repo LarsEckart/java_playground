@@ -1,5 +1,8 @@
 package lars.spielplatz.java11;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,9 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HttpClientExamples {
 
@@ -191,10 +191,14 @@ public class HttpClientExamples {
   public void handling_failure() throws Exception {
     mockWebServer.enqueue(new MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START));
 
-    var request = HttpRequest.newBuilder().uri(URI.create(mockWebServerUrl())).timeout(
-        Duration.ofSeconds(2)).build();
+    var request =
+        HttpRequest.newBuilder()
+            .uri(URI.create(mockWebServerUrl()))
+            .timeout(Duration.ofSeconds(2))
+            .build();
 
-    assertThrows(java.net.http.HttpTimeoutException.class,
+    assertThrows(
+        java.net.http.HttpTimeoutException.class,
         () -> client.send(request, HttpResponse.BodyHandlers.ofString()));
   }
 }

@@ -1,5 +1,8 @@
 package lars.spielplatz.readfile;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,9 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
-
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
 
 /** from https://stuartmarks.wordpress.com/2019/01/11/processing-large-files-in-java/ */
 public class ReadFileJavaApplicationBufferedReader {

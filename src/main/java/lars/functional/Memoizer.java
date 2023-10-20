@@ -9,9 +9,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.function.Function;
 
-/**
- * Memoizer from Java Concurrency in Practise
- */
+/** Memoizer from Java Concurrency in Practise */
 public class Memoizer<A, R> implements Function<A, R> {
 
   private final ConcurrentMap<A, Future<R>> cache = new ConcurrentHashMap<>();

@@ -1,42 +1,37 @@
 package lars.refactoring.xmljson;
 
+import java.net.URL;
+import java.util.*;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import java.net.URL;
-import java.util.*;
-
 /**
- * fk--folder key,dk--doc key -->value is key string
- * dt--doc type,ft--folder type -->both have 19 key options:
- * bom tr amend history help info loeid cust cust0-cust9 custhist
- * folder type only seen as "history" in toc,why ??do we use other ones? -- it only has one child
- * doc type only seen two "tr" and "history" in toc??-- it only has one child
- * node with "folder type="history"" is the only child of it parent either "<doc type="tr" key="xxx" trnum="xxx"....." or "<doc type="tr"  trnum="xxx""
- * <folder type="history"  could has more then one doc children .e.g. title="History of AMM31-32-00-720-807" in 700/amm
+ * fk--folder key,dk--doc key -->value is key string dt--doc type,ft--folder type -->both have 19
+ * key options: bom tr amend history help info loeid cust cust0-cust9 custhist folder type only seen
+ * as "history" in toc,why ??do we use other ones? -- it only has one child doc type only seen two
+ * "tr" and "history" in toc??-- it only has one child node with "folder type="history"" is the only
+ * child of it parent either "<doc type="tr" key="xxx" trnum="xxx"....." or "<doc type="tr"
+ * trnum="xxx"" <folder type="history" could has more then one doc children .e.g. title="History of
+ * AMM31-32-00-720-807" in 700/amm
+ *
  * <p>
+ *
  * <p>
+ *
+ * <p>folder element has the follwing to identify itself: 1, key 2, type="history", in this case,
+ * folder is the only child of doc element with type ="tr"?????
+ *
+ * <p>doc element has the following to identify itself 1, key 2, type="tr" trnum="xxxxx" 3,
+ * type="history", in this case, doc isthe only child of a folder element???
+ *
  * <p>
- * folder element has the follwing to identify itself:
- * 1, key
- * 2, type="history",  in this case, folder is the only child of doc element with type ="tr"?????
+ *
  * <p>
- * doc element has the following to identify itself
- * 1, key
- * 2, type="tr" trnum="xxxxx"
- * 3, type="history", in this case, doc isthe only child of a folder element???
- * <p>
- * <p>
- * <p>
- * the return json format likes following:
- * [
- * { "data" : "A node", "children" , "state" : "open" },
- * { "data" : "Only child", "state" : "closed" },
- * "Ajax node"
- * ]
+ *
+ * <p>the return json format likes following: [ { "data" : "A node", "children" , "state" : "open"
+ * }, { "data" : "Only child", "state" : "closed" }, "Ajax node" ]
  */
-
 public class XMLToJson {
   private static final Map<String, String> PATH_MAP;
   private static final String START_ATTRIBUTE_WITH_ID = "'attr':{'id':'";
@@ -82,41 +77,61 @@ public class XMLToJson {
     String fileAttrContent = element.attributeValue("file");
 
     if ("doc".equals(elementName)) {
-      jsonStringElement = jsonStringElement.concat("{").concat("'data':'").concat(titleAttrContent).concat("',");
+      jsonStringElement =
+          jsonStringElement.concat("{").concat("'data':'").concat(titleAttrContent).concat("',");
 
       if (attributeList.stream().anyMatch(attribute -> "key".equals(attribute.getName()))) {
         String keyContent = extractKeyContentFromElement(element);
-        jsonStringElement = jsonStringElement.concat(START_ATTRIBUTE_WITH_ID)
-            .concat(xPathString).concat("_dk:")
-            .concat(keyContent)
-            .concat("','file':'").concat(fileAttrContent).concat("'}");
+        jsonStringElement =
+            jsonStringElement
+                .concat(START_ATTRIBUTE_WITH_ID)
+                .concat(xPathString)
+                .concat("_dk:")
+                .concat(keyContent)
+                .concat("','file':'")
+                .concat(fileAttrContent)
+                .concat("'}");
       }
       if (attributeList.stream().anyMatch(attribute -> "trnum".equals(attribute.getName()))) {
         String trnumContent = element.attributeValue("trnum");
-        jsonStringElement = jsonStringElement.concat(START_ATTRIBUTE_WITH_ID)
-            .concat(xPathString).concat("_dtrn:")
-            .concat(trnumContent)
-            .concat("','file':'").concat(fileAttrContent).concat("'}");
+        jsonStringElement =
+            jsonStringElement
+                .concat(START_ATTRIBUTE_WITH_ID)
+                .concat(xPathString)
+                .concat("_dtrn:")
+                .concat(trnumContent)
+                .concat("','file':'")
+                .concat(fileAttrContent)
+                .concat("'}");
       }
 
       jsonStringElement = addClosedStateIfNoChildren(jsonStringElement, element);
       jsonStringElement = jsonStringElement.concat("},");
     }
     if ("folder".equals(elementName)) {
-      jsonStringElement = jsonStringElement.concat("{").concat("'data':'").concat(titleAttrContent).concat("',");
+      jsonStringElement =
+          jsonStringElement.concat("{").concat("'data':'").concat(titleAttrContent).concat("',");
 
       if (attributeList.stream().anyMatch(attribute -> "key".equals(attribute.getName()))) {
         String keyContent = extractKeyContentFromElement(element);
-        jsonStringElement = jsonStringElement.concat(START_ATTRIBUTE_WITH_ID).concat(xPathString).concat("_fk:").concat(keyContent).concat("'}");
+        jsonStringElement =
+            jsonStringElement
+                .concat(START_ATTRIBUTE_WITH_ID)
+                .concat(xPathString)
+                .concat("_fk:")
+                .concat(keyContent)
+                .concat("'}");
         if (fileAttrContent != null) {
-          jsonStringElement = jsonStringElement.concat("','file':'").concat(fileAttrContent).concat("'}");
+          jsonStringElement =
+              jsonStringElement.concat("','file':'").concat(fileAttrContent).concat("'}");
         }
       }
 
       if (attributeList.stream().anyMatch(attribute -> "type".equals(attribute.getName()))) {
         String typeContent = element.attributeValue("type");
         if (typeContent == "history") {
-          jsonStringElement = jsonStringElement.concat(START_ATTRIBUTE_WITH_ID).concat(xPathString).concat("_fth,");
+          jsonStringElement =
+              jsonStringElement.concat(START_ATTRIBUTE_WITH_ID).concat(xPathString).concat("_fth,");
         }
       }
       jsonStringElement = jsonStringElement.concat("},");
@@ -181,7 +196,8 @@ public class XMLToJson {
    *
    *
    */
-  public String convertAdHocXPathStringToStandardXPathExpresssion(String shortXPath) throws Exception {
+  public String convertAdHocXPathStringToStandardXPathExpresssion(String shortXPath)
+      throws Exception {
     String tagetString;
     if (shortXPath.equals("")) {
       tagetString = "//toc";
@@ -194,9 +210,9 @@ public class XMLToJson {
     String valueString;
     while (shortXPath.indexOf("_", newStart) > -1) {
       int keyValueSepPos;
-      String keyString;//not necessary key, might be type attribute
+      String keyString; // not necessary key, might be type attribute
       segString = shortXPath.substring(newStart, shortXPath.indexOf("_", newStart));
-      newStart = shortXPath.indexOf("_", newStart) + 1;//new start search point
+      newStart = shortXPath.indexOf("_", newStart) + 1; // new start search point
       if (segString.indexOf(":") > 0) {
         keyValueSepPos = segString.indexOf(":");
         keyString = segString.substring(0, keyValueSepPos);
@@ -209,7 +225,7 @@ public class XMLToJson {
         tagetString = tagetString.concat("='").concat(valueString).concat("']/");
       }
     }
-    //this is for scenerio either no "_" or sub string after "_"
+    // this is for scenerio either no "_" or sub string after "_"
     segString = shortXPath.substring(newStart);
     System.out.println(segString);
     if (segString.indexOf(":") > 0) {
@@ -224,6 +240,5 @@ public class XMLToJson {
       tagetString = tagetString.concat("='").concat(lastValueString).concat("']");
     }
     return tagetString;
-
   }
 }

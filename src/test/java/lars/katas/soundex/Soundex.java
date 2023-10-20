@@ -67,8 +67,7 @@ class Soundex {
 
   private String encodeLetter(String result, char letter, char lastLetter) {
     String digit = encodedDigit(letter);
-    if (!digit.equals(NOT_A_DIGIT) &&
-        (!digit.equals(lastDigit(result)) || isVowel(lastLetter))) {
+    if (!digit.equals(NOT_A_DIGIT) && (!digit.equals(lastDigit(result)) || isVowel(lastLetter))) {
       result += digit;
     }
     return result;

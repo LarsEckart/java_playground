@@ -1,5 +1,6 @@
 package lars.spielplatz.hazel;
 
+import com.hazelcast.cache.ICache;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
@@ -7,8 +8,6 @@ import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.AccessedExpiryPolicy;
 import javax.cache.expiry.Duration;
 import javax.cache.expiry.ExpiryPolicy;
-
-import com.hazelcast.cache.ICache;
 
 public class JCacheSample {
 

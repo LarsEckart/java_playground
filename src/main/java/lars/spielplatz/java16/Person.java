@@ -9,15 +9,16 @@ record Person(String name, int age) {
     }
     instanceCounter++;
   }
+
   private static int instanceCounter;
+
   static int getInstanceCounter() {
     return instanceCounter;
   }
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Person p)
-        && name.equalsIgnoreCase(p.name) && age == p.age;
+    return (o instanceof Person p) && name.equalsIgnoreCase(p.name) && age == p.age;
   }
 
   @Override

@@ -1,13 +1,13 @@
 package lars.katas;
 
+import static java.util.function.Predicate.not;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
-
-import static java.util.function.Predicate.not;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class QueryParserTest {
 

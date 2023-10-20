@@ -1,14 +1,13 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Comparator;
 import java.util.function.IntBinaryOperator;
-
 import lars.lambdalab.model.Person;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Exercises to create comparators using lambda expressions and using the Comparator combinators.
@@ -36,6 +35,7 @@ public class B_Comparators {
     assertTrue(compareByLength.compare("ONE", "SEVEN") < 0);
     assertTrue(compareByLength.compare("ONE", "TWO") == 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the static factory methods of the Comparator interface. Remember
@@ -58,6 +58,7 @@ public class B_Comparators {
     assertTrue(compareByLengthThenAlphabetical.compare("FOUR", "FIVE") > 0);
     assertTrue(compareByLengthThenAlphabetical.compare("EIGHT", "EIGHT") == 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the previous comparator and check the default methods of the
@@ -76,6 +77,7 @@ public class B_Comparators {
     assertTrue(comparebyLastName.compare(paul, paul) == 0);
     assertTrue(comparebyLastName.compare(michael, jermaine) == 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the static factory methods of the Comparator interface. Remember
@@ -96,6 +98,7 @@ public class B_Comparators {
     assertTrue(comparebyLastNameThenFirstName.compare(paul, paul) == 0);
     assertTrue(comparebyLastNameThenFirstName.compare(michael, jermaine) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the previous comparator and check the default methods of the Comparator interface.
@@ -116,6 +119,7 @@ public class B_Comparators {
     assertTrue(comparebyLastNameThenFirstNameReversed.compare(paul, paul) == 0);
     assertFalse(comparebyLastNameThenFirstNameReversed.compare(michael, jermaine) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the previous comparator and check the default methods of the Comparator interface.
@@ -137,6 +141,7 @@ public class B_Comparators {
     assertTrue(comparebyLastNameThenFirstNameWithNull.compare(mick, null) < 0);
     assertTrue(comparebyLastNameThenFirstNameWithNull.compare(null, mick) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use the previous comparator and check the static methods of the Comparator interface.
@@ -155,6 +160,7 @@ public class B_Comparators {
     assertTrue(comparebyAge.compare(paul, paul) == 0);
     assertTrue(comparebyAge.compare(mick, jermaine) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Look for static methods on the Comparator interface that
@@ -178,6 +184,7 @@ public class B_Comparators {
     assertTrue(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE) < 0);
     assertTrue(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use a ternary operator (cond ? result1 : result2) instead of subtraction.
@@ -198,6 +205,7 @@ public class B_Comparators {
     assertTrue(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE) < 0);
     assertTrue(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE) > 0);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use a method reference to a static method on the Integer class.

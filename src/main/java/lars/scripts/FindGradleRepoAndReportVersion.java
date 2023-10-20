@@ -2,14 +2,13 @@ package lars.scripts;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import org.slf4j.Logger;
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
 
 public class FindGradleRepoAndReportVersion {
 
@@ -33,7 +32,6 @@ public class FindGradleRepoAndReportVersion {
       System.out.println(gradleProject + " : " + version);
 
       // TODO: but what if behind origin/master?
-
 
       try {
         Process updateGradleWrapperProcess =

@@ -1,10 +1,9 @@
 package lars.spielplatz.java12;
 
-import java.time.DayOfWeek;
-
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.DayOfWeek;
+import org.junit.jupiter.api.Test;
 
 class SwitchPreview {
 
@@ -15,11 +14,12 @@ class SwitchPreview {
   }
 
   String whatIsToday(DayOfWeek day) {
-    var today = switch (day) {
-      case SATURDAY, SUNDAY -> "Weekend";
-      case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "work day";
-      default -> "N/A";
-    };
+    var today =
+        switch (day) {
+          case SATURDAY, SUNDAY -> "Weekend";
+          case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "work day";
+          default -> "N/A";
+        };
     return today;
   }
 
@@ -29,5 +29,4 @@ class SwitchPreview {
       case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "work day";
     };
   }
-
 }

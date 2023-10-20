@@ -1,8 +1,8 @@
 package lars.spielplatz.java8;
 
-import java.util.function.Supplier;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.function.Supplier;
 
 public final class Lazy<T> {
 

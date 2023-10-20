@@ -5,5 +5,4 @@ class Address {
   private String zip;
 
   private String town;
-
 }

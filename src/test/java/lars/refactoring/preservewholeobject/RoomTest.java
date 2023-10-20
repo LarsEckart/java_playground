@@ -1,9 +1,9 @@
 package lars.refactoring.preservewholeobject;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoomTest {
 
@@ -17,8 +17,7 @@ public class RoomTest {
     assertThat(room.isWithinPlan(heatingPlan)).isTrue();
   }
 
-  @NotNull
-  private Room aRoomWithNextMeasuredTemperature(int i) {
+  @NotNull private Room aRoomWithNextMeasuredTemperature(int i) {
     return new Room(new TemperatureRange(8, 8), () -> i);
   }
 

@@ -11,7 +11,7 @@ public class HelpfulNullPointer {
     System.out.println(person.hobbies.contains("programming"));
   }
 
-  static class Person{
+  static class Person {
     String name;
     List<String> hobbies;
   }

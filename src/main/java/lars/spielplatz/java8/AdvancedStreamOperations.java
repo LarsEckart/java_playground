@@ -27,8 +27,7 @@ public class AdvancedStreamOperations {
     ForkJoinPool commonPool = ForkJoinPool.commonPool();
     System.out.println(commonPool.getParallelism());
 
-    List.of("a1", "a2", "b1", "c2", "c1")
-        .parallelStream()
+    List.of("a1", "a2", "b1", "c2", "c1").parallelStream()
         .filter(
             s -> {
               System.out.format("filter: %s [%s]\n", s, Thread.currentThread().getName());

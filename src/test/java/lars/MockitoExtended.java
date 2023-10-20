@@ -1,9 +1,9 @@
 package lars;
 
-import java.util.function.Function;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.util.function.Function;
 
 public class MockitoExtended {
 

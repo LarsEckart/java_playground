@@ -1,9 +1,9 @@
 package lars.katas;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /*
 Write the first failing test. Then write a factory that returns an object, or an aggregate of objects, that make the test pass.

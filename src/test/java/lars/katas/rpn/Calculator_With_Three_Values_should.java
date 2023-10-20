@@ -34,7 +34,6 @@ public class Calculator_With_Three_Values_should {
     assertThat(calculator.getAccumulator()).isEqualTo(value2);
   }
 
-
   @Test
   void have_the_second_to_last_value_after_two_drops() {
     calculator.drop();
@@ -49,5 +48,4 @@ public class Calculator_With_Three_Values_should {
     calculator.drop();
     assertThat(calculator.getAccumulator()).isEqualTo(BigDecimal.ZERO);
   }
-
 }

@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.AbstractAction;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -57,75 +56,80 @@ public class UI {
     tottext = new JTextField("0", 5);
 
     GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-    hGroup.addGroup(layout.createParallelGroup()
-        .addComponent(poclabel)
-        .addComponent(poslabel)
-        .addComponent(totlabel));
-    hGroup.addGroup(layout.createParallelGroup()
-        .addComponent(poctext)
-        .addComponent(postext)
-        .addComponent(tottext));
-    hGroup.addGroup(layout.createParallelGroup()
-        .addComponent(explabel));
-    hGroup.addGroup(layout.createParallelGroup()
-        .addComponent(exptext));
-    hGroup.addGroup(layout.createParallelGroup()
-        .addComponent(addCheese)
-        .addComponent(addScrewdriver));
+    hGroup.addGroup(
+        layout
+            .createParallelGroup()
+            .addComponent(poclabel)
+            .addComponent(poslabel)
+            .addComponent(totlabel));
+    hGroup.addGroup(
+        layout
+            .createParallelGroup()
+            .addComponent(poctext)
+            .addComponent(postext)
+            .addComponent(tottext));
+    hGroup.addGroup(layout.createParallelGroup().addComponent(explabel));
+    hGroup.addGroup(layout.createParallelGroup().addComponent(exptext));
+    hGroup.addGroup(
+        layout.createParallelGroup().addComponent(addCheese).addComponent(addScrewdriver));
     layout.setHorizontalGroup(hGroup);
 
     GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-    vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        .addComponent(poclabel)
-        .addComponent(poctext)
-        .addComponent(explabel)
-        .addComponent(exptext)
-        .addComponent(addCheese));
-    vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        .addComponent(poslabel)
-        .addComponent(postext)
-        .addComponent(addScrewdriver));
-    vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        .addComponent(totlabel)
-        .addComponent(tottext));
+    vGroup.addGroup(
+        layout
+            .createParallelGroup(Alignment.BASELINE)
+            .addComponent(poclabel)
+            .addComponent(poctext)
+            .addComponent(explabel)
+            .addComponent(exptext)
+            .addComponent(addCheese));
+    vGroup.addGroup(
+        layout
+            .createParallelGroup(Alignment.BASELINE)
+            .addComponent(poslabel)
+            .addComponent(postext)
+            .addComponent(addScrewdriver));
+    vGroup.addGroup(
+        layout
+            .createParallelGroup(Alignment.BASELINE)
+            .addComponent(totlabel)
+            .addComponent(tottext));
     layout.setVerticalGroup(vGroup);
 
     frame.add(form);
     frame.setSize(600, 300);
   }
 
-  private class ShoppingCart
-  {
+  private class ShoppingCart {
     private UI _form1;
     private List<Product> _products = new ArrayList<Product>();
 
-    public ShoppingCart(UI form1)
-    {
+    public ShoppingCart(UI form1) {
       _form1 = form1;
-      _form1.addCheese.setAction(new AbstractAction("Add") {
-        public void actionPerformed(ActionEvent e) {
-          AddCheeseAndDisplay(e);
-        }
-      });
-      _form1.addScrewdriver.setAction(new AbstractAction("Add") {
-        public void actionPerformed(ActionEvent e) {
-          AddScrewDriverAndUpdate(e);
-        }
-      });
+      _form1.addCheese.setAction(
+          new AbstractAction("Add") {
+            public void actionPerformed(ActionEvent e) {
+              AddCheeseAndDisplay(e);
+            }
+          });
+      _form1.addScrewdriver.setAction(
+          new AbstractAction("Add") {
+            public void actionPerformed(ActionEvent e) {
+              AddScrewDriverAndUpdate(e);
+            }
+          });
     }
 
-    private void AddScrewDriverAndUpdate(ActionEvent e)
-    {
+    private void AddScrewDriverAndUpdate(ActionEvent e) {
       _products.add(new Screwdriver(Integer.parseInt(_form1.postext.getText())));
       int total = 0;
-      for (int i = 0; i < _products.size(); i++)
-        total += _products.get(i).price();
+      for (int i = 0; i < _products.size(); i++) total += _products.get(i).price();
       _form1.tottext.setText("" + total);
     }
 
-    private void AddCheeseAndDisplay(ActionEvent e)
-    {
-      _products.add(new Cheese(Integer.parseInt(_form1.poctext.getText()), _form1.exptext.getText()));
+    private void AddCheeseAndDisplay(ActionEvent e) {
+      _products.add(
+          new Cheese(Integer.parseInt(_form1.poctext.getText()), _form1.exptext.getText()));
       int tot = 0;
       Iterator<Product> iter = _products.iterator();
       while (iter.hasNext()) {
@@ -135,12 +139,10 @@ public class UI {
     }
   }
 
-  class Screwdriver implements Product
-  {
+  class Screwdriver implements Product {
     private int _price;
 
-    public Screwdriver(int parse)
-    {
+    public Screwdriver(int parse) {
       _price = parse;
     }
 
@@ -150,12 +152,10 @@ public class UI {
     }
   }
 
-  class Cheese implements Product
-  {
+  class Cheese implements Product {
     private int _price;
 
-    public Cheese(int p, String text)
-    {
+    public Cheese(int p, String text) {
       _price = p;
     }
 
@@ -165,9 +165,7 @@ public class UI {
     }
   }
 
-  interface Product
-  {
+  interface Product {
     int price();
   }
-
 }

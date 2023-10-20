@@ -16,13 +16,12 @@ class CurrencyConverter {
     String accessKey = System.getenv("fixer_api_access_key");
 
     String url =
-        "http://data.fixer.io/api/latest?access_key=%s&base=%s&symbols=%s".formatted(
-            accessKey,
-            money.getCurrency().asString(),
-            to.asString());
+        "http://data.fixer.io/api/latest?access_key=%s&base=%s&symbols=%s"
+            .formatted(accessKey, money.getCurrency().asString(), to.asString());
 
     HttpRequest request = HttpRequest.newBuilder(URI.create(url)).GET().build();
-    HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+    HttpResponse<InputStream> response =
+        httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
 
     JsonNode json = new ObjectMapper().readTree(response.body());
 

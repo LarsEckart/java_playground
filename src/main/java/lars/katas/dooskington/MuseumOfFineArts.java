@@ -36,7 +36,6 @@ public class MuseumOfFineArts {
     Map<String, Pair<String, Double>> transactionLog;
   }
 
-
   static class Museum {
 
     public List<Painting> Paintings = new ArrayList<>();
@@ -71,12 +70,13 @@ public class MuseumOfFineArts {
     }
 
     public void DisplayPaintingValues() {
-      Paintings.forEach(p ->
-      {
-        double value = FinalPaintingValue(p);
-        System.out.printf("%s (%s) is worth %s zorknids and has transfered hands %s times%n",
-            p.name, p.rarity, value, p.transactionLog.size());
-      });
+      Paintings.forEach(
+          p -> {
+            double value = FinalPaintingValue(p);
+            System.out.printf(
+                "%s (%s) is worth %s zorknids and has transfered hands %s times%n",
+                p.name, p.rarity, value, p.transactionLog.size());
+          });
     }
 
     public long GetCountOfAnonymousPaintings() {
@@ -93,19 +93,18 @@ public class MuseumOfFineArts {
       abstractPainting.name = "Bold and Brash";
       abstractPainting.artist = "Squidward";
       abstractPainting.value = 100.0;
-      abstractPainting.transactionLog = Map.of(
-          "08/15/1997", Tuples.pair("sold to Bob Binley", 1000.0),
-          "08/18/1997", Tuples.pair("sold to Larry Schmelton", 2500.0),
-          "02/05/2004", Tuples.pair("sold to museum", 100.0));
+      abstractPainting.transactionLog =
+          Map.of(
+              "08/15/1997", Tuples.pair("sold to Bob Binley", 1000.0),
+              "08/18/1997", Tuples.pair("sold to Larry Schmelton", 2500.0),
+              "02/05/2004", Tuples.pair("sold to museum", 100.0));
       museum.Paintings.add(abstractPainting);
 
       Painting lostPainting = new Painting();
-      lostPainting.name =
-          "The Eating of The Cheeseburger";
+      lostPainting.name = "The Eating of The Cheeseburger";
       lostPainting.value = 275000.0;
       lostPainting.rarity = "rare";
-      lostPainting.transactionLog =
-          Map.of("06/02/2006", Tuples.pair("sold to museum", 100000.0));
+      lostPainting.transactionLog = Map.of("06/02/2006", Tuples.pair("sold to museum", 100000.0));
 
       museum.Paintings.add(lostPainting);
 
@@ -114,9 +113,10 @@ public class MuseumOfFineArts {
       anotherPainting.artist = "Edward Bopper";
       anotherPainting.value = 500000.0;
       anotherPainting.rarity = "very_rare";
-      anotherPainting.transactionLog = Map.of(
-          "08/15/1994", Tuples.pair("sold to Jenny Downloadface", 50000.0),
-          "02/05/2010", Tuples.pair("sold to museum", 150000.0));
+      anotherPainting.transactionLog =
+          Map.of(
+              "08/15/1994", Tuples.pair("sold to Jenny Downloadface", 50000.0),
+              "02/05/2010", Tuples.pair("sold to museum", 150000.0));
 
       museum.Paintings.add(anotherPainting);
 
@@ -129,8 +129,7 @@ public class MuseumOfFineArts {
       museum.DisplayPaintingValues();
 
       long anonymousCount = museum.GetCountOfAnonymousPaintings();
-      System.out.printf("There are %s anonymous paintings in the museum",
-          anonymousCount);
+      System.out.printf("There are %s anonymous paintings in the museum", anonymousCount);
     }
   }
 }

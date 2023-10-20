@@ -1,10 +1,9 @@
 package lars.refactoring.extractvalueobject;
 
-import java.time.LocalDate;
-
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
 
 class EventTest {
 

@@ -1,5 +1,8 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,12 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /** This set of exercises covers new default methods on the Collections and related APIs. */
 public class C_DefaultMethods {
@@ -34,6 +33,7 @@ public class C_DefaultMethods {
         List.of("alfanew", "bravonew", "charlienew"),
         sbList.stream().map(StringBuilder::toString).collect(Collectors.toList()));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Iterable.forEach().
@@ -50,6 +50,7 @@ public class C_DefaultMethods {
 
     assertEquals(List.of("alfa", "echo"), list);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Collection.removeIf().
@@ -65,6 +66,7 @@ public class C_DefaultMethods {
 
     assertEquals(List.of("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT"), list);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use List.replaceAll().
@@ -91,6 +93,7 @@ public class C_DefaultMethods {
     assertEquals("bravo2", map.get(2).toString());
     assertEquals("charlie3", map.get(3).toString());
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Map.forEach().
@@ -117,6 +120,7 @@ public class C_DefaultMethods {
             3, "charlie3"),
         map);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Map.replaceAll().
@@ -160,6 +164,7 @@ public class C_DefaultMethods {
             List.of("chimpanzee")),
         result);
   }
+
   // <editor-fold defaultstate="collapsed">
   // Use Map.computeIfAbsent() within Iterable.forEach().
   // </editor-fold>
@@ -194,6 +199,7 @@ public class C_DefaultMethods {
             'c', "capybara:chimpanzee:capuchin"),
         result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Map.merge() within Iterable.forEach().
@@ -230,6 +236,7 @@ public class C_DefaultMethods {
             "g", ""),
         map);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the Map.putIfAbsent() default method.
@@ -265,6 +272,7 @@ public class C_DefaultMethods {
             "d", "delta"),
         map);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the two-arg Map.remove() default method.
@@ -303,6 +311,7 @@ public class C_DefaultMethods {
             "g", "g"),
         map);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the Map.replace() default method that takes 3 arguments.
@@ -338,6 +347,7 @@ public class C_DefaultMethods {
             "g", "g"),
         map);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Check the Map.compute() default method, and read the Javadoc carefully

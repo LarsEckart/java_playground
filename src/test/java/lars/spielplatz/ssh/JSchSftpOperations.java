@@ -33,7 +33,8 @@ public class JSchSftpOperations implements SftpOperations {
     }
   }
 
-  public static JSchSftpOperations with(String user, String password, String localhost, Integer port) {
+  public static JSchSftpOperations with(
+      String user, String password, String localhost, Integer port) {
     return new JSchSftpOperations(user, password, localhost, port);
   }
 

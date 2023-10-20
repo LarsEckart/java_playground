@@ -1,6 +1,8 @@
 package lars.spielplatz.javaspecialists.issue224;
 
-/** @author Maurice Naftalin, from Mastering Lambdas */
+/**
+ * @author Maurice Naftalin, from Mastering Lambdas
+ */
 public class Hello {
 
   Runnable r1 =

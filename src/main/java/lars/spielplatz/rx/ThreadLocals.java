@@ -1,9 +1,8 @@
 package lars.spielplatz.rx;
 
+import io.reactivex.rxjava3.core.Flowable;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-
-import io.reactivex.rxjava3.core.Flowable;
 import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
 

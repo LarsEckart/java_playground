@@ -24,11 +24,12 @@ class House3 {
   private List<String> pieces;
 
   public House3(String order) {
-    pieces = switch (order) {
-      case "randomized" -> new Random().order(DATA);
-      case "mostly_randomized" -> new MostlyRandom().order(DATA);
-      default -> new Default().order(DATA);
-    };
+    pieces =
+        switch (order) {
+          case "randomized" -> new Random().order(DATA);
+          case "mostly_randomized" -> new MostlyRandom().order(DATA);
+          default -> new Default().order(DATA);
+        };
   }
 
   private List<String> getPieces() {

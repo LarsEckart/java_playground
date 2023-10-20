@@ -30,14 +30,14 @@ class ExampleConditionalsTest {
 
   @Test
   void test_split() {
-    assertThat(split(3,4)).isEqualTo(7);
-    assertThat(split(3,5)).isEqualTo(0);
+    assertThat(split(3, 4)).isEqualTo(7);
+    assertThat(split(3, 5)).isEqualTo(0);
   }
 
   @Test
   void test_join() {
-    assertThat(join(3,4)).isEqualTo(7);
-    assertThat(join(3,5)).isEqualTo(0);
+    assertThat(join(3, 4)).isEqualTo(7);
+    assertThat(join(3, 5)).isEqualTo(0);
   }
 
   @Test

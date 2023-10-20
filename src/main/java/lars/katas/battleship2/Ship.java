@@ -1,2 +1,3 @@
-package lars.katas.battleship2;public class Ship {
-}
+package lars.katas.battleship2;
+
+public class Ship {}

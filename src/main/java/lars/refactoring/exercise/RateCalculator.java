@@ -46,27 +46,28 @@ public class RateCalculator {
         }
         break; // consumer
       case Customer.BUSINESS:
-      case Customer.INDUSTRIAL: {
-        for (Iterator iter = c.sites.iterator(); iter.hasNext(); ) {
-          Site s = (Site) iter.next();
-          rate += calculateSlidingScale(s.kwh);
-        }
-        if (c.customerType == Customer.INDUSTRIAL) {
-          switch (c.industrialRate) {
-            case Customer.INTERRUPTABLE:
-              rate *= .8;
-              break;
-            case Customer.ONE_HOUR_NOTICE:
-              rate *= .9;
-              break;
-            default:
-              rate *= .95;
-              break;
+      case Customer.INDUSTRIAL:
+        {
+          for (Iterator iter = c.sites.iterator(); iter.hasNext(); ) {
+            Site s = (Site) iter.next();
+            rate += calculateSlidingScale(s.kwh);
+          }
+          if (c.customerType == Customer.INDUSTRIAL) {
+            switch (c.industrialRate) {
+              case Customer.INTERRUPTABLE:
+                rate *= .8;
+                break;
+              case Customer.ONE_HOUR_NOTICE:
+                rate *= .9;
+                break;
+              default:
+                rate *= .95;
+                break;
+            }
           }
         }
-      }
-      // industrial rate
-      break; // business + industrial
+        // industrial rate
+        break; // business + industrial
     } // customer.type
     return rate;
   }

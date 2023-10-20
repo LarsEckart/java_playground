@@ -16,10 +16,8 @@ class FixerApiTreeModel implements ExchangeRates {
   public ExchangeRate exchangeRateFor(Currency from, Currency to) {
     try {
       var url =
-          "http://data.fixer.io/api/latest?access_key=%s&base=%s&symbols=%s".formatted(
-              accessKey,
-              from.asString(),
-              to.asString());
+          "http://data.fixer.io/api/latest?access_key=%s&base=%s&symbols=%s"
+              .formatted(accessKey, from.asString(), to.asString());
       var request = HttpRequest.newBuilder(URI.create(url)).GET().build();
       var response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
       var json = new ObjectMapper().readTree(response.body());
@@ -37,5 +35,4 @@ class FixerApiTreeModel implements ExchangeRates {
       super(e);
     }
   }
-
 }

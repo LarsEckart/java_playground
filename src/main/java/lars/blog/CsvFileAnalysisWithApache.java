@@ -27,9 +27,7 @@ class CsvFileAnalysisWithApache {
     return new Person(name, age);
   }
 
-  record Person(String name, int age) {
-
-  }
+  record Person(String name, int age) {}
 
   private static File csvFile() {
     Path workingDir = Path.of("src/main/resources");

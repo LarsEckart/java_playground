@@ -1,2 +1,3 @@
-package lars;public class UserInput {
-}
+package lars;
+
+public class UserInput {}

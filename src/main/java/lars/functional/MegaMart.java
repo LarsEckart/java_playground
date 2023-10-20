@@ -20,15 +20,9 @@ public class MegaMart {
     setCartTotalDom();
   }
 
-  private void updateShippingIcons() {
-    
-  }
+  private void updateShippingIcons() {}
 
-
-  private void setCartTotalDom() {
-
-  }
+  private void setCartTotalDom() {}
 
   private static record Item(String name, int price) {}
 }
-

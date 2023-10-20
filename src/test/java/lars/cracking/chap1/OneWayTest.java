@@ -1,10 +1,10 @@
 package lars.cracking.chap1;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class OneWayTest {
 

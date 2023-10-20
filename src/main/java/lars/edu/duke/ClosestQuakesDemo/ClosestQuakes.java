@@ -1,17 +1,17 @@
 package lars.edu.duke.ClosestQuakesDemo;
+
 /**
  * Find N-closest quakes
  *
  * @author Duke Software/Learn to Program
  * @version 1.0, November 2015
  */
-
 import java.util.ArrayList;
 
 public class ClosestQuakes {
 
-  public ArrayList<QuakeEntry> getClosest(ArrayList<QuakeEntry> quakeData, Location current,
-      int howMany) {
+  public ArrayList<QuakeEntry> getClosest(
+      ArrayList<QuakeEntry> quakeData, Location current, int howMany) {
     ArrayList<QuakeEntry> copy = new ArrayList<QuakeEntry>(quakeData);
     ArrayList<QuakeEntry> ret = new ArrayList<QuakeEntry>();
     for (int j = 0; j < howMany; j++) {
@@ -19,8 +19,7 @@ public class ClosestQuakes {
       for (int k = 1; k < copy.size(); k++) {
         QuakeEntry quake = copy.get(k);
         Location loc = quake.getLocation();
-        if (loc.distanceTo(current) <
-            copy.get(minIndex).getLocation().distanceTo(current)) {
+        if (loc.distanceTo(current) < copy.get(minIndex).getLocation().distanceTo(current)) {
           minIndex = k;
         }
       }
@@ -33,7 +32,7 @@ public class ClosestQuakes {
 
   public void findClosestQuakes() {
     EarthQuakeParser parser = new EarthQuakeParser();
-    //String source = "data/nov20quakedata.atom";
+    // String source = "data/nov20quakedata.atom";
     String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
     ArrayList<QuakeEntry> list = parser.read(source);
     System.out.println("read data for " + list.size());

@@ -27,7 +27,6 @@ class MultiLineStringTest {
         () -> assertThat(text).isEqualTo(text3),
         () -> assertThat(text).isEqualTo(text4),
         () -> assertThat(text2).isEqualTo(text4),
-        () -> assertThat(text3).isEqualTo(text4)
-    );
+        () -> assertThat(text3).isEqualTo(text4));
   }
 }

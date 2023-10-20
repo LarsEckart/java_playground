@@ -5,11 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 public class ListTest {
@@ -31,14 +29,14 @@ public class ListTest {
   void List_of_returns_unmodifiable_list() {
     List<Integer> list = List.of(1, 2, 3);
 
-    assertThatExceptionOfType(UnsupportedOperationException.class)
-        .isThrownBy(() -> list.add(4));
+    assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> list.add(4));
   }
 
   @Test
   void collectors_toList_returns_modifiable_ArrayList() {
     // There are no guarantees on the type, mutability, serializability, or thread-safety of the
-    // List returned; if more control over the returned List is required, use toCollection(Supplier).
+    // List returned; if more control over the returned List is required, use
+    // toCollection(Supplier).
     // currently on java 17 we get back an ArrayList
     List<Integer> list = Stream.of(1, 2, 3).collect(Collectors.toList());
 
@@ -57,8 +55,7 @@ public class ListTest {
     // visible are referred to as immutable.
     List<Integer> list = Stream.of(1, 2, 3).toList();
 
-    assertThatExceptionOfType(UnsupportedOperationException.class)
-        .isThrownBy(() -> list.add(4));
+    assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> list.add(4));
   }
 
   @Test

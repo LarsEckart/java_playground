@@ -14,7 +14,6 @@ public class SnookerTest {
 
   SnookerScorer subject;
 
-
   @BeforeEach
   void setUp() {
     subject = new SnookerScorer("Alice", "Bob");
@@ -25,45 +24,25 @@ public class SnookerTest {
 
     @Test
     void scores_1_point_they_pot_a_red() {
-      var result = subject.record(ShotBuilder
-          .forPlayer("Alice")
-          .hits("red")
-          .pots("red")
-          .shot());
+      var result = subject.record(ShotBuilder.forPlayer("Alice").hits("red").pots("red").shot());
 
       assertThat(result).isEqualTo(new Turn("Alice", false, 1));
     }
 
     @Test
     void scores_no_points_and_passes_to_the_next_player_if_they_hit_a_red_but_donot_pot_it() {
-      var result = subject.record(ShotBuilder
-          .forPlayer("Alice")
-          .hits("red")
-          .shot()
-      );
+      var result = subject.record(ShotBuilder.forPlayer("Alice").hits("red").shot());
 
-      assertThat(result).isEqualTo(new Turn(
-          "Bob",
-          false,
-          0
-      ));
+      assertThat(result).isEqualTo(new Turn("Bob", false, 0));
     }
 
     @Test
     void scores_2_points_if_they_pot_two_red_balls() {
-      var potTwoReds = ShotBuilder
-          .forPlayer("Alice")
-          .hits("red")
-          .pots("red", "red")
-          .shot();
+      var potTwoReds = ShotBuilder.forPlayer("Alice").hits("red").pots("red", "red").shot();
 
       var result = subject.record(potTwoReds);
 
-      assertThat(result).isEqualTo(new Turn(
-          "Alice",
-          false,
-          2
-      ));
+      assertThat(result).isEqualTo(new Turn("Alice", false, 2));
     }
   }
 
@@ -79,21 +58,14 @@ public class SnookerTest {
     void potting_another_red_ball_is_a_foul() {
       var result = subject.record(ShotBuilder.potRed("Alice"));
 
-      assertThat(result).
-          isEqualTo(new Turn(
-              "Bob",
-              true,
-              1));
+      assertThat(result).isEqualTo(new Turn("Bob", true, 1));
     }
 
     @Test
     void missing_a_colour_ends_their_break() {
       var result = subject.record(ShotBuilder.forPlayer("Alice").hits("black").shot());
 
-      assertThat(result).isEqualTo(new Turn(
-          "Bob",
-          false,
-          1));
+      assertThat(result).isEqualTo(new Turn("Bob", false, 1));
     }
 
     @Test
@@ -102,14 +74,8 @@ public class SnookerTest {
 
       var result = subject.record(ShotBuilder.forPlayer("Bob").hits("red").pots("red").shot());
 
-      assertThat(result).
-
-          isEqualTo(new Turn(
-              "Bob",
-              false,
-              1));
+      assertThat(result).isEqualTo(new Turn("Bob", false, 1));
     }
-
 
     static Stream<Arguments> colourScores() {
       return Stream.of(
@@ -118,24 +84,16 @@ public class SnookerTest {
           Arguments.of("brown", 4),
           Arguments.of("blue", 5),
           Arguments.of("pink", 6),
-          Arguments.of("black", 7)
-      );
+          Arguments.of("black", 7));
     }
 
     @ParameterizedTest
     @MethodSource("colourScores")
     void potting_a_colour_is_worth_$_points_for_$_colour(String colour, int points) {
 
-      var result = subject.record(
-          ShotBuilder.forPlayer("Alice")
-              .hits(colour)
-              .pots(colour)
-              .shot());
+      var result = subject.record(ShotBuilder.forPlayer("Alice").hits(colour).pots(colour).shot());
 
-      assertThat(result).isEqualTo(new Turn(
-          "Alice",
-          false,
-          1 + points));
+      assertThat(result).isEqualTo(new Turn("Alice", false, 1 + points));
     }
   }
 

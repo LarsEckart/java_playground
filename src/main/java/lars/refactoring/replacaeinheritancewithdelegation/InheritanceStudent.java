@@ -6,4 +6,3 @@ class InheritanceStudent extends Person {
     super(name);
   }
 }
-

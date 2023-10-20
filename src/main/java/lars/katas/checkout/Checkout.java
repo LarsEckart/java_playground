@@ -7,7 +7,6 @@ public class Checkout {
   private MultiBuyDiscount multiBuyDiscount;
   private Money currentBalance = Money.ZERO;
 
-
   public Checkout(Money priceOfA, Money priceOfB, MultiBuyDiscount multiBuyDiscount) {
     this.priceOfA = priceOfA;
     this.priceOfB = priceOfB;

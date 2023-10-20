@@ -1,14 +1,13 @@
 package lars.design.v3;
 
-import java.math.BigDecimal;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(ReplaceUnderscores.class)
 class MoneyTest {

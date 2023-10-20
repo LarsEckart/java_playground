@@ -23,14 +23,16 @@ class Currency {
     return this.symbol;
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Currency currency = (Currency) o;
     return Objects.equals(symbol, currency.symbol);
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return Objects.hash(symbol);
   }
 }

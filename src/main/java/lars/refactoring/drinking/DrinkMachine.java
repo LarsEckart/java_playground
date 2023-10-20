@@ -121,6 +121,7 @@ class DrinkMachine {
   public static void addIngredient(Ingredient ingredient) {
     ingredientList.add(ingredient);
   }
+
   // Add drinks through addAllDrinks
   public static void addDrink(String name, String[] recipe) {
     drinkList.add(new Drink(name, recipe));

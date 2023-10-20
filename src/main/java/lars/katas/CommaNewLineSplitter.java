@@ -8,7 +8,8 @@ class CommaNewLineSplitter implements Splitter {
     this.splitter = splitter;
   }
 
-  @Override public String[] split(String numbers) {
+  @Override
+  public String[] split(String numbers) {
     String result = numbers.replace("\n", ",");
     return splitter.split(result);
   }

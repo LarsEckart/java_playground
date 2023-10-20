@@ -20,9 +20,9 @@ public class RedisJedisTest {
   private static final Logger log = getLogger(RedisJedisTest.class);
 
   @Container
-  private GenericContainer<?> redis = new GenericContainer<>(
-      DockerImageName.parse("redis:6.2.7-alpine"))
-      .withExposedPorts(6379);
+  private GenericContainer<?> redis =
+      new GenericContainer<>(DockerImageName.parse("redis:6.2.7-alpine")).withExposedPorts(6379);
+
   private Jedis jedis;
 
   @BeforeEach
@@ -33,8 +33,7 @@ public class RedisJedisTest {
   }
 
   @AfterEach
-  void tearDown() {
-  }
+  void tearDown() {}
 
   @Test
   void incr_for_integers() {
@@ -44,5 +43,4 @@ public class RedisJedisTest {
 
     assertThat(jedis.get("balance")).isEqualTo("2");
   }
-
 }

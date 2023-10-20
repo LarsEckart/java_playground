@@ -1,5 +1,3 @@
 package lars.scripts;
 
-record Owner(String login) {
-
-}
+record Owner(String login) {}

@@ -1,12 +1,12 @@
 package lars.spielplatz.javaspecialists.issue224;
 
+import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Spliterator;
 import java.util.function.Consumer;
-
-import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
 
 /**
  * @author Dr Heinz M. Kabutz, Maurice Naftalin, based on the LineSpliterator from the Mastering

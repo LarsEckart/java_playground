@@ -1,9 +1,9 @@
 package lars.spielplatz.javaspecialists.issue257;
 
+import static java.util.concurrent.Executors.newFixedThreadPool;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-
-import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class LockStepCountDownLatch extends LockStepExample {
 

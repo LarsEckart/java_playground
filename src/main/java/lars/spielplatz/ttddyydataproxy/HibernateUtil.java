@@ -1,18 +1,5 @@
 package lars.spielplatz.ttddyydataproxy;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.sql.DataSource;
-
-import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.postgresql.ds.PGSimpleDataSource;
-
 import static org.hibernate.cfg.AvailableSettings.AUTOCOMMIT;
 import static org.hibernate.cfg.Environment.CURRENT_SESSION_CONTEXT_CLASS;
 import static org.hibernate.cfg.Environment.DATASOURCE;
@@ -21,6 +8,18 @@ import static org.hibernate.cfg.Environment.HBM2DDL_AUTO;
 import static org.hibernate.cfg.Environment.ORDER_INSERTS;
 import static org.hibernate.cfg.Environment.ORDER_UPDATES;
 import static org.hibernate.cfg.Environment.STATEMENT_BATCH_SIZE;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
+import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.postgresql.ds.PGSimpleDataSource;
 
 public class HibernateUtil {
 

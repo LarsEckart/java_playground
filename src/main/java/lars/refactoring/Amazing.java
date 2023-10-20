@@ -4,7 +4,7 @@ import java.util.Random;
 
 class Amazing {
 
-  static int target = 0;      // where GOTO goes
+  static int target = 0; // where GOTO goes
   public static Random random = new Random(0);
   static StringBuffer result = new StringBuffer();
 
@@ -686,32 +686,31 @@ class Amazing {
 
     // 1200:
     for (int j = 1; j <= v; j++) {
-      print("I");        // 1210
+      print("I"); // 1210
 
       for (int i = 1; i <= h; i++) {
         if (vArray[i][j] >= 2) {
-          print("   ");  // 1240
+          print("   "); // 1240
         } else {
-          print("  I");  // 1260
+          print("  I"); // 1260
         }
       }
 
-      print(" ");   // 1280
+      print(" "); // 1280
       println();
 
       for (int i = 1; i <= h; i++) {
         if (vArray[i][j] == 0) {
-          print(":--");   // 1300, 1340
+          print(":--"); // 1300, 1340
         } else if (vArray[i][j] == 2) {
-          print(":--");  // 1310, 1340
+          print(":--"); // 1310, 1340
         } else {
           print(":  "); // 1320
         }
       }
 
-      print(":");    // 1360
+      print(":"); // 1360
       println();
     }
   }
 }
-

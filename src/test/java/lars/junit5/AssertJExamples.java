@@ -1,14 +1,13 @@
 package lars.junit5;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AssertJExamples {
 

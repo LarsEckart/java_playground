@@ -42,38 +42,45 @@ public class SFtpUploadWithTestContainersTest {
   private static final String PASSWORD = "password";
   private static final String REMOTE_PATH = "upload";
 
-  @TempDir
-  private static File directory;
+  @TempDir private static File directory;
 
   @Container
-  private static final GenericContainer<?> sftp = new GenericContainer<>(
-      new ImageFromDockerfile()
-          .withDockerfileFromBuilder(builder ->
-              builder
-                  .from("atmoz/sftp:latest")
-                  .run("mkdir -p /home/" + USERNAME + "/upload; chmod -R 007 /home/" + USERNAME)
-                  .build()))
-      .withExposedPorts(22)
-      .withCommand(USERNAME + ":" + PASSWORD + ":1001:::" + REMOTE_PATH);
+  private static final GenericContainer<?> sftp =
+      new GenericContainer<>(
+              new ImageFromDockerfile()
+                  .withDockerfileFromBuilder(
+                      builder ->
+                          builder
+                              .from("atmoz/sftp:latest")
+                              .run(
+                                  "mkdir -p /home/"
+                                      + USERNAME
+                                      + "/upload; chmod -R 007 /home/"
+                                      + USERNAME)
+                              .build()))
+          .withExposedPorts(22)
+          .withCommand(USERNAME + ":" + PASSWORD + ":1001:::" + REMOTE_PATH);
 
   @Test
   void uploadOnlyCsvFiles() throws IOException {
-    var folderWithFiles = createTempFilesOnLocalStorage(
-        "users1.csv", "users2.csv", "users3.csv", "secrets.txt", "config", "users4.csv");
+    var folderWithFiles =
+        createTempFilesOnLocalStorage(
+            "users1.csv", "users2.csv", "users3.csv", "secrets.txt", "config", "users4.csv");
 
     newUploadAllCsvFiles(folderWithFiles);
   }
 
   private static File createTempFilesOnLocalStorage(String... fileNames) {
     var files = Arrays.asList(fileNames);
-    files.forEach(fileName -> {
-      File csvFile = new File(directory.getAbsolutePath() + "/" + fileName);
-      try {
-        csvFile.createNewFile();
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    });
+    files.forEach(
+        fileName -> {
+          File csvFile = new File(directory.getAbsolutePath() + "/" + fileName);
+          try {
+            csvFile.createNewFile();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        });
     return new File(directory.getAbsolutePath());
   }
 
@@ -105,7 +112,7 @@ public class SFtpUploadWithTestContainersTest {
             log.info("Uploading {}", file.getName());
             try (FileInputStream input = new FileInputStream(file)) {
               try {
-                //write to ftp server
+                // write to ftp server
                 channel.put(input, file.getName());
               } catch (SftpException e) {
                 log.error("Failed to upload file {}", file.getName(), e);
@@ -116,8 +123,8 @@ public class SFtpUploadWithTestContainersTest {
       }
 
       Vector<LsEntry> files = channel.ls(path);
-      String collect = files.stream().map(LsEntry::toString).sorted()
-          .collect(Collectors.joining("\n"));
+      String collect =
+          files.stream().map(LsEntry::toString).sorted().collect(Collectors.joining("\n"));
 
       Approvals.verify(collect, new Options(new DateScrubber("[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}")));
 
@@ -134,8 +141,8 @@ public class SFtpUploadWithTestContainersTest {
   }
 
   private void newUploadAllCsvFiles(File directory) {
-    try (SftpOperations ssh = SftpOperations.withJsch(USERNAME, PASSWORD, sftp.getHost(),
-        sftp.getFirstMappedPort())) {
+    try (SftpOperations ssh =
+        SftpOperations.withJsch(USERNAME, PASSWORD, sftp.getHost(), sftp.getFirstMappedPort())) {
       Path path = Path.of("/upload/");
       ssh.changeDirectory(path);
 
@@ -161,4 +168,3 @@ public class SFtpUploadWithTestContainersTest {
         .orElse("");
   }
 }
-

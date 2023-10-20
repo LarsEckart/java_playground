@@ -18,5 +18,4 @@ class PlayerActor {
   void missesRed() {
     this.snookerGame.record(ShotBuilder.forPlayer(this.playerName).hits("red").shot());
   }
-
 }

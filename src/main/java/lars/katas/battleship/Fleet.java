@@ -32,5 +32,4 @@ class Fleet {
   public boolean anyAlive() {
     return this.ships.stream().anyMatch(Ship::isAlive);
   }
-
 }

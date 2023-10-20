@@ -1,13 +1,12 @@
 package lars.spielplatz.sudoku;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class SudokuSolverTest {
 

@@ -8,7 +8,8 @@ class LoadedDie extends Die {
     this.value = value;
   }
 
-  @Override public int faceValue() {
+  @Override
+  public int faceValue() {
     return value;
   }
 }

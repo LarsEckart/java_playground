@@ -38,10 +38,7 @@ public class ShotBuilder {
    * @returns {{hitFirst: string, pottedBalls: *[], player: string}}
    */
   static Shot potColour(String playerName, String colour) {
-    return new ShotBuilder(playerName)
-        .hits(colour)
-        .pots(colour)
-        .shot();
+    return new ShotBuilder(playerName).hits(colour).pots(colour).shot();
   }
 
   /**
@@ -56,8 +53,8 @@ public class ShotBuilder {
 
   /**
    * pots is an ordered array of balls that the player potted
-   * <p>
-   * Calling this method multiple times will add to the balls potted by the player for this shot.
+   *
+   * <p>Calling this method multiple times will add to the balls potted by the player for this shot.
    * You may pass in an array of balls or list of balls as arguments
    *
    * @returns {ShotBuilder}
@@ -76,5 +73,3 @@ public class ShotBuilder {
     return new Shot(this.playerName, this.potted, this.hit);
   }
 }
-
-

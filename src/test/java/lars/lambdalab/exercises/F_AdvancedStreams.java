@@ -1,5 +1,9 @@
 package lars.lambdalab.exercises;
 
+import static java.util.Map.entry;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,15 +19,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static java.util.Map.entry;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 /**
  * This set of exercises covers advanced stream operations, including grouping collectors,
@@ -52,6 +51,7 @@ public class F_AdvancedStreams {
     assertEquals(List.of("substantial"), result.get(11));
     assertFalse(result.containsKey(12));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Use Collectors.groupingBy().
@@ -85,6 +85,7 @@ public class F_AdvancedStreams {
             entry(11, 1L)),
         result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use the overload of Collectors.groupingBy() that has
@@ -116,6 +117,7 @@ public class F_AdvancedStreams {
     assertEquals(3L, (long) result.get("self"));
     assertFalse(result.containsKey("lambda"));
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // For Collectors.groupingBy(), consider that each word needs to be in
@@ -155,6 +157,7 @@ public class F_AdvancedStreams {
         result.get("t").get(3).toString());
     assertEquals("[where, waste, world]", result.get("w").get(5).toString());
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // The nested map structure that's desired is the result of applying a
@@ -180,6 +183,7 @@ public class F_AdvancedStreams {
     assertEquals(516, sumEvens);
     assertEquals(614, sumOdds);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use Collectors.partitioningBy().
@@ -201,8 +205,8 @@ public class F_AdvancedStreams {
   public void f6_insertBeginningAndEnd() {
     Stream<String> input =
         List.of(
-                "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
-                "r", "s", "t")
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
+            "r", "s", "t")
             .parallelStream();
 
     String result = input.collect(null, null, null).toString();
@@ -211,6 +215,7 @@ public class F_AdvancedStreams {
 
     assertEquals("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst", result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // The collector state (that is, the object being accumulated and
@@ -259,6 +264,7 @@ public class F_AdvancedStreams {
       return set.size();
     }
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // The operations you need to write are actually quite simple.
@@ -276,8 +282,7 @@ public class F_AdvancedStreams {
             .collect(Collectors.toList());
 
     TotalAndDistinct totalAndDistinct =
-        Collections.nCopies(100, allWords)
-            .parallelStream()
+        Collections.nCopies(100, allWords).parallelStream()
             .flatMap(List::stream)
             .collect(
                 TotalAndDistinct::new, TotalAndDistinct::accumulate, TotalAndDistinct::combine);

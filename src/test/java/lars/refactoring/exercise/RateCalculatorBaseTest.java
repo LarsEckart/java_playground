@@ -1,9 +1,9 @@
 package lars.refactoring.exercise;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class RateCalculatorBaseTest {
 

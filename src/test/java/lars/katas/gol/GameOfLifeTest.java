@@ -62,7 +62,7 @@ public class GameOfLifeTest {
   @Test
   void newGridPrintsAlsoAliveCells() {
     Grid grid = new Grid(2, 2);
-    grid.placeAlive(0,0);
+    grid.placeAlive(0, 0);
     String result = grid.print();
     assertEquals("*.\n..\n", result);
   }

@@ -1,12 +1,11 @@
 package lars.presentation;
 
+import static java.util.function.Predicate.not;
+
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
-
-import static java.util.function.Predicate.not;
 
 public class Slide_05 {
 

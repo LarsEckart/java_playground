@@ -24,7 +24,7 @@ It's important that no behavior changes as a result of these refactorings!
 */
 public class Fight {
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     System.out.println("Hello, world!");
 
     // gather and display my power level
@@ -33,23 +33,25 @@ public class Fight {
     int happiness = 1000;
     Optional<Integer> power_level = calculation(gear_score, fighting_skill_level, happiness);
     power_level.orElseThrow(() -> new RuntimeException("Failed to calculate"));
-    System.out.println("My power level is "+power_level+"!");
+    System.out.println("My power level is " + power_level + "!");
 
     // ... fight some monsters
 
     // you gained experience points. fighting skill level has changed
-    fighting_skill_level = fighting_skill_level + skill_level_increase_from_exp_points(exp_from_enemy(get_power_of_sun()));
+    fighting_skill_level =
+        fighting_skill_level
+            + skill_level_increase_from_exp_points(exp_from_enemy(get_power_of_sun()));
     power_level = calculation(gear_score, fighting_skill_level, happiness);
     power_level.orElseThrow(() -> new RuntimeException("Failed to calculate"));
-    System.out.println("My new power level is "+power_level+"!");
+    System.out.println("My new power level is " + power_level + "!");
 
     Optional<Integer> enemy_power_level = calculation(5, 10, 1);
     enemy_power_level.orElseThrow(() -> new RuntimeException("Failed to calculate"));
-    System.out.println("The enemy power level is "+enemy_power_level+"!");
+    System.out.println("The enemy power level is " + enemy_power_level + "!");
   }
 
   // get the power of the sun
-  public static int get_power_of_sun(){
+  public static int get_power_of_sun() {
     return 5;
   }
 
@@ -58,21 +60,22 @@ public class Fight {
     return 500 + (sun_power * 3);
   }
 
-  // calculate your total power level, based on your gear score, fighting skill level, your happiness, and the power of the sun and moon
-  public static Optional<Integer> calculation(int gear_score, int fighting_skill_level,
-      int happiness) {
-    if ((gear_score < 0) || (fighting_skill_level < 0) ){
+  // calculate your total power level, based on your gear score, fighting skill level, your
+  // happiness, and the power of the sun and moon
+  public static Optional<Integer> calculation(
+      int gear_score, int fighting_skill_level, int happiness) {
+    if ((gear_score < 0) || (fighting_skill_level < 0)) {
       return Optional.empty();
     }
 
-    if (happiness < 0 ){
+    if (happiness < 0) {
       // being unhappy makes you evil and thus the most powerful of all
       return Optional.of(Integer.MAX_VALUE);
     }
 
     // calculate fighting power based on gear score
     int fighting_power = 0;
-    for (int i = 0; i <= gear_score;i++) {
+    for (int i = 0; i <= gear_score; i++) {
       fighting_power += (fighting_skill_level * 2) + i;
     }
 
@@ -86,7 +89,6 @@ public class Fight {
   }
 
   public static int skill_level_increase_from_exp_points(int exp) {
-    return (int)(exp + Math.floor((exp * exp)  * 0.1));
+    return (int) (exp + Math.floor((exp * exp) * 0.1));
   }
-
 }

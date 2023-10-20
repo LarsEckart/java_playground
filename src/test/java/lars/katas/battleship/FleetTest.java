@@ -19,7 +19,6 @@ class FleetTest {
     assertThat(fleet.anyAlive()).isFalse();
   }
 
-
   @Test
   void alive_when_all_ship_shot() {
     Fleet fleet = new Fleet();

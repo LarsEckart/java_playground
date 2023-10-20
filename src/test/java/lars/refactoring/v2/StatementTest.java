@@ -1,15 +1,14 @@
 package lars.refactoring.v2;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
+import java.util.Map;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.approvaltests.reporters.JunitReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @UseReporter(JunitReporter.class)
 public class StatementTest {

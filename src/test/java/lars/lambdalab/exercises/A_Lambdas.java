@@ -1,5 +1,9 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -7,12 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * This set of exercises is about lambdas and method references. You will write a lambda or method
@@ -55,6 +54,7 @@ public class A_Lambdas {
     assertTrue(pred.test(""));
     assertFalse(pred.test("a"));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Copy the lambda expression from the previous exercise and then pop
@@ -76,6 +76,7 @@ public class A_Lambdas {
     assertFalse(startsWithJAndLengthIs7.test("Java1"));
     assertTrue(startsWithJAndLengthIs7.test("JavaOne"));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // see java.util.function.Predicate.and()
@@ -98,6 +99,7 @@ public class A_Lambdas {
     assertTrue(lengthIs9orError.test("ERROR"));
     assertFalse(lengthIs9orError.test("Error"));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // see java.util.function.Predicate.or()
@@ -143,6 +145,7 @@ public class A_Lambdas {
     assertEquals((Integer) 0, lengthBis.apply(""));
     assertEquals((Integer) 0, lengthBis.apply(null));
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // See java.util.Function.andThen() or java.util.Function.compose()
@@ -193,6 +196,7 @@ public class A_Lambdas {
     consumer.accept(list);
     assertEquals(List.of("a", "b", "c", "first", "second"), list);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // see java.util.function.Consumer.andThen()
@@ -244,6 +248,7 @@ public class A_Lambdas {
     assertEquals(3, bifunc.apply("abcdefghi", "def").intValue());
     assertEquals(-1, bifunc.apply("abcdefghi", "xyz").intValue());
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // The String method
@@ -265,6 +270,7 @@ public class A_Lambdas {
     assertEquals(3, bifunc.apply("abcdefghij", "def").intValue());
     assertEquals(-1, bifunc.apply("abcdefghij", "xyz").intValue());
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Try using the IDE command to convert the lambda from the previous
@@ -307,6 +313,7 @@ public class A_Lambdas {
     assertEquals(4, func.apply("efg").intValue());
     assertEquals(-1, func.apply("xyz").intValue());
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Call the indexOf() method on a string literal.

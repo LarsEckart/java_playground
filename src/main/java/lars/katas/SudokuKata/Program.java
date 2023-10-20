@@ -128,8 +128,7 @@ public class Program {
 
         // Always try to move after expand
         command = "move";
-      }
-      else if (command.equals("collapse")) {
+      } else if (command.equals("collapse")) {
         stateStack.pop();
         rowIndexStack.pop();
         colIndexStack.pop();

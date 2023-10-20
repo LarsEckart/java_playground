@@ -1,9 +1,9 @@
 package lars.katas.gildedrose;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
 

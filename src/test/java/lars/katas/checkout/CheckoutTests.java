@@ -15,8 +15,8 @@ public class CheckoutTests {
   public void basicPrices() {
     Money priceOfA = randomPrice();
     Money priceOfB = randomPrice();
-    Checkout checkout = new Checkout(priceOfA, priceOfB,
-        new MultiBuyDiscount ("", Money.ZERO, Integer.MAX_VALUE));
+    Checkout checkout =
+        new Checkout(priceOfA, priceOfB, new MultiBuyDiscount("", Money.ZERO, Integer.MAX_VALUE));
     checkout.scan("B");
     checkout.scan("A");
     assertThat(checkout.currentBalance()).isEqualTo(priceOfA.add(priceOfB));
@@ -30,8 +30,7 @@ public class CheckoutTests {
     Checkout checkout = new Checkout(priceOfA, Money.ZERO, discount);
     checkout.scan("A");
     checkout.scan("A");
-    assertThat(checkout.currentBalance()).isEqualTo(
-        priceOfA.add(priceOfA).subtract(discountOfA));
+    assertThat(checkout.currentBalance()).isEqualTo(priceOfA.add(priceOfA).subtract(discountOfA));
   }
 
   @Test
@@ -44,8 +43,8 @@ public class CheckoutTests {
     checkout.scan("A");
     checkout.scan("B");
     checkout.scan("A");
-    assertThat(checkout.currentBalance()).isEqualTo(
-        priceOfA.add(priceOfA).add(priceOfB).subtract(discountOfA));
+    assertThat(checkout.currentBalance())
+        .isEqualTo(priceOfA.add(priceOfA).add(priceOfB).subtract(discountOfA));
   }
 
   @Test
@@ -63,5 +62,4 @@ public class CheckoutTests {
   private Money randomPrice() {
     return Money.fromPence(new Random().nextInt(1000));
   }
-
 }

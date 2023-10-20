@@ -7,14 +7,13 @@ public class Breakpoints {
     calcAge(11);
     calcAge(22);
     calcAge(33); // set breakpoint but uncheck "Suspended"
-
   }
 
   static int calcAge(int any) {
     System.out.println("calc");
     System.out.println("calc");
-    System.out.println("calc"); // set breakpoint but check "disable until hitting following breakpoint"
+    System.out.println(
+        "calc"); // set breakpoint but check "disable until hitting following breakpoint"
     return 42;
   }
-
 }

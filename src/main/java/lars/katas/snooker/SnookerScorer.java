@@ -58,11 +58,13 @@ public class SnookerScorer {
 
     var reds = this.pottedReds == 15;
 
-    turn.pottedBalls().forEach(ball -> {
-      if ("red".equals(ball)) {
-        this.pottedReds++;
-      }
-    });
+    turn.pottedBalls()
+        .forEach(
+            ball -> {
+              if ("red".equals(ball)) {
+                this.pottedReds++;
+              }
+            });
 
     if (this.onBlue) {
       if (turn.pottedBalls().contains("white")) {
@@ -71,10 +73,11 @@ public class SnookerScorer {
         } else {
           this.playerTwoScore += 5;
         }
-        return new Turn(!this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true,
-            this.breakScore);
+        return new Turn(
+            !this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true, this.breakScore);
       }
-      if ("blue".equals(turn.hitFirst()) && turn.pottedBalls().size() == 1
+      if ("blue".equals(turn.hitFirst())
+          && turn.pottedBalls().size() == 1
           && "blue".equals(turn.pottedBalls().get(0))) {
         if (this.isPlayerOneTurn) {
           this.playerOneScore += 5;
@@ -85,8 +88,8 @@ public class SnookerScorer {
         }
         this.onBlue = false;
         this.onPink = true;
-        return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false,
-            this.breakScore);
+        return new Turn(
+            this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false, this.breakScore);
       }
     } else {
       if (this.onPink) {
@@ -97,7 +100,9 @@ public class SnookerScorer {
             } else {
               this.playerTwoScore += 7;
             }
-            return new Turn(!this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true,
+            return new Turn(
+                !this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName,
+                true,
                 this.breakScore);
           } else {
             if (!this.isPlayerOneTurn) {
@@ -105,11 +110,14 @@ public class SnookerScorer {
             } else {
               this.playerTwoScore += 6;
             }
-            return new Turn(!this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true,
+            return new Turn(
+                !this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName,
+                true,
                 this.breakScore);
           }
         } else {
-          if (turn.pottedBalls().size() == 1 && "pink".equals(turn.pottedBalls().get(0))
+          if (turn.pottedBalls().size() == 1
+              && "pink".equals(turn.pottedBalls().get(0))
               && "pink".equals(turn.hitFirst())) {
             if (this.isPlayerOneTurn) {
               this.playerOneScore += 6;
@@ -119,8 +127,10 @@ public class SnookerScorer {
               this.breakScore += 6;
             }
             this.oneBall = true;
-            return new Turn(!this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
-                false, this.breakScore);
+            return new Turn(
+                !this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
+                false,
+                this.breakScore);
           }
           if (this.oneBall) {
             if (this.isPlayerOneTurn) {
@@ -130,9 +140,12 @@ public class SnookerScorer {
               this.playerTwoScore += 7;
               this.breakScore += 7;
             }
-            return new Turn(!this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
-                false, this.breakScore,
-                this.playerOneScore > this.playerTwoScore ? this.playerOneName
+            return new Turn(
+                !this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
+                false,
+                this.breakScore,
+                this.playerOneScore > this.playerTwoScore
+                    ? this.playerOneName
                     : this.playerTwoName);
           }
         }
@@ -147,14 +160,17 @@ public class SnookerScorer {
               this.breakScore += 3;
             }
             this.greenCleared = true;
-            return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false,
+            return new Turn(
+                this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName,
+                false,
                 this.breakScore);
           }
         }
       }
     }
 
-    if ("".equals(turn.hitFirst()) || turn.hitFirst() == null
+    if ("".equals(turn.hitFirst())
+        || turn.hitFirst() == null
         || turn.pottedBalls().contains("white")) {
       this.turns = 0;
       this.isPlayerOneTurn = !this.isPlayerOneTurn;
@@ -189,12 +205,13 @@ public class SnookerScorer {
       }
       var breakScore = this.breakScore;
       this.breakScore = 0;
-      return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true,
-          breakScore);
+      return new Turn(
+          this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true, breakScore);
     }
 
     if (this.greenCleared) {
-      if ("brown".equals(turn.hitFirst()) && turn.pottedBalls().size() == 1
+      if ("brown".equals(turn.hitFirst())
+          && turn.pottedBalls().size() == 1
           && "brown".equals(turn.pottedBalls().get(0))) {
         this.onBlue = true;
         if (this.isPlayerOneTurn) {
@@ -204,7 +221,9 @@ public class SnookerScorer {
           this.playerTwoScore += 4;
           this.breakScore += 4;
         }
-        return new Turn(!this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName, false,
+        return new Turn(
+            !this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
+            false,
             this.breakScore);
       }
     }
@@ -251,8 +270,8 @@ public class SnookerScorer {
       this.isPlayerOneTurn = !this.isPlayerOneTurn;
       var breakScore = this.breakScore;
       this.breakScore = 0;
-      return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false,
-          breakScore);
+      return new Turn(
+          this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false, breakScore);
     }
 
     if (this.turns % 2 == 0) {
@@ -307,8 +326,8 @@ public class SnookerScorer {
             }
             this.isPlayerOneTurn = !this.isPlayerOneTurn;
 
-            return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true,
-                0);
+            return new Turn(
+                this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, true, 0);
           }
         }
 
@@ -341,7 +360,9 @@ public class SnookerScorer {
           this.breakScore += 2;
         }
         this.yellowCleared = true;
-        return new Turn(!this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName, false,
+        return new Turn(
+            !this.isPlayerOneTurn ? this.playerTwoName : this.playerOneName,
+            false,
             this.breakScore);
       }
       if (turn.pottedBalls().size() > 1) {
@@ -392,8 +413,8 @@ public class SnookerScorer {
           this.playerTwoScore += turn.pottedBalls().size();
           this.breakScore += turn.pottedBalls().size();
         }
-        return new Turn(this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false,
-            this.breakScore);
+        return new Turn(
+            this.isPlayerOneTurn ? this.playerOneName : this.playerTwoName, false, this.breakScore);
       }
     }
     throw new RuntimeException("can never happen, trust me, I'm Ronnie!");

@@ -1,18 +1,17 @@
 package lars.lambdalab.exercises;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * This set of exercises covers simple stream pipelines, including intermediate operations and basic
@@ -35,6 +34,7 @@ public class D_SimpleStreams {
 
     assertEquals(List.of("BRAVO", "CHARLIE", "DELTA", "FOXTROT"), result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use filter() and map().
@@ -58,6 +58,7 @@ public class D_SimpleStreams {
 
     assertEquals("h,e,c", result);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.skip() and Stream.limit().
@@ -80,6 +81,7 @@ public class D_SimpleStreams {
 
     assertEquals(14, count);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use BufferedReader.lines() to get a stream of lines.
@@ -101,6 +103,7 @@ public class D_SimpleStreams {
 
     assertEquals(53, longestLength);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.mapToInt() to convert a stream of objects to an IntStream.
@@ -127,6 +130,7 @@ public class D_SimpleStreams {
 
     assertEquals("Feed'st thy light's flame with self-substantial fuel,", longest);
   }
+
   // Hint 1:
   // <editor-fold defaultstate="collapsed">
   // Use Stream.max() with a Comparator.
@@ -150,6 +154,7 @@ public class D_SimpleStreams {
 
     assertEquals(List.of("charlie", "foxtrot"), result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Consider making two passes over the input stream.
@@ -169,6 +174,7 @@ public class D_SimpleStreams {
 
     assertEquals(List.of("alfa", "bravo", "charlie", "delta", "foxtrot"), result);
   }
+
   // Hint:
   // <editor-fold defaultstate="collapsed">
   // Instead of a stream of words (Strings), run an IntStream of indexes of
