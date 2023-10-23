@@ -40,10 +40,6 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
           cache: 'gradle'
-      - name: Setup Testcontainers Cloud Client
-        uses: atomicjar/testcontainers-cloud-setup-action@v1
-        with:
-          token: ${{ secrets.TC_CLOUD_TOKEN }}
       - name: Run Gradle's test task
         run: ./gradlew -i --no-daemon --parallel --continue --build-cache --stacktrace test
         env:
