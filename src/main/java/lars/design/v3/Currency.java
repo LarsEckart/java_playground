@@ -25,10 +25,7 @@ class Currency {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Currency currency = (Currency) o;
-    return Objects.equals(symbol, currency.symbol);
+    return (o instanceof Currency c) && symbol.equals(c.symbol);
   }
 
   @Override

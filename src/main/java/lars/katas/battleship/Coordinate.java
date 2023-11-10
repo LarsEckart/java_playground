@@ -23,14 +23,8 @@ class Coordinate {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Coordinate that = (Coordinate) o;
-    return Objects.equals(row, that.row) && Objects.equals(column, that.column);
+    return (o instanceof Coordinate c) && Objects.equals(row, c.row)
+        && Objects.equals(column, c.column);
   }
 
   @Override

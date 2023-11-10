@@ -270,7 +270,7 @@ public class H_Challenges {
     }
 
     public boolean equals(Object other) {
-      return (other instanceof Shoe) && this.size == ((Shoe) other).size;
+      return (other instanceof Shoe s) && this.size == s.size;
     }
   }
 

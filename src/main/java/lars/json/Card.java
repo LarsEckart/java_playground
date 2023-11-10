@@ -12,19 +12,7 @@ public class Card {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    Card card = (Card) o;
-
-    if (this.rank != card.rank) {
-      return false;
-    }
-    return this.suit == card.suit;
+    return (o instanceof Card c) && rank == c.rank && suit == c.suit;
   }
 
   @Override

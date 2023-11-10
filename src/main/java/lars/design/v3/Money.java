@@ -31,10 +31,8 @@ class Money {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Money money = (Money) o;
-    return Objects.equals(currency, money.currency) && amount.compareTo(money.amount) == 0;
+    return (o instanceof Money m) && Objects.equals(currency, m.currency)
+        && amount.compareTo(m.amount) == 0;
   }
 
   @Override

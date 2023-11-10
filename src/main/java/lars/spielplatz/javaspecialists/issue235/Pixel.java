@@ -60,12 +60,7 @@ class Pixel implements Comparable<Pixel> {
   }
 
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Pixel pixel = (Pixel) o;
-
-    return x == pixel.x && y == pixel.y;
+    return (o instanceof Pixel p) && x == p.x && y == p.y;
   }
 
   public int hashCode() {

@@ -25,11 +25,8 @@ public final class Money {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (obj == this) return true;
-    if (obj == null || obj.getClass() != this.getClass()) return false;
-    var that = (Money) obj;
-    return this.pence == that.pence;
+  public boolean equals(Object o) {
+    return (o instanceof Money m) && pence == m.pence;
   }
 
   @Override

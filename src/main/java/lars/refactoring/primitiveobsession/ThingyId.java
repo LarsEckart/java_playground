@@ -13,12 +13,8 @@ public final class ThingyId {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof ThingyId)) {
-      return false;
-    }
-    ThingyId that = (ThingyId) obj;
-    return this.id == that.id;
+  public boolean equals(Object o) {
+    return (o instanceof ThingyId t) && id == t.id;
   }
 
   @Override

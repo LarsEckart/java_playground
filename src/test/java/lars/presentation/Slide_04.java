@@ -93,14 +93,7 @@ public class Slide_04 {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-        return false;
-      }
-      Person person = (Person) o;
-      return Objects.equals(name, person.name);
+      return (o instanceof Person p) && Objects.equals(name, p.name);
     }
 
     @Override

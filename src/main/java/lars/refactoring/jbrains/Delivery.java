@@ -87,18 +87,18 @@ class Delivery {
 
   @Override
   public boolean equals(Object o) {
-    return o instanceof Delivery that
-        && Double.compare(that.weight, weight) == 0
-        && packageCount == that.packageCount
-        && fragile == that.fragile
-        && Objects.equals(addressLine1, that.addressLine1)
-        && Objects.equals(addressLine2, that.addressLine2)
-        && Objects.equals(city, that.city)
-        && Objects.equals(province, that.province)
-        && Objects.equals(postalCode, that.postalCode)
-        && Objects.equals(recipientName, that.recipientName)
-        && Objects.equals(phoneNumber, that.phoneNumber)
-        && Objects.equals(deliveryInstructions, that.deliveryInstructions);
+    return (o instanceof Delivery d)
+        && Double.compare(d.weight, weight) == 0
+        && packageCount == d.packageCount
+        && fragile == d.fragile
+        && Objects.equals(addressLine1, d.addressLine1)
+        && Objects.equals(addressLine2, d.addressLine2)
+        && Objects.equals(city, d.city)
+        && Objects.equals(province, d.province)
+        && Objects.equals(postalCode, d.postalCode)
+        && Objects.equals(recipientName, d.recipientName)
+        && Objects.equals(phoneNumber, d.phoneNumber)
+        && Objects.equals(deliveryInstructions, d.deliveryInstructions);
   }
 
   @Override

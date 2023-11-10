@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.LongAdder;
 class HashtableExamples {
 
   static class Person {
+
     private final String name;
 
     public Person(String name) {
@@ -20,10 +21,8 @@ class HashtableExamples {
     }
 
     @Override
-    public boolean equals(Object obj) {
-      if (!(obj instanceof Person)) return false;
-      System.out.println("equals(" + ((Person) obj).name + ")");
-      return name.equals(((Person) obj).name);
+    public boolean equals(Object o) {
+      return (o instanceof Person p) && name.equals(p.name);
     }
   }
 
