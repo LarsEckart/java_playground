@@ -1,12 +1,12 @@
 /*
- from https://hollycummins.com/creating-QR-codes/
- */
+from https://hollycummins.com/creating-QR-codes/
+*/
 package lars.scripts;
 
-///usr/bin/env jbang "$0" "$@" ; exit $?
+/// usr/bin/env jbang "$0" "$@" ; exit $?
 
-//DEPS com.google.zxing:core:3.4.0
-//DEPS com.google.zxing:javase:3.4.0
+// DEPS com.google.zxing:core:3.4.0
+// DEPS com.google.zxing:javase:3.4.0
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -15,23 +15,21 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 
 public class QrCode {
 
   public static void main(String[] args) throws Exception {
     if (args.length != 3) {
       System.err.println(
-          "Wrong number of arguments - should be text to encode, image path, output file" +
-              " path");
+          "Wrong number of arguments - should be text to encode, image path, output file"
+              + " path");
       System.exit(1);
     } else {
       String text = args[0];
@@ -42,7 +40,8 @@ public class QrCode {
     }
   }
 
-  private static void writeQrCode(String text, String imagePath, String outPath, int width) throws Exception {
+  private static void writeQrCode(String text, String imagePath, String outPath, int width)
+      throws Exception {
 
     Map<EncodeHintType, ErrorCorrectionLevel> hints = new HashMap<>();
 
@@ -54,17 +53,15 @@ public class QrCode {
     int height = width;
 
     QRCodeWriter qrCodeWriter = new QRCodeWriter();
-    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width,
-        height, hints);
+    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height, hints);
     // Load QR image
-    BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix,
-        new MatrixToImageConfig(
-            0xFF000000,
-            0xFFFFFFFF));
+    BufferedImage qrImage =
+        MatrixToImageWriter.toBufferedImage(
+            bitMatrix, new MatrixToImageConfig(0xFF000000, 0xFFFFFFFF));
 
     // Initialize combined image
-    BufferedImage combined = new BufferedImage(qrImage.getHeight(), qrImage.getWidth(),
-        BufferedImage.TYPE_INT_ARGB);
+    BufferedImage combined =
+        new BufferedImage(qrImage.getHeight(), qrImage.getWidth(), BufferedImage.TYPE_INT_ARGB);
     Graphics2D g = (Graphics2D) combined.getGraphics();
 
     // Write QR code to new image at position 0/0
@@ -77,9 +74,8 @@ public class QrCode {
     System.out.println("Created QR code at " + outPath);
   }
 
-
-  private static BufferedImage addOverlayImage(Graphics2D g, BufferedImage qrImage,
-      String imagePath) throws IOException {
+  private static BufferedImage addOverlayImage(
+      Graphics2D g, BufferedImage qrImage, String imagePath) throws IOException {
     // Load logo image
     BufferedImage overlay = ImageIO.read(new File(imagePath));
 
