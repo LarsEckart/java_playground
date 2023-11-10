@@ -21,17 +21,16 @@ public class ThreadLocals {
         .delaySubscription(Flowable.timer(1, TimeUnit.SECONDS))
         .transform(
             flux ->
-                Mono.deferWithContext(
+                Mono.deferContextual(
                     ctx -> {
                       return flux.doOnNext(
                           greeting -> {
                             // Get it from the Context
                             String userId = ctx.get("userId");
-                            System.out.println(String.format(greeting, userId));
+                            System.out.printf((greeting) + "%n", userId);
                           });
                     }))
-        // Put something to the Context, e.g. in the web filter
-        .subscriberContext(Context.of("userId", "bsideup"))
+        .contextWrite(Context.of("userId", "bsideup"))
         .block();
   }
 
@@ -43,7 +42,7 @@ public class ThreadLocals {
         .doOnNext(
             greeting -> {
               // WIll print "Hello null". Bummer!
-              System.out.println(String.format(greeting, USER_ID.get()));
+              System.out.printf((greeting) + "%n", USER_ID.get());
             })
         .block();
   }

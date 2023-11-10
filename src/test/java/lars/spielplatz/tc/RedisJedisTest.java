@@ -31,8 +31,7 @@ public class RedisJedisTest {
   }
 
   @AfterEach
-  void tearDown() {
-  }
+  void tearDown() {}
 
   @Test
   void incr_for_integers() {
