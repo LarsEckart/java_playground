@@ -1,14 +1,10 @@
 package lars.katas.checkout;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.larseckart.tcr.CommitOnGreenExtension;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(CommitOnGreenExtension.class)
 public class CheckoutTests {
 
   @Test

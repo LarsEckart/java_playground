@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-// @ExtendWith(CommitOnGreenExtension.class)
 public class Newly_Created_Calculator_should {
 
   private RpnCalculator calculator;

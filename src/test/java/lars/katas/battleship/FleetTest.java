@@ -2,12 +2,9 @@ package lars.katas.battleship;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.larseckart.tcr.CommitOnGreenExtension;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(CommitOnGreenExtension.class)
 class FleetTest {
 
   @Test
