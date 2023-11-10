@@ -49,7 +49,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.google.zxing:javase:3.4.0'
 
-    testImplementation 'com.github.mwiede:jsch:0.2.4'
+    testImplementation 'com.github.mwiede:jsch:0.2.12'
     testImplementation 'com.hierynomus:sshj:0.32.0'
 
     implementation("javax.servlet:servlet-api:2.5")
