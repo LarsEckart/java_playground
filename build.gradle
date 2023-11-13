@@ -22,7 +22,7 @@ dependencies {
 //    errorprone("com.google.errorprone:error_prone_core:2.15.0")
 
     implementation('com.fasterxml.jackson.core:jackson-databind:2.15.2')
-    implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
     implementation('io.projectreactor:reactor-core:3.5.11')
     implementation("org.threeten:threeten-extra:1.7.2")
     implementation("org.slf4j:slf4j-api:1.7.36")
