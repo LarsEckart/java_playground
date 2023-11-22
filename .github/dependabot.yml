@@ -21,6 +21,9 @@ updates:
             - "org.junit.vintage"
             - "org.junit.jupiter"
             - "junit"
+        mockito:
+          patterns:
+            - "org.mockito"
 
 
   # Maintain dependencies for GitHub Actions
