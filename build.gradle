@@ -47,7 +47,7 @@ dependencies {
     implementation 'org.dom4j:dom4j:2.1.4'
 
     implementation 'com.google.zxing:core:3.4.0'
-    implementation 'com.google.zxing:javase:3.4.0'
+    implementation 'com.google.zxing:javase:3.5.2'
 
     testImplementation 'com.github.mwiede:jsch:0.2.12'
     testImplementation 'com.hierynomus:sshj:0.37.0'
