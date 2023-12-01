@@ -31,7 +31,8 @@ class Money {
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Money m) && Objects.equals(currency, m.currency)
+    return (o instanceof Money m)
+        && Objects.equals(currency, m.currency)
         && amount.compareTo(m.amount) == 0;
   }
 

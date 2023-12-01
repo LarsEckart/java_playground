@@ -23,7 +23,8 @@ class Coordinate {
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Coordinate c) && Objects.equals(row, c.row)
+    return (o instanceof Coordinate c)
+        && Objects.equals(row, c.row)
         && Objects.equals(column, c.column);
   }
 
