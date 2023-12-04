@@ -34,7 +34,7 @@ dependencies {
     implementation('commons-codec:commons-codec:1.16.0')
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.apache.commons:commons-csv:1.10.0")
-    implementation('org.apache.commons:commons-lang3:3.13.0')
+    implementation('org.apache.commons:commons-lang3:3.14.0')
 
     implementation("org.hibernate:hibernate-core:6.1.2.Final")
     implementation("net.ttddyy:datasource-proxy:1.9")
