@@ -38,7 +38,7 @@ dependencies {
 
     implementation("org.hibernate:hibernate-core:6.1.2.Final")
     implementation("net.ttddyy:datasource-proxy:1.9")
-    implementation("org.postgresql:postgresql:42.4.1")
+    implementation("org.postgresql:postgresql:42.7.0")
     implementation("io.lettuce:lettuce-core:6.3.0.RELEASE")
     implementation 'redis.clients:jedis:4.4.3'
     implementation("org.eclipse.collections:eclipse-collections-api:11.1.0")
