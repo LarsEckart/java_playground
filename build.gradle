@@ -1,6 +1,6 @@
 plugins {
     id "com.github.ben-manes.versions" version "0.50.0"
-//    id "net.ltgt.errorprone" version "2.0.2"
+    id "net.ltgt.errorprone" version "3.1.0"
     id "java"
     id "idea"
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
@@ -19,7 +19,9 @@ repositories {
 }
 
 dependencies {
-//    errorprone("com.google.errorprone:error_prone_core:2.15.0")
+    errorprone("com.google.errorprone:error_prone_core:2.23.0") {
+        because "errorprone version is different from plugin version"
+    }
 
     implementation('com.fasterxml.jackson.core:jackson-databind:2.15.2')
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
@@ -124,11 +126,12 @@ tasks.withType(JavaCompile) {
 
     dependsOn 'spotlessApply'
 
-//    options.errorprone {
-//        disableWarningsInGeneratedCode = true
-//        allErrorsAsWarnings = true
-//        disableAllChecks = true
-//    }
+    options.errorprone {
+        allErrorsAsWarnings = true
+        disableWarningsInGeneratedCode = true
+        allErrorsAsWarnings = true
+        disableAllChecks = true
+    }
 }
 
 
