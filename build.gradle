@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.5.2'
     implementation 'com.google.zxing:javase:3.5.2'
 
-    testImplementation 'com.github.mwiede:jsch:0.2.13'
+    testImplementation 'com.github.mwiede:jsch:0.2.14'
     testImplementation 'com.hierynomus:sshj:0.37.0'
     implementation 'io.vavr:vavr:1.0.0-alpha-4'
 
