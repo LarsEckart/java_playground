@@ -4,7 +4,7 @@ plugins {
     id "java"
     id "idea"
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
-    id("com.diffplug.spotless") version "6.22.0"
+    id("com.diffplug.spotless") version "6.23.3"
 //    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
 }
 
