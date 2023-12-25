@@ -102,7 +102,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:postgresql:${testcontainersVersion}")
-    testImplementation("net.java.dev.jna:jna:5.13.0") {
+    testImplementation("net.java.dev.jna:jna:5.14.0") {
         because "testcontainers, docker and M1 chip"
     }
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
