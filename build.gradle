@@ -42,7 +42,7 @@ dependencies {
     implementation("net.ttddyy:datasource-proxy:1.10")
     implementation("org.postgresql:postgresql:42.7.1")
     implementation("io.lettuce:lettuce-core:6.3.0.RELEASE")
-    implementation 'redis.clients:jedis:4.4.3'
+    implementation 'redis.clients:jedis:5.1.0'
     implementation("org.eclipse.collections:eclipse-collections-api:11.1.0")
     implementation("org.eclipse.collections:eclipse-collections:11.1.0")
     implementation("org.apache.commons:commons-pool2:2.12.0")
