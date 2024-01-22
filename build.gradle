@@ -23,7 +23,7 @@ dependencies {
         because "errorprone version is different from plugin version"
     }
 
-    implementation('com.fasterxml.jackson.core:jackson-databind:2.15.2')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.16.1')
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
     implementation('io.projectreactor:reactor-core:3.6.1')
     implementation("org.threeten:threeten-extra:1.7.2")
