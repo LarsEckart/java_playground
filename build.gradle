@@ -28,7 +28,7 @@ dependencies {
     implementation('io.projectreactor:reactor-core:3.6.1')
     implementation("org.threeten:threeten-extra:1.7.2")
     implementation("org.slf4j:slf4j-api:2.0.11")
-    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("ch.qos.logback:logback-core:1.4.14")
     implementation("org.owasp.encoder:encoder:1.2.3")
     implementation("com.hazelcast:hazelcast:5.3.6")
