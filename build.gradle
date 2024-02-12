@@ -86,7 +86,7 @@ dependencies {
     def mockitoVersion = "5.8.0"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
-    testImplementation('org.assertj:assertj-core:3.24.2')
+    testImplementation('org.assertj:assertj-core:3.25.3')
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation('com.squareup.okhttp3:mockwebserver:4.12.0')
     testImplementation("org.awaitility:awaitility-groovy:4.2.0")
