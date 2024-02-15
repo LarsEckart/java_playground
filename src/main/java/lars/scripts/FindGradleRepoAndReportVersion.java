@@ -30,14 +30,16 @@ public class FindGradleRepoAndReportVersion {
         Process process = new ProcessBuilder("git", "pull").start();
         process.waitFor();
         Process updateGradleWrapperProcess =
-            Runtime.getRuntime().exec(new String[]{"gradle", "wrapper"}, null, gradleProject.path().toFile());
+            Runtime.getRuntime()
+                .exec(new String[] {"gradle", "wrapper"}, null, gradleProject.path().toFile());
         updateGradleWrapperProcess.waitFor();
         if (updateGradleWrapperProcess.exitValue() != 0) {
           System.out.printf("Gradle wrapper in %s needs manual tweaking%n", gradleProject);
           continue;
         }
         Process verifyGradleProjectBuilds =
-            Runtime.getRuntime().exec(new String[]{"./gradlew", "test"}, null, gradleProject.path().toFile());
+            Runtime.getRuntime()
+                .exec(new String[] {"./gradlew", "test"}, null, gradleProject.path().toFile());
         verifyGradleProjectBuilds.waitFor();
         if (verifyGradleProjectBuilds.exitValue() != 0) {
           System.out.printf("Gradle project %s does not build%n", gradleProject);

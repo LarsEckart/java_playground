@@ -10,19 +10,22 @@ public class Song {
         .mapToObj(
             i ->
                 switch (i) {
-                  case 1 -> """
+                  case 1 ->
+                      """
           There was an old lady who swallowed a fly;
 
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 2 -> """
+                  case 2 ->
+                      """
           There was an old lady who swallowed a spider
           That wriggled and jiggled and tickled inside her!
 
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 3 -> """
+                  case 3 ->
+                      """
           There was an old lady who swallowed a bird;
           How absurd to swallow a bird!
 
@@ -31,7 +34,8 @@ public class Song {
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 4 -> """
+                  case 4 ->
+                      """
           There was an old lady who swallowed a cat;
           Imagine that! She swallowed a cat!
 
@@ -41,7 +45,8 @@ public class Song {
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 5 -> """
+                  case 5 ->
+                      """
           There was an old lady that swallowed a dog;
           What a hog, to swallow a dog!
 
@@ -52,7 +57,8 @@ public class Song {
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 6 -> """
+                  case 6 ->
+                      """
           There was an old lady who swallowed a goat;
           She just opened her throat and swallowed a goat!
 
@@ -64,7 +70,8 @@ public class Song {
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she'll die!
               """;
-                  case 7 -> """
+                  case 7 ->
+                      """
           There was an old lady who swallowed a cow;
           I don't know how she swallowed a cow!
 
@@ -77,7 +84,8 @@ public class Song {
               She swallowed the spider to catch the fly;
               I don't know why she swallowed a fly - Perhaps she’ll die!
               """;
-                  default -> """
+                  default ->
+                      """
           There was an old lady who swallowed a horse;
 
               ...She's dead, of course""";
