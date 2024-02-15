@@ -28,7 +28,8 @@ class BirthdayGreetingsTest {
       assertThat(sentMessage.getSubject(), is("Happy Birthday!"));
       assertThat(sentMessage.getContent(), is("Happy Birthday, dear Jane"));
       assertThat(sentMessage.getRecipients(Message.RecipientType.TO).length, is(1));
-      assertThat(sentMessage.getRecipients(Message.RecipientType.TO)[0],
+      assertThat(
+          sentMessage.getRecipients(Message.RecipientType.TO)[0],
           is(new InternetAddress("jane.doe@example.com")));
     }
   }
