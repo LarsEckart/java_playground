@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 class BirthdayGreetingsTest {
 
-  public BirthdayGreetings birthdayService = new BirthdayGreetings();
+  public BirthdayService birthdayService = new BirthdayService();
 
   @Test
   public void testSendGreetings() throws Exception {

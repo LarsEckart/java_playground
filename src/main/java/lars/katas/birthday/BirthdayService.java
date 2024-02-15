@@ -7,7 +7,7 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-class BirthdayGreetings {
+class BirthdayService {
 
   void sendBirthdayGreetings(String recipient, String firstName) throws MessagingException {
     // Construct the bits of the message
