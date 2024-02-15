@@ -106,6 +106,7 @@ dependencies {
         because "testcontainers, docker and M1 chip"
     }
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
+    testImplementation("com.github.kirviq:dumbster:1.7.1")
 }
 
 jar {
