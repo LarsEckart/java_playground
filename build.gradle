@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.24.0") {
+    errorprone("com.google.errorprone:error_prone_core:2.26.1") {
         because "errorprone version is different from plugin version"
     }
 
