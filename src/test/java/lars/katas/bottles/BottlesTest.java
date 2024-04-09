@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class BottlesTest {
 
-  private final Bottles bottles = new ShamelessGreenBottles();
+  private final Bottles bottles = new Solution_4_ShamelessGreenBottles();
 
   @Test
   void test_the_first_verse() {

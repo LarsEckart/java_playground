@@ -11,11 +11,11 @@ class ParameterizedBottlesTest {
 
   private static Stream<Arguments> bottles() {
     return Stream.of(
-        Arguments.of(new Bottles()),
-        Arguments.of(new ConciseBottles()),
-        Arguments.of(new SpeculativelyGeneralBottles()),
-        Arguments.of(new ConcretelyAbstractBottles()),
-        Arguments.of(new ShamelessGreenBottles()));
+        Arguments.of(new Solution_5_LarsFirstAttemptBottles()),
+        Arguments.of(new Solution_1_IncomprehensiblyConciseBottles()),
+        Arguments.of(new Solution_2_SpeculativelyGeneralBottles()),
+        Arguments.of(new Solution_3_ConcretelyAbstractBottles()),
+        Arguments.of(new Solution_4_ShamelessGreenBottles()));
   }
 
   @ParameterizedTest

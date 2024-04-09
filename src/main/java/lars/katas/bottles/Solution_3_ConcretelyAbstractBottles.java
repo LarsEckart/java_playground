@@ -1,10 +1,25 @@
 package lars.katas.bottles;
 
-public class ConcretelyAbstractBottles extends Bottles {
+import java.util.stream.IntStream;
+
+public class Solution_3_ConcretelyAbstractBottles implements Bottles {
 
   @Override
   public String verse(int bottles) {
     return new Round(bottles).toString();
+  }
+
+  @Override
+  public String verses(int start, int end) {
+    return IntStream.iterate(start, i -> i >= end, i -> i - 1)
+        .mapToObj(this::verse)
+        .reduce((v1, v2) -> v1 + "\n" + v2)
+        .orElse("");
+  }
+
+  @Override
+  public String song() {
+    return verses(99, 0);
   }
 
   private class Round {

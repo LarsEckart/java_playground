@@ -3,19 +3,7 @@ package lars.katas.bottles;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class OpenBottles extends Bottles {
-
-  @Override
-  public String song() {
-    return verses(99, 0);
-  }
-
-  @Override
-  public String verses(int start, int end) {
-    return Stream.iterate(start, i -> i >= end, i -> i - 1)
-        .map(this::verse)
-        .collect(Collectors.joining("\n"));
-  }
+public class OpenBottles implements Bottles {
 
   @Override
   public String verse(int number) {
@@ -28,6 +16,18 @@ public class OpenBottles extends Bottles {
         + ", "
         + bottleNumber.successor()
         + " of beer on the wall.\n";
+  }
+
+  @Override
+  public String verses(int start, int end) {
+    return Stream.iterate(start, i -> i >= end, i -> i - 1)
+        .map(this::verse)
+        .collect(Collectors.joining("\n"));
+  }
+
+  @Override
+  public String song() {
+    return verses(99, 0);
   }
 
   private String capitalize(String text) {

@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SpeculativelyGeneralBottles extends Bottles {
+public class Solution_2_SpeculativelyGeneralBottles implements Bottles {
 
   private Function<Verse, String> noMore =
       (verse) ->
@@ -48,6 +48,11 @@ public class SpeculativelyGeneralBottles extends Bottles {
         .map(this::verseFor)
         .map(Verse::text)
         .collect(Collectors.joining("\n"));
+  }
+
+  @Override
+  public String song() {
+    return verses(99, 0);
   }
 
   private Verse verseFor(int number) {

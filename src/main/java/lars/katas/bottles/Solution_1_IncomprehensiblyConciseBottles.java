@@ -3,7 +3,7 @@ package lars.katas.bottles;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ConciseBottles extends Bottles {
+public class Solution_1_IncomprehensiblyConciseBottles implements Bottles {
 
   @Override
   public String verse(int n) {
@@ -28,5 +28,10 @@ public class ConciseBottles extends Bottles {
     return Stream.iterate(start, i -> i >= end, i -> i - 1)
         .map(this::verse)
         .collect(Collectors.joining("\n"));
+  }
+
+  @Override
+  public String song() {
+    return verses(99, 0);
   }
 }
