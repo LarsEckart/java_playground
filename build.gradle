@@ -3,9 +3,11 @@ plugins {
     id "net.ltgt.errorprone" version "3.1.0"
     id "java"
     id "idea"
+    id "application"
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
     id("com.diffplug.spotless") version "6.25.0"
 //    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
 java {
@@ -115,7 +117,7 @@ jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 }
 
-task copyDependenciesToLibs(type: Copy) {
+tasks.register('copyDependenciesToLibs', Copy) {
     into "libs"
     from configurations.compileClasspath
 }
@@ -123,7 +125,7 @@ task copyDependenciesToLibs(type: Copy) {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     //options.compilerArgs.add("-Xlint:all")
-//    options.compilerArgs.add("--enable-preview")
+    options.compilerArgs.add("--enable-preview")
 
     options.incremental = true
 
@@ -137,6 +139,11 @@ tasks.withType(JavaCompile) {
     }
 }
 
+// application and main class definition
+application {
+    mainClassName = 'lars.Main'
+}
+
 
 test {
     useJUnitPlatform()
@@ -145,7 +152,7 @@ test {
         exceptionFormat "full"
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-//    jvmArgs("--enable-preview")
+    jvmArgs("--enable-preview")
 }
 
 dependencyUpdates.resolutionStrategy {
