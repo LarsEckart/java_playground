@@ -7,12 +7,11 @@ plugins {
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
     id("com.diffplug.spotless") version "6.25.0"
 //    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
