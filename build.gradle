@@ -124,7 +124,7 @@ tasks.register('copyDependenciesToLibs', Copy) {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     //options.compilerArgs.add("-Xlint:all")
-    options.compilerArgs.add("--enable-preview")
+    options.compilerArgs += "--enable-preview"
 
     options.incremental = true
 
@@ -152,6 +152,15 @@ test {
     }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     jvmArgs("--enable-preview")
+}
+
+
+tasks.withType(Test).configureEach {
+    jvmArgs += "--enable-preview"
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += "--enable-preview"
 }
 
 dependencyUpdates.resolutionStrategy {
