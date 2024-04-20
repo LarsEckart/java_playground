@@ -8,7 +8,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
+@EnabledForJreRange(max = JRE.JAVA_22)
 class MockitoExamples {
 
   @Test

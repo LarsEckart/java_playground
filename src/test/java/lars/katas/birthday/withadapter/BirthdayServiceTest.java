@@ -4,7 +4,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
+@EnabledForJreRange(max = JRE.JAVA_22)
 class BirthdayServiceTest {
 
   @Test
