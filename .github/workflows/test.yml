@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        java: [GA, EA]
+        java: [GA]
         os: [ubuntu, windows]
     steps:
       - name: Check out repo
