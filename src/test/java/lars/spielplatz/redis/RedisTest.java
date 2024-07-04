@@ -10,4 +10,20 @@ public class RedisTest {
   public RedisTest(GenericObjectPool<StatefulRedisConnection<String, String>> redisPool) {
     this.redisPool = redisPool;
   }
+
+  public void update() {
+    try (StatefulRedisConnection<String, String> connection = redisPool.borrowObject()) {
+      connection.sync().set("key", "value");
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public String get() {
+    try (StatefulRedisConnection<String, String> connection = redisPool.borrowObject()) {
+      return connection.sync().get("key");
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
