@@ -5,6 +5,9 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 
 public class RedisTest {
 
+  // TODO: try out https://github.com/DanielYWoo/fast-object-pool
+  // TODO: try out https://github.com/chrisvest/stormpot
+
   private final GenericObjectPool<StatefulRedisConnection<String, String>> redisPool;
 
   public RedisTest(GenericObjectPool<StatefulRedisConnection<String, String>> redisPool) {
