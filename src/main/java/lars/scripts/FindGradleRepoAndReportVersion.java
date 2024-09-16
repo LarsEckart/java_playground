@@ -37,9 +37,6 @@ public class FindGradleRepoAndReportVersion {
   }
 
   private static void applesauce(Project gradleProject) {
-    if (!gradleProject.name().equals("bootstrap") || !gradleProject.name().startsWith("poker-player")) {
-      return;
-    }
     if (!gradleProject.checkIfMainBranch()) {
       System.out.println(gradleProject + " not on main branch");
       gradleProject.stashAndSwitchToMain();
