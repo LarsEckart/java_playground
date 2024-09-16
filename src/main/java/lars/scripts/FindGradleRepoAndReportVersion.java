@@ -37,22 +37,23 @@ public class FindGradleRepoAndReportVersion {
   }
 
   private static void applesauce(Project gradleProject) {
-    if (!gradleProject.name().equals("bootstrap")) {
+    if (!gradleProject.name().equals("bootstrap") || !gradleProject.name().startsWith("poker-player")) {
       return;
     }
-    System.out.println("started at " + gradleProject);
-    // make sure we're on main branch
     if (!gradleProject.checkIfMainBranch()) {
+      System.out.println(gradleProject + " not on main branch");
       gradleProject.stashAndSwitchToMain();
     }
     gradleProject.gitReset();
     gradleProject.gitPull();
-    var version = determineGradleWrapperVersion(gradleProject);
+    var version = gradleProject.determineGradleWrapperVersion();
     System.out.println(gradleProject + " : " + version);
     if (version.equals("8.10.1")) {
       System.out.println("already on latest version");
     }
     gradleProject.gradleUpdate();
+    gradleProject.commitUpdatesFiles();
+    gradleProject.gitPush();
   }
 
   public static String runOnCommandLine(String[] args, Project project) {
@@ -61,50 +62,6 @@ public class FindGradleRepoAndReportVersion {
       command.waitFor();
       return command.getInputStream().toString();
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  // TODO: but what if behind origin/master?
-
-  // try {
-  //   Process verifyGradleProjectBuilds = gradleUpdate(gradleProject);
-  //   if (verifyGradleProjectBuilds == null) {
-  //     continue;
-  //   }
-  //   if (verifyGradleProjectBuilds.exitValue() != 0) {
-  //     System.out.printf("Gradle project %s does not build%n", gradleProject);
-  //     continue;
-  //   }
-  // } catch (Exception e) {
-  //   System.out.println("something went wrong");
-  // }
-  // commit(gradleProject);
-
-  // System.out.printf("done at %s\n", gradleProject);
-  // });
-
-  private static void commit(Project gradleProject) throws IOException, InterruptedException {
-    Process gitCommitCommand =
-        Runtime.getRuntime()
-            .exec(
-                new String[] {"git", "commit", "-a", "-m", "'update gradle wrapper'"},
-                null,
-                gradleProject.path().toFile());
-    gitCommitCommand.waitFor();
-  }
-
-  private static String determineGradleWrapperVersion(Project gradleProject) {
-    final Path path = gradleProject.path().resolve("gradle/wrapper/gradle-wrapper.properties");
-    try (Stream<String> lines = Files.lines(path)) {
-      return lines
-          .filter(l -> l.startsWith("distributionUrl"))
-          .map(l -> l.substring(66))
-          .map(s -> s.replace("-all.zip", ""))
-          .map(s -> s.replace("-bin.zip", ""))
-          .findFirst()
-          .orElseThrow(() -> new RuntimeException("no version found"));
-    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
@@ -135,6 +92,21 @@ public class FindGradleRepoAndReportVersion {
 
   record Project(Path path) implements Comparable<Project> {
 
+    private String determineGradleWrapperVersion() {
+      final Path path = path().resolve("gradle/wrapper/gradle-wrapper.properties");
+      try (Stream<String> lines = Files.lines(path)) {
+        return lines
+            .filter(l -> l.startsWith("distributionUrl"))
+            .map(l -> l.substring(66))
+            .map(s -> s.replace("-all.zip", ""))
+            .map(s -> s.replace("-bin.zip", ""))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("no version found"));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
     private void gitPull() {
       runOnCommandLine(new String[] {"git", "pull"}, this);
     }
@@ -160,6 +132,19 @@ public class FindGradleRepoAndReportVersion {
         System.out.printf("Gradle wrapper in %s needs manual tweaking%n", this);
         throw new RuntimeException(e);
       }
+    }
+
+    public void commitUpdatesFiles() {
+      runOnCommandLine(new String[] {"git", "add", "gradlew"}, this);
+      runOnCommandLine(new String[] {"git", "add", "gradlew.bat"}, this);
+      runOnCommandLine(
+          new String[] {"git", "add", "gradle/wrapper/gradle-wrapper.properties"}, this);
+      runOnCommandLine(new String[] {"git", "add", "gradle/wrapper/gradle-wrapper.jar"}, this);
+      runOnCommandLine(new String[] {"git", "commit", "-m", "Update Gradle wrapper"}, this);
+    }
+
+    public void gitPush() {
+      runOnCommandLine(new String[] {"git", "push"}, this);
     }
 
     String name() {
