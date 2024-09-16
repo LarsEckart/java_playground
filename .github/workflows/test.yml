@@ -3,7 +3,7 @@ name: Run tests
 on:
   push:
     branches:
-    - main
+      - main
     paths:
       - '**.java'
       - 'build.gradle'
@@ -11,7 +11,7 @@ on:
       - '.github/workflows/test.yml'
   pull_request:
     branches:
-    - main
+      - main
     paths:
       - '**.java'
       - 'build.gradle'
@@ -45,6 +45,12 @@ jobs:
         env:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          retention-days: 1
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
