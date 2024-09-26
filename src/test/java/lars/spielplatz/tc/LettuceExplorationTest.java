@@ -24,9 +24,9 @@ import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 @EnabledOnOs({OS.LINUX, OS.MAC})
-public class RedisTest {
+public class LettuceExplorationTest {
 
-  private static final Logger log = getLogger(RedisTest.class);
+  private static final Logger log = getLogger(LettuceExplorationTest.class);
 
   @Container
   private GenericContainer<?> redis =
