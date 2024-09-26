@@ -49,8 +49,8 @@ class LocalStackTests {
     ObjectStorageService objectStorageService = new ObjectStorageService(s3);
 
     objectStorageService.store("key", text);
-    String key = objectStorageService.retrieve("key");
+    String retrievedValue = objectStorageService.retrieve("key");
 
-    assertThat(key).isEqualTo(text);
+    assertThat(retrievedValue).isEqualTo(text);
   }
 }
