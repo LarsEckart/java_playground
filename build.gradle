@@ -93,7 +93,7 @@ dependencies {
     testImplementation('com.squareup.okhttp3:mockwebserver:4.12.0')
     testImplementation("org.awaitility:awaitility-groovy:4.2.2")
     testImplementation("com.tngtech.archunit:archunit:1.3.0")
-    testImplementation("net.datafaker:datafaker:2.3.0")
+    testImplementation("net.datafaker:datafaker:2.4.1")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.16.2')
 
     testImplementation("org.slf4j:slf4j-simple:2.0.13") {
