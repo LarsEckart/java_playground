@@ -23,9 +23,8 @@ class ChatHistoryService {
 
   void whoSaidWhatWhen(String who, String what, LocalDateTime when) {
     try {
-      Path tempFile = Files.createTempFile(null, null);
-      // [2024-8-24 17:34:22] Lars: hello world
-      var line = String.format("[%s] %s: %s", when, who, what);
+      // [2024-8-24 17:34] Lars: hello world
+      var line = new ChatHistoryLine(who, what, when).renderChatHistoryLine();
       var getObjectRequest =
           GetObjectRequest.builder().bucket(bucketName).key("chat_history").build();
       String previousVersion;
@@ -36,9 +35,10 @@ class ChatHistoryService {
         previousVersion = "";
       }
 
+      Path tempFile = Files.createTempFile(null, null);
       String newContent = previousVersion + line + "\n";
       var path = Files.writeString(tempFile, newContent);
-      PutObjectRequest putObjectRequest =
+      var putObjectRequest =
           PutObjectRequest.builder().bucket(bucketName).key("chat_history").build();
       s3Client.putObject(putObjectRequest, path);
     } catch (Exception e) {
@@ -48,17 +48,17 @@ class ChatHistoryService {
 
   List<String> history(String who) {
     try {
-      GetObjectRequest getObjectRequest =
+      var getObjectRequest =
           GetObjectRequest.builder().bucket(bucketName).key("chat_history").build();
       var response = s3Client.getObject(getObjectRequest);
-      String s = new String(response.readAllBytes());
-      return s.lines().filter(getStringPredicate(who)).toList();
+      var allContent = new String(response.readAllBytes());
+      return allContent.lines().filter(getStringPredicate(who)).toList();
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  private static Predicate<String> getStringPredicate(String who) {
+  private static @NotNull Predicate<String> getStringPredicate(String who) {
     return line -> line.contains(who);
   }
 

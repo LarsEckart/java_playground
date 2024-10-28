@@ -105,6 +105,8 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
     testImplementation("org.testcontainers:postgresql:${testcontainersVersion}")
     testImplementation("org.testcontainers:localstack:${testcontainersVersion}")
+    testImplementation "com.redis:testcontainers-redis:2.2.2"
+
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
     testImplementation("com.github.kirviq:dumbster:1.7.1")
 

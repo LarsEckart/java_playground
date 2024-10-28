@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import com.redis.testcontainers.RedisContainer;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisCommandExecutionException;
 import io.lettuce.core.TransactionResult;
@@ -17,10 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.slf4j.Logger;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 @EnabledOnOs({OS.LINUX, OS.MAC})
@@ -29,8 +28,8 @@ public class LettuceExplorationTest {
   private static final Logger log = getLogger(LettuceExplorationTest.class);
 
   @Container
-  private GenericContainer<?> redis =
-      new GenericContainer<>(DockerImageName.parse("redis:6.2.7-alpine")).withExposedPorts(6379);
+  private static RedisContainer container =
+      new RedisContainer(RedisContainer.DEFAULT_IMAGE_NAME.withTag(RedisContainer.DEFAULT_TAG));
 
   private RedisCommands<String, String> syncCommands;
   private RedisCommands<String, String> otherSyncCommands;
@@ -40,8 +39,7 @@ public class LettuceExplorationTest {
 
   @BeforeEach
   void setUp() {
-    redisClient =
-        RedisClient.create("redis://" + redis.getHost() + ":" + redis.getMappedPort(6379));
+    redisClient = RedisClient.create(container.getRedisURI());
     connection = redisClient.connect();
     otherConnection = redisClient.connect();
     syncCommands = connection.sync();
