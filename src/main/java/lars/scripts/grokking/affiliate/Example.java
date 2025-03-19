@@ -22,11 +22,7 @@ class Example {
     }
   }
 
-  private void sendPayout(String bankCode, int owed) {
+  private void sendPayout(String bankCode, int owed) {}
 
-  }
-
-  record Affiliate(String bankCode, int sales, int commission) {
-
-  }
+  record Affiliate(String bankCode, int sales, int commission) {}
 }

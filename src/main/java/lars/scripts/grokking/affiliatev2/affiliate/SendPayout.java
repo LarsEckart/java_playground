@@ -1,8 +1,6 @@
 package lars.scripts.grokking.affiliatev2.affiliate;
 
-import lars.scripts.grokking.affiliatev2.affiliate.Example.Affiliate;
-
-final class SendPayout implements PayoutDecision{
+final class SendPayout implements PayoutDecision {
 
   private final int amount;
 

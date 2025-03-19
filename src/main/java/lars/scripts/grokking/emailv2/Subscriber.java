@@ -9,5 +9,4 @@ record Subscriber(String email, int recCount) {
       return "good";
     }
   }
-
 }

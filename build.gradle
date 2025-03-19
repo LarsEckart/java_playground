@@ -11,7 +11,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(24)
     }
 }
 
@@ -126,7 +126,7 @@ tasks.register('copyDependenciesToLibs', Copy) {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     //options.compilerArgs.add("-Xlint:all")
-    options.compilerArgs += "--enable-preview"
+    options.compilerArgs += ["--enable-preview", "--should-stop=ifError=FLOW"]
 
     options.incremental = true
 
@@ -137,6 +137,7 @@ tasks.withType(JavaCompile) {
         disableWarningsInGeneratedCode = true
         allErrorsAsWarnings = true
         disableAllChecks = true
+        // --should-stop=ifError=FLOW
     }
 }
 

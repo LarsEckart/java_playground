@@ -22,8 +22,8 @@ class CouponEmailProcess {
     }
   }
 
-  List<Email> emailsForSubscribers(List<Subscriber> subscribers, List<String> goods,
-      List<String> bests) {
+  List<Email> emailsForSubscribers(
+      List<Subscriber> subscribers, List<String> goods, List<String> bests) {
     var emails = new ArrayList<Email>();
     for (Subscriber subscriber : subscribers) {
       var email = emailForSubscriber(subscriber, goods, bests);
@@ -32,18 +32,20 @@ class CouponEmailProcess {
     return emails;
   }
 
-  private Email emailForSubscriber(Subscriber subscriber, List<String> goods,
-      List<String> bests) {
+  private Email emailForSubscriber(Subscriber subscriber, List<String> goods, List<String> bests) {
     if (subscriber.subCouponRank().equals("best")) {
-      return new Email("newsletter@coupondog.co", subscriber.email(),
+      return new Email(
+          "newsletter@coupondog.co",
+          subscriber.email(),
           "Your best weekly coupons inside",
           "Here are the best coupons: " + String.join(", ", bests));
     } else // rank === "good"
     {
-      return new Email("newsletter@coupondog.co", subscriber.email(),
+      return new Email(
+          "newsletter@coupondog.co",
+          subscriber.email(),
           "Your good weekly coupons inside",
           "Here are the good coupons: " + String.join(", ", goods));
     }
   }
-
 }

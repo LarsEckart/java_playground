@@ -12,8 +12,12 @@ class Example {
     for (Affiliate affiliate : affiliates) {
       PayoutDecision payoutDecision = figurePayout(affiliate);
       switch (payoutDecision) {
-        case SendPayout p: sendPayout(affiliate.bankCode, p.owed()); break;
-        case DontSendPayout p: {}
+        case SendPayout p:
+          sendPayout(affiliate.bankCode, p.owed());
+          break;
+        case DontSendPayout p:
+          {
+          }
       }
     }
   }
@@ -26,11 +30,7 @@ class Example {
     return new DontSendPayout();
   }
 
-  private void sendPayout(String bankCode, int owed) {
+  private void sendPayout(String bankCode, int owed) {}
 
-  }
-
-  record Affiliate(String bankCode, int sales, int commission) {
-
-  }
+  record Affiliate(String bankCode, int sales, int commission) {}
 }

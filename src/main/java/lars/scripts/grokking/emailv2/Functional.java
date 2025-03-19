@@ -6,7 +6,7 @@ import lars.scripts.grokking.email.Coupon;
 
 class Functional {
 
-  public static List<Coupon> findByRank(List<Coupon> allCoupons, String rank) {
+  public static List<String> findByRank(List<Coupon> allCoupons, String rank) {
     List<String> list = new ArrayList<>();
     for (var coupon : allCoupons) {
       if (coupon.rank().equals(rank)) {
@@ -15,5 +15,4 @@ class Functional {
     }
     return list;
   }
-
 }
