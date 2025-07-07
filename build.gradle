@@ -97,7 +97,7 @@ dependencies {
     testImplementation("net.datafaker:datafaker:2.4.2")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.16.2')
 
-    testImplementation("org.slf4j:slf4j-simple:2.0.13") {
+    testImplementation("org.slf4j:slf4j-simple:2.0.17") {
         because "allows a library to log during tests even when only log4j api is on path"
     }
 
