@@ -144,7 +144,7 @@ tasks.withType(JavaCompile) {
 
 // application and main class definition
 application {
-    mainClassName = 'lars.Main'
+    mainClass = 'lars.Main'
 }
 
 
