@@ -1,3 +1,6 @@
+# Runs Java tests on push/PR for changed files
+# Tests on Ubuntu and Windows with Java 21
+# Auto-merges dependabot PRs if tests pass
 name: Run tests
 
 on:

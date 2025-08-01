@@ -1,3 +1,6 @@
+# Analyzes Java dependencies and identifies module/package relationships
+# Configurable JDK version via input parameter (default: 21)
+# Useful for checking JAR file dependencies and module structure
 name: jdeps
 
 on:

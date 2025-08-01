@@ -1,3 +1,6 @@
+# Automatically updates Gradle wrapper to the latest version
+# Runs weekly on Sunday at midnight UTC
+# Creates PR if updates are available
 name: Update Gradle Wrapper
 
 on:

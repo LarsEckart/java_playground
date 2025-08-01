@@ -1,8 +1,10 @@
+# Scans Java code for deprecated API usage that's marked for removal
+# Helps identify code that will break in future Java versions
+# Runs manually via workflow_dispatch
 name: jdeprscan
 
 on:
   workflow_dispatch:
-    types: jdeprscan
 
 jobs:
   jdeps:
