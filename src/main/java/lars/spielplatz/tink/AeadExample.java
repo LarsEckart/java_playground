@@ -35,7 +35,7 @@ public final class AeadExample {
       System.err.printf("Expected 4 or 5 parameters, got %d\n", args.length);
       System.err.println(
           "Usage: java AeadExample encrypt/decrypt key-file input-file output-file"
-          + " [associated-data]");
+              + " [associated-data]");
       System.exit(1);
     }
     String mode = args[0];
