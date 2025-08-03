@@ -14,11 +14,13 @@ class MultiLineStringTest {
   void line_endings_on_different_os() {
     String text = "%s%n%s%n%s%n%s".formatted("a", "b", "c", "d");
     String text2 = "%s\n%s\n%s\n%s".formatted("a", "b", "c", "d");
-    String text3 = """
+    String text3 =
+        """
         %s
         %s
         %s
-        %s""".formatted("a", "b", "c", "d");
+        %s"""
+            .formatted("a", "b", "c", "d");
     String text4 = String.join(System.lineSeparator(), "a", "b", "c", "d");
 
     Assertions.assertAll(

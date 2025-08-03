@@ -12,7 +12,8 @@ class GsonTests {
 
   @Test
   void gson_plain() {
-    String json = """
+    String json =
+        """
                 {\"name\":\"Lars\"}""";
     JsonElement jsonElement = JsonParser.parseString(json);
 
@@ -23,7 +24,8 @@ class GsonTests {
 
   @Test
   void gson_object() {
-    String json = """
+    String json =
+        """
                 {\"name\":\"Lars\"}""";
     JsonElement jsonElement = JsonParser.parseString(json);
 

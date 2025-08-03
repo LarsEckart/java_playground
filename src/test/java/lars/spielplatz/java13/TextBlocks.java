@@ -54,7 +54,8 @@ class TextBlocks {
 
   @Test
   void alignment() throws Exception {
-    String string = """
+    String string =
+        """
         red
         green
         blue

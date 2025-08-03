@@ -29,12 +29,12 @@ public class RateCalculator {
               rate = 3 + (c.kwh - 100) * .05;
               break;
             }
-            // Customer does not qualify for lifline,
-            // fall through to territorial case.
+          // Customer does not qualify for lifline,
+          // fall through to territorial case.
           case Customer.TERITORIAL:
             switch (calculateTerritory(c.address)) {
               case 1:
-                // spec says territory 1 and 2 use same rate.
+              // spec says territory 1 and 2 use same rate.
               case 2:
                 rate = c.kwh * (isWinter() ? .07 : .06);
                 break;

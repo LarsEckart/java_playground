@@ -27,7 +27,11 @@ class Day2 {
   void solvePart2() {
     int result =
         """
-            input""".lines().map(l -> parseLine(l)).mapToInt(g -> g.power()).sum();
+            input"""
+            .lines()
+            .map(l -> parseLine(l))
+            .mapToInt(g -> g.power())
+            .sum();
 
     System.out.println(result);
   }

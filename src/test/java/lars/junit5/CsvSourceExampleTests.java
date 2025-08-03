@@ -16,7 +16,9 @@ class CsvSourceExampleTests {
   }
 
   @ParameterizedTest
-  @CsvSource(textBlock = """
+  @CsvSource(
+      textBlock =
+          """
           hello world, 11
           JUnit 5,      7
       """)
