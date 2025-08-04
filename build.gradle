@@ -36,7 +36,7 @@ dependencies {
     implementation("javax.cache:cache-api:1.1.1")
     implementation('commons-codec:commons-codec:1.17.1')
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("org.apache.commons:commons-csv:1.11.0")
+    implementation("org.apache.commons:commons-csv:1.14.1")
     implementation('org.apache.commons:commons-lang3:3.17.0')
 
     implementation("org.hibernate:hibernate-core:6.6.0.Final")
