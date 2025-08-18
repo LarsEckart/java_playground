@@ -86,7 +86,7 @@ dependencies {
 
     testImplementation("com.approvaltests:approvaltests:25.0.23")
 
-    def mockitoVersion = "5.18.0"
+    def mockitoVersion = "5.19.0"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testImplementation('org.assertj:assertj-core:3.25.3')
