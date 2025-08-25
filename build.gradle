@@ -95,7 +95,7 @@ dependencies {
     testImplementation("org.awaitility:awaitility-groovy:4.3.0")
     testImplementation("com.tngtech.archunit:archunit:1.4.1")
     testImplementation("net.datafaker:datafaker:2.4.4")
-    testImplementation('nl.jqno.equalsverifier:equalsverifier:4.0.7')
+    testImplementation('nl.jqno.equalsverifier:equalsverifier:4.0.9')
 
     testImplementation("org.slf4j:slf4j-simple:2.0.17") {
         because "allows a library to log during tests even when only log4j api is on path"
