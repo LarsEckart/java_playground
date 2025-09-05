@@ -15,8 +15,15 @@ public class Move {
       return;
     }
 
-    Path source = Paths.get(args[0]);
-    Path target = Paths.get(args[1]);
+    Path source;
+    Path target;
+    try {
+      source = new SanitizedPath(args[0]).value();
+      target = new SanitizedPath(args[1]).value();
+    } catch (SecurityException e) {
+      System.err.printf("Invalid path: %s%n", e.getMessage());
+      return;
+    }
 
     try {
       Files.move(source, target);

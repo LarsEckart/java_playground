@@ -14,7 +14,13 @@ public class ListHiddenFiles {
       return;
     }
 
-    Path dir = Paths.get(args[0]);
+    Path dir;
+    try {
+      dir = new SanitizedPath(args[0]).value();
+    } catch (SecurityException e) {
+      System.err.printf("Invalid path: %s%n", e.getMessage());
+      return;
+    }
     try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
       for (Path file : stream) {
         if (Files.isHidden(file)) {

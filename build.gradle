@@ -24,7 +24,7 @@ dependencies {
         because "errorprone version is different from plugin version"
     }
 
-    implementation('com.fasterxml.jackson.core:jackson-databind:2.19.2')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.20.0')
     implementation("io.reactivex.rxjava3:rxjava:3.1.11")
     implementation('io.projectreactor:reactor-core:3.7.9')
     implementation("org.threeten:threeten-extra:1.8.0")
@@ -43,7 +43,7 @@ dependencies {
     implementation("net.ttddyy:datasource-proxy:1.11.0")
     implementation("org.postgresql:postgresql:42.7.7")
     implementation("io.lettuce:lettuce-core:6.8.0.RELEASE")
-    implementation("software.amazon.awssdk:s3:2.32.29")
+    implementation("software.amazon.awssdk:s3:2.33.0")
     implementation 'redis.clients:jedis:6.2.0'
     implementation("org.eclipse.collections:eclipse-collections-api:13.0.0")
     implementation("org.eclipse.collections:eclipse-collections:13.0.0")

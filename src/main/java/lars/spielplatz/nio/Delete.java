@@ -15,7 +15,13 @@ public class Delete {
       return;
     }
 
-    Path path = Paths.get(args[0]);
+    Path path;
+    try {
+      path = new SanitizedPath(args[0]).value();
+    } catch (SecurityException e) {
+      System.err.printf("Invalid path: %s%n", e.getMessage());
+      return;
+    }
     try {
       Files.delete(path);
     } catch (NoSuchFileException nsfe) {
