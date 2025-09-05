@@ -45,6 +45,10 @@ public class BlockedOnIO extends Thread {
   }
 
   public static void main(String[] args) throws IOException, InterruptedException {
+    if (args.length > 0) {
+      System.err.println("This program does not accept command line arguments");
+      return;
+    }
     ServerSocket ss = new ServerSocket(4444);
     Socket socket = new Socket("localhost", 4444);
     System.out.println("Made socket, now reading from socket");
