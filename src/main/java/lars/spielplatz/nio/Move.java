@@ -9,17 +9,6 @@ import java.nio.file.Paths;
 
 public class Move {
 
-  private static Path validatePath(String pathStr) throws IOException {
-    Path path = Paths.get(pathStr).normalize();
-    if (path.isAbsolute()) {
-      throw new SecurityException("Absolute paths are not allowed");
-    }
-    if (path.toString().contains("..")) {
-      throw new SecurityException("Path traversal attempts are not allowed");
-    }
-    return path;
-  }
-
   public static void main(String[] args) {
     if (args.length != 2) {
       System.err.println("usage: java Move source target");
@@ -29,9 +18,9 @@ public class Move {
     Path source;
     Path target;
     try {
-      source = validatePath(args[0]);
-      target = validatePath(args[1]);
-    } catch (SecurityException | IOException e) {
+      source = new SanitizedPath(args[0]).value();
+      target = new SanitizedPath(args[1]).value();
+    } catch (SecurityException e) {
       System.err.printf("Invalid path: %s%n", e.getMessage());
       return;
     }
