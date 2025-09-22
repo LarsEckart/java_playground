@@ -41,7 +41,7 @@ dependencies {
 
     implementation("org.hibernate:hibernate-core:7.1.1.Final")
     implementation("net.ttddyy:datasource-proxy:1.11.0")
-    implementation("org.postgresql:postgresql:42.7.7")
+    implementation("org.postgresql:postgresql:42.7.8")
     implementation("io.lettuce:lettuce-core:6.8.1.RELEASE")
     implementation("software.amazon.awssdk:s3:2.33.9")
     implementation 'redis.clients:jedis:6.2.0'
