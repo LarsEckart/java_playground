@@ -61,8 +61,8 @@ dependencies {
     implementation("javax.servlet:servlet-api:2.5")
 
     // jep 320
-    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
-    implementation("org.glassfish.jaxb:jaxb-xjc:4.0.5")
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.6")
+    implementation("org.glassfish.jaxb:jaxb-xjc:4.0.6")
     implementation("com.sun.xml.ws:jaxws-rt:4.0.3")
     implementation("javax.activation:activation:1.1.1")
 
