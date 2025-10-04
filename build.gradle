@@ -119,6 +119,14 @@ jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 }
 
+tasks.withType(Tar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Zip) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.register('copyDependenciesToLibs', Copy) {
     into "libs"
     from configurations.compileClasspath
