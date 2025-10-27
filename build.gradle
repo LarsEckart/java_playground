@@ -84,7 +84,7 @@ dependencies {
         because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
-    testImplementation("com.approvaltests:approvaltests:25.6.0")
+    testImplementation("com.approvaltests:approvaltests:25.7.0")
 
     def mockitoVersion = "5.20.0"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
