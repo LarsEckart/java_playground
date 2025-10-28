@@ -1,11 +1,11 @@
 plugins {
-    id "com.github.ben-manes.versions" version "0.52.0"
+    id "com.github.ben-manes.versions" version "0.53.0"
     id "net.ltgt.errorprone" version "4.3.0"
     id "java"
     id "idea"
     id "application"
     id "com.vanniktech.dependency.graph.generator" version "0.8.0"
-    id("com.diffplug.spotless") version "7.2.1"
+    id("com.diffplug.spotless") version "8.0.0"
 //    id "com.libyear.libyear-gradle-plugin" version "0.1.6"
 }
 
@@ -20,30 +20,30 @@ repositories {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.41.0") {
+    errorprone("com.google.errorprone:error_prone_core:2.43.0") {
         because "errorprone version is different from plugin version"
     }
 
     implementation('com.fasterxml.jackson.core:jackson-databind:2.20.0')
-    implementation("io.reactivex.rxjava3:rxjava:3.1.11")
-    implementation('io.projectreactor:reactor-core:3.7.11')
+    implementation("io.reactivex.rxjava3:rxjava:3.1.12")
+    implementation('io.projectreactor:reactor-core:3.7.12')
     implementation("org.threeten:threeten-extra:1.8.0")
     implementation("org.slf4j:slf4j-api:2.0.17")
-    implementation("ch.qos.logback:logback-classic:1.5.18")
-    implementation("ch.qos.logback:logback-core:1.5.18")
+    implementation("ch.qos.logback:logback-classic:1.5.20")
+    implementation("ch.qos.logback:logback-core:1.5.20")
     implementation("org.owasp.encoder:encoder:1.3.1")
-    implementation("com.hazelcast:hazelcast:5.5.0")
+    implementation("com.hazelcast:hazelcast:5.6.0")
     implementation("javax.cache:cache-api:1.1.1")
     implementation('commons-codec:commons-codec:1.19.0')
     implementation("com.google.code.gson:gson:2.13.2")
     implementation("org.apache.commons:commons-csv:1.14.1")
-    implementation('org.apache.commons:commons-lang3:3.18.0')
+    implementation('org.apache.commons:commons-lang3:3.19.0')
 
-    implementation("org.hibernate:hibernate-core:7.1.1.Final")
+    implementation("org.hibernate:hibernate-core:7.1.4.Final")
     implementation("net.ttddyy:datasource-proxy:1.11.0")
-    implementation("org.postgresql:postgresql:42.7.7")
+    implementation("org.postgresql:postgresql:42.7.8")
     implementation("io.lettuce:lettuce-core:6.8.1.RELEASE")
-    implementation("software.amazon.awssdk:s3:2.33.9")
+    implementation("software.amazon.awssdk:s3:2.35.10")
     implementation 'redis.clients:jedis:6.2.0'
     implementation("org.eclipse.collections:eclipse-collections-api:13.0.0")
     implementation("org.eclipse.collections:eclipse-collections:13.0.0")
@@ -61,15 +61,15 @@ dependencies {
     implementation("javax.servlet:servlet-api:2.5")
 
     // jep 320
-    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
-    implementation("org.glassfish.jaxb:jaxb-xjc:4.0.5")
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.6")
+    implementation("org.glassfish.jaxb:jaxb-xjc:4.0.6")
     implementation("com.sun.xml.ws:jaxws-rt:4.0.3")
     implementation("javax.activation:activation:1.1.1")
 
     def junit4Version = "4.13.2"
     def junitVintageVersion = "5.13.4"
-    def junitJupiterVersion = "5.13.4"
-    def junitPlatformVersion = "1.13.4"
+    def junitJupiterVersion = "6.0.0"
+    def junitPlatformVersion = "6.0.0"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
@@ -84,18 +84,18 @@ dependencies {
         because "allows tests to run from IDEs that bundle older version of launcher"
     }
 
-    testImplementation("com.approvaltests:approvaltests:25.0.23")
+    testImplementation("com.approvaltests:approvaltests:25.7.0")
 
-    def mockitoVersion = "5.19.0"
+    def mockitoVersion = "5.20.0"
     testImplementation("org.mockito:mockito-core:${mockitoVersion}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
-    testImplementation('org.assertj:assertj-core:3.27.4')
+    testImplementation('org.assertj:assertj-core:3.27.6')
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
     testImplementation('com.squareup.okhttp3:mockwebserver:5.1.0')
     testImplementation("org.awaitility:awaitility-groovy:4.3.0")
     testImplementation("com.tngtech.archunit:archunit:1.4.1")
-    testImplementation("net.datafaker:datafaker:2.4.4")
-    testImplementation('nl.jqno.equalsverifier:equalsverifier:4.1')
+    testImplementation("net.datafaker:datafaker:2.5.3")
+    testImplementation('nl.jqno.equalsverifier:equalsverifier:4.2')
 
     testImplementation("org.slf4j:slf4j-simple:2.0.17") {
         because "allows a library to log during tests even when only log4j api is on path"
@@ -117,6 +117,14 @@ dependencies {
 
 jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
+tasks.withType(Tar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Zip) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.register('copyDependenciesToLibs', Copy) {
