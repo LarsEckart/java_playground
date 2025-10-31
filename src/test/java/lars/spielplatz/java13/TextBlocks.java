@@ -67,7 +67,7 @@ class TextBlocks {
       recommended_to_fully_left_justify_a_wide_string_in_order_to_avoid_horizontal_scrolling_or_line_wrapping()
           throws Exception {
     String lilacs =
-        """
+"""
 Over the breast of the spring, the land, amid cities,
 Amid lanes and through old woods, where lately the violets peep’d from the ground, spotting the gray debris,
 Amid the grass in the fields each side of the lanes, passing the endless grass,

@@ -71,7 +71,7 @@ class CsvSourceExampleTests {
   @CsvSource(
       delimiter = '|',
       textBlock =
-          """
+"""
     positive numbers      |   10  |      6  |   16
     positive and negative |   -4  |      2  |   -2
     negative numbers      |   -6  |   -100  | -106
@@ -86,7 +86,7 @@ class CsvSourceExampleTests {
   @CsvSource(
       delimiter = '|',
       textBlock =
-          """
+"""
     positive numbers      |   10  |      6  |   16
     positive and negative |   -4  |      2  |   -2
     negative numbers      |   -6  |   -100  | -106
