@@ -49,7 +49,7 @@ dependencies {
     implementation("org.eclipse.collections:eclipse-collections:13.0.0")
     implementation("org.apache.commons:commons-pool2:2.12.1")
     implementation 'org.dom4j:dom4j:2.2.0'
-    implementation 'com.google.crypto.tink:tink:1.18.0'
+    implementation 'com.google.crypto.tink:tink:1.19.0'
 
     implementation 'com.google.zxing:core:3.5.3'
     implementation 'com.google.zxing:javase:3.5.3'
