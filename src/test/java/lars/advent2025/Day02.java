@@ -14,77 +14,77 @@ import org.junit.jupiter.api.Test;
 class Day02 {
 
   @Test
-  void isInvalidId_singleDigitRepeated() {
-    assertThat(isInvalidId(11)).isTrue();
-    assertThat(isInvalidId(22)).isTrue();
-    assertThat(isInvalidId(55)).isTrue();
-    assertThat(isInvalidId(99)).isTrue();
+  void productId_isInvalid_singleDigitRepeated() {
+    assertThat(ProductId.of(11).isInvalid()).isTrue();
+    assertThat(ProductId.of(22).isInvalid()).isTrue();
+    assertThat(ProductId.of(55).isInvalid()).isTrue();
+    assertThat(ProductId.of(99).isInvalid()).isTrue();
   }
 
   @Test
-  void isInvalidId_twoDigitRepeated() {
-    assertThat(isInvalidId(6464)).isTrue();
-    assertThat(isInvalidId(1010)).isTrue();
+  void productId_isInvalid_twoDigitRepeated() {
+    assertThat(ProductId.of(6464).isInvalid()).isTrue();
+    assertThat(ProductId.of(1010).isInvalid()).isTrue();
   }
 
   @Test
-  void isInvalidId_threeDigitRepeated() {
-    assertThat(isInvalidId(123123)).isTrue();
+  void productId_isInvalid_threeDigitRepeated() {
+    assertThat(ProductId.of(123123).isInvalid()).isTrue();
   }
 
   @Test
-  void isInvalidId_validIds() {
-    assertThat(isInvalidId(12)).isFalse();
-    assertThat(isInvalidId(101)).isFalse(); // odd length
-    assertThat(isInvalidId(1234)).isFalse();
+  void productId_isInvalid_validIds() {
+    assertThat(ProductId.of(12).isInvalid()).isFalse();
+    assertThat(ProductId.of(101).isInvalid()).isFalse();
+    assertThat(ProductId.of(1234).isInvalid()).isFalse();
   }
 
   @Test
-  void findInvalidIdsInRange_11to22() {
-    List<Long> invalid = findInvalidIdsInRange(11, 22);
-    assertThat(invalid).containsExactly(11L, 22L);
+  void productIdRange_invalidIds_11to22() {
+    ProductIdRange range = ProductIdRange.parse("11-22");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(11), ProductId.of(22));
   }
 
   @Test
-  void findInvalidIdsInRange_95to115() {
-    List<Long> invalid = findInvalidIdsInRange(95, 115);
-    assertThat(invalid).containsExactly(99L);
+  void productIdRange_invalidIds_95to115() {
+    ProductIdRange range = ProductIdRange.parse("95-115");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(99));
   }
 
   @Test
-  void findInvalidIdsInRange_998to1012() {
-    List<Long> invalid = findInvalidIdsInRange(998, 1012);
-    assertThat(invalid).containsExactly(1010L);
+  void productIdRange_invalidIds_998to1012() {
+    ProductIdRange range = ProductIdRange.parse("998-1012");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(1010));
   }
 
   @Test
-  void findInvalidIdsInRange_1188511880to1188511890() {
-    List<Long> invalid = findInvalidIdsInRange(1188511880L, 1188511890L);
-    assertThat(invalid).containsExactly(1188511885L);
+  void productIdRange_invalidIds_1188511880to1188511890() {
+    ProductIdRange range = ProductIdRange.parse("1188511880-1188511890");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(1188511885L));
   }
 
   @Test
-  void findInvalidIdsInRange_222220to222224() {
-    List<Long> invalid = findInvalidIdsInRange(222220, 222224);
-    assertThat(invalid).containsExactly(222222L);
+  void productIdRange_invalidIds_222220to222224() {
+    ProductIdRange range = ProductIdRange.parse("222220-222224");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(222222));
   }
 
   @Test
-  void findInvalidIdsInRange_1698522to1698528() {
-    List<Long> invalid = findInvalidIdsInRange(1698522, 1698528);
-    assertThat(invalid).isEmpty();
+  void productIdRange_invalidIds_1698522to1698528() {
+    ProductIdRange range = ProductIdRange.parse("1698522-1698528");
+    assertThat(range.invalidIds()).isEmpty();
   }
 
   @Test
-  void findInvalidIdsInRange_446443to446449() {
-    List<Long> invalid = findInvalidIdsInRange(446443, 446449);
-    assertThat(invalid).containsExactly(446446L);
+  void productIdRange_invalidIds_446443to446449() {
+    ProductIdRange range = ProductIdRange.parse("446443-446449");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(446446));
   }
 
   @Test
-  void findInvalidIdsInRange_38593856to38593862() {
-    List<Long> invalid = findInvalidIdsInRange(38593856L, 38593862L);
-    assertThat(invalid).containsExactly(38593859L);
+  void productIdRange_invalidIds_38593856to38593862() {
+    ProductIdRange range = ProductIdRange.parse("38593856-38593862");
+    assertThat(range.invalidIds()).containsExactly(ProductId.of(38593859L));
   }
 
   @Test
@@ -94,74 +94,74 @@ class Day02 {
             + "1698522-1698528,446443-446449,38593856-38593862,565653-565659,"
             + "824824821-824824827,2121212118-2121212124";
 
-    BigInteger sum = sumInvalidIds(input);
+    ProductDatabase database = ProductDatabase.parse(input);
 
-    assertThat(sum).isEqualTo(new BigInteger("1227775554"));
+    assertThat(database.sumOfInvalidIds()).isEqualTo(new BigInteger("1227775554"));
   }
 
   @Test
   void puzzleInput() throws Exception {
     String input = Files.readString(Path.of("src/test/resources/advent2025/day02.txt")).trim();
 
-    BigInteger sum = sumInvalidIds(input);
-    System.out.println("Day 2 Part 1: " + sum);
+    ProductDatabase database = ProductDatabase.parse(input);
+    System.out.println("Day 2 Part 1: " + database.sumOfInvalidIds());
+    System.out.println("Day 2 Part 2: " + database.sumOfInvalidIdsPart2());
 
-    BigInteger sum2 = sumInvalidIdsPart2(input);
-    System.out.println("Day 2 Part 2: " + sum2);
-
-    assertThat(sum).isEqualTo(new BigInteger("5398419778"));
-    assertThat(sum2).isEqualTo(new BigInteger("15704845910"));
+    assertThat(database.sumOfInvalidIds()).isEqualTo(new BigInteger("5398419778"));
+    assertThat(database.sumOfInvalidIdsPart2()).isEqualTo(new BigInteger("15704845910"));
   }
 
   // Part 2 tests
 
   @Test
-  void isInvalidIdPart2_repeatedAtLeastTwice() {
-    assertThat(isInvalidIdPart2(11)).isTrue(); // 1 repeated 2 times
-    assertThat(isInvalidIdPart2(111)).isTrue(); // 1 repeated 3 times
-    assertThat(isInvalidIdPart2(1111)).isTrue(); // 1 repeated 4 times
-    assertThat(isInvalidIdPart2(12341234)).isTrue(); // 1234 repeated 2 times
-    assertThat(isInvalidIdPart2(123123123)).isTrue(); // 123 repeated 3 times
-    assertThat(isInvalidIdPart2(1212121212L)).isTrue(); // 12 repeated 5 times
-    assertThat(isInvalidIdPart2(1111111)).isTrue(); // 1 repeated 7 times
+  void productId_isInvalidPart2_repeatedAtLeastTwice() {
+    assertThat(ProductId.of(11).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(111).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(1111).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(12341234).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(123123123).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(1212121212L).isInvalidPart2()).isTrue();
+    assertThat(ProductId.of(1111111).isInvalidPart2()).isTrue();
   }
 
   @Test
-  void isInvalidIdPart2_validIds() {
-    assertThat(isInvalidIdPart2(12)).isFalse();
-    assertThat(isInvalidIdPart2(101)).isFalse();
-    assertThat(isInvalidIdPart2(1234)).isFalse();
-    assertThat(isInvalidIdPart2(12345)).isFalse();
+  void productId_isInvalidPart2_validIds() {
+    assertThat(ProductId.of(12).isInvalidPart2()).isFalse();
+    assertThat(ProductId.of(101).isInvalidPart2()).isFalse();
+    assertThat(ProductId.of(1234).isInvalidPart2()).isFalse();
+    assertThat(ProductId.of(12345).isInvalidPart2()).isFalse();
   }
 
   @Test
-  void findInvalidIdsInRangePart2_95to115() {
-    List<Long> invalid = findInvalidIdsInRangePart2(95, 115);
-    assertThat(invalid).containsExactlyInAnyOrder(99L, 111L);
+  void productIdRange_invalidIdsPart2_95to115() {
+    ProductIdRange range = ProductIdRange.parse("95-115");
+    assertThat(range.invalidIdsPart2())
+        .containsExactlyInAnyOrder(ProductId.of(99), ProductId.of(111));
   }
 
   @Test
-  void findInvalidIdsInRangePart2_998to1012() {
-    List<Long> invalid = findInvalidIdsInRangePart2(998, 1012);
-    assertThat(invalid).containsExactlyInAnyOrder(999L, 1010L);
+  void productIdRange_invalidIdsPart2_998to1012() {
+    ProductIdRange range = ProductIdRange.parse("998-1012");
+    assertThat(range.invalidIdsPart2())
+        .containsExactlyInAnyOrder(ProductId.of(999), ProductId.of(1010));
   }
 
   @Test
-  void findInvalidIdsInRangePart2_565653to565659() {
-    List<Long> invalid = findInvalidIdsInRangePart2(565653, 565659);
-    assertThat(invalid).containsExactly(565656L);
+  void productIdRange_invalidIdsPart2_565653to565659() {
+    ProductIdRange range = ProductIdRange.parse("565653-565659");
+    assertThat(range.invalidIdsPart2()).containsExactly(ProductId.of(565656));
   }
 
   @Test
-  void findInvalidIdsInRangePart2_824824821to824824827() {
-    List<Long> invalid = findInvalidIdsInRangePart2(824824821L, 824824827L);
-    assertThat(invalid).containsExactly(824824824L);
+  void productIdRange_invalidIdsPart2_824824821to824824827() {
+    ProductIdRange range = ProductIdRange.parse("824824821-824824827");
+    assertThat(range.invalidIdsPart2()).containsExactly(ProductId.of(824824824L));
   }
 
   @Test
-  void findInvalidIdsInRangePart2_2121212118to2121212124() {
-    List<Long> invalid = findInvalidIdsInRangePart2(2121212118L, 2121212124L);
-    assertThat(invalid).containsExactly(2121212121L);
+  void productIdRange_invalidIdsPart2_2121212118to2121212124() {
+    ProductIdRange range = ProductIdRange.parse("2121212118-2121212124");
+    assertThat(range.invalidIdsPart2()).containsExactly(ProductId.of(2121212121L));
   }
 
   @Test
@@ -171,146 +171,172 @@ class Day02 {
             + "1698522-1698528,446443-446449,38593856-38593862,565653-565659,"
             + "824824821-824824827,2121212118-2121212124";
 
-    BigInteger sum = sumInvalidIdsPart2(input);
+    ProductDatabase database = ProductDatabase.parse(input);
 
-    // 11+22 + 99+111 + 999+1010 + 1188511885 + 222222 + 446446 + 38593859 + 565656 + 824824824 +
-    // 2121212121
-    assertThat(sum).isEqualTo(new BigInteger("4174379265"));
+    assertThat(database.sumOfInvalidIdsPart2()).isEqualTo(new BigInteger("4174379265"));
   }
 
-  private BigInteger sumInvalidIdsPart2(String input) {
-    BigInteger sum = BigInteger.ZERO;
-    String[] ranges = input.split(",");
-    for (String range : ranges) {
-      if (range.isBlank()) continue;
-      String[] parts = range.split("-");
-      long start = Long.parseLong(parts[0].trim());
-      long end = Long.parseLong(parts[1].trim());
-      List<Long> invalidIds = findInvalidIdsInRangePart2(start, end);
-      for (Long id : invalidIds) {
-        sum = sum.add(BigInteger.valueOf(id));
-      }
+  // Domain objects
+
+  record ProductId(long value) implements Comparable<ProductId> {
+
+    static ProductId of(long value) {
+      return new ProductId(value);
     }
-    return sum;
-  }
 
-  private BigInteger sumInvalidIds(String input) {
-    BigInteger sum = BigInteger.ZERO;
-    String[] ranges = input.split(",");
-    for (String range : ranges) {
-      if (range.isBlank()) continue;
-      String[] parts = range.split("-");
-      long start = Long.parseLong(parts[0].trim());
-      long end = Long.parseLong(parts[1].trim());
-      List<Long> invalidIds = findInvalidIdsInRange(start, end);
-      for (Long id : invalidIds) {
-        sum = sum.add(BigInteger.valueOf(id));
+    boolean isInvalid() {
+      String s = String.valueOf(value);
+      if (s.length() % 2 != 0) {
+        return false;
       }
+      int half = s.length() / 2;
+      return s.substring(0, half).equals(s.substring(half));
     }
-    return sum;
-  }
 
-  private boolean isInvalidId(long id) {
-    String s = String.valueOf(id);
-    if (s.length() % 2 != 0) {
+    boolean isInvalidPart2() {
+      String s = String.valueOf(value);
+      int len = s.length();
+
+      for (int patternLen = 1; patternLen <= len / 2; patternLen++) {
+        if (len % patternLen != 0) continue;
+
+        String pattern = s.substring(0, patternLen);
+        boolean matches = true;
+        for (int i = patternLen; i < len; i += patternLen) {
+          if (!s.substring(i, i + patternLen).equals(pattern)) {
+            matches = false;
+            break;
+          }
+        }
+        if (matches) {
+          return true;
+        }
+      }
       return false;
     }
-    int half = s.length() / 2;
-    return s.substring(0, half).equals(s.substring(half));
-  }
 
-  private boolean isInvalidIdPart2(long id) {
-    String s = String.valueOf(id);
-    int len = s.length();
-
-    // Try all possible pattern lengths that divide evenly into the total length
-    // and result in at least 2 repetitions
-    for (int patternLen = 1; patternLen <= len / 2; patternLen++) {
-      if (len % patternLen != 0) continue;
-
-      String pattern = s.substring(0, patternLen);
-      boolean matches = true;
-      for (int i = patternLen; i < len; i += patternLen) {
-        if (!s.substring(i, i + patternLen).equals(pattern)) {
-          matches = false;
-          break;
-        }
-      }
-      if (matches) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private List<Long> findInvalidIdsInRange(long start, long end) {
-    List<Long> result = new ArrayList<>();
-
-    // Instead of iterating all numbers (could be huge ranges),
-    // we generate all invalid IDs that could fall in the range.
-    // Invalid IDs are formed by repeating a sequence twice.
-
-    // Determine the digit lengths we need to consider
-    int startLen = String.valueOf(start).length();
-    int endLen = String.valueOf(end).length();
-
-    // For each possible total length (must be even)
-    for (int totalLen = startLen; totalLen <= endLen; totalLen++) {
-      if (totalLen % 2 != 0) continue;
-
-      int halfLen = totalLen / 2;
-
-      // Generate all half-patterns of this length
-      long minHalf = (halfLen == 1) ? 1 : (long) Math.pow(10, halfLen - 1);
-      long maxHalf = (long) Math.pow(10, halfLen) - 1;
-
-      for (long half = minHalf; half <= maxHalf; half++) {
-        String halfStr = String.valueOf(half);
-        String fullStr = halfStr + halfStr;
-        long id = Long.parseLong(fullStr);
-
-        if (id >= start && id <= end) {
-          result.add(id);
-        }
-      }
+    int digitCount() {
+      return String.valueOf(value).length();
     }
 
-    return result;
+    BigInteger toBigInteger() {
+      return BigInteger.valueOf(value);
+    }
+
+    @Override
+    public int compareTo(ProductId other) {
+      return Long.compare(this.value, other.value);
+    }
   }
 
-  private List<Long> findInvalidIdsInRangePart2(long start, long end) {
-    Set<Long> result = new HashSet<>();
+  record Pattern(long value) {
 
-    int startLen = String.valueOf(start).length();
-    int endLen = String.valueOf(end).length();
+    int length() {
+      return String.valueOf(value).length();
+    }
 
-    // For each total length in range
-    for (int totalLen = startLen; totalLen <= endLen; totalLen++) {
-      // For each pattern length that divides totalLen and gives at least 2 reps
-      for (int patternLen = 1; patternLen <= totalLen / 2; patternLen++) {
-        if (totalLen % patternLen != 0) continue;
+    ProductId repeat(int times) {
+      String patternStr = String.valueOf(value);
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < times; i++) {
+        sb.append(patternStr);
+      }
+      return ProductId.of(Long.parseLong(sb.toString()));
+    }
 
-        int repetitions = totalLen / patternLen;
+    static List<Pattern> allOfLength(int length) {
+      List<Pattern> patterns = new ArrayList<>();
+      long min = (length == 1) ? 1 : (long) Math.pow(10, length - 1);
+      long max = (long) Math.pow(10, length) - 1;
+      for (long v = min; v <= max; v++) {
+        patterns.add(new Pattern(v));
+      }
+      return patterns;
+    }
+  }
 
-        // Generate all patterns of this length (no leading zeros)
-        long minPattern = (patternLen == 1) ? 1 : (long) Math.pow(10, patternLen - 1);
-        long maxPattern = (long) Math.pow(10, patternLen) - 1;
+  record ProductIdRange(ProductId start, ProductId end) {
 
-        for (long pattern = minPattern; pattern <= maxPattern; pattern++) {
-          String patternStr = String.valueOf(pattern);
-          StringBuilder sb = new StringBuilder();
-          for (int r = 0; r < repetitions; r++) {
-            sb.append(patternStr);
-          }
-          long id = Long.parseLong(sb.toString());
+    static ProductIdRange parse(String range) {
+      String[] parts = range.split("-");
+      return new ProductIdRange(
+          ProductId.of(Long.parseLong(parts[0].trim())),
+          ProductId.of(Long.parseLong(parts[1].trim())));
+    }
 
-          if (id >= start && id <= end) {
+    boolean contains(ProductId id) {
+      return id.value() >= start.value() && id.value() <= end.value();
+    }
+
+    List<ProductId> invalidIds() {
+      List<ProductId> result = new ArrayList<>();
+
+      for (int totalLen = start.digitCount(); totalLen <= end.digitCount(); totalLen++) {
+        if (totalLen % 2 != 0) continue;
+
+        int halfLen = totalLen / 2;
+        for (Pattern pattern : Pattern.allOfLength(halfLen)) {
+          ProductId id = pattern.repeat(2);
+          if (contains(id)) {
             result.add(id);
           }
         }
       }
+
+      return result;
     }
 
-    return new ArrayList<>(result);
+    List<ProductId> invalidIdsPart2() {
+      Set<ProductId> result = new HashSet<>();
+
+      for (int totalLen = start.digitCount(); totalLen <= end.digitCount(); totalLen++) {
+        for (int patternLen = 1; patternLen <= totalLen / 2; patternLen++) {
+          if (totalLen % patternLen != 0) continue;
+
+          int repetitions = totalLen / patternLen;
+          for (Pattern pattern : Pattern.allOfLength(patternLen)) {
+            ProductId id = pattern.repeat(repetitions);
+            if (contains(id)) {
+              result.add(id);
+            }
+          }
+        }
+      }
+
+      return new ArrayList<>(result);
+    }
+  }
+
+  record ProductDatabase(List<ProductIdRange> ranges) {
+
+    static ProductDatabase parse(String input) {
+      List<ProductIdRange> ranges = new ArrayList<>();
+      for (String range : input.split(",")) {
+        if (!range.isBlank()) {
+          ranges.add(ProductIdRange.parse(range));
+        }
+      }
+      return new ProductDatabase(ranges);
+    }
+
+    BigInteger sumOfInvalidIds() {
+      BigInteger sum = BigInteger.ZERO;
+      for (ProductIdRange range : ranges) {
+        for (ProductId id : range.invalidIds()) {
+          sum = sum.add(id.toBigInteger());
+        }
+      }
+      return sum;
+    }
+
+    BigInteger sumOfInvalidIdsPart2() {
+      BigInteger sum = BigInteger.ZERO;
+      for (ProductIdRange range : ranges) {
+        for (ProductId id : range.invalidIdsPart2()) {
+          sum = sum.add(id.toBigInteger());
+        }
+      }
+      return sum;
+    }
   }
 }

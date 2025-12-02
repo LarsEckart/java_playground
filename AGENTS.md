@@ -13,4 +13,8 @@ A personal sandbox for exploring Java language features, experimenting with new 
 - **Java Version**: 25
 - **Testing**: Comprehensive tests are important - validate experiments with good test coverage
 - **Design**: Follow object-oriented design principles
+  - Immutable objects with behavior
+  - Clear separation of concerns
+  - Methods on objects rather than procedural code
 - **Style**: Experiment freely, but keep code clean and well-structured
+
