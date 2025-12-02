@@ -59,6 +59,9 @@ class Day01 {
 
     System.out.println("Day 1 Part 1: " + safe.zeroCount());
     System.out.println("Day 1 Part 2: " + safe.clickCount());
+
+    assertThat(safe.zeroCount()).isEqualTo(1100);
+    assertThat(safe.clickCount()).isEqualTo(6358);
   }
 
   record Dial(int position) {

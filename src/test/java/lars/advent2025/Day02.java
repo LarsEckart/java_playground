@@ -108,6 +108,9 @@ class Day02 {
 
     BigInteger sum2 = sumInvalidIdsPart2(input);
     System.out.println("Day 2 Part 2: " + sum2);
+
+    assertThat(sum).isEqualTo(new BigInteger("5398419778"));
+    assertThat(sum2).isEqualTo(new BigInteger("15704845910"));
   }
 
   // Part 2 tests
