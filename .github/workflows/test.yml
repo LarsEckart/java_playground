@@ -38,7 +38,7 @@ jobs:
         os: [ubuntu, windows]
     steps:
       - name: Check out repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Set up latest JDK N from oracle.com
         uses: oracle-actions/setup-java@v1
         with:
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: auto-merge
         if: |
           github.actor == 'dependabot[bot]' &&
