@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 class Day03 {
 
@@ -99,8 +100,11 @@ class Day03 {
   }
 
   @Test
+  @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+  @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
-    String input = Files.readString(Path.of("src/test/resources/advent2025/day03.txt"));
+    Path inputPath = AdventInputs.ensureDayInput(2025, 3);
+    String input = Files.readString(inputPath);
 
     BatterySystem system = BatterySystem.parse(input);
     System.out.println("Day 3 Part 1: " + system.totalOutputJoltage());

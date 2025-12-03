@@ -33,4 +33,7 @@ bin
 /src/test/java/lars/exercism/
 /src/main/java/lars/exercism/
 
+# Advent of Code inputs
+src/test/resources/advent*/**
+
 tcc-agent

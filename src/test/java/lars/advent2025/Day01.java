@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 class Day01 {
 
@@ -50,8 +51,11 @@ class Day01 {
   }
 
   @Test
+  @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+  @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
-    List<String> rotations = Files.readAllLines(Path.of("src/test/resources/advent2025/day01.txt"));
+    Path input = AdventInputs.ensureDayInput(2025, 1);
+    List<String> rotations = Files.readAllLines(input);
     Safe safe = new Safe();
     for (String rotation : rotations) {
       safe = safe.turn(rotation);

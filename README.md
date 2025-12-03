@@ -6,6 +6,11 @@
 
 This is a place for me to explore java core api and various libraries.
 
+## Advent of Code inputs
+
+- Puzzle inputs are **not** tracked in git (`src/test/resources/advent*/**` is ignored).
+- Advent 2025 tests auto-download inputs locally using `AOC_SESSION` (session cookie) and `AOC_USER_AGENT`; downloads are blocked on CI and those tests are JUnit-disabled when `CI`/`GITHUB_ACTIONS` is set.
+- Suggested user agent: `java_playground/2025 (maintainer: you@example.com)`.
 
 ## jdeps
 

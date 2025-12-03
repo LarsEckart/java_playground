@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 class Day02 {
 
@@ -100,8 +101,11 @@ class Day02 {
   }
 
   @Test
+  @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+  @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
-    String input = Files.readString(Path.of("src/test/resources/advent2025/day02.txt")).trim();
+    Path inputPath = AdventInputs.ensureDayInput(2025, 2);
+    String input = Files.readString(inputPath).trim();
 
     ProductDatabase database = ProductDatabase.parse(input);
     System.out.println("Day 2 Part 1: " + database.sumOfInvalidIds());
