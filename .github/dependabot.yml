@@ -6,6 +6,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 14
     groups:
       logback:
         patterns:
@@ -32,3 +34,5 @@ updates:
     rebase-strategy: auto
     schedule:
       interval: daily
+    cooldown:
+      default-days: 14
