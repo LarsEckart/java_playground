@@ -2,6 +2,7 @@ package lars.advent2018;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -115,8 +116,9 @@ class Day1 {
 
     @Test
     void my_numbers() throws Exception {
-      String allNumbers =
-          Files.readString(new File("src/test/resources/advent2018/day1.txt").toPath());
+      File inputFile = new File("src/test/resources/advent2018/day1.txt");
+      assumeTrue(inputFile.exists(), "Puzzle input not available");
+      String allNumbers = Files.readString(inputFile.toPath());
       assertThat(firstFrequencyTwice(allNumbers)).isEqualTo(83445);
     }
   }
