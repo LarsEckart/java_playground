@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -52,6 +53,13 @@ class Day05 {
   }
 
   @Test
+  void examplePart2() {
+    IngredientDatabase db = IngredientDatabase.parse(EXAMPLE);
+
+    assertThat(db.countAllFreshIds()).isEqualTo(14);
+  }
+
+  @Test
   @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
   @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
@@ -62,7 +70,12 @@ class Day05 {
     long result = db.countFreshIngredients();
     System.out.println("Day 5 Part 1: " + result);
 
-    assertThat(result).isGreaterThan(0);
+    assertThat(result).isEqualTo(773);
+
+    long result2 = db.countAllFreshIds();
+    System.out.println("Day 5 Part 2: " + result2);
+
+    assertThat(result2).isGreaterThan(0);
   }
 
   // Domain objects
@@ -100,6 +113,29 @@ class Day05 {
 
     long countFreshIngredients() {
       return availableIngredients.stream().filter(this::isFresh).count();
+    }
+
+    long countAllFreshIds() {
+      // Merge overlapping ranges, then sum their sizes
+      List<Range> sorted =
+          freshRanges.stream().sorted(Comparator.comparingLong(Range::start)).toList();
+
+      List<Range> merged = new ArrayList<>();
+      for (Range range : sorted) {
+        if (merged.isEmpty()) {
+          merged.add(range);
+        } else {
+          Range last = merged.getLast();
+          // Ranges overlap or are adjacent if last.end >= range.start - 1
+          if (last.end >= range.start - 1) {
+            merged.set(merged.size() - 1, new Range(last.start, Math.max(last.end, range.end)));
+          } else {
+            merged.add(range);
+          }
+        }
+      }
+
+      return merged.stream().mapToLong(r -> r.end - r.start + 1).sum();
     }
   }
 }
