@@ -49,6 +49,24 @@ class Day06 {
   }
 
   @Test
+  void parseCephalopodProblems_fromWorksheet() {
+    CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
+
+    assertThat(worksheet.problems()).hasSize(4);
+    // Right-to-left, each column is a number read top-to-bottom
+    assertThat(worksheet.problems().get(0)).isEqualTo(new Problem(List.of(4L, 431L, 623L), '+'));
+    assertThat(worksheet.problems().get(1)).isEqualTo(new Problem(List.of(175L, 581L, 32L), '*'));
+    assertThat(worksheet.problems().get(2)).isEqualTo(new Problem(List.of(8L, 248L, 369L), '+'));
+    assertThat(worksheet.problems().get(3)).isEqualTo(new Problem(List.of(356L, 24L, 1L), '*'));
+  }
+
+  @Test
+  void examplePart2() {
+    CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
+    assertThat(worksheet.grandTotal()).isEqualTo(3263827L);
+  }
+
+  @Test
   @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
   @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
@@ -59,7 +77,13 @@ class Day06 {
     long result = worksheet.grandTotal();
     System.out.println("Day 6 Part 1: " + result);
 
-    assertThat(result).isGreaterThan(0);
+    assertThat(result).isEqualTo(6757749566978L);
+
+    CephalopodWorksheet cephalopodWorksheet = CephalopodWorksheet.parse(input);
+    long result2 = cephalopodWorksheet.grandTotal();
+    System.out.println("Day 6 Part 2: " + result2);
+
+    assertThat(result2).isGreaterThan(0);
   }
 
   // Domain objects
@@ -131,6 +155,88 @@ class Day06 {
       }
 
       return new Worksheet(problems);
+    }
+
+    private static boolean isSpaceColumn(List<String> lines, int col) {
+      for (String line : lines) {
+        if (col < line.length() && line.charAt(col) != ' ') {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    long grandTotal() {
+      return problems.stream().mapToLong(Problem::solve).sum();
+    }
+  }
+
+  record CephalopodWorksheet(List<Problem> problems) {
+
+    static CephalopodWorksheet parse(String input) {
+      List<String> lines = input.lines().toList();
+      if (lines.isEmpty()) {
+        return new CephalopodWorksheet(List.of());
+      }
+
+      // Find the width of the worksheet (max line length)
+      int width = lines.stream().mapToInt(String::length).max().orElse(0);
+
+      // Pad all lines to same width
+      List<String> paddedLines =
+          lines.stream().map(line -> String.format("%-" + width + "s", line)).toList();
+
+      // The last line contains operators, other lines contain numbers
+      String operatorLine = paddedLines.getLast();
+      List<String> numberLines = paddedLines.subList(0, paddedLines.size() - 1);
+
+      // Parse right-to-left, each column within a problem is a separate number
+      List<Problem> problems = new ArrayList<>();
+      int col = width - 1;
+
+      while (col >= 0) {
+        // Skip separator columns (all spaces)
+        if (isSpaceColumn(paddedLines, col)) {
+          col--;
+          continue;
+        }
+
+        // Find the start of this problem (previous all-space column or start)
+        int endCol = col;
+        while (col >= 0 && !isSpaceColumn(paddedLines, col)) {
+          col--;
+        }
+        int startCol = col + 1;
+
+        // Each column is a number (digits read top-to-bottom), read right-to-left
+        List<Long> numbers = new ArrayList<>();
+        for (int c = endCol; c >= startCol; c--) {
+          StringBuilder digits = new StringBuilder();
+          for (String line : numberLines) {
+            char ch = line.charAt(c);
+            if (ch != ' ') {
+              digits.append(ch);
+            }
+          }
+          if (!digits.isEmpty()) {
+            numbers.add(Long.parseLong(digits.toString()));
+          }
+        }
+
+        // Extract operator (any non-space in operator line for this problem)
+        char operator = ' ';
+        for (int c = startCol; c <= endCol; c++) {
+          char ch = operatorLine.charAt(c);
+          if (ch != ' ') {
+            operator = ch;
+            break;
+          }
+        }
+
+        problems.add(new Problem(numbers, operator));
+      }
+
+      return new CephalopodWorksheet(problems);
     }
 
     private static boolean isSpaceColumn(List<String> lines, int col) {
