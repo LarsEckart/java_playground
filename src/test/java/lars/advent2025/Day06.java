@@ -88,6 +88,75 @@ class Day06 {
 
   // Domain objects
 
+  record TextGrid(List<String> rows) {
+
+    static TextGrid parse(String input) {
+      List<String> lines = input.lines().toList();
+      if (lines.isEmpty()) {
+        return new TextGrid(List.of());
+      }
+
+      int width = lines.stream().mapToInt(String::length).max().orElse(0);
+      List<String> padded =
+          lines.stream().map(line -> String.format("%-" + width + "s", line)).toList();
+
+      return new TextGrid(padded);
+    }
+
+    int width() {
+      return rows.isEmpty() ? 0 : rows.getFirst().length();
+    }
+
+    int height() {
+      return rows.size();
+    }
+
+    int operatorRow() {
+      return height() - 1;
+    }
+
+    char charAt(int row, int col) {
+      return rows.get(row).charAt(col);
+    }
+
+    boolean isSpaceColumn(int col) {
+      for (String row : rows) {
+        if (row.charAt(col) != ' ') {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    String column(int col) {
+      StringBuilder sb = new StringBuilder();
+      for (String row : rows) {
+        sb.append(row.charAt(col));
+      }
+      return sb.toString();
+    }
+
+    String row(int row) {
+      return rows.get(row);
+    }
+
+    String rowSegment(int row, int startCol, int endCol) {
+      return rows.get(row).substring(startCol, endCol);
+    }
+
+    /** Returns column content for rows 0 to height-2 (excluding last row). */
+    String columnDigits(int col) {
+      StringBuilder sb = new StringBuilder();
+      for (int row = 0; row < height() - 1; row++) {
+        char ch = charAt(row, col);
+        if (ch != ' ') {
+          sb.append(ch);
+        }
+      }
+      return sb.toString();
+    }
+  }
+
   record Problem(List<Long> numbers, char operator) {
     long solve() {
       if (operator == '+') {
@@ -101,69 +170,39 @@ class Day06 {
   record Worksheet(List<Problem> problems) {
 
     static Worksheet parse(String input) {
-      List<String> lines = input.lines().toList();
-      if (lines.isEmpty()) {
+      TextGrid grid = TextGrid.parse(input);
+      if (grid.height() == 0) {
         return new Worksheet(List.of());
       }
 
-      // Find the width of the worksheet (max line length)
-      int width = lines.stream().mapToInt(String::length).max().orElse(0);
-
-      // Pad all lines to same width
-      List<String> paddedLines =
-          lines.stream().map(line -> String.format("%-" + width + "s", line)).toList();
-
-      // The last line contains operators, other lines contain numbers
-      String operatorLine = paddedLines.getLast();
-      List<String> numberLines = paddedLines.subList(0, paddedLines.size() - 1);
-
-      // Parse column by column, grouping into problems
       List<Problem> problems = new ArrayList<>();
       int col = 0;
 
-      while (col < width) {
-        // Skip separator columns (all spaces)
-        if (isSpaceColumn(paddedLines, col)) {
+      while (col < grid.width()) {
+        if (grid.isSpaceColumn(col)) {
           col++;
           continue;
         }
 
-        // Find the end of this problem (next all-space column or end)
         int startCol = col;
-        while (col < width && !isSpaceColumn(paddedLines, col)) {
+        while (col < grid.width() && !grid.isSpaceColumn(col)) {
           col++;
         }
         int endCol = col;
 
-        // Extract numbers from this problem's columns
         List<Long> numbers = new ArrayList<>();
-        for (String line : numberLines) {
-          String segment = line.substring(startCol, Math.min(endCol, line.length())).trim();
+        for (int row = 0; row < grid.operatorRow(); row++) {
+          String segment = grid.rowSegment(row, startCol, endCol).trim();
           if (!segment.isEmpty()) {
             numbers.add(Long.parseLong(segment));
           }
         }
 
-        // Extract operator
-        char operator =
-            operatorLine
-                .substring(startCol, Math.min(endCol, operatorLine.length()))
-                .trim()
-                .charAt(0);
-
+        char operator = grid.rowSegment(grid.operatorRow(), startCol, endCol).trim().charAt(0);
         problems.add(new Problem(numbers, operator));
       }
 
       return new Worksheet(problems);
-    }
-
-    private static boolean isSpaceColumn(List<String> lines, int col) {
-      for (String line : lines) {
-        if (col < line.length() && line.charAt(col) != ' ') {
-          return false;
-        }
-      }
-      return true;
     }
 
     long grandTotal() {
@@ -174,36 +213,22 @@ class Day06 {
   record CephalopodWorksheet(List<Problem> problems) {
 
     static CephalopodWorksheet parse(String input) {
-      List<String> lines = input.lines().toList();
-      if (lines.isEmpty()) {
+      TextGrid grid = TextGrid.parse(input);
+      if (grid.height() == 0) {
         return new CephalopodWorksheet(List.of());
       }
 
-      // Find the width of the worksheet (max line length)
-      int width = lines.stream().mapToInt(String::length).max().orElse(0);
-
-      // Pad all lines to same width
-      List<String> paddedLines =
-          lines.stream().map(line -> String.format("%-" + width + "s", line)).toList();
-
-      // The last line contains operators, other lines contain numbers
-      String operatorLine = paddedLines.getLast();
-      List<String> numberLines = paddedLines.subList(0, paddedLines.size() - 1);
-
-      // Parse right-to-left, each column within a problem is a separate number
       List<Problem> problems = new ArrayList<>();
-      int col = width - 1;
+      int col = grid.width() - 1;
 
       while (col >= 0) {
-        // Skip separator columns (all spaces)
-        if (isSpaceColumn(paddedLines, col)) {
+        if (grid.isSpaceColumn(col)) {
           col--;
           continue;
         }
 
-        // Find the start of this problem (previous all-space column or start)
         int endCol = col;
-        while (col >= 0 && !isSpaceColumn(paddedLines, col)) {
+        while (col >= 0 && !grid.isSpaceColumn(col)) {
           col--;
         }
         int startCol = col + 1;
@@ -211,22 +236,16 @@ class Day06 {
         // Each column is a number (digits read top-to-bottom), read right-to-left
         List<Long> numbers = new ArrayList<>();
         for (int c = endCol; c >= startCol; c--) {
-          StringBuilder digits = new StringBuilder();
-          for (String line : numberLines) {
-            char ch = line.charAt(c);
-            if (ch != ' ') {
-              digits.append(ch);
-            }
-          }
+          String digits = grid.columnDigits(c);
           if (!digits.isEmpty()) {
-            numbers.add(Long.parseLong(digits.toString()));
+            numbers.add(Long.parseLong(digits));
           }
         }
 
-        // Extract operator (any non-space in operator line for this problem)
+        // Find operator in this problem's columns
         char operator = ' ';
         for (int c = startCol; c <= endCol; c++) {
-          char ch = operatorLine.charAt(c);
+          char ch = grid.charAt(grid.operatorRow(), c);
           if (ch != ' ') {
             operator = ch;
             break;
@@ -237,15 +256,6 @@ class Day06 {
       }
 
       return new CephalopodWorksheet(problems);
-    }
-
-    private static boolean isSpaceColumn(List<String> lines, int col) {
-      for (String line : lines) {
-        if (col < line.length() && line.charAt(col) != ' ') {
-          return false;
-        }
-      }
-      return true;
     }
 
     long grandTotal() {
