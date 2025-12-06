@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -158,7 +159,7 @@ class Day04 {
 
       while (true) {
         // Find all currently accessible rolls
-        java.util.List<int[]> toRemove = new java.util.ArrayList<>();
+        List<int[]> toRemove = new ArrayList<>();
 
         for (int row = 0; row < mutableGrid.length; row++) {
           for (int col = 0; col < mutableGrid[row].length; col++) {
