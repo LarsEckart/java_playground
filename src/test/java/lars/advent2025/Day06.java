@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
@@ -19,71 +20,90 @@ class Day06 {
       *   +   *   +
       """;
 
-  @Test
-  void parseProblems_fromWorksheet() {
-    Worksheet worksheet = Worksheet.parse(EXAMPLE);
+  @Nested
+  class PartOne {
 
-    assertThat(worksheet.problems()).hasSize(4);
-    assertThat(worksheet.problems().get(0)).isEqualTo(new Problem(List.of(123L, 45L, 6L), '*'));
-    assertThat(worksheet.problems().get(1)).isEqualTo(new Problem(List.of(328L, 64L, 98L), '+'));
-    assertThat(worksheet.problems().get(2)).isEqualTo(new Problem(List.of(51L, 387L, 215L), '*'));
-    assertThat(worksheet.problems().get(3)).isEqualTo(new Problem(List.of(64L, 23L, 314L), '+'));
+    @Test
+    void parseProblems_fromWorksheet() {
+      Worksheet worksheet = Worksheet.parse(EXAMPLE);
+
+      assertThat(worksheet.problems()).hasSize(4);
+      assertThat(worksheet.problems().get(0)).isEqualTo(new Problem(List.of(123L, 45L, 6L), '*'));
+      assertThat(worksheet.problems().get(1)).isEqualTo(new Problem(List.of(328L, 64L, 98L), '+'));
+      assertThat(worksheet.problems().get(2)).isEqualTo(new Problem(List.of(51L, 387L, 215L), '*'));
+      assertThat(worksheet.problems().get(3)).isEqualTo(new Problem(List.of(64L, 23L, 314L), '+'));
+    }
+
+    @Test
+    void problem_solves_multiplication() {
+      Problem problem = new Problem(List.of(123L, 45L, 6L), '*');
+
+      assertThat(problem.solve()).isEqualTo(33210L);
+    }
+
+    @Test
+    void problem_solves_addition() {
+      Problem problem = new Problem(List.of(328L, 64L, 98L), '+');
+
+      assertThat(problem.solve()).isEqualTo(490L);
+    }
+
+    @Test
+    void example() {
+      Worksheet worksheet = Worksheet.parse(EXAMPLE);
+
+      assertThat(worksheet.grandTotal()).isEqualTo(4277556L);
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void puzzleInput() throws Exception {
+      Path inputPath = AdventInputs.ensureDayInput(2025, 6);
+      String input = Files.readString(inputPath);
+
+      Worksheet worksheet = Worksheet.parse(input);
+      long result = worksheet.grandTotal();
+      System.out.println("Day 6 Part 1: " + result);
+
+      assertThat(result).isEqualTo(6757749566978L);
+    }
   }
 
-  @Test
-  void problem_solves_multiplication() {
-    Problem problem = new Problem(List.of(123L, 45L, 6L), '*');
-    assertThat(problem.solve()).isEqualTo(33210L);
-  }
+  @Nested
+  class PartTwo {
 
-  @Test
-  void problem_solves_addition() {
-    Problem problem = new Problem(List.of(328L, 64L, 98L), '+');
-    assertThat(problem.solve()).isEqualTo(490L);
-  }
+    @Test
+    void parseCephalopodProblems_fromWorksheet() {
+      CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
 
-  @Test
-  void example() {
-    Worksheet worksheet = Worksheet.parse(EXAMPLE);
-    assertThat(worksheet.grandTotal()).isEqualTo(4277556L);
-  }
+      assertThat(worksheet.problems()).hasSize(4);
+      // Right-to-left, each column is a number read top-to-bottom
+      assertThat(worksheet.problems().get(0)).isEqualTo(new Problem(List.of(4L, 431L, 623L), '+'));
+      assertThat(worksheet.problems().get(1)).isEqualTo(new Problem(List.of(175L, 581L, 32L), '*'));
+      assertThat(worksheet.problems().get(2)).isEqualTo(new Problem(List.of(8L, 248L, 369L), '+'));
+      assertThat(worksheet.problems().get(3)).isEqualTo(new Problem(List.of(356L, 24L, 1L), '*'));
+    }
 
-  @Test
-  void parseCephalopodProblems_fromWorksheet() {
-    CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
+    @Test
+    void example() {
+      CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
+      assertThat(worksheet.grandTotal()).isEqualTo(3263827L);
+    }
 
-    assertThat(worksheet.problems()).hasSize(4);
-    // Right-to-left, each column is a number read top-to-bottom
-    assertThat(worksheet.problems().get(0)).isEqualTo(new Problem(List.of(4L, 431L, 623L), '+'));
-    assertThat(worksheet.problems().get(1)).isEqualTo(new Problem(List.of(175L, 581L, 32L), '*'));
-    assertThat(worksheet.problems().get(2)).isEqualTo(new Problem(List.of(8L, 248L, 369L), '+'));
-    assertThat(worksheet.problems().get(3)).isEqualTo(new Problem(List.of(356L, 24L, 1L), '*'));
-  }
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void puzzleInput() throws Exception {
+      Path inputPath = AdventInputs.ensureDayInput(2025, 6);
+      String input = Files.readString(inputPath);
 
-  @Test
-  void examplePart2() {
-    CephalopodWorksheet worksheet = CephalopodWorksheet.parse(EXAMPLE);
-    assertThat(worksheet.grandTotal()).isEqualTo(3263827L);
-  }
+      CephalopodWorksheet worksheet = CephalopodWorksheet.parse(input);
+      long result = worksheet.grandTotal();
+      System.out.println("Day 6 Part 2: " + result);
 
-  @Test
-  @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
-  @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
-  void puzzleInput() throws Exception {
-    Path inputPath = AdventInputs.ensureDayInput(2025, 6);
-    String input = Files.readString(inputPath);
-
-    Worksheet worksheet = Worksheet.parse(input);
-    long result = worksheet.grandTotal();
-    System.out.println("Day 6 Part 1: " + result);
-
-    assertThat(result).isEqualTo(6757749566978L);
-
-    CephalopodWorksheet cephalopodWorksheet = CephalopodWorksheet.parse(input);
-    long result2 = cephalopodWorksheet.grandTotal();
-    System.out.println("Day 6 Part 2: " + result2);
-
-    assertThat(result2).isGreaterThan(0);
+      assertThat(result).isGreaterThan(0);
+    }
   }
 
   // Domain objects
@@ -126,18 +146,6 @@ class Day06 {
         }
       }
       return true;
-    }
-
-    String column(int col) {
-      StringBuilder sb = new StringBuilder();
-      for (String row : rows) {
-        sb.append(row.charAt(col));
-      }
-      return sb.toString();
-    }
-
-    String row(int row) {
-      return rows.get(row);
     }
 
     String rowSegment(int row, int startCol, int endCol) {
