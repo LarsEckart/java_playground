@@ -4,8 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -207,21 +206,10 @@ class Day07 {
 
   // Domain objects
 
-  record Manifold(List<String> rows, int startColumn) {
+  record Grid(List<String> rows) {
 
-    static Manifold parse(String input) {
-      List<String> rows = input.lines().toList();
-      int startColumn = -1;
-
-      for (String row : rows) {
-        int idx = row.indexOf('S');
-        if (idx >= 0) {
-          startColumn = idx;
-          break;
-        }
-      }
-
-      return new Manifold(rows, startColumn);
+    static Grid parse(String input) {
+      return new Grid(input.lines().toList());
     }
 
     int width() {
@@ -234,90 +222,150 @@ class Day07 {
 
     char charAt(int row, int col) {
       if (row < 0 || row >= height() || col < 0 || col >= width()) {
-        return ' '; // out of bounds
+        return ' ';
       }
       return rows.get(row).charAt(col);
+    }
+
+    int findColumn(char target) {
+      for (String row : rows) {
+        int idx = row.indexOf(target);
+        if (idx >= 0) {
+          return idx;
+        }
+      }
+      return -1;
     }
 
     boolean isSplitter(int row, int col) {
       return charAt(row, col) == '^';
     }
+  }
+
+  static class BeamState {
+    private final boolean[] active;
+
+    BeamState(int width) {
+      this.active = new boolean[width];
+    }
+
+    void activate(int col) {
+      if (col >= 0 && col < active.length) {
+        active[col] = true;
+      }
+    }
+
+    void deactivate(int col) {
+      active[col] = false;
+    }
+
+    boolean isActive(int col) {
+      return active[col];
+    }
+
+    List<Integer> activeColumns() {
+      List<Integer> columns = new ArrayList<>();
+      for (int col = 0; col < active.length; col++) {
+        if (isActive(col)) {
+          columns.add(col);
+        }
+      }
+      return columns;
+    }
+
+    void split(int col) {
+      deactivate(col);
+      activate(col - 1);
+      activate(col + 1);
+    }
+  }
+
+  static class TimelineState {
+    private long[] counts;
+
+    TimelineState(int width) {
+      this.counts = new long[width];
+    }
+
+    void add(int col, long amount) {
+      if (col >= 0 && col < counts.length) {
+        counts[col] += amount;
+      }
+    }
+
+    long at(int col) {
+      return counts[col];
+    }
+
+    int width() {
+      return counts.length;
+    }
+
+    long total() {
+      long sum = 0;
+      for (long count : counts) {
+        sum += count;
+      }
+      return sum;
+    }
+
+    TimelineState nextRow() {
+      return new TimelineState(counts.length);
+    }
+
+    void advanceTo(TimelineState next) {
+      this.counts = next.counts;
+    }
+  }
+
+  record Manifold(Grid grid, int startColumn) {
+
+    static Manifold parse(String input) {
+      Grid grid = Grid.parse(input);
+      int startColumn = grid.findColumn('S');
+      return new Manifold(grid, startColumn);
+    }
 
     long countSplits() {
       long totalSplits = 0;
+      BeamState beams = new BeamState(grid.width());
+      beams.activate(startColumn);
 
-      // Track active beam columns using a set (to handle merging)
-      // We use a boolean array for efficiency
-      boolean[] activeBeams = new boolean[width()];
-      activeBeams[startColumn] = true;
-
-      // Process row by row, starting from after S
-      for (int row = 1; row < height(); row++) {
-        // Find splitters hit by active beams
-        Deque<Integer> splitterColumns = new ArrayDeque<>();
-        for (int col = 0; col < width(); col++) {
-          if (activeBeams[col] && isSplitter(row, col)) {
-            splitterColumns.add(col);
+      for (int row = 1; row < grid.height(); row++) {
+        for (int col : beams.activeColumns()) {
+          if (grid.isSplitter(row, col)) {
+            totalSplits++;
+            beams.split(col);
           }
         }
-
-        // Process each splitter hit
-        for (int splitterCol : splitterColumns) {
-          totalSplits++;
-          // Stop the beam at the splitter
-          activeBeams[splitterCol] = false;
-          // Emit new beams left and right (if in bounds)
-          if (splitterCol > 0) {
-            activeBeams[splitterCol - 1] = true;
-          }
-          if (splitterCol < width() - 1) {
-            activeBeams[splitterCol + 1] = true;
-          }
-        }
-
-        // Beams that went out of bounds are removed (handled by bounds checking)
-        // Clean up beams that exited left or right edge - already handled since
-        // we only set valid indices
       }
 
       return totalSplits;
     }
 
     long countTimelines() {
-      // Track how many timelines have a particle at each column
-      long[] timelines = new long[width()];
-      timelines[startColumn] = 1;
+      TimelineState timelines = new TimelineState(grid.width());
+      timelines.add(startColumn, 1);
 
-      // Process row by row
-      for (int row = 1; row < height(); row++) {
-        long[] newTimelines = new long[width()];
+      for (int row = 1; row < grid.height(); row++) {
+        TimelineState next = timelines.nextRow();
 
-        for (int col = 0; col < width(); col++) {
-          if (timelines[col] == 0) continue;
+        for (int col = 0; col < timelines.width(); col++) {
+          long count = timelines.at(col);
+          if (count == 0) continue;
 
-          if (isSplitter(row, col)) {
-            // Each timeline splits: particle goes left OR right
-            if (col > 0) {
-              newTimelines[col - 1] += timelines[col];
-            }
-            if (col < width() - 1) {
-              newTimelines[col + 1] += timelines[col];
-            }
+          if (grid.isSplitter(row, col)) {
+            next.add(col - 1, count);
+            next.add(col + 1, count);
           } else {
-            // Particle continues straight down
-            newTimelines[col] += timelines[col];
+            next.add(col, count);
           }
         }
 
-        timelines = newTimelines;
+        timelines.advanceTo(next);
       }
 
-      // Sum all remaining timelines
-      long total = 0;
-      for (long count : timelines) {
-        total += count;
-      }
-      return total;
+      return timelines.total();
     }
   }
 }
