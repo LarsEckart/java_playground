@@ -128,6 +128,79 @@ class Day07 {
       long result = manifold.countSplits();
       System.out.println("Day 7 Part 1: " + result);
 
+      assertThat(result).isEqualTo(1518);
+    }
+  }
+
+  @Nested
+  class PartTwo {
+
+    @Test
+    void noSplitters_oneTimeline() {
+      String input =
+          """
+          ..S..
+          .....
+          .....
+          """;
+      Manifold manifold = Manifold.parse(input);
+
+      assertThat(manifold.countTimelines()).isEqualTo(1);
+    }
+
+    @Test
+    void singleSplitter_twoTimelines() {
+      String input =
+          """
+          ..S..
+          .....
+          ..^..
+          .....
+          """;
+      Manifold manifold = Manifold.parse(input);
+
+      // Particle goes left OR right -> 2 timelines
+      assertThat(manifold.countTimelines()).isEqualTo(2);
+    }
+
+    @Test
+    void twoSplittersInLine_fourTimelines() {
+      String input =
+          """
+          ..S..
+          .....
+          ..^..
+          .....
+          .^.^.
+          .....
+          """;
+      Manifold manifold = Manifold.parse(input);
+
+      // First split: 2 timelines (left, right)
+      // Left timeline hits left splitter: 2 more (LL, LR)
+      // Right timeline hits right splitter: 2 more (RL, RR)
+      // Total: 4 timelines
+      assertThat(manifold.countTimelines()).isEqualTo(4);
+    }
+
+    @Test
+    void example() {
+      Manifold manifold = Manifold.parse(EXAMPLE);
+
+      assertThat(manifold.countTimelines()).isEqualTo(40);
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void puzzleInput() throws Exception {
+      Path inputPath = AdventInputs.ensureDayInput(2025, 7);
+      String input = Files.readString(inputPath);
+
+      Manifold manifold = Manifold.parse(input);
+      long result = manifold.countTimelines();
+      System.out.println("Day 7 Part 2: " + result);
+
       assertThat(result).isGreaterThan(0);
     }
   }
@@ -208,6 +281,43 @@ class Day07 {
       }
 
       return totalSplits;
+    }
+
+    long countTimelines() {
+      // Track how many timelines have a particle at each column
+      long[] timelines = new long[width()];
+      timelines[startColumn] = 1;
+
+      // Process row by row
+      for (int row = 1; row < height(); row++) {
+        long[] newTimelines = new long[width()];
+
+        for (int col = 0; col < width(); col++) {
+          if (timelines[col] == 0) continue;
+
+          if (isSplitter(row, col)) {
+            // Each timeline splits: particle goes left OR right
+            if (col > 0) {
+              newTimelines[col - 1] += timelines[col];
+            }
+            if (col < width() - 1) {
+              newTimelines[col + 1] += timelines[col];
+            }
+          } else {
+            // Particle continues straight down
+            newTimelines[col] += timelines[col];
+          }
+        }
+
+        timelines = newTimelines;
+      }
+
+      // Sum all remaining timelines
+      long total = 0;
+      for (long count : timelines) {
+        total += count;
+      }
+      return total;
     }
   }
 }
