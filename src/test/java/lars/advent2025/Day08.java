@@ -1,6 +1,7 @@
 package lars.advent2025;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.data.Offset.offset;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,7 +56,7 @@ class Day08 {
 
       double distance = a.distanceTo(b);
 
-      assertThat(distance).isCloseTo(316.90, org.assertj.core.data.Offset.offset(0.01));
+      assertThat(distance).isCloseTo(316.90, offset(0.01));
     }
 
     @Test
@@ -92,6 +93,35 @@ class Day08 {
       System.out.println("Day 8 Part 1: " + result);
 
       assertThat(result).isEqualTo(57564);
+    }
+  }
+
+  @Nested
+  class PartTwo {
+
+    @Test
+    void lastConnectionToUnify() {
+      Playground playground = Playground.parse(EXAMPLE);
+
+      BoxPair lastPair = playground.connectUntilUnified();
+
+      // Last connection: 216,146,977 and 117,168,530
+      assertThat(lastPair.a().x() * lastPair.b().x()).isEqualTo(25272);
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void puzzleInput() throws Exception {
+      Path inputPath = AdventInputs.ensureDayInput(2025, 8);
+      String input = Files.readString(inputPath);
+
+      Playground playground = Playground.parse(input);
+      BoxPair lastPair = playground.connectUntilUnified();
+      long result = (long) lastPair.a().x() * lastPair.b().x();
+      System.out.println("Day 8 Part 2: " + result);
+
+      assertThat(result).isEqualTo(133296744L);
     }
   }
 
@@ -174,6 +204,16 @@ class Day08 {
       sizes.sort(Comparator.reverseOrder());
       return sizes;
     }
+
+    int circuitCount() {
+      int count = 0;
+      for (int i = 0; i < parent.length; i++) {
+        if (parent[i] == i) {
+          count++;
+        }
+      }
+      return count;
+    }
   }
 
   record Playground(List<JunctionBox> boxes) {
@@ -216,6 +256,24 @@ class Day08 {
         result *= sizes.get(i);
       }
       return result;
+    }
+
+    BoxPair connectUntilUnified() {
+      UnionFind uf = new UnionFind(boxes.size());
+      List<BoxPair> pairs = sortedPairs();
+
+      BoxPair lastConnection = null;
+      for (BoxPair pair : pairs) {
+        int indexA = boxes.indexOf(pair.a());
+        int indexB = boxes.indexOf(pair.b());
+        if (uf.union(indexA, indexB)) {
+          lastConnection = pair;
+          if (uf.circuitCount() == 1) {
+            break;
+          }
+        }
+      }
+      return lastConnection;
     }
   }
 }
