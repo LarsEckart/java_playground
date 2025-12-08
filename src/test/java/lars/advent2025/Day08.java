@@ -150,10 +150,10 @@ class Day08 {
     }
   }
 
-  record BoxPair(JunctionBox a, JunctionBox b, long distanceSquared) {
+  record BoxPair(JunctionBox a, int indexA, JunctionBox b, int indexB, long distanceSquared) {
 
-    static BoxPair of(JunctionBox a, JunctionBox b) {
-      return new BoxPair(a, b, a.distanceSquaredTo(b));
+    static BoxPair of(JunctionBox a, int indexA, JunctionBox b, int indexB) {
+      return new BoxPair(a, indexA, b, indexB, a.distanceSquaredTo(b));
     }
   }
 
@@ -228,7 +228,7 @@ class Day08 {
       List<BoxPair> pairs = new ArrayList<>();
       for (int i = 0; i < boxes.size(); i++) {
         for (int j = i + 1; j < boxes.size(); j++) {
-          pairs.add(BoxPair.of(boxes.get(i), boxes.get(j)));
+          pairs.add(BoxPair.of(boxes.get(i), i, boxes.get(j), j));
         }
       }
       pairs.sort(Comparator.comparingLong(BoxPair::distanceSquared));
@@ -244,9 +244,7 @@ class Day08 {
         if (connectionsMade >= connections) {
           break;
         }
-        int indexA = boxes.indexOf(pair.a());
-        int indexB = boxes.indexOf(pair.b());
-        uf.union(indexA, indexB);
+        uf.union(pair.indexA(), pair.indexB());
         connectionsMade++;
       }
 
@@ -264,9 +262,7 @@ class Day08 {
 
       BoxPair lastConnection = null;
       for (BoxPair pair : pairs) {
-        int indexA = boxes.indexOf(pair.a());
-        int indexB = boxes.indexOf(pair.b());
-        if (uf.union(indexA, indexB)) {
+        if (uf.union(pair.indexA(), pair.indexB())) {
           lastConnection = pair;
           if (uf.circuitCount() == 1) {
             break;
