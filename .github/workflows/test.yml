@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        java: [21]
+        java: [25]
         os: [ubuntu, windows]
     steps:
       - name: Check out repo
