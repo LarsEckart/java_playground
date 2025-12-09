@@ -23,12 +23,6 @@ jdeps --class-path 'libs/*' -R build/libs/java_playground.jar
 ```
 gradlew generateDependencyGraph
 ```
-
-### GitHub Markdown Task Lists
-
-- [x] use JDK 17
-- [ ] try JDK 21 early access
-
 ### License
 
 ```
