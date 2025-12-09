@@ -53,6 +53,8 @@ dependencies {
 
     implementation 'com.google.zxing:core:3.5.4'
     implementation 'com.google.zxing:javase:3.5.4'
+    implementation 'com.google.mug:mug-safesql:9.5'
+
 
     testImplementation 'com.github.mwiede:jsch:2.27.6'
     testImplementation 'com.hierynomus:sshj:0.40.0'
