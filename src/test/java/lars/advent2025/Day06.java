@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -59,7 +60,7 @@ class Day06 {
     @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void puzzleInput() throws Exception {
-      Path inputPath = AdventInputs.ensureDayInput(2025, 6);
+      Path inputPath = PuzzleInput.forDate(2025, 6);
       String input = Files.readString(inputPath);
 
       Worksheet worksheet = Worksheet.parse(input);
@@ -95,7 +96,7 @@ class Day06 {
     @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void puzzleInput() throws Exception {
-      Path inputPath = AdventInputs.ensureDayInput(2025, 6);
+      Path inputPath = PuzzleInput.forDate(2025, 6);
       String input = Files.readString(inputPath);
 
       CephalopodWorksheet worksheet = CephalopodWorksheet.parse(input);

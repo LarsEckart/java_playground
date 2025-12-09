@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
@@ -54,7 +55,7 @@ class Day01 {
   @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
   @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
-    Path input = AdventInputs.ensureDayInput(2025, 1);
+    Path input = PuzzleInput.forDate(2025, 1);
     List<String> rotations = Files.readAllLines(input);
     Safe safe = new Safe();
     for (String rotation : rotations) {

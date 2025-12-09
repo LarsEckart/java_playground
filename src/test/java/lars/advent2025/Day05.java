@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
@@ -63,7 +64,7 @@ class Day05 {
   @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
   @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
   void puzzleInput() throws Exception {
-    Path inputPath = AdventInputs.ensureDayInput(2025, 5);
+    Path inputPath = PuzzleInput.forDate(2025, 5);
     String input = Files.readString(inputPath);
 
     IngredientDatabase db = IngredientDatabase.parse(input);

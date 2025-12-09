@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
+import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -118,7 +119,8 @@ class Day1 {
     @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void my_numbers() throws Exception {
-      String allNumbers = Files.readString(Path.of("src/test/resources/advent2018/day1.txt"));
+      Path inputPath = PuzzleInput.forDate(2018, 1);
+      String allNumbers = Files.readString(inputPath);
       assertThat(firstFrequencyTwice(allNumbers)).isEqualTo(83445);
     }
   }

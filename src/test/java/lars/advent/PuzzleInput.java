@@ -1,4 +1,4 @@
-package lars.advent2025;
+package lars.advent;
 
 import java.io.IOException;
 import java.net.CookieManager;
@@ -14,20 +14,20 @@ import java.time.Duration;
 import java.util.Optional;
 
 /**
- * Small helper for Advent of Code puzzles. Call {@link #ensureDayInput(int, int)} at the start of a
+ * Small helper for Advent of Code puzzles. Call {@link #forDate(int, int)} at the start of a
  * test. If the input file already exists it is returned unchanged. If it is missing, this helper
  * downloads it using the session cookie from {@code AOC_SESSION} (preferred) or the file {@code
  * ~/.config/aoc/session}. This keeps puzzle inputs out of version control while allowing tests to
  * fetch them on demand.
  */
-final class AdventInputs {
+public final class PuzzleInput {
 
   private static final Path INPUT_ROOT = Path.of("src", "test", "resources");
   private static final Duration TIMEOUT = Duration.ofSeconds(10);
 
-  private AdventInputs() {}
+  private PuzzleInput() {}
 
-  static Path ensureDayInput(int year, int day) throws IOException, InterruptedException {
+  public static Path forDate(int year, int day) throws IOException, InterruptedException {
     if (day < 1 || day > 25) {
       throw new IllegalArgumentException("Day must be 1-25, was: " + day);
     }

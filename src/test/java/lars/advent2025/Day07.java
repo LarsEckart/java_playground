@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -120,7 +121,7 @@ class Day07 {
     @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void puzzleInput() throws Exception {
-      Path inputPath = AdventInputs.ensureDayInput(2025, 7);
+      Path inputPath = PuzzleInput.forDate(2025, 7);
       String input = Files.readString(inputPath);
 
       Manifold manifold = Manifold.parse(input);
@@ -193,7 +194,7 @@ class Day07 {
     @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void puzzleInput() throws Exception {
-      Path inputPath = AdventInputs.ensureDayInput(2025, 7);
+      Path inputPath = PuzzleInput.forDate(2025, 7);
       String input = Files.readString(inputPath);
 
       Manifold manifold = Manifold.parse(input);
