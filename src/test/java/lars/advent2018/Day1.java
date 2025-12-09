@@ -2,16 +2,16 @@ package lars.advent2018;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 class Day1 {
 
@@ -115,10 +115,10 @@ class Day1 {
     }
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
     void my_numbers() throws Exception {
-      File inputFile = new File("src/test/resources/advent2018/day1.txt");
-      assumeTrue(inputFile.exists(), "Puzzle input not available");
-      String allNumbers = Files.readString(inputFile.toPath());
+      String allNumbers = Files.readString(Path.of("src/test/resources/advent2018/day1.txt"));
       assertThat(firstFrequencyTwice(allNumbers)).isEqualTo(83445);
     }
   }
