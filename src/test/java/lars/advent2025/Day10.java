@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,45 +31,55 @@ class Day10 {
   class PartOne {
 
     @Test
-    void parseMachine() {
+    void parseDiagram() {
       String line = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}";
-      Machine machine = Machine.parse(line);
+      Diagram diagram = Diagram.parse(line);
 
-      assertThat(machine.numLights()).isEqualTo(4);
-      assertThat(machine.targetState()).isEqualTo(0b0110); // .##. -> bits 1,2 are on
-      assertThat(machine.buttons()).hasSize(6);
-      assertThat(machine.buttons().get(0).toggleMask()).isEqualTo(0b1000); // toggles light 3
-      assertThat(machine.buttons().get(1).toggleMask()).isEqualTo(0b1010); // toggles lights 1,3
+      assertThat(diagram.numLights()).isEqualTo(4);
+      assertThat(diagram.target()).isEqualTo(List.of(false, true, true, false)); // .##.
+      assertThat(diagram.lights()).isEqualTo(List.of(false, false, false, false)); // all off
+      assertThat(diagram.isConfigured()).isFalse();
     }
 
     @Test
-    void parseSecondMachine() {
+    void parseButtons() {
+      String line = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}";
+      List<Button> buttons = Button.parseAll(line);
+
+      assertThat(buttons).hasSize(6);
+      assertThat(buttons.get(0).toggleIndices()).containsExactly(3);
+      assertThat(buttons.get(1).toggleIndices()).containsExactly(1, 3);
+    }
+
+    @Test
+    void parseSecondDiagram() {
       String line = "[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}";
-      Machine machine = Machine.parse(line);
+      Diagram diagram = Diagram.parse(line);
 
-      assertThat(machine.numLights()).isEqualTo(5);
-      assertThat(machine.targetState()).isEqualTo(0b01000); // ...#. -> bit 3 is on
+      assertThat(diagram.numLights()).isEqualTo(5);
+      assertThat(diagram.target()).isEqualTo(List.of(false, false, false, true, false)); // ...#.
     }
 
     @Test
-    void toggleLights() {
-      // Start with all off (0), toggle lights 1 and 3
-      int state = 0b0000;
-      Button button = new Button(0b1010); // toggles bits 1 and 3
+    void pressButtonTogglesLights() {
+      Diagram diagram = Diagram.parse("[.##.] (1,3) {1}");
+      Button button = new Button(List.of(1, 3)); // toggles lights 1 and 3
 
-      int newState = button.toggle(state);
+      Diagram after = diagram.pressButton(button);
 
-      assertThat(newState).isEqualTo(0b1010);
+      assertThat(after.lights()).isEqualTo(List.of(false, true, false, true));
+      assertThat(diagram.lights())
+          .isEqualTo(List.of(false, false, false, false)); // original unchanged
     }
 
     @Test
-    void toggleTwiceReturnsToOriginal() {
-      int state = 0b0000;
-      Button button = new Button(0b1010);
+    void pressButtonTwiceReturnsToOriginal() {
+      Diagram diagram = Diagram.parse("[.##.] (1,3) {1}");
+      Button button = new Button(List.of(1, 3));
 
-      int newState = button.toggle(button.toggle(state));
+      Diagram after = diagram.pressButton(button).pressButton(button);
 
-      assertThat(newState).isEqualTo(state);
+      assertThat(after.lights()).isEqualTo(diagram.lights());
     }
 
     @Test
@@ -124,46 +135,65 @@ class Day10 {
 
   // Domain objects
 
-  record Button(int toggleMask) {
+  record Button(List<Integer> toggleIndices) {
 
-    int toggle(int state) {
-      return state ^ toggleMask;
+    private static final Pattern PATTERN = Pattern.compile("\\(([0-9,]+)\\)");
+
+    static List<Button> parseAll(String line) {
+      List<Button> buttons = new ArrayList<>();
+      Matcher matcher = PATTERN.matcher(line);
+      while (matcher.find()) {
+        List<Integer> indices =
+            Arrays.stream(matcher.group(1).split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .toList();
+        buttons.add(new Button(indices));
+      }
+      return buttons;
     }
   }
 
-  record Machine(int numLights, int targetState, List<Button> buttons) {
+  record Diagram(List<Boolean> target, List<Boolean> lights) {
 
-    private static final Pattern DIAGRAM_PATTERN = Pattern.compile("\\[([.#]+)]");
-    private static final Pattern BUTTON_PATTERN = Pattern.compile("\\(([0-9,]+)\\)");
+    private static final Pattern PATTERN = Pattern.compile("\\[([.#]+)]");
 
-    static Machine parse(String line) {
-      // Parse indicator light diagram [.##.]
-      Matcher diagramMatcher = DIAGRAM_PATTERN.matcher(line);
-      if (!diagramMatcher.find()) {
+    static Diagram parse(String line) {
+      Matcher matcher = PATTERN.matcher(line);
+      if (!matcher.find()) {
         throw new IllegalArgumentException("No diagram found in: " + line);
       }
-      String diagram = diagramMatcher.group(1);
-      int numLights = diagram.length();
-      int targetState = 0;
-      for (int i = 0; i < diagram.length(); i++) {
-        if (diagram.charAt(i) == '#') {
-          targetState |= (1 << i);
-        }
+      String pattern = matcher.group(1);
+      List<Boolean> target = new ArrayList<>();
+      List<Boolean> lights = new ArrayList<>();
+      for (int i = 0; i < pattern.length(); i++) {
+        target.add(pattern.charAt(i) == '#');
+        lights.add(false);
       }
+      return new Diagram(target, lights);
+    }
 
-      // Parse button wiring schematics (0,1,2)
-      List<Button> buttons = new ArrayList<>();
-      Matcher buttonMatcher = BUTTON_PATTERN.matcher(line);
-      while (buttonMatcher.find()) {
-        String buttonSpec = buttonMatcher.group(1);
-        int mask = 0;
-        for (String index : buttonSpec.split(",")) {
-          mask |= (1 << Integer.parseInt(index.trim()));
-        }
-        buttons.add(new Button(mask));
+    Diagram pressButton(Button button) {
+      List<Boolean> newLights = new ArrayList<>(lights);
+      for (int index : button.toggleIndices()) {
+        newLights.set(index, !newLights.get(index));
       }
+      return new Diagram(target, newLights);
+    }
 
-      return new Machine(numLights, targetState, buttons);
+    boolean isConfigured() {
+      return lights.equals(target);
+    }
+
+    int numLights() {
+      return lights.size();
+    }
+  }
+
+  record Machine(Diagram diagram, List<Button> buttons) {
+
+    static Machine parse(String line) {
+      return new Machine(Diagram.parse(line), Button.parseAll(line));
     }
 
     /**
@@ -173,35 +203,30 @@ class Day10 {
      * time.
      */
     int findMinimumPresses() {
-      // BFS: state -> minimum presses to reach it
-      Map<Integer, Integer> visited = new HashMap<>();
-      Queue<int[]> queue = new LinkedList<>();
+      Map<List<Boolean>, Integer> visited = new HashMap<>();
+      Queue<Diagram> queue = new LinkedList<>();
 
-      // Start with all lights off (state 0), 0 presses
-      queue.add(new int[] {0, 0});
-      visited.put(0, 0);
+      queue.add(diagram);
+      visited.put(diagram.lights(), 0);
 
       while (!queue.isEmpty()) {
-        int[] current = queue.poll();
-        int state = current[0];
-        int presses = current[1];
+        Diagram current = queue.poll();
+        int presses = visited.get(current.lights());
 
-        if (state == targetState) {
+        if (current.isConfigured()) {
           return presses;
         }
 
-        // Try pressing each button
         for (Button button : buttons) {
-          int newState = button.toggle(state);
-          if (!visited.containsKey(newState)) {
-            visited.put(newState, presses + 1);
-            queue.add(new int[] {newState, presses + 1});
+          Diagram next = current.pressButton(button);
+          if (!visited.containsKey(next.lights())) {
+            visited.put(next.lights(), presses + 1);
+            queue.add(next);
           }
         }
       }
 
-      // No solution found (shouldn't happen for valid input)
-      throw new IllegalStateException("No solution found for target state: " + targetState);
+      throw new IllegalStateException("No solution found for target: " + diagram.target());
     }
   }
 
