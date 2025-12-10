@@ -14,8 +14,8 @@ import java.time.Duration;
 import java.util.Optional;
 
 /**
- * Small helper for Advent of Code puzzles. Call {@link #forDate(int, int)} at the start of a
- * test. If the input file already exists it is returned unchanged. If it is missing, this helper
+ * Small helper for Advent of Code puzzles. Call {@link #forDate(int, int)} at the start of a test.
+ * If the input file already exists it is returned unchanged. If it is missing, this helper
  * downloads it using the session cookie from {@code AOC_SESSION} (preferred) or the file {@code
  * ~/.config/aoc/session}. This keeps puzzle inputs out of version control while allowing tests to
  * fetch them on demand.
