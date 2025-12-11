@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -60,6 +61,59 @@ class Day11 {
       DeviceNetwork network = DeviceNetwork.parse(input);
       long result = network.countPaths("you", "out");
       System.out.println("Day 11 Part 1: " + result);
+
+      assertThat(result).isEqualTo(500);
+    }
+  }
+
+  @Nested
+  class PartTwo {
+
+    static final String EXAMPLE2 =
+        """
+        svr: aaa bbb
+        aaa: fft
+        fft: ccc
+        bbb: tty
+        tty: ccc
+        ccc: ddd eee
+        ddd: hub
+        hub: fff
+        eee: dac
+        dac: fff
+        fff: ggg hhh
+        ggg: out
+        hhh: out
+        """;
+
+    @Test
+    void countPathsVisitingBothDacAndFft() {
+      DeviceNetwork network = DeviceNetwork.parse(EXAMPLE2);
+
+      long pathCount = network.countPathsVisiting("svr", "out", Set.of("dac", "fft"));
+
+      assertThat(pathCount).isEqualTo(2);
+    }
+
+    @Test
+    void totalPathsFromSvrToOut() {
+      DeviceNetwork network = DeviceNetwork.parse(EXAMPLE2);
+
+      long pathCount = network.countPaths("svr", "out");
+
+      assertThat(pathCount).isEqualTo(8);
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void puzzleInput() throws Exception {
+      Path inputPath = PuzzleInput.forDate(2025, 11);
+      String input = Files.readString(inputPath);
+
+      DeviceNetwork network = DeviceNetwork.parse(input);
+      long result = network.countPathsVisiting("svr", "out", Set.of("dac", "fft"));
+      System.out.println("Day 11 Part 2: " + result);
 
       assertThat(result).isGreaterThan(0);
     }
@@ -121,5 +175,56 @@ class Day11 {
       memo.put(current, totalPaths);
       return totalPaths;
     }
+
+    /**
+     * Counts paths from start to end that visit ALL required nodes. Uses memoization with state
+     * tracking which required nodes have been visited (as a bitmask).
+     */
+    long countPathsVisiting(String start, String end, Set<String> required) {
+      List<String> requiredList = required.stream().sorted().toList();
+      Map<MemoKey, Long> memo = new HashMap<>();
+      int initialMask = computeMask(start, requiredList);
+      return countPathsVisitingMemoized(start, end, requiredList, initialMask, memo);
+    }
+
+    private long countPathsVisitingMemoized(
+        String current,
+        String end,
+        List<String> required,
+        int visitedMask,
+        Map<MemoKey, Long> memo) {
+
+      int allVisited = (1 << required.size()) - 1;
+
+      if (current.equals(end)) {
+        return visitedMask == allVisited ? 1 : 0;
+      }
+
+      MemoKey key = new MemoKey(current, visitedMask);
+      if (memo.containsKey(key)) {
+        return memo.get(key);
+      }
+
+      long totalPaths = 0;
+      for (String next : outputs(current)) {
+        int newMask = visitedMask | computeMask(next, required);
+        totalPaths += countPathsVisitingMemoized(next, end, required, newMask, memo);
+      }
+
+      memo.put(key, totalPaths);
+      return totalPaths;
+    }
+
+    private int computeMask(String node, List<String> required) {
+      int mask = 0;
+      for (int i = 0; i < required.size(); i++) {
+        if (required.get(i).equals(node)) {
+          mask |= (1 << i);
+        }
+      }
+      return mask;
+    }
+
+    record MemoKey(String node, int visitedMask) {}
   }
 }
