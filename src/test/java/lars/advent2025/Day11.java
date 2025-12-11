@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -124,23 +125,21 @@ class Day11 {
   record DeviceNetwork(Map<String, List<String>> adjacency) {
 
     static DeviceNetwork parse(String input) {
-      Map<String, List<String>> adjacency = new HashMap<>();
-
-      input
-          .lines()
-          .filter(line -> !line.isBlank())
-          .forEach(
-              line -> {
-                String[] parts = line.split(":");
-                String device = parts[0].trim();
-                List<String> outputs =
-                    parts.length > 1
-                        ? Arrays.stream(parts[1].trim().split("\\s+"))
-                            .filter(s -> !s.isBlank())
-                            .toList()
-                        : List.of();
-                adjacency.put(device, outputs);
-              });
+      Map<String, List<String>> adjacency =
+          input
+              .lines()
+              .filter(line -> !line.isBlank())
+              .collect(
+                  Collectors.toMap(
+                      line -> line.split(":")[0].trim(),
+                      line -> {
+                        String[] parts = line.split(":");
+                        return parts.length > 1
+                            ? Arrays.stream(parts[1].trim().split("\\s+"))
+                                .filter(s -> !s.isBlank())
+                                .toList()
+                            : List.of();
+                      }));
 
       return new DeviceNetwork(adjacency);
     }
