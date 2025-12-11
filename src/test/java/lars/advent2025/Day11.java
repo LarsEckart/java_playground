@@ -129,16 +129,15 @@ class Day11 {
           input
               .lines()
               .filter(line -> !line.isBlank())
+              .map(line -> line.split(":"))
               .collect(
                   Collectors.toMap(
-                      line -> line.split(":")[0].trim(),
-                      line -> {
-                        String[] parts = line.split(":");
-                        return parts.length > 1
-                            ? Arrays.stream(parts[1].trim().split("\\s+"))
-                                .filter(s -> !s.isBlank())
-                                .toList()
-                            : List.of();
+                      parts -> parts[0].trim(),
+                      parts -> {
+                        String outputsPart = parts.length > 1 ? parts[1].trim() : "";
+                        return outputsPart.isEmpty()
+                            ? List.of()
+                            : Arrays.stream(outputsPart.split("\\s+")).toList();
                       }));
 
       return new DeviceNetwork(adjacency);
