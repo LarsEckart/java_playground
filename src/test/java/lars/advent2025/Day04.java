@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
@@ -78,9 +80,8 @@ class Day04 {
 
     Warehouse warehouse = Warehouse.parse(input);
     long result = warehouse.countAccessibleRolls();
-    System.out.println("Day 4 Part 1: " + result);
-
     long result2 = warehouse.totalRemovableRolls();
+    System.out.println("Day 4 Part 1: " + result);
     System.out.println("Day 4 Part 2: " + result2);
 
     assertThat(result).isEqualTo(1397);
@@ -156,17 +157,24 @@ class Day04 {
         mutableGrid[i] = grid.get(i).toCharArray();
       }
 
+      // Initial scan: find all paper roll positions as candidates
+      Set<Coordinate> candidates = new HashSet<>();
+      for (int row = 0; row < mutableGrid.length; row++) {
+        for (int col = 0; col < mutableGrid[row].length; col++) {
+          if (mutableGrid[row][col] == '@') {
+            candidates.add(new Coordinate(row, col));
+          }
+        }
+      }
+
       long totalRemoved = 0;
 
-      while (true) {
-        // Find all currently accessible rolls
-        List<int[]> toRemove = new ArrayList<>();
-
-        for (int row = 0; row < mutableGrid.length; row++) {
-          for (int col = 0; col < mutableGrid[row].length; col++) {
-            if (isAccessibleInGrid(mutableGrid, row, col)) {
-              toRemove.add(new int[] {row, col});
-            }
+      while (!candidates.isEmpty()) {
+        // Find accessible rolls among candidates
+        List<Coordinate> toRemove = new ArrayList<>();
+        for (Coordinate coord : candidates) {
+          if (isAccessibleInGrid(mutableGrid, coord.row(), coord.col())) {
+            toRemove.add(coord);
           }
         }
 
@@ -174,16 +182,31 @@ class Day04 {
           break;
         }
 
-        // Remove all accessible rolls
-        for (int[] pos : toRemove) {
-          mutableGrid[pos[0]][pos[1]] = '.';
+        // Remove accessible rolls and collect their neighbors as next candidates
+        Set<Coordinate> nextCandidates = new HashSet<>();
+        for (Coordinate coord : toRemove) {
+          mutableGrid[coord.row()][coord.col()] = '.';
+
+          // Only neighbors of removed cells might become accessible
+          for (int dr = -1; dr <= 1; dr++) {
+            for (int dc = -1; dc <= 1; dc++) {
+              if (dr == 0 && dc == 0) continue;
+              int nr = coord.row() + dr, nc = coord.col() + dc;
+              if (isPaperRollInGrid(mutableGrid, nr, nc)) {
+                nextCandidates.add(new Coordinate(nr, nc));
+              }
+            }
+          }
         }
 
         totalRemoved += toRemove.size();
+        candidates = nextCandidates;
       }
 
       return totalRemoved;
     }
+
+    record Coordinate(int row, int col) {}
 
     private boolean isAccessibleInGrid(char[][] grid, int row, int col) {
       if (!isPaperRollInGrid(grid, row, col)) {
@@ -210,7 +233,7 @@ class Day04 {
             continue;
           }
           if (isPaperRollInGrid(grid, row + dr, col + dc)) {
-            count++;
+            if (++count >= 4) return count; // Early exit - already inaccessible
           }
         }
       }
