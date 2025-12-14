@@ -108,11 +108,19 @@ class Day03 {
     String input = Files.readString(inputPath);
 
     BatterySystem system = BatterySystem.parse(input);
-    System.out.println("Day 3 Part 1: " + system.totalOutputJoltage());
-    System.out.println("Day 3 Part 2: " + system.totalOutputJoltagePart2());
 
-    assertThat(system.totalOutputJoltage()).isEqualTo(17085);
-    assertThat(system.totalOutputJoltagePart2()).isEqualTo(new BigInteger("169408143086082"));
+    long start = System.nanoTime();
+    int part1 = system.totalOutputJoltage();
+    long part1Time = System.nanoTime() - start;
+
+    start = System.nanoTime();
+    var part2 = system.totalOutputJoltagePart2();
+    long part2Time = System.nanoTime() - start;
+
+    System.out.println("Day 3 Part 1: " + part1 + " (took " + part1Time / 1_000_000.0 + " ms)");
+    System.out.println("Day 3 Part 2: " + part2 + " (took " + part2Time / 1_000_000.0 + " ms)");
+    assertThat(part1).isEqualTo(17085);
+    assertThat(part2).isEqualTo(new BigInteger("169408143086082"));
   }
 
   // Domain objects
@@ -124,17 +132,20 @@ class Day03 {
     }
 
     int maxJoltage() {
-      int max = 0;
       int length = batteries.length();
 
-      // Try all pairs of positions (i, j) where i < j
-      for (int i = 0; i < length; i++) {
-        for (int j = i + 1; j < length; j++) {
-          int digit1 = batteries.charAt(i) - '0';
-          int digit2 = batteries.charAt(j) - '0';
-          int joltage = digit1 * 10 + digit2;
-          max = Math.max(max, joltage);
-        }
+      // Precompute: for each position, what's the max digit to its right?
+      int[] maxFromRight = new int[length];
+      maxFromRight[length - 1] = batteries.charAt(length - 1) - '0';
+      for (int i = length - 2; i >= 0; i--) {
+        maxFromRight[i] = Math.max(batteries.charAt(i) - '0', maxFromRight[i + 1]);
+      }
+
+      // For each position as first digit, pair with the max digit to its right
+      int max = 0;
+      for (int i = 0; i < length - 1; i++) {
+        int joltage = (batteries.charAt(i) - '0') * 10 + maxFromRight[i + 1];
+        max = Math.max(max, joltage);
       }
 
       return max;
