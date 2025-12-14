@@ -2,6 +2,7 @@ package lars.advent2025;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.google.guava.labs.collect.BinarySearch;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -69,13 +70,11 @@ class Day05 {
 
     IngredientDatabase db = IngredientDatabase.parse(input);
     long result = db.countFreshIngredients();
-    System.out.println("Day 5 Part 1: " + result);
-
-    assertThat(result).isEqualTo(773);
-
     long result2 = db.countAllFreshIds();
+    System.out.println("Day 5 Part 1: " + result);
     System.out.println("Day 5 Part 2: " + result2);
 
+    assertThat(result).isEqualTo(773);
     assertThat(result2).isGreaterThan(0);
   }
 
@@ -87,7 +86,7 @@ class Day05 {
     }
   }
 
-  record IngredientDatabase(List<Range> freshRanges, List<Long> availableIngredients) {
+  record IngredientDatabase(List<Range> mergedRanges, List<Long> availableIngredients) {
 
     static IngredientDatabase parse(String input) {
       String[] sections = input.split("\n\n");
@@ -105,21 +104,12 @@ class Day05 {
         ingredients.add(Long.parseLong(line.trim()));
       }
 
-      return new IngredientDatabase(ranges, ingredients);
+      List<Range> merged = mergeRanges(ranges);
+      return new IngredientDatabase(merged, ingredients);
     }
 
-    boolean isFresh(long ingredientId) {
-      return freshRanges.stream().anyMatch(range -> range.contains(ingredientId));
-    }
-
-    long countFreshIngredients() {
-      return availableIngredients.stream().filter(this::isFresh).count();
-    }
-
-    long countAllFreshIds() {
-      // Merge overlapping ranges, then sum their sizes
-      List<Range> sorted =
-          freshRanges.stream().sorted(Comparator.comparingLong(Range::start)).toList();
+    private static List<Range> mergeRanges(List<Range> ranges) {
+      List<Range> sorted = ranges.stream().sorted(Comparator.comparingLong(Range::start)).toList();
 
       List<Range> merged = new ArrayList<>();
       for (Range range : sorted) {
@@ -127,16 +117,40 @@ class Day05 {
           merged.add(range);
         } else {
           Range last = merged.getLast();
-          // Ranges overlap or are adjacent if last.end >= range.start - 1
-          if (last.end >= range.start - 1) {
-            merged.set(merged.size() - 1, new Range(last.start, Math.max(last.end, range.end)));
+          if (last.end() >= range.start() - 1) {
+            merged.set(
+                merged.size() - 1, new Range(last.start(), Math.max(last.end(), range.end())));
           } else {
             merged.add(range);
           }
         }
       }
+      return merged;
+    }
 
-      return merged.stream().mapToLong(r -> r.end - r.start + 1).sum();
+    boolean isFresh(long ingredientId) {
+      // Binary search to find the range that could contain this ingredient
+      // We search by range start - find the last range whose start <= ingredientId
+      var insertionPoint =
+          BinarySearch.inSortedList(mergedRanges, Range::start).insertionPointFor(ingredientId);
+
+      // Check the floor (largest range with start <= ingredientId)
+      int floorIndex = insertionPoint.floor();
+      if (floorIndex >= 0 && floorIndex < mergedRanges.size()) {
+        Range range = mergedRanges.get(floorIndex);
+        if (range.contains(ingredientId)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    long countFreshIngredients() {
+      return availableIngredients.stream().filter(this::isFresh).count();
+    }
+
+    long countAllFreshIds() {
+      return mergedRanges.stream().mapToLong(r -> r.end() - r.start() + 1).sum();
     }
   }
 }
