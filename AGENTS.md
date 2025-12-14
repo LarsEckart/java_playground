@@ -17,4 +17,5 @@ A personal sandbox for exploring Java language features, experimenting with new 
   - Clear separation of concerns
   - Methods on objects rather than procedural code
 - **Style**: Experiment freely, but keep code clean and well-structured
+- **Naming**: Avoid abbreviations - use full, descriptive names (e.g., `Coordinate` not `Coord`)
 
