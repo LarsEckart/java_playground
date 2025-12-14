@@ -108,19 +108,11 @@ class Day03 {
     String input = Files.readString(inputPath);
 
     BatterySystem system = BatterySystem.parse(input);
+    System.out.println("Day 3 Part 1: " + system.totalOutputJoltage());
+    System.out.println("Day 3 Part 2: " + system.totalOutputJoltagePart2());
 
-    long start = System.nanoTime();
-    int part1 = system.totalOutputJoltage();
-    long part1Time = System.nanoTime() - start;
-
-    start = System.nanoTime();
-    var part2 = system.totalOutputJoltagePart2();
-    long part2Time = System.nanoTime() - start;
-
-    System.out.println("Day 3 Part 1: " + part1 + " (took " + part1Time / 1_000_000.0 + " ms)");
-    System.out.println("Day 3 Part 2: " + part2 + " (took " + part2Time / 1_000_000.0 + " ms)");
-    assertThat(part1).isEqualTo(17085);
-    assertThat(part2).isEqualTo(new BigInteger("169408143086082"));
+    assertThat(system.totalOutputJoltage()).isEqualTo(17085);
+    assertThat(system.totalOutputJoltagePart2()).isEqualTo(new BigInteger("169408143086082"));
   }
 
   // Domain objects
