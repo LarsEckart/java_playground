@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,8 +37,10 @@ class Day10 {
       Diagram diagram = Diagram.parse(line);
 
       assertThat(diagram.numLights()).isEqualTo(4);
-      assertThat(diagram.target()).isEqualTo(List.of(false, true, true, false)); // .##.
-      assertThat(diagram.lights()).isEqualTo(List.of(false, false, false, false)); // all off
+      assertThat(diagram.isLightOn(0)).isFalse();
+      assertThat(diagram.isLightOn(1)).isFalse();
+      assertThat(diagram.isLightOn(2)).isFalse();
+      assertThat(diagram.isLightOn(3)).isFalse();
       assertThat(diagram.isConfigured()).isFalse();
     }
 
@@ -57,29 +60,38 @@ class Day10 {
       Diagram diagram = Diagram.parse(line);
 
       assertThat(diagram.numLights()).isEqualTo(5);
-      assertThat(diagram.target()).isEqualTo(List.of(false, false, false, true, false)); // ...#.
+      // Target is ...#. meaning only position 3 should be on
+      assertThat(diagram.isTargetOn(3)).isTrue();
+      assertThat(diagram.isTargetOn(0)).isFalse();
     }
 
     @Test
     void pressButtonTogglesLights() {
       Diagram diagram = Diagram.parse("[.##.] (1,3) {1}");
-      Button button = new Button(List.of(1, 3)); // toggles lights 1 and 3
+      Button button = Button.parseAll("(1,3)").getFirst(); // toggles lights 1 and 3
 
       Diagram after = diagram.pressButton(button);
 
-      assertThat(after.lights()).isEqualTo(List.of(false, true, false, true));
-      assertThat(diagram.lights())
-          .isEqualTo(List.of(false, false, false, false)); // original unchanged
+      // Lights 1 and 3 should now be on
+      assertThat(after.isLightOn(0)).isFalse();
+      assertThat(after.isLightOn(1)).isTrue();
+      assertThat(after.isLightOn(2)).isFalse();
+      assertThat(after.isLightOn(3)).isTrue();
+      // Original should be unchanged (immutable)
+      assertThat(diagram.isLightOn(1)).isFalse();
+      assertThat(diagram.isLightOn(3)).isFalse();
     }
 
     @Test
     void pressButtonTwiceReturnsToOriginal() {
       Diagram diagram = Diagram.parse("[.##.] (1,3) {1}");
-      Button button = new Button(List.of(1, 3));
+      Button button = Button.parseAll("(1,3)").getFirst();
 
       Diagram after = diagram.pressButton(button).pressButton(button);
 
-      assertThat(after.lights()).isEqualTo(diagram.lights());
+      // Should be back to all lights off
+      assertThat(after.isLightOn(1)).isFalse();
+      assertThat(after.isLightOn(3)).isFalse();
     }
 
     @Test
@@ -149,7 +161,7 @@ class Day10 {
     @Test
     void pressButtonIncrementsCounters() {
       JoltagePanel panel = JoltagePanel.parse("[.##.] (1,3) {3,5,4,7}");
-      Button button = new Button(List.of(1, 3));
+      Button button = Button.parseAll("(1,3)").getFirst();
 
       JoltagePanel after = panel.pressButton(button);
 
@@ -210,7 +222,13 @@ class Day10 {
 
   // Domain objects
 
-  record Button(List<Integer> indices) {
+  /**
+   * A button that toggles specific light positions when pressed.
+   *
+   * <p>The mask is a pre-computed BitSet with bits set at each position this button affects. When
+   * pressed, we XOR the current lights with this mask to toggle all affected positions at once.
+   */
+  record Button(List<Integer> indices, BitSet mask) {
 
     private static final Pattern PATTERN = Pattern.compile("\\(([0-9,]+)\\)");
 
@@ -223,7 +241,12 @@ class Day10 {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .toList();
-        buttons.add(new Button(indices));
+        // Pre-compute the mask: set a bit at each position this button toggles
+        BitSet mask = new BitSet();
+        for (int index : indices) {
+          mask.set(index);
+        }
+        buttons.add(new Button(indices, mask));
       }
       return buttons;
     }
@@ -272,7 +295,19 @@ class Day10 {
     }
   }
 
-  record Diagram(List<Boolean> target, List<Boolean> lights) {
+  /**
+   * Represents the light display panel using BitSet for efficient state management.
+   *
+   * <p>A BitSet stores bits (0 or 1) at indexed positions. We use it to represent which lights are
+   * on (bit set to 1) or off (bit set to 0). This is much faster than List<Boolean> because:
+   *
+   * <ul>
+   *   <li>Toggling uses XOR which flips multiple bits in one operation
+   *   <li>Equality comparison is a single operation instead of element-by-element
+   *   <li>Hashing for HashMap lookups is O(1) instead of O(n)
+   * </ul>
+   */
+  record Diagram(BitSet target, BitSet lights, int numLights) {
 
     private static final Pattern PATTERN = Pattern.compile("\\[([.#]+)]");
 
@@ -282,29 +317,36 @@ class Day10 {
         throw new IllegalArgumentException("No diagram found in: " + line);
       }
       String pattern = matcher.group(1);
-      List<Boolean> target = new ArrayList<>();
-      List<Boolean> lights = new ArrayList<>();
+      BitSet target = new BitSet(pattern.length());
       for (int i = 0; i < pattern.length(); i++) {
-        target.add(pattern.charAt(i) == '#');
-        lights.add(false);
+        if (pattern.charAt(i) == '#') {
+          target.set(i); // set bit at position i to 1 (light on)
+        }
       }
-      return new Diagram(target, lights);
+      // All lights start off (empty BitSet has all bits as 0)
+      BitSet lights = new BitSet(pattern.length());
+      return new Diagram(target, lights, pattern.length());
     }
 
     Diagram pressButton(Button button) {
-      List<Boolean> newLights = new ArrayList<>(lights);
-      for (int index : button.indices()) {
-        newLights.set(index, !newLights.get(index));
-      }
-      return new Diagram(target, newLights);
+      // Clone the current lights state (BitSet is mutable, so we need a copy)
+      BitSet newLights = (BitSet) lights.clone();
+      // XOR with button's mask flips all bits at the button's positions
+      // Example: if lights=0010 and mask=1010, then 0010 XOR 1010 = 1000
+      newLights.xor(button.mask());
+      return new Diagram(target, newLights, numLights);
     }
 
     boolean isConfigured() {
       return lights.equals(target);
     }
 
-    int numLights() {
-      return lights.size();
+    boolean isLightOn(int position) {
+      return lights.get(position);
+    }
+
+    boolean isTargetOn(int position) {
+      return target.get(position);
     }
   }
 
@@ -319,9 +361,18 @@ class Day10 {
      * combinations since each button press toggles (XOR). Key insight: pressing a button twice is
      * the same as not pressing it, so we only need to consider each button being pressed 0 or 1
      * time.
+     *
+     * <p>Using BitSet for state tracking makes this much faster:
+     *
+     * <ul>
+     *   <li>HashMap lookups are O(1) since BitSet.hashCode() is efficient
+     *   <li>State comparison via BitSet.equals() is fast
+     *   <li>Toggle operations use XOR on the underlying bits
+     * </ul>
      */
     int findMinimumPresses() {
-      Map<List<Boolean>, Integer> visited = new HashMap<>();
+      // Track visited states: BitSet -> number of presses to reach it
+      Map<BitSet, Integer> visited = new HashMap<>();
       Queue<Diagram> queue = new LinkedList<>();
 
       queue.add(diagram);
