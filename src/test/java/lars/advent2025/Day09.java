@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 import lars.advent.PuzzleInput;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -226,19 +227,23 @@ class Day09 {
      */
     long largestColoredRectangleArea() {
       List<Edge> edges = buildEdges();
-      long maxArea = 0;
-
-      for (int i = 0; i < redTiles.size(); i++) {
-        for (int j = i + 1; j < redTiles.size(); j++) {
-          Tile a = redTiles.get(i);
-          Tile b = redTiles.get(j);
-          if (rectangleFitsGeometric(a, b, edges)) {
-            long area = a.rectangleAreaWith(b);
-            maxArea = Math.max(maxArea, area);
-          }
-        }
-      }
-      return maxArea;
+      return IntStream.range(0, redTiles.size())
+          .parallel()
+          .mapToLong(
+              i -> {
+                long maxArea = 0;
+                for (int j = i + 1; j < redTiles.size(); j++) {
+                  Tile a = redTiles.get(i);
+                  Tile b = redTiles.get(j);
+                  if (rectangleFitsGeometric(a, b, edges)) {
+                    long area = a.rectangleAreaWith(b);
+                    maxArea = Math.max(maxArea, area);
+                  }
+                }
+                return maxArea;
+              })
+          .max()
+          .orElse(0);
     }
 
     /**
