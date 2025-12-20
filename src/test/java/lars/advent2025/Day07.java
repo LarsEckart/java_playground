@@ -333,12 +333,19 @@ class Day07 {
       beams.activate(startColumn);
 
       for (int row = 1; row < grid.height(); row++) {
-        for (int col : beams.activeColumns()) {
-          if (grid.isSplitter(row, col)) {
-            totalSplits++;
-            beams.split(col);
+        BeamState next = new BeamState(grid.width());
+        for (int col = 0; col < grid.width(); col++) {
+          if (beams.isActive(col)) {
+            if (grid.isSplitter(row, col)) {
+              totalSplits++;
+              next.activate(col - 1);
+              next.activate(col + 1);
+            } else {
+              next.activate(col);
+            }
           }
         }
+        beams = next;
       }
 
       return totalSplits;
