@@ -6,6 +6,7 @@ import static org.assertj.core.data.Offset.offset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import lars.advent.PuzzleInput;
@@ -126,6 +127,72 @@ class Day08 {
     }
   }
 
+  @Nested
+  class Benchmark {
+
+    @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = ".*")
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = ".*")
+    void compareRegularVsParallelSort() throws Exception {
+      Path inputPath = PuzzleInput.forDate(2025, 8);
+      String input = Files.readString(inputPath);
+      Playground playground = Playground.parse(input);
+
+      System.out.println("Number of boxes: " + playground.boxes().size());
+      int numPairs = playground.boxes().size() * (playground.boxes().size() - 1) / 2;
+      System.out.println("Number of pairs: " + numPairs);
+      System.out.println();
+
+      // Helper to create pairs with regular sort (old approach)
+      var sortedPairsRegular =
+          (java.util.function.Supplier<List<BoxPair>>)
+              () -> {
+                List<BoxPair> pairs = new ArrayList<>();
+                for (int i = 0; i < playground.boxes().size(); i++) {
+                  for (int j = i + 1; j < playground.boxes().size(); j++) {
+                    pairs.add(
+                        BoxPair.of(playground.boxes().get(i), i, playground.boxes().get(j), j));
+                  }
+                }
+                pairs.sort(Comparator.comparingLong(BoxPair::distanceSquared));
+                return pairs;
+              };
+
+      // Warm up JVM
+      for (int i = 0; i < 3; i++) {
+        sortedPairsRegular.get();
+        playground.sortedPairs();
+      }
+
+      // Benchmark regular sort (old approach)
+      int iterations = 10;
+      long regularTotal = 0;
+      for (int i = 0; i < iterations; i++) {
+        long start = System.nanoTime();
+        sortedPairsRegular.get();
+        long end = System.nanoTime();
+        regularTotal += (end - start);
+      }
+      double regularAvg = regularTotal / (double) iterations / 1_000_000.0;
+
+      // Benchmark parallel sort (new optimized approach)
+      long parallelTotal = 0;
+      for (int i = 0; i < iterations; i++) {
+        long start = System.nanoTime();
+        playground.sortedPairs();
+        long end = System.nanoTime();
+        parallelTotal += (end - start);
+      }
+      double parallelAvg = parallelTotal / (double) iterations / 1_000_000.0;
+
+      System.out.printf(
+          "Regular sort (old):     %.2f ms (avg of %d runs)%n", regularAvg, iterations);
+      System.out.printf(
+          "Parallel sort (new):    %.2f ms (avg of %d runs)%n", parallelAvg, iterations);
+      System.out.printf("Speedup: %.2fx%n", regularAvg / parallelAvg);
+    }
+  }
+
   // Domain objects
 
   record JunctionBox(int x, int y, int z) {
@@ -232,8 +299,9 @@ class Day08 {
           pairs.add(BoxPair.of(boxes.get(i), i, boxes.get(j), j));
         }
       }
-      pairs.sort(Comparator.comparingLong(BoxPair::distanceSquared));
-      return pairs;
+      BoxPair[] pairArray = pairs.toArray(new BoxPair[0]);
+      Arrays.parallelSort(pairArray, Comparator.comparingLong(BoxPair::distanceSquared));
+      return Arrays.asList(pairArray);
     }
 
     long connectAndMultiplyLargest(int connections, int topN) {
@@ -262,10 +330,12 @@ class Day08 {
       List<BoxPair> pairs = sortedPairs();
 
       BoxPair lastConnection = null;
+      int successfulUnions = 0;
       for (BoxPair pair : pairs) {
         if (uf.union(pair.indexA(), pair.indexB())) {
           lastConnection = pair;
-          if (uf.circuitCount() == 1) {
+          successfulUnions++;
+          if (successfulUnions == boxes.size() - 1) { // MST has n-1 edges
             break;
           }
         }
