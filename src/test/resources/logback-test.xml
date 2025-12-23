@@ -11,4 +11,8 @@
 
   <logger name="org.testcontainers" level="INFO"/>
   <logger name="com.github.dockerjava" level="WARN"/>
+  
+  <!-- Reduce noise from connection pool libraries -->
+  <logger name="com.vladmihalcea.flexypool" level="ERROR"/>
+  <logger name="com.zaxxer.hikari" level="ERROR"/>
 </configuration>
