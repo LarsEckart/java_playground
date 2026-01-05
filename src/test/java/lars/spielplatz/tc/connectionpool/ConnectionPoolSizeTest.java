@@ -18,6 +18,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -42,6 +44,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
  * @see <a href="https://vladmihalcea.com/optimal-connection-pool-size/">Original Blog Post</a>
  */
 @Testcontainers
+@DisabledOnOs(OS.WINDOWS)
 @DisplayName("Connection Pool Size Optimization")
 class ConnectionPoolSizeTest {
 
