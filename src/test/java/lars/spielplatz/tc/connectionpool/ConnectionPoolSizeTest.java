@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.google.mu.safesql.SafeSql;
 import com.vladmihalcea.flexypool.FlexyPoolDataSource;
 import com.vladmihalcea.flexypool.adaptor.HikariCPPoolAdapter;
-import com.vladmihalcea.flexypool.config.Configuration;
-import com.vladmihalcea.flexypool.strategy.IncrementPoolOnTimeoutConnectionAcquiringStrategy;
+import com.vladmihalcea.flexypool.config.FlexyPoolConfiguration;
+import com.vladmihalcea.flexypool.strategy.IncrementPoolOnTimeoutConnectionAcquisitionStrategy;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
@@ -171,10 +171,10 @@ class ConnectionPoolSizeTest {
 
     FlexyPoolDataSource<HikariDataSource> flexyPoolDataSource =
         new FlexyPoolDataSource<>(
-            new Configuration.Builder<>(
+            new FlexyPoolConfiguration.Builder<>(
                     "FlexyPoolTest", hikariDataSource, HikariCPPoolAdapter.FACTORY)
                 .build(),
-            new IncrementPoolOnTimeoutConnectionAcquiringStrategy.Factory<>(
+            new IncrementPoolOnTimeoutConnectionAcquisitionStrategy.Factory<>(
                 maxOverflowPoolSize, connectionAcquisitionThresholdMillis));
 
     TransferResult result = executeConcurrentTransfers(flexyPoolDataSource, 64, 5);
