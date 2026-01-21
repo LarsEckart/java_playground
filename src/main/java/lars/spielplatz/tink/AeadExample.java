@@ -10,7 +10,7 @@ import com.google.crypto.tink.TinkJsonProtoKeysetFormat;
 import com.google.crypto.tink.aead.AeadConfig;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import lars.spielplatz.nio.SanitizedPath;
 
 /**
  * A command-line utility for encrypting small files with AEAD.
@@ -39,9 +39,18 @@ public final class AeadExample {
       System.exit(1);
     }
     String mode = args[0];
-    Path keyFile = Paths.get(args[1]);
-    Path inputFile = Paths.get(args[2]);
-    Path outputFile = Paths.get(args[3]);
+    Path keyFile;
+    Path inputFile;
+    Path outputFile;
+    try {
+      keyFile = new SanitizedPath(args[1]).value();
+      inputFile = new SanitizedPath(args[2]).value();
+      outputFile = new SanitizedPath(args[3]).value();
+    } catch (SecurityException e) {
+      System.err.printf("Invalid path: %s%n", e.getMessage());
+      System.exit(1);
+      return;
+    }
     byte[] associatedData = new byte[0];
     if (args.length == 5) {
       associatedData = args[4].getBytes(UTF_8);

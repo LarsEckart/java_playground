@@ -18,11 +18,12 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
+import lars.spielplatz.nio.SanitizedPath;
 
 public class QrCode {
 
@@ -34,14 +35,22 @@ public class QrCode {
       System.exit(1);
     } else {
       String text = args[0];
-      String imagePath = args[1];
-      String outPath = args[2];
+      Path imagePath;
+      Path outPath;
+      try {
+        imagePath = new SanitizedPath(args[1]).value();
+        outPath = new SanitizedPath(args[2]).value();
+      } catch (SecurityException e) {
+        System.err.printf("Invalid path: %s%n", e.getMessage());
+        System.exit(1);
+        return;
+      }
       int width = 640;
       writeQrCode(text, imagePath, outPath, width);
     }
   }
 
-  private static void writeQrCode(String text, String imagePath, String outPath, int width)
+  private static void writeQrCode(String text, Path imagePath, Path outPath, int width)
       throws Exception {
 
     Map<EncodeHintType, ErrorCorrectionLevel> hints = new HashMap<>();
@@ -71,14 +80,14 @@ public class QrCode {
 
     addOverlayImage(g, qrImage, imagePath);
 
-    ImageIO.write(combined, "png", new File(outPath));
+    ImageIO.write(combined, "png", outPath.toFile());
     System.out.println("Created QR code at " + outPath);
   }
 
-  private static BufferedImage addOverlayImage(
-      Graphics2D g, BufferedImage qrImage, String imagePath) throws IOException {
+  private static BufferedImage addOverlayImage(Graphics2D g, BufferedImage qrImage, Path imagePath)
+      throws IOException {
     // Load logo image
-    BufferedImage overlay = ImageIO.read(new File(imagePath));
+    BufferedImage overlay = ImageIO.read(imagePath.toFile());
 
     // Calculate the delta height and width between QR code and the logo
     // Note that we don't do any scaling, so the sizes need to kind of

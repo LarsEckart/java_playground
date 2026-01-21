@@ -5,7 +5,6 @@ import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /** http://www.javaworld.com/article/2882984/core-java/nio2-cookbook-part-1.html */
@@ -18,8 +17,15 @@ public class Copy {
       return;
     }
 
-    Path source = Paths.get(args[0]);
-    Path target = Paths.get(args[1]);
+    Path source;
+    Path target;
+    try {
+      source = new SanitizedPath(args[0]).value();
+      target = new SanitizedPath(args[1]).value();
+    } catch (SecurityException e) {
+      System.err.printf("Invalid path: %s%n", e.getMessage());
+      return;
+    }
 
     try {
       Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
