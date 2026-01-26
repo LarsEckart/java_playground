@@ -72,7 +72,7 @@ dependencies {
     implementation("javax.activation:activation:1.1.1")
 
     def junit4Version = "4.13.2"
-    def junitVintageVersion = "6.0.1"
+    def junitVintageVersion = "6.0.2"
     def junitJupiterVersion = "6.0.2"
     def junitPlatformVersion = "6.0.1"
 
