@@ -113,7 +113,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers-localstack:${testcontainersVersion}")
     testImplementation "com.redis:testcontainers-redis:2.2.4"
 
-    testImplementation("com.larseckart:junit-tcr-extensions:1.0.0")
+    testImplementation("com.larseckart:junit-tcr-extensions:2.0.0")
     testImplementation("com.github.kirviq:dumbster:1.7.1")
 
     testImplementation 'org.tonicsoft.timebomb:timebomb-junit:0.0.0'
