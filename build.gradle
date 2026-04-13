@@ -68,7 +68,7 @@ dependencies {
     // jep 320
     implementation("org.glassfish.jaxb:jaxb-runtime:4.0.7")
     implementation("org.glassfish.jaxb:jaxb-xjc:4.0.7")
-    implementation("com.sun.xml.ws:jaxws-rt:4.0.3")
+    implementation("com.sun.xml.ws:jaxws-rt:4.0.4")
     implementation("javax.activation:activation:1.1.1")
 
     def junit4Version = "4.13.2"
