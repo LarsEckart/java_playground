@@ -55,8 +55,8 @@ dependencies {
 
     implementation 'com.google.zxing:core:3.5.4'
     implementation 'com.google.zxing:javase:3.5.4'
-    implementation 'com.google.mug:mug-safesql:9.9.1'
-    implementation 'com.google.mug:mug-guava:9.9.1'
+    implementation 'com.google.mug:mug-safesql:9.9.8'
+    implementation 'com.google.mug:mug-guava:9.9.8'
 
 
     testImplementation 'com.github.mwiede:jsch:2.27.9'
