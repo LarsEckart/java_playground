@@ -45,7 +45,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:7.0.2")
     implementation("com.vladmihalcea.flexy-pool:flexy-hikaricp:3.1.1")
     implementation("io.lettuce:lettuce-core:7.4.0.RELEASE")
-    implementation("software.amazon.awssdk:s3:2.42.13")
+    implementation("software.amazon.awssdk:s3:2.42.28")
     implementation 'redis.clients:jedis:7.4.0'
     implementation("org.eclipse.collections:eclipse-collections-api:13.0.0")
     implementation("org.eclipse.collections:eclipse-collections:13.0.0")
