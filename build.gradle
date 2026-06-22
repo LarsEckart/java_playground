@@ -27,7 +27,7 @@ dependencies {
     implementation('com.fasterxml.jackson.core:jackson-databind:2.22.0')
     implementation("io.reactivex.rxjava3:rxjava:3.1.12")
     implementation('io.projectreactor:reactor-core:3.8.5')
-    implementation("org.threeten:threeten-extra:1.8.0")
+    implementation("org.threeten:threeten-extra:1.9.0")
     implementation("org.slf4j:slf4j-api:2.0.17")
     implementation("ch.qos.logback:logback-classic:1.5.32")
     implementation("ch.qos.logback:logback-core:1.5.32")
