@@ -28,7 +28,7 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.12")
     implementation('io.projectreactor:reactor-core:3.8.6')
     implementation("org.threeten:threeten-extra:1.9.0")
-    implementation("org.slf4j:slf4j-api:2.0.17")
+    implementation("org.slf4j:slf4j-api:2.0.18")
     implementation("ch.qos.logback:logback-classic:1.5.32")
     implementation("ch.qos.logback:logback-core:1.5.32")
     implementation("org.owasp.encoder:encoder:1.4.0")
@@ -102,7 +102,7 @@ dependencies {
     testImplementation("net.datafaker:datafaker:2.5.4")
     testImplementation('nl.jqno.equalsverifier:equalsverifier:4.5')
 
-    testImplementation("org.slf4j:slf4j-simple:2.0.17") {
+    testImplementation("org.slf4j:slf4j-simple:2.0.18") {
         because "allows a library to log during tests even when only log4j api is on path"
     }
 
