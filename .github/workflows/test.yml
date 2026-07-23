@@ -52,7 +52,7 @@ jobs:
           GH_USERNAME: 'GitHub Action'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v6
+        uses: mikepenz/action-junit-report@v6.4.0
         if: success() || failure()
         continue-on-error: true
         with:
