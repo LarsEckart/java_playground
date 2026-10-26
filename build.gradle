@@ -31,7 +31,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.18")
     implementation("ch.qos.logback:logback-classic:1.6.3")
     implementation("ch.qos.logback:logback-core:1.6.3")
-    implementation("org.owasp.encoder:encoder:1.4.0")
+    implementation("org.owasp.encoder:encoder:1.5.0")
     implementation("com.hazelcast:hazelcast:5.7.0")
     implementation("javax.cache:cache-api:1.1.1")
     implementation('commons-codec:commons-codec:1.22.1')
